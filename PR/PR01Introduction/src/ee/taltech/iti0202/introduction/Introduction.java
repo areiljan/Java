@@ -123,7 +123,7 @@ public class Introduction {
         int count = 0;
         word = word + " ";
         for (int i = 0; i < word.length() - 2; i++) {
-            char currentChar = word.charAt(i);
+            char currentChar = Character.toLowerCase(word.charAt(i));
             if (i + 3 < word.length() && currentChar == word.charAt(i + 1) && currentChar == word.charAt(i + 2)) {
                 if (currentChar == word.charAt(i + 3)){
                     i = i + 2;
