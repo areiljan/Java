@@ -16,7 +16,7 @@ public class Hello {
         if (name.equals("")) {
             return("Hello!");
         }
-        return("Hello " + name + "!");
+        return("Hello, " + name + "!");
     }
 
     /**
