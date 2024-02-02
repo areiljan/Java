@@ -94,7 +94,7 @@ public class Introduction {
             return first + second;
         }else {
             int difference = 0;
-            if (first.length() > second.length()) {
+            if (first.length() >= second.length()) {
                 difference = first.length() - second.length();
                 if (difference < first.length()) {
                     return (first.substring(difference) + second).toLowerCase();
@@ -103,7 +103,7 @@ public class Introduction {
                 }
             } else {
                 difference = second.length() - first.length();
-                if (difference < second.length()) {
+                if (difference <= second.length()) {
                     return (first + second.substring(difference)).toUpperCase();
                 } else {
                     return "";
