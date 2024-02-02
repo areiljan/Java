@@ -124,8 +124,11 @@ public class Introduction {
         word = word + " ";
         for (int i = 0; i < word.length() - 2; i++) {
             char currentChar = word.charAt(i);
+            // Finding an instance of three characters
             if (i + 3 < word.length() && currentChar == word.charAt(i + 1) && currentChar == word.charAt(i + 2)) {
+                // Checking the value after the characters
                 if (i + 3 < word.length() && currentChar != word.charAt(i + 3)) {
+                    // Checking the value in front
                     if (i > 0) {
                         if (currentChar != word.charAt(i - 1)) {
                             i = i + 2;
