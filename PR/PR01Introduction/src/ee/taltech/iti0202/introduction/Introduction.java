@@ -39,9 +39,9 @@ public class Introduction {
      */
     public List<Integer> findEvenNumbersList(List<Integer> numbers) {
         List<Integer> integerList = new ArrayList<>();
-        for (int i = 0; i < numbers.size(); i++)
-            if (numbers.get(i) % 2 == 0) {
-                integerList.add(numbers.get(i));
+        for (Integer number : numbers)
+            if (number % 2 == 0) {
+                integerList.add(number);
             }
         return integerList;
     }
@@ -50,25 +50,24 @@ public class Introduction {
      * Method gets an array of numbers.
      * Return an array containing only even numbers of the given array.
      * If the given array does not contain any even numbers, return an empty array.
-     *
+     * <p>
      * You must not use the previous function in this function!
      *
      * @param numbers given array that contains numbers.
      * @return array of even numbers.
      */
     public int[] findEvenNumbersArray(int[] numbers) {
-        int[] lst1;
         int evenCount = 0;
-        for (int i = 0; i < numbers.length; i++) {
-            if (numbers[i] % 2 == 0) {
+        for (int number : numbers) {
+            if (number % 2 == 0) {
                 evenCount++;
             }
         }
         int[] evenNumbers = new int[evenCount];
         int index = 0;
-        for (int i = 0; numbers.length > i; i++) {
-            if (numbers[i] % 2 == 0) {
-                evenNumbers[index++] = numbers[i];
+        for (int number : numbers) {
+            if (number % 2 == 0) {
+                evenNumbers[index++] = number;
             }
         }
         return evenNumbers;
@@ -103,11 +102,7 @@ public class Introduction {
                 }
             } else {
                 difference = second.length() - first.length();
-                if (difference <= second.length()) {
-                    return (first + second.substring(difference)).toUpperCase();
-                } else {
-                    return "";
-                }
+                return (first + second.substring(difference)).toUpperCase();
             }
         }
     }
@@ -167,7 +162,7 @@ public class Introduction {
         System.out.println(introduction.findTheString("", "   "));  // FALSE
         System.out.println(introduction.findTheString("  ", "a"));  //  a  (with space in front)
 
-        System.out.println(introduction.countTripleChars("AAAbbbabbb"));  // 3
+        System.out.println(countTripleChars("AAAbbbabbb"));  // 3
         System.out.println(introduction.countTripleChars("aaa"));  // 1
         System.out.println(introduction.countTripleChars("aaaa"));  // 0
         System.out.println(introduction.countTripleChars("aaaabbbabbbcCc"));  // 2
