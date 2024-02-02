@@ -139,33 +139,4 @@ public class Introduction {
         }
         return count;
     }
-
-
-    /**
-     * Run tests.
-     * @param args Arguments from command line.
-     */
-    public static void main(String[] args) {
-        Introduction introduction = new Introduction();
-        System.out.println(introduction.howIsOutcome(3, 6)); // "bad"
-
-        List<Integer> nums = new ArrayList<>(Arrays.asList(4, 7, 5, 2, 1, 2, -2, 0));
-        System.out.println(introduction.findEvenNumbersList(nums)); // [4, 2, 2, -2, 0]
-
-        int[] array = {9, 0, 24, -6, 3};
-        System.out.println(Arrays.toString(introduction.findEvenNumbersArray(array))); // [0, 24, -6]
-
-        String result = introduction.findTheString("Good", "afternoon");
-        System.out.println(result);  // GOODNOON
-        result = introduction.findTheString("Hello", "lo");
-        System.out.println(result);  // lolo
-        System.out.println(introduction.findTheString("", ""));  // FALSE
-        System.out.println(introduction.findTheString("", "   "));  // FALSE
-        System.out.println(introduction.findTheString("  ", "a"));  //  a  (with space in front)
-
-        System.out.println(countTripleChars("AAAbbbabbb"));  // 3
-        System.out.println(introduction.countTripleChars("aaa"));  // 1
-        System.out.println(introduction.countTripleChars("aaaa"));  // 0
-        System.out.println(introduction.countTripleChars("aaaabbbabbbcCc"));  // 2
-    }
 }
