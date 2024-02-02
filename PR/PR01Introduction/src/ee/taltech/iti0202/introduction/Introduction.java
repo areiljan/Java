@@ -125,11 +125,16 @@ public class Introduction {
         for (int i = 0; i < word.length() - 2; i++) {
             char currentChar = word.charAt(i);
             if (i + 3 < word.length() && currentChar == word.charAt(i + 1) && currentChar == word.charAt(i + 2)) {
-                if (currentChar == word.charAt(i + 3)){
-                    i = i + 2;
-                } else {
-                    count++;
-                    i = i + 2;
+                if (i + 3 < word.length() && currentChar != word.charAt(i + 3)) {
+                    if (i > 0) {
+                        if (currentChar != word.charAt(i - 1)) {
+                            i = i + 2;
+                            count++;
+                        }
+                    } else {
+                        i = i + 2;
+                        count++;
+                    }
                 }
             }
         }
