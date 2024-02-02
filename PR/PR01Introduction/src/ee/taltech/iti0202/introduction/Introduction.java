@@ -88,7 +88,7 @@ public class Introduction {
      * @return String based on the values of first and second
      */
     public String findTheString(String first, String second) {
-        if (first.isEmpty() || first.contains(" ") && second.isEmpty() || second.contains(" ")) {
+        if ((first.isEmpty() || first.contains(" ")) && (second.isEmpty() || second.contains(" "))) {
             return "FALSE"; }
         else if (first.length() == second.length()) {
             return first + second;
