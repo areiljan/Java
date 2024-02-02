@@ -39,10 +39,11 @@ public class Introduction {
      */
     public List<Integer> findEvenNumbersList(List<Integer> numbers) {
         List<Integer> integerList = new ArrayList<>();
-        for (Integer number : numbers)
+        for (Integer number : numbers) {
             if (number % 2 == 0) {
                 integerList.add(number);
             }
+        }
         return integerList;
     }
 
@@ -88,10 +89,11 @@ public class Introduction {
      */
     public String findTheString(String first, String second) {
         if ((first.isEmpty() || first.contains(" ")) && (second.isEmpty() || second.contains(" "))) {
-            return "FALSE"; }
+            return "FALSE";
+        }
         else if (first.length() == second.length()) {
             return first + second;
-        }else {
+        } else {
             int difference = 0;
             if (first.length() >= second.length()) {
                 difference = first.length() - second.length();
