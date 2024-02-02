@@ -90,11 +90,10 @@ public class Introduction {
     public String findTheString(String first, String second) {
         if ((first.isEmpty() || first.contains(" ")) && (second.isEmpty() || second.contains(" "))) {
             return "FALSE";
-        }
-        else if (first.length() == second.length()) {
+        } else if (first.length() == second.length()) {
             return first + second;
         } else {
-            int difference = 0;
+            int difference;
             if (first.length() >= second.length()) {
                 difference = first.length() - second.length();
                 if (difference < first.length()) {
