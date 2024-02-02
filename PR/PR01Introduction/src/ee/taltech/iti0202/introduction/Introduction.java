@@ -123,7 +123,7 @@ public class Introduction {
         int count = 0;
         word = word + " ";
         for (int i = 0; i < word.length() - 2; i++) {
-            char currentChar = Character.toLowerCase(word.charAt(i));
+            char currentChar = word.charAt(i);
             if (i + 3 < word.length() && currentChar == word.charAt(i + 1) && currentChar == word.charAt(i + 2)) {
                 if (currentChar == word.charAt(i + 3)){
                     i = i + 2;
@@ -159,7 +159,7 @@ public class Introduction {
         System.out.println(introduction.findTheString("", "   "));  // FALSE
         System.out.println(introduction.findTheString("  ", "a"));  //  a  (with space in front)
 
-        System.out.println(introduction.countTripleChars("aaabbbabbb"));  // 3
+        System.out.println(introduction.countTripleChars("AAAbbbabbb"));  // 3
         System.out.println(introduction.countTripleChars("aaa"));  // 1
         System.out.println(introduction.countTripleChars("aaaa"));  // 0
         System.out.println(introduction.countTripleChars("aaaabbbabbbcCc"));  // 2
