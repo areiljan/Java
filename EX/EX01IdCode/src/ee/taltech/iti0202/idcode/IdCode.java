@@ -18,9 +18,9 @@ public class IdCode {
     }
     public IdCode(String idCodeValue) {
         this.idCodeValue = idCodeValue;
-        // if (!isCorrect()) {
-        //   throw new IllegalArgumentException();
-        // }
+        if (!isCorrect()) {
+           throw new IllegalArgumentException();
+        }
 
 
     }
