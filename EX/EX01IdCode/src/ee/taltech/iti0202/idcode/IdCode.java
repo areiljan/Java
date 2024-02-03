@@ -18,9 +18,9 @@ public class IdCode {
     }
     public IdCode(String idCodeValue) {
         this.idCodeValue = idCodeValue;
-        if (!isCorrect()) {
-            throw new IllegalArgumentException();
-        }
+        // if (!isCorrect()) {
+        //    throw new IllegalArgumentException();
+        //}
 
 
     }
@@ -210,6 +210,7 @@ public class IdCode {
        * @return boolean describing whether the control number is correct.
        */
     private boolean isControlNumberCorrect() {
+        // 47605030299
         int[] firstWeights = {1, 2, 3, 4, 5, 6, 7, 8, 9, 1};
         int[] secondWeights = {3, 4, 5, 6, 7, 8, 9, 1, 2, 3};
         int sum = 0;
@@ -220,6 +221,7 @@ public class IdCode {
         if ((sum % 11) < 10) {
             controlNumber = sum % 11;
         } else if ((sum % 11) == 10) {
+            sum = 0;
             for (int i = 0; i <= 9; i++) {
                 sum = sum + (Integer.parseInt(idCodeValue.substring(i, i + 1)) * secondWeights[i]);
             }
@@ -244,4 +246,19 @@ public class IdCode {
         boolean b = fullYear % 4 == 0;
         return b;
     }
-  }
+    public static void main(String[] args) {
+        IdCode validMaleIdCode = new IdCode("47605030299");
+        System.out.println(validMaleIdCode.isCorrect());
+        System.out.println(validMaleIdCode.getInformation());
+        System.out.println(validMaleIdCode.getGender());
+        System.out.println(validMaleIdCode.getBirthPlace());
+        System.out.println(validMaleIdCode.getFullYear());
+        System.out.println(validMaleIdCode.isGenderNumberCorrect());
+        System.out.println(validMaleIdCode.isYearNumberCorrect());
+        System.out.println(validMaleIdCode.isMonthNumberCorrect());
+        System.out.println(validMaleIdCode.isDayNumberCorrect());
+        System.out.println(validMaleIdCode.isControlNumberCorrect());
+        System.out.println(validMaleIdCode.isLeapYear(validMaleIdCode.getFullYear()));
+    }
+
+}
