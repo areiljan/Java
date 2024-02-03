@@ -1,5 +1,5 @@
 package ee.taltech.iti0202.idcode;
-  
+
 public class IdCode {
     public static final int MAX_FIRST_NUMBER_SIZE = 7;
     private final String idCodeValue;
@@ -167,7 +167,7 @@ public class IdCode {
     public static final int NEXT_YEAR = 2025;
     private boolean isYearNumberCorrect() {
         int yearNumber = getFullYear();
-        boolean b = yearNumber > TWENTIETH_CENTURY && yearNumber < NEXT_YEAR;
+        boolean b = yearNumber > NINETEENTH_CENTURY && yearNumber < NEXT_YEAR;
         return b;
     }
 
