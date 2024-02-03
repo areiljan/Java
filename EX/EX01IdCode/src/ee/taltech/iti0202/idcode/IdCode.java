@@ -27,11 +27,11 @@ public class IdCode {
      * @return boolean describing whether or not the id code was correct.
      */
     public boolean isCorrect() {
-        return isGenderNumberCorrect() &&
-                isYearNumberCorrect() &&
-                isMonthNumberCorrect() &&
-                isDayNumberCorrect() &&
-                isControlNumberCorrect();
+        return isGenderNumberCorrect()
+                && isYearNumberCorrect()
+                && isMonthNumberCorrect()
+                && isDayNumberCorrect()
+                && isControlNumberCorrect();
     }
 
     /**
@@ -174,10 +174,10 @@ public class IdCode {
         return b;
     }
     /**
-       * Check if the day number is correct.
-       * 
-       * @return boolean describing whether the day number is correct.
-       */
+     * Check if the day number is correct.
+     *
+     * @return boolean describing whether the day number is correct.
+     */
     private static final int DAYS_IN_JANUARY = 31;
     private static final int DAYS_IN_FEBRUARY_COMMON_YEAR = 28;
     private static final int DAYS_IN_FEBRUARY_LEAP_YEAR = 29;
@@ -212,7 +212,7 @@ public class IdCode {
                 DAYS_IN_NOVEMBER,
                 DAYS_IN_DECEMBER};
             // Adjusting for leap years
-        if (leapYear && monthNumber == 2){
+        if (leapYear && monthNumber == 2) {
             daysInMonth[1] = DAYS_IN_FEBRUARY_LEAP_YEAR;
         }
         return dayNumber <= daysInMonth[monthNumber - 1];
@@ -251,23 +251,16 @@ public class IdCode {
     }
 
     /**
-       * Check if the given year is a leap year.
-       * 
-       * @param fullYear
-       * @return boolean describing whether the given year is a leap year.
-       */
+     * Check if the given year is a leap year.
+     *
+     * @param fullYear
+     * @return boolean describing whether the given year is a leap year.
+     */
     private static final int FOUR_HUNDRED = 400;
     private static final int ONE_HUNDRED = 100;
     private boolean isLeapYear(int fullYear) {
-        if (fullYear % FOUR_HUNDRED == 0){
-            return true;
-        } else if (fullYear % ONE_HUNDRED == 0) {
-            return false;
-        } else if (fullYear % 4 == 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return (fullYear % FOUR_HUNDRED == 0) ||
+                ((fullYear % ONE_HUNDRED != 0) && (fullYear % 4 == 0));
     }
     public static void main(String[] args) {
         IdCode validMaleIdCode = new IdCode("30002290231");
