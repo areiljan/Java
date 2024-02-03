@@ -18,9 +18,9 @@ public class IdCode {
     }
     public IdCode(String idCodeValue) {
         this.idCodeValue = idCodeValue;
-        if (!isCorrect()) {
-           throw new IllegalArgumentException();
-        }
+        // if (!isCorrect()) {
+        //   throw new IllegalArgumentException();
+        // }
 
 
     }
@@ -246,7 +246,7 @@ public class IdCode {
         return b;
     }
     public static void main(String[] args) {
-        IdCode validMaleIdCode = new IdCode("47605030299");
+        IdCode validMaleIdCode = new IdCode("29912272017");
         System.out.println(validMaleIdCode.isCorrect());
         System.out.println(validMaleIdCode.getInformation());
         System.out.println(validMaleIdCode.getGender());
