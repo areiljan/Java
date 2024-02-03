@@ -19,10 +19,8 @@ public class IdCode {
     public IdCode(String idCodeValue) {
         this.idCodeValue = idCodeValue;
         if (!isCorrect()) {
-           throw new IllegalArgumentException();
+            throw new IllegalArgumentException();
         }
-
-
     }
     /**
      * Check if the id code is valid or not.
@@ -242,11 +240,18 @@ public class IdCode {
        * @return boolean describing whether the given year is a leap year.
        */
     private boolean isLeapYear(int fullYear) {
-        boolean b = fullYear % 4 == 0;
-        return b;
+        if (fullYear % 400 == 0){
+            return true;
+        } else if (fullYear % 100 == 0) {
+            return false;
+        } else if (fullYear % 4 == 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
     public static void main(String[] args) {
-        IdCode validMaleIdCode = new IdCode("29912272017");
+        IdCode validMaleIdCode = new IdCode("30002290231");
         System.out.println(validMaleIdCode.isCorrect());
         System.out.println(validMaleIdCode.getInformation());
         System.out.println(validMaleIdCode.getGender());
