@@ -17,11 +17,12 @@ public class IdCode {
         return idCodeValue;
     }
     public IdCode(String idCodeValue) {
-        if (isCorrect()) {
-            this.idCodeValue = idCodeValue;
-        } else {
+        this.idCodeValue = idCodeValue;
+        if (!isCorrect()) {
             throw new IllegalArgumentException();
         }
+
+
     }
     /**
      * Check if the id code is valid or not.
