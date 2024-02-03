@@ -1,7 +1,7 @@
 package ee.taltech.iti0202.idcode;
   
 public class IdCode {
-  
+    public static final int MAX_FIRST_NUMBER_SIZE = 7;
     private final String idCodeValue;
 
     enum Gender {
@@ -59,34 +59,61 @@ public class IdCode {
        * 
        * @return String with the person's birth place.
        */
+    public static final int MIN_KURESSAARE_SIZE = 1;
+    public static final int MAX_KURESSAARE_SIZE = 10;
+    public static final int MIN_TARTU_SIZE = 11;
+    public static final int MAX_TARTU_SIZE = 20;
+    public static final int MIN_TALLINN_SIZE = 21;
+    public static final int MAX_TALLINN_SIZE = 220;
+    public static final int MIN_KOHTLAJARVE_SIZE = 221;
+    public static final int MAX_KOHTLAJARVE_SIZE = 270;
+    public static final int MIN_TARTU_SIZE_SECOND = 271;
+    public static final int MAX_TARTU_SIZE_SECOND = 370;
+    public static final int MIN_NARVA_SIZE = 371;
+    public static final int MAX_NARVA_SIZE = 420;
+    public static final int MIN_PARNU_SIZE = 421;
+    public static final int MAX_PARNU_SIZE = 470;
+    public static final int MIN_TALLINN_SIZE_SECOND = 471;
+    public static final int MAX_TALLINN_SIZE_SECOND = 490;
+    public static final int MIN_PAIDE_SIZE = 491;
+    public static final int MAX_PAIDE_SIZE = 520;
+    public static final int MIN_RAKVERE_SIZE = 521;
+    public static final int MAX_RAKVERE_SIZE = 570;
+    public static final int MIN_VALGA_SIZE = 571;
+    public static final int MAX_VALGA_SIZE = 600;
+    public static final int MIN_VILJANDI_SIZE = 601;
+    public static final int MAX_VILJANDI_SIZE = 650;
+    public static final int MIN_VORU_SIZE = 651;
+    public static final int MAX_VORU_SIZE = 710;
+
     public String getBirthPlace() {
         int number;
         number = Integer.parseInt(idCodeValue.substring(7,10));
-        if (number >= 1 && number <= 10) {
+        if (number >= MIN_KURESSAARE_SIZE && number <= MAX_KURESSAARE_SIZE) {
             return "Kuressaare";
-        } else if (number >= 11 && number <= 20) {
+        } else if (number >= MIN_TARTU_SIZE && number <= MAX_TARTU_SIZE) {
             return "Tartu";
-        } else if (number >= 21 && number <= 220) {
+        } else if (number >= MIN_TALLINN_SIZE && number <= MAX_TALLINN_SIZE) {
             return "Tallinn";
-        } else if (number >= 221 && number <= 270) {
+        } else if (number >= MIN_KOHTLAJARVE_SIZE && number <= MAX_KOHTLAJARVE_SIZE) {
             return "Kohtla-Järve";
-        } else if (number >= 271 && number <= 370) {
+        } else if (number >= MIN_TARTU_SIZE_SECOND && number <= MAX_TARTU_SIZE_SECOND) {
             return "Tartu";
-        } else if (number >= 371 && number <= 420) {
+        } else if (number >= MIN_NARVA_SIZE && number <= MAX_NARVA_SIZE) {
             return "Narva";
-        } else if (number >= 421 && number <= 470) {
+        } else if (number >= MIN_PARNU_SIZE && number <= MAX_PARNU_SIZE) {
             return "Pärnu";
-        } else if (number >= 471 && number <= 490) {
+        } else if (number >= MIN_TALLINN_SIZE_SECOND && number <= MAX_TALLINN_SIZE_SECOND) {
             return "Tallinn";
-        } else if (number >= 491 && number <= 520) {
+        } else if (number >= MIN_PAIDE_SIZE && number <= MAX_PAIDE_SIZE) {
             return "Paide";
-        } else if (number >= 521 && number <= 570) {
+        } else if (number >= MIN_RAKVERE_SIZE && number <= MAX_RAKVERE_SIZE) {
             return "Rakvere";
-        } else if (number >= 571 && number <= 600) {
+        } else if (number >= MIN_VALGA_SIZE && number <= MAX_VALGA_SIZE) {
             return "Valga";
-        } else if (number >= 601 && number <= 650) {
+        } else if (number >= MIN_VILJANDI_SIZE && number <= MAX_VILJANDI_SIZE) {
             return "Viljandi";
-        } else if (number >= 651 && number <= 710) {
+        } else if (number >= MIN_VORU_SIZE && number <= MAX_VORU_SIZE) {
             return "Võru";
         } else {
             return "unknown";
@@ -117,7 +144,7 @@ public class IdCode {
        * @return boolean describing whether the gender number is correct.
        */
     private boolean isGenderNumberCorrect() {
-        if (Integer.parseInt(idCodeValue.substring(0, 1)) < 7) {
+        if (Integer.parseInt(idCodeValue.substring(0, 1)) < MAX_FIRST_NUMBER_SIZE) {
             return true;
         } else {
             return false;
