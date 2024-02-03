@@ -180,24 +180,48 @@ public class IdCode {
         boolean b = monthNumber >= 0 && monthNumber <= MONTHS_IN_YEAR;
         return b;
     }
-
+    public static final int LAST_MONTH_OFYEAR = 12;
     /**
        * Check if the day number is correct.
        * 
        * @return boolean describing whether the day number is correct.
        */
+    private static final int DAYS_IN_JANUARY = 31;
+    private static int DAYS_IN_FEBRUARY_COMMON_YEAR = 28;
+    private static final int DAYS_IN_FEBRUARY_LEAP_YEAR = 29;
+    private static final int DAYS_IN_MARCH = 31;
+    private static final int DAYS_IN_APRIL = 30;
+    private static final int DAYS_IN_MAY = 31;
+    private static final int DAYS_IN_JUNE = 30;
+    private static final int DAYS_IN_JULY = 31;
+    private static final int DAYS_IN_AUGUST = 31;
+    private static final int DAYS_IN_SEPTEMBER = 30;
+    private static final int DAYS_IN_OCTOBER = 31;
+    private static final int DAYS_IN_NOVEMBER = 30;
+    private static final int DAYS_IN_DECEMBER = 31;
     private boolean isDayNumberCorrect() {
         int dayNumber = Integer.parseInt(idCodeValue.substring(5, 7));
         int monthNumber = Integer.parseInt(idCodeValue.substring(3, 5));
         boolean leapYear = isLeapYear(getFullYear());
-        if (monthNumber < 1 || monthNumber > 12 || dayNumber < 1) {
+        if (monthNumber < 1 || monthNumber > LAST_MONTH_OFYEAR || dayNumber < 1) {
             // Invalid input values
             return false;
         }
-        int[] daysInMonth = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        int[] daysInMonth = {DAYS_IN_JANUARY,
+                DAYS_IN_FEBRUARY_COMMON_YEAR,
+                DAYS_IN_MARCH,
+                DAYS_IN_APRIL,
+                DAYS_IN_MAY,
+                DAYS_IN_JUNE,
+                DAYS_IN_JULY,
+                DAYS_IN_AUGUST,
+                DAYS_IN_SEPTEMBER,
+                DAYS_IN_OCTOBER,
+                DAYS_IN_NOVEMBER,
+                DAYS_IN_DECEMBER};
             // Adjusting for leap years
         if (leapYear && monthNumber == 2){
-            daysInMonth[2] = 29;
+            DAYS_IN_FEBRUARY_COMMON_YEAR = DAYS_IN_FEBRUARY_LEAP_YEAR;
         }
         return dayNumber <= daysInMonth[monthNumber];
     }
@@ -207,6 +231,7 @@ public class IdCode {
        * 
        * @return boolean describing whether the control number is correct.
        */
+    private static final int THE_DIVISOR = 11;
     private boolean isControlNumberCorrect() {
         int[] firstWeights = {1, 2, 3, 4, 5, 6, 7, 8, 9, 1};
         int[] secondWeights = {3, 4, 5, 6, 7, 8, 9, 1, 2, 3};
@@ -215,16 +240,16 @@ public class IdCode {
         for (int i = 0; i <= 9; i++) {
             sum = sum + (Integer.parseInt(idCodeValue.substring(i, i + 1)) * firstWeights[i]);
         }
-        if ((sum % 11) < 10) {
-            controlNumber = sum % 11;
-        } else if ((sum % 11) == 10) {
+        if ((sum % THE_DIVISOR) < 10) {
+            controlNumber = sum % THE_DIVISOR;
+        } else if ((sum % THE_DIVISOR) == 10) {
             sum = 0;
             for (int i = 0; i <= 9; i++) {
                 sum = sum + (Integer.parseInt(idCodeValue.substring(i, i + 1)) * secondWeights[i]);
             }
-            if ((sum % 11) < 10) {
-                controlNumber = sum % 11;
-            } else if ((sum % 11) == 10) {
+            if ((sum % THE_DIVISOR) < 10) {
+                controlNumber = sum % THE_DIVISOR;
+            } else if ((sum % THE_DIVISOR) == 10) {
                 controlNumber = 0;
             }
         } else {
@@ -239,10 +264,12 @@ public class IdCode {
        * @param fullYear
        * @return boolean describing whether the given year is a leap year.
        */
+    private static final int FOUR_HUNDRED = 400;
+    private static final int ONE_HUNDRED = 100;
     private boolean isLeapYear(int fullYear) {
-        if (fullYear % 400 == 0){
+        if (fullYear % FOUR_HUNDRED == 0){
             return true;
-        } else if (fullYear % 100 == 0) {
+        } else if (fullYear % ONE_HUNDRED == 0) {
             return false;
         } else if (fullYear % 4 == 0) {
             return true;
