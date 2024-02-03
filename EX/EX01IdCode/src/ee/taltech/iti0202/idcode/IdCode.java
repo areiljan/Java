@@ -180,7 +180,6 @@ public class IdCode {
         boolean b = monthNumber >= 0 && monthNumber <= MONTHS_IN_YEAR;
         return b;
     }
-    public static final int LAST_MONTH_OFYEAR = 12;
     /**
        * Check if the day number is correct.
        * 
@@ -203,7 +202,7 @@ public class IdCode {
         int dayNumber = Integer.parseInt(idCodeValue.substring(5, 7));
         int monthNumber = Integer.parseInt(idCodeValue.substring(3, 5));
         boolean leapYear = isLeapYear(getFullYear());
-        if (monthNumber < 1 || monthNumber > LAST_MONTH_OFYEAR || dayNumber < 1) {
+        if (monthNumber < 1 || monthNumber > MONTHS_IN_YEAR || dayNumber < 1) {
             // Invalid input values
             return false;
         }
