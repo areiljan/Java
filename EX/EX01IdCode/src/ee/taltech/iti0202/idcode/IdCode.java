@@ -5,11 +5,10 @@ public class IdCode {
     private final String idCodeValue;
 
     enum Gender {
-          MALE, FEMALE
+        MALE, FEMALE
     }
-    
     /**
-     * * Method returns the id code.
+     * Method returns the id code.
      *
      * @return id code.
      */
@@ -28,11 +27,11 @@ public class IdCode {
      * @return boolean describing whether or not the id code was correct.
      */
     public boolean isCorrect() {
-        if (isGenderNumberCorrect() && isYearNumberCorrect() && isMonthNumberCorrect() && isDayNumberCorrect() && isControlNumberCorrect()) {
-            return true;
-        } else {
-            return false;
-        }
+        return isGenderNumberCorrect() &&
+                isYearNumberCorrect() &&
+                isMonthNumberCorrect() &&
+                isDayNumberCorrect() &&
+                isControlNumberCorrect();
     }
 
     /**
@@ -41,7 +40,8 @@ public class IdCode {
      * @return String containing information.
      */
     public String getInformation() {
-        return String.format("This is a %s born on %s.%s.%d in %s", getGender(), idCodeValue.substring(5, 7), idCodeValue.substring(3, 5), getFullYear(), getBirthPlace());
+        return String.format("This is a %s born on %s.%s.%d in %s", getGender(), idCodeValue.substring(5, 7),
+                idCodeValue.substring(3, 5), getFullYear(), getBirthPlace());
     }
 
     /**
@@ -56,12 +56,11 @@ public class IdCode {
             return Gender.FEMALE;
         }
     }
-
     /**
-       * Get person's birth location.
-       * 
-       * @return String with the person's birth place.
-       */
+     * Get person's birth location.
+     *
+     * @return String with the person's birth place.
+     */
     public static final int MIN_KURESSAARE_SIZE = 1;
     public static final int MAX_KURESSAARE_SIZE = 10;
     public static final int MIN_TARTU_SIZE = 11;
@@ -88,10 +87,9 @@ public class IdCode {
     public static final int MAX_VILJANDI_SIZE = 650;
     public static final int MIN_VORU_SIZE = 651;
     public static final int MAX_VORU_SIZE = 710;
-
     public String getBirthPlace() {
         int number;
-        number = Integer.parseInt(idCodeValue.substring(7,10));
+        number = Integer.parseInt(idCodeValue.substring(7, 10));
         if (number >= MIN_KURESSAARE_SIZE && number <= MAX_KURESSAARE_SIZE) {
             return "Kuressaare";
         } else if (number >= MIN_TARTU_SIZE && number <= MAX_TARTU_SIZE) {
@@ -121,12 +119,12 @@ public class IdCode {
         } else {
             return "unknown";
         }
-      }
+    }
     /**
-       * Get the year that the person was born in.
-       * 
-       * @return int with person's birth year.
-       */
+     * Get the year that the person was born in.
+     *
+     * @return int with person's birth year.
+     */
     public static final int NINETEENTH_CENTURY = 1800;
     public static final int TWENTIETH_CENTURY = 1900;
     public static final int TWENTY_FIRST_CENTURY = 2000;
@@ -134,27 +132,22 @@ public class IdCode {
         int firstNumber;
         firstNumber = Integer.parseInt(idCodeValue.substring(0, 1));
         if (firstNumber == 1 || firstNumber == 2) {
-            return NINETEENTH_CENTURY + Integer.parseInt(idCodeValue.substring(1,3));
-        } else if (firstNumber == 3 || firstNumber == 4){
-            return TWENTIETH_CENTURY + Integer.parseInt(idCodeValue.substring(1,3));
-        } else if (firstNumber == 5 || firstNumber == 6){
-            return TWENTY_FIRST_CENTURY + Integer.parseInt(idCodeValue.substring(1,3));
+            return NINETEENTH_CENTURY + Integer.parseInt(idCodeValue.substring(1, 3));
+        } else if (firstNumber == 3 || firstNumber == 4) {
+            return TWENTIETH_CENTURY + Integer.parseInt(idCodeValue.substring(1, 3));
+        } else if (firstNumber == 5 || firstNumber == 6) {
+            return TWENTY_FIRST_CENTURY + Integer.parseInt(idCodeValue.substring(1, 3));
         } else {
             return 0;
         }
     }
-
     /**
-       * Check if gender number is correct.
-       * 
-       * @return boolean describing whether the gender number is correct.
-       */
+     * Check if gender number is correct.
+     *
+     * @return boolean describing whether the gender number is correct.
+     */
     private boolean isGenderNumberCorrect() {
-        if (Integer.parseInt(idCodeValue.substring(0, 1)) < MAX_FIRST_NUMBER_SIZE) {
-            return true;
-        } else {
-            return false;
-        }
+        return Integer.parseInt(idCodeValue.substring(0, 1)) < MAX_FIRST_NUMBER_SIZE;
     }
 
     /**
@@ -186,7 +179,7 @@ public class IdCode {
        * @return boolean describing whether the day number is correct.
        */
     private static final int DAYS_IN_JANUARY = 31;
-    private static int DAYS_IN_FEBRUARY_COMMON_YEAR = 28;
+    private static final int DAYS_IN_FEBRUARY_COMMON_YEAR = 28;
     private static final int DAYS_IN_FEBRUARY_LEAP_YEAR = 29;
     private static final int DAYS_IN_MARCH = 31;
     private static final int DAYS_IN_APRIL = 30;
@@ -226,10 +219,10 @@ public class IdCode {
     }
 
     /**
-       * Check if the control number is correct.
-       * 
-       * @return boolean describing whether the control number is correct.
-       */
+     * Check if the control number is correct.
+     *
+     * @return boolean describing whether the control number is correct.
+     */
     private static final int THE_DIVISOR = 11;
     private boolean isControlNumberCorrect() {
         int[] firstWeights = {1, 2, 3, 4, 5, 6, 7, 8, 9, 1};
