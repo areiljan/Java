@@ -207,24 +207,4 @@ public class IdCode {
         boolean b = fullYear % 4 == 0;
         return b;
     }
-
-    /**
-       * Run tests.
-       * @param args info.
-       */
-    public static void main(String[] args) {
-        IdCode validMaleIdCode = new IdCode("37605030299");
-        System.out.println(validMaleIdCode.isCorrect());
-        System.out.println(validMaleIdCode.getInformation());
-        System.out.println(validMaleIdCode.getGender());
-        System.out.println(validMaleIdCode.getBirthPlace());
-        System.out.println(validMaleIdCode.getFullYear());
-        System.out.println(validMaleIdCode.isGenderNumberCorrect());
-        System.out.println(validMaleIdCode.isYearNumberCorrect());
-        System.out.println(validMaleIdCode.isMonthNumberCorrect());
-        System.out.println(validMaleIdCode.isDayNumberCorrect());
-        System.out.println(validMaleIdCode.isControlNumberCorrect());
-        System.out.println(validMaleIdCode.isLeapYear(validMaleIdCode.getFullYear()));
-    }
-
   }
