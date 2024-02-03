@@ -259,8 +259,8 @@ public class IdCode {
     private static final int FOUR_HUNDRED = 400;
     private static final int ONE_HUNDRED = 100;
     private boolean isLeapYear(int fullYear) {
-        return (fullYear % FOUR_HUNDRED == 0) ||
-                ((fullYear % ONE_HUNDRED != 0) && (fullYear % 4 == 0));
+        return (fullYear % FOUR_HUNDRED == 0)
+                || ((fullYear % ONE_HUNDRED != 0) && (fullYear % 4 == 0));
     }
     public static void main(String[] args) {
         IdCode validMaleIdCode = new IdCode("30002290231");
