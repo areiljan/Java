@@ -222,7 +222,7 @@ public class IdCode {
         if (leapYear && monthNumber == 2){
             daysInMonth[1] = DAYS_IN_FEBRUARY_LEAP_YEAR;
         }
-        return dayNumber <= daysInMonth[monthNumber];
+        return dayNumber <= daysInMonth[monthNumber - 1];
     }
 
     /**
