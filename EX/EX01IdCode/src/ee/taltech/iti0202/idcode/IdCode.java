@@ -18,9 +18,9 @@ public class IdCode {
     }
     public IdCode(String idCodeValue) {
         this.idCodeValue = idCodeValue;
-        // if (!isCorrect()) {
-        //    throw new IllegalArgumentException();
-        //}
+        if (!isCorrect()) {
+           throw new IllegalArgumentException();
+        }
 
 
     }
@@ -210,7 +210,6 @@ public class IdCode {
        * @return boolean describing whether the control number is correct.
        */
     private boolean isControlNumberCorrect() {
-        // 47605030299
         int[] firstWeights = {1, 2, 3, 4, 5, 6, 7, 8, 9, 1};
         int[] secondWeights = {3, 4, 5, 6, 7, 8, 9, 1, 2, 3};
         int sum = 0;
