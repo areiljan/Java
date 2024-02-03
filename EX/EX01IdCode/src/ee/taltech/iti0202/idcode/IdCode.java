@@ -17,7 +17,11 @@ public class IdCode {
         return idCodeValue;
     }
     public IdCode(String idCodeValue) {
-        this.idCodeValue = idCodeValue;
+        if (isCorrect()) {
+            this.idCodeValue = idCodeValue;
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
     /**
      * Check if the id code is valid or not.
@@ -124,15 +128,18 @@ public class IdCode {
        * 
        * @return int with person's birth year.
        */
+    public static final int NINETEENTH_CENTURY = 1800;
+    public static final int TWENTIETH_CENTURY = 1900;
+    public static final int TWENTY_FIRST_CENTURY = 2000;
     public int getFullYear() {
         int firstNumber;
         firstNumber = Integer.parseInt(idCodeValue.substring(0, 1));
         if (firstNumber == 1 || firstNumber == 2) {
-            return 1800 + Integer.parseInt(idCodeValue.substring(1,3));
+            return NINETEENTH_CENTURY + Integer.parseInt(idCodeValue.substring(1,3));
         } else if (firstNumber == 3 || firstNumber == 4){
-            return 1900 + Integer.parseInt(idCodeValue.substring(1,3));
+            return TWENTIETH_CENTURY + Integer.parseInt(idCodeValue.substring(1,3));
         } else if (firstNumber == 5 || firstNumber == 6){
-            return 2000 + Integer.parseInt(idCodeValue.substring(1,3));
+            return TWENTY_FIRST_CENTURY + Integer.parseInt(idCodeValue.substring(1,3));
         } else {
             return 0;
         }
@@ -156,9 +163,10 @@ public class IdCode {
      *
      * @return boolean describing whether the year number is correct.
      **/
+    public static final int NEXT_YEAR = 2025;
     private boolean isYearNumberCorrect() {
         int yearNumber = getFullYear();
-        boolean b = yearNumber > 1800 && yearNumber < 2025;
+        boolean b = yearNumber > TWENTIETH_CENTURY && yearNumber < NEXT_YEAR;
         return b;
     }
 
@@ -167,9 +175,10 @@ public class IdCode {
      *
      * @return boolean describing whether the month number is correct.
      */
+    public static final int MONTHS_IN_YEAR = 12;
     private boolean isMonthNumberCorrect() {
         int monthNumber = Integer.parseInt(idCodeValue.substring(3, 5));
-        boolean b = monthNumber > 0 && monthNumber < 13;
+        boolean b = monthNumber >= 0 && monthNumber <= MONTHS_IN_YEAR;
         return b;
     }
 
