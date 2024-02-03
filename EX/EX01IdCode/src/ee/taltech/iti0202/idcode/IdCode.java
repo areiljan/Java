@@ -38,7 +38,7 @@ public class IdCode {
      * @return String containing information.
      */
     public String getInformation() {
-        return String.format("This is a %s born on %s.%s.%d in %s.", getGender(), idCodeValue.substring(5, 7), idCodeValue.substring(3, 5), getFullYear(), getBirthPlace());
+        return String.format("This is a %s born on %s.%s.%d in %s", getGender(), idCodeValue.substring(5, 7), idCodeValue.substring(3, 5), getFullYear(), getBirthPlace());
     }
 
     /**
@@ -89,7 +89,7 @@ public class IdCode {
         } else if (number >= 651 && number <= 710) {
             return "Võru";
         } else {
-            return "Unknown";
+            return "unknown";
         }
       }
     /**
