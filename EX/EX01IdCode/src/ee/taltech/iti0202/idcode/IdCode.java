@@ -220,7 +220,7 @@ public class IdCode {
                 DAYS_IN_DECEMBER};
             // Adjusting for leap years
         if (leapYear && monthNumber == 2){
-            daysInMonth[2] = DAYS_IN_FEBRUARY_LEAP_YEAR;
+            daysInMonth[1] = DAYS_IN_FEBRUARY_LEAP_YEAR;
         }
         return dayNumber <= daysInMonth[monthNumber];
     }
