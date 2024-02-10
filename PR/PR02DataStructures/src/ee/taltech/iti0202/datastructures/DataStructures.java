@@ -52,7 +52,17 @@ public class DataStructures {
      * @return map containing all word to count mappings.
      */
     public static Map<String, Integer> wordCount(String[] sentence) {
-        return null;
+        Map <String, Integer> dict = new HashMap<>();
+        for (int i = 0; i < sentence.length; i++) {
+            if (dict.containsKey(sentence[i])) {
+                int newCount;
+                newCount = dict.get(sentence[i]) + 1;
+                dict.put(sentence[i],newCount);
+            } else {
+                dict.put(sentence[i], 1);
+            }
+        }
+        return dict;
     }
 
     /**
@@ -67,7 +77,14 @@ public class DataStructures {
      * @return list of strings matching criteria
      */
     public static List<String> onlyEvenWords(List<String> words) {
-        return null;
+        Map <String, Integer> allWords = wordCount(words.toArray(new String[0]));
+        List <String> evenWords = new ArrayList<>();
+        for (Map.Entry<String, Integer> entry : allWords.entrySet()) {
+            if (entry.getValue() % 2 == 0) {
+                evenWords.add(entry.getKey());
+            }
+        }
+        return evenWords;
     }
 
     /**
