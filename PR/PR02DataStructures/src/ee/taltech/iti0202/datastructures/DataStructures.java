@@ -49,7 +49,7 @@ public class DataStructures {
      * @return map containing all word to count mappings.
      */
     public static Map<String, Integer> wordCount(String[] sentence) {
-        Map <String, Integer> dict = new HashMap<>();
+        Map<String, Integer> dict = new HashMap<>();
         for (String s : sentence) {
             if (dict.containsKey(s)) {
                 int newCount;
@@ -74,8 +74,8 @@ public class DataStructures {
      * @return list of strings matching criteria
      */
     public static List<String> onlyEvenWords(List<String> words) {
-        Map <String, Integer> allWords = wordCount(words.toArray(new String[0]));
-        List <String> evenWords = new ArrayList<>();
+        Map<String, Integer> allWords = wordCount(words.toArray(new String[0]));
+        List<String> evenWords = new ArrayList<>();
         for (Map.Entry<String, Integer> entry : allWords.entrySet()) {
             for (int i = entry.getValue(); i > 0; i--) {
                 if (i % 2 == 0) {
@@ -97,7 +97,7 @@ public class DataStructures {
         if (grades.length > 1) {
             try {
                 int gradeValue = Integer.parseInt(grades[1]);
-                if (gradeValue < 6 && gradeValue >= 0) {
+                if (gradeValue <= 5 && gradeValue >= 0) {
                     students.put(grades[0], gradeValue);
                 }
             } catch (NumberFormatException e) {
@@ -116,34 +116,5 @@ public class DataStructures {
      */
     public int getStudentGrade(String name) {
         return students.getOrDefault(name, -1);
-    }
-
-    /**
-     * Main.
-     * @param args Command line arguments.
-     */
-    public static void main(String[] args) {
-        System.out.println(findLongestWord("nimi on salastatud"));  // "salastatud"
-        System.out.println(findLongestWord("aaa bbbbb"));  // "bbbbb"
-        System.out.println(findLongestWord("hello ahllo")); // "ahllo"
-
-        System.out.println(wordCount(new String[]{})); // empty
-        System.out.println(wordCount(new String[]{"eggs", "SPAM", "eggs", "bacon", "SPAM", "bacon", "SPAM"})); // {bacon=2, eggs=2, SPAM=3}
-
-        System.out.println(onlyEvenWords(Arrays.asList("foo", "bar", "baz", "baz", "bar", "foo"))); // [baz, bar, foo] any order
-        System.out.println(onlyEvenWords(Arrays.asList("a", "b", "b", "a"))); // [b, a] any order
-        System.out.println(onlyEvenWords(Arrays.asList("eggs", "bacon", "SPAM", "ham", "SPAM", "SPAM"))); // [SPAM]
-
-        DataStructures dataStructures = new DataStructures();
-
-        dataStructures.addStudent("Ago:5");
-        dataStructures.addStudent("Martin:0");
-        dataStructures.addStudent("Margo:3");
-        dataStructures.addStudent("Cheater:6");
-
-        System.out.println(dataStructures.getStudentGrade("Ago")); // 5
-        System.out.println(dataStructures.getStudentGrade("Martin")); // 0
-        System.out.println(dataStructures.getStudentGrade("Margo")); // 3
-        System.out.println(dataStructures.getStudentGrade("Cheater")); // -1
     }
 }
