@@ -4,10 +4,8 @@ package ee.taltech.iti0202.datastructures;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class DataStructures {
     private final Map<String, Integer> students = new HashMap<>();
@@ -31,11 +29,10 @@ public class DataStructures {
     public static String findLongestWord(String sentence) {
         String[] parts = sentence.split(" ");
         String longestWord = "";
-        for (int i = 0; i < (parts.length); i++) {
-            if (parts[i].length() > longestWord.length()) {
-                longestWord = parts[i];
-            } else if (parts[i].length() == longestWord.length()) {
-                String[] equalParts = {longestWord, parts[i]};
+        for (String part : parts) {
+            if (part.length() > longestWord.length()) longestWord = part;
+            else if (part.length() == longestWord.length()) {
+                String[] equalParts = {longestWord, part};
                 Arrays.sort(equalParts);
                 longestWord = equalParts[0];
             }
@@ -53,13 +50,13 @@ public class DataStructures {
      */
     public static Map<String, Integer> wordCount(String[] sentence) {
         Map <String, Integer> dict = new HashMap<>();
-        for (int i = 0; i < sentence.length; i++) {
-            if (dict.containsKey(sentence[i])) {
+        for (String s : sentence) {
+            if (dict.containsKey(s)) {
                 int newCount;
-                newCount = dict.get(sentence[i]) + 1;
-                dict.put(sentence[i],newCount);
+                newCount = dict.get(s) + 1;
+                dict.put(s, newCount);
             } else {
-                dict.put(sentence[i], 1);
+                dict.put(s, 1);
             }
         }
         return dict;
@@ -80,8 +77,10 @@ public class DataStructures {
         Map <String, Integer> allWords = wordCount(words.toArray(new String[0]));
         List <String> evenWords = new ArrayList<>();
         for (Map.Entry<String, Integer> entry : allWords.entrySet()) {
-            if (entry.getValue() % 2 == 0) {
-                evenWords.add(entry.getKey());
+            for (int i = entry.getValue(); i > 0; i--) {
+                if (i % 2 == 0) {
+                    evenWords.add(entry.getKey());
+                }
             }
         }
         return evenWords;
@@ -116,11 +115,7 @@ public class DataStructures {
      * @return int student's grade.
      */
     public int getStudentGrade(String name) {
-        if (students.containsKey(name)) {
-            return students.get(name);
-        } else {
-            return -1;
-        }
+        return students.getOrDefault(name, -1);
     }
 
     /**
