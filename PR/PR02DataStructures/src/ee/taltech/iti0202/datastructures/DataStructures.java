@@ -94,7 +94,17 @@ public class DataStructures {
      * @param studentInfo String with a pattern (name:grade)
      */
     public void addStudent(String studentInfo) {
-
+        String[] grades = studentInfo.split(":");
+        if (grades.length > 1) {
+            try {
+                int gradeValue = Integer.parseInt(grades[1]);
+                if (gradeValue < 6 && gradeValue >= 0) {
+                    students.put(grades[0], gradeValue);
+                }
+            } catch (NumberFormatException e) {
+                System.err.println("Invalid grade value: " + grades[1]);
+            }
+        }
     }
 
     /**
@@ -106,7 +116,11 @@ public class DataStructures {
      * @return int student's grade.
      */
     public int getStudentGrade(String name) {
-        return 0;
+        if (students.containsKey(name)) {
+            return students.get(name);
+        } else {
+            return -1;
+        }
     }
 
     /**
