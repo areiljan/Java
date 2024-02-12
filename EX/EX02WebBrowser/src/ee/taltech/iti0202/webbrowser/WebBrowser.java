@@ -117,19 +117,44 @@ public class WebBrowser {
         List<Map.Entry<String, Integer>> topThree = visitsSorted.subList(0, Math.min(3, visitsSorted.size()));
 
         StringBuilder result = new StringBuilder();
+        Set<String> processedWebsites = new HashSet<>();
         boolean isFirstEntry = true;
+
         for (Map.Entry<String, Integer> entry : topThree) {
             if (!isFirstEntry) {
                 result.append("\n"); // Add a newline before each entry except the first one
             }
             isFirstEntry = false;
 
-            if (entry.getValue() == 1) {
-                result.append(entry.getKey()).append(" - ").append(1).append(" visit");
-            } else {
-                result.append(entry.getKey()).append(" - ").append(entry.getValue()).append(" visits");
+            // If the website has already been processed, skip it
+            if (processedWebsites.contains(entry.getKey())) {
+                continue;
+            }
+
+            // Get the original order of entries with the same visit count
+            List<String> originalOrder = new ArrayList<>();
+            for (String website : history) {
+                if (entry.getKey().equals(website)) {
+                    originalOrder.add(website);
+                }
+            }
+
+            // Append the entries in the original order
+            for (String website : originalOrder) {
+                if (processedWebsites.contains(website)) {
+                    continue; // Skip if the website has already been processed
+                }
+                if (entry.getValue() == 1) {
+                    result.append(website).append(" - ").append(1).append(" visit");
+                } else {
+                    result.append(website).append(" - ").append(entry.getValue()).append(" visits");
+                }
+                processedWebsites.add(website); // Mark the website as processed
             }
         }
+
+
+
         return result.toString();
     }
 
