@@ -122,41 +122,26 @@ public class WebBrowser {
         Set<String> processedWebsites = new HashSet<>();
         boolean isFirstEntry = true;
 
-        for (Map.Entry<String, Integer> entry : topThree) {
+        for (int i = history.size() - 1; i >= 0; i--) {
+            String website = history.get(i);
+            // If the website has already been processed, skip it
+            if (processedWebsites.contains(website)) {
+                continue;
+            }
+            // Get the visit count for the current website
+            int visitCount = visits.getOrDefault(website, 0);
+            // Append the website and visit count to the result
             if (!isFirstEntry) {
                 result.append("\n"); // Add a newline before each entry except the first one
             }
             isFirstEntry = false;
-
-            // If the website has already been processed, skip it
-            if (processedWebsites.contains(entry.getKey())) {
-                continue;
+            if (visitCount == 1) {
+                result.append(website).append(" - ").append(1).append(" visit");
+            } else {
+                result.append(website).append(" - ").append(visitCount).append(" visits");
             }
-
-            // Get the original order of entries with the same visit count
-            List<String> originalOrder = new ArrayList<>();
-            for (String website : history) {
-                if (entry.getKey().equals(website)) {
-                    originalOrder.add(website);
-                }
-            }
-
-            // Append the entries in the original order
-            for (String website : originalOrder) {
-                if (processedWebsites.contains(website)) {
-                    continue; // Skip if the website has already been processed
-                }
-                if (entry.getValue() == 1) {
-                    result.append(website).append(" - ").append(1).append(" visit");
-                } else {
-                    result.append(website).append(" - ").append(entry.getValue()).append(" visits");
-                }
-                processedWebsites.add(website); // Mark the website as processed
-            }
+            processedWebsites.add(website); // Mark the website as processed
         }
-
-
-
         return result.toString();
     }
 
