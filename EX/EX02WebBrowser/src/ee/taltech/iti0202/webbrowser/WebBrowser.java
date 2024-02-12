@@ -26,10 +26,12 @@ public class WebBrowser {
      * Goes back to previous page.
      */
     public void back() {
-        if (positionInHistory >= 1) {
-            forwardHistory.add(history.get(positionInHistory));
-            positionInHistory = positionInHistory - 1;
-            history.add(history.get(positionInHistory));
+        if (!positionInHistory.equals(null)) {
+            if (positionInHistory >= 1) {
+                forwardHistory.add(history.get(positionInHistory));
+                positionInHistory = positionInHistory - 1;
+                history.add(history.get(positionInHistory));
+            }
         }
     }
 
