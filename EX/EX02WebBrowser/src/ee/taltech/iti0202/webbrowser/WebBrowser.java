@@ -6,6 +6,7 @@ public class WebBrowser {
     private String homePage;
     private List<String> bookMarks = new ArrayList<>();
     private List<String> history = new ArrayList<>();
+    private List<String> forwardHistory = new ArrayList<>();
     private Integer positionInHistory;
     /**
      * Constructor.
@@ -26,6 +27,7 @@ public class WebBrowser {
      */
     public void back() {
         if (positionInHistory >= 1) {
+            forwardHistory.add(history.get(positionInHistory));
             positionInHistory = positionInHistory - 1;
             history.add(history.get(positionInHistory));
         }
@@ -35,9 +37,9 @@ public class WebBrowser {
      * Goes forward to next page.
      */
     public void forward() {
-        if (positionInHistory < history.size() - 1) {
-            positionInHistory = positionInHistory + 1;
-            history.add(history.get(positionInHistory));
+        if (!forwardHistory.isEmpty()) {
+            history.add(forwardHistory.get(forwardHistory.size() - 1));
+            forwardHistory.remove(forwardHistory.size() - 1);
         }
     }
 
@@ -49,6 +51,7 @@ public class WebBrowser {
     public void goTo(String url) {
         if (!url.equals(history.get(history.size() - 1))) {
             history.add(url);
+            forwardHistory.clear();
         }
         positionInHistory = history.size() - 1;
     }
@@ -99,16 +102,11 @@ public class WebBrowser {
      */
     public String getTop3VisitedPages() {
         Map<String, Integer> visits = new HashMap<>();
-        String topThreeList = null;
         for (String website : history) { // Making a map of the history
-            if (history.contains(website)) {
-                int newCount;
-                newCount = visits.get(website) + 1;
-                visits.put(website, newCount);
-            } else {
-                visits.put(website, 1);
-            }
+            int newCount = visits.getOrDefault(website, 0) + 1;
+            visits.put(website, newCount);
         }
+
         List<Map.Entry<String, Integer>> visitsSorted = new ArrayList<>(visits.entrySet());
 
         // Sort the entries by value in descending order
@@ -118,10 +116,15 @@ public class WebBrowser {
 
         StringBuilder result = new StringBuilder();
         for (Map.Entry<String, Integer> entry : topThree) {
-            result.append(entry.getKey()).append(" - ").append(entry.getValue()).append(" visits\n");
+            if (entry.getValue() == 1) {
+                result.append(entry.getKey()).append(" - ").append(1).append(" visit\n");
+            } else {
+                result.append(entry.getKey()).append(" - ").append(entry.getValue()).append(" visits\n");
+            }
         }
         return result.toString();
     }
+
 
     /**
      * Returns the active web page (string).
@@ -139,22 +142,11 @@ public class WebBrowser {
 
     public static void main(String[] args) {
         WebBrowser webBrowser = new WebBrowser();
-        System.out.println(webBrowser.getCurrentUrl());  // google.com
-        webBrowser.setHomePage("neti.ee");
-        webBrowser.goTo("facebook.com");
+        webBrowser.goTo("rahamaa.ee");
+        webBrowser.goTo("clubpenguin.ee");
         webBrowser.back();
-        webBrowser.back();
-        System.out.println(webBrowser.getHistory());  // [google.com, facebook.com, google.com]
-
-        webBrowser = new WebBrowser();
-        System.out.println(webBrowser.getCurrentUrl());  // google.com
-        webBrowser.setHomePage("neti.ee");
-        webBrowser.goTo("facebook.com");
-        webBrowser.back();
-        System.out.println(webBrowser.getCurrentUrl());  // google.com
         webBrowser.forward();
-        System.out.println(webBrowser.getCurrentUrl());  // facebook.com
-
-        System.out.println(webBrowser.getHistory()); // [google.com, facebook.com, google.com, facebook.com]
+        webBrowser.forward(); // Cannot go forwards more than it did go back
+        System.out.println(webBrowser.getTop3VisitedPages());
     }
 }
