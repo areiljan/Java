@@ -115,11 +115,17 @@ public class WebBrowser {
         List<Map.Entry<String, Integer>> topThree = visitsSorted.subList(0, Math.min(3, visitsSorted.size()));
 
         StringBuilder result = new StringBuilder();
+        boolean isFirstEntry = true;
         for (Map.Entry<String, Integer> entry : topThree) {
+            if (!isFirstEntry) {
+                result.append("\n"); // Add a newline before each entry except the first one
+            }
+            isFirstEntry = false;
+
             if (entry.getValue() == 1) {
-                result.append(entry.getKey()).append(" - ").append(1).append(" visit\n");
+                result.append(entry.getKey()).append(" - ").append(1).append(" visit");
             } else {
-                result.append(entry.getKey()).append(" - ").append(entry.getValue()).append(" visits\n");
+                result.append(entry.getKey()).append(" - ").append(entry.getValue()).append(" visits");
             }
         }
         return result.toString();
