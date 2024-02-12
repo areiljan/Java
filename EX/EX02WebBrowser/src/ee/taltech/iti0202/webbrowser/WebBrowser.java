@@ -115,32 +115,32 @@ public class WebBrowser {
 
         // Sort the entries by value in descending order
         Collections.sort(visitsSorted, (entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()));
-
+        // Make a list of maps.
         List<Map.Entry<String, Integer>> topThree = visitsSorted.subList(0, Math.min(3, visitsSorted.size()));
-
-        StringBuilder result = new StringBuilder();
-        Set<String> processedWebsites = new HashSet<>();
-        boolean isFirstEntry = true;
-
-        for (int i = history.size() - 1; i >= 0; i--) {
-            String website = history.get(i);
-            // If the website has already been processed, skip it
-            if (processedWebsites.contains(website)) {
-                continue;
+        Collections.sort(topThree, (entry1, entry2) -> {
+            int result = entry2.getValue().compareTo(entry1.getValue()); // Sort by value first
+            if (result != 0) {
+                return result; // If values are different, return the comparison result
+            } else {
+                // If values are the same, find the last occurrence in the history
+                int lastIndex1 = history.lastIndexOf(entry1.getKey());
+                int lastIndex2 = history.lastIndexOf(entry2.getKey());
+                return Integer.compare(lastIndex2, lastIndex1); // Compare last indices
             }
-            // Get the visit count for the current website
-            int visitCount = visits.getOrDefault(website, 0);
-            // Append the website and visit count to the result
+        });
+        StringBuilder result = new StringBuilder();
+        boolean isFirstEntry = true;
+        for (Map.Entry<String, Integer> entry : topThree) {
             if (!isFirstEntry) {
                 result.append("\n"); // Add a newline before each entry except the first one
             }
             isFirstEntry = false;
-            if (visitCount == 1) {
-                result.append(website).append(" - ").append(1).append(" visit");
+
+            if (entry.getValue() == 1) {
+                result.append(entry.getKey()).append(" - ").append(1).append(" visit");
             } else {
-                result.append(website).append(" - ").append(visitCount).append(" visits");
+                result.append(entry.getKey()).append(" - ").append(entry.getValue()).append(" visits");
             }
-            processedWebsites.add(website); // Mark the website as processed
         }
         return result.toString();
     }
