@@ -118,14 +118,14 @@ public class WebBrowser {
         // Make a list of maps.
         List<Map.Entry<String, Integer>> topThree = visitsSorted.subList(0, Math.min(3, visitsSorted.size()));
         Collections.sort(topThree, (entry1, entry2) -> {
-            int result = entry2.getValue().compareTo(entry1.getValue()); // Sort by value first
+            int result = entry2.getValue().compareTo(entry1.getValue()); // Sort by value first in descending order
             if (result != 0) {
                 return result; // If values are different, return the comparison result
             } else {
-                // If values are the same, find the last occurrence in the history
-                int lastIndex1 = history.lastIndexOf(entry1.getKey());
-                int lastIndex2 = history.lastIndexOf(entry2.getKey());
-                return Integer.compare(lastIndex2, lastIndex1); // Compare last indices
+                // If values are the same, find the first occurrence in the history
+                int firstIndex1 = history.indexOf(entry1.getKey());
+                int firstIndex2 = history.indexOf(entry2.getKey());
+                return Integer.compare(firstIndex1, firstIndex2); // Compare first indices
             }
         });
         StringBuilder result = new StringBuilder();
