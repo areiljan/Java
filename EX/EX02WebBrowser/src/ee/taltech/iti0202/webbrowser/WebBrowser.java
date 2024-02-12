@@ -60,7 +60,9 @@ public class WebBrowser {
      * Add the current webpage as a bookmark.
      */
     public void addAsBookmark() {
-        bookMarks.add(history.get(history.size() - 1));
+        if (!bookMarks.contains(history.get(history.size() - 1))) {
+            bookMarks.add(history.get(history.size() - 1));
+        }
     }
 
     /**
