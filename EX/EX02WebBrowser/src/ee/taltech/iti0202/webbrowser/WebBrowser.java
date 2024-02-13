@@ -57,7 +57,7 @@ public class WebBrowser {
         if (backAndForwardHistory.size() > positionInHistory + 1) {
             backAndForwardHistory.subList(positionInHistory + 1, backAndForwardHistory.size()).clear();
         }
-        if (!url.equals(history.getLast())) {
+        if (!url.equals(history.get(history.size() - 1))) {
             history.add(url);
             backAndForwardHistory.add(url);
         }
