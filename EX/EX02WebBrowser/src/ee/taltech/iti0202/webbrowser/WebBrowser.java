@@ -1,6 +1,10 @@
 package ee.taltech.iti0202.webbrowser;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Collections;
 
 public class WebBrowser {
     private String homePage;
@@ -158,5 +162,4 @@ public class WebBrowser {
     public String getCurrentUrl() {
         return backAndForwardHistory.get(positionInHistory);
     }
-
 }
