@@ -21,6 +21,7 @@ public class WebBrowser {
      */
     public void homePage() {
         backAndForwardHistory.add(this.homePage);
+        history.add(this.homePage);
         positionInHistory = backAndForwardHistory.size() - 1;
     }
 
@@ -160,7 +161,6 @@ public class WebBrowser {
         webBrowser.goTo("2");
         webBrowser.goTo("3");
         webBrowser.goTo("4");
-        webBrowser.goTo("5");
         webBrowser.back();
         webBrowser.back();
         webBrowser.back();
