@@ -55,7 +55,7 @@ public class WebBrowser {
      */
     public void goTo(String url) {
         if (positionInHistory < backAndForwardHistory.size() - 1) {
-            backAndForwardHistory = backAndForwardHistory.subList(0, positionInHistory + 1);
+            backAndForwardHistory.subList(positionInHistory + 1, history.size()).clear();
         }
         if (!url.equals(history.get(history.size() - 1))) {
             history.add(url);
@@ -159,25 +159,5 @@ public class WebBrowser {
      */
     public String getCurrentUrl() {
         return backAndForwardHistory.get(positionInHistory);
-    }
-
-    public static void main(String[] args) {
-        WebBrowser webBrowser = new WebBrowser();
-        webBrowser.goTo("1");
-        webBrowser.goTo("2");
-        webBrowser.goTo("3");
-        webBrowser.goTo("4");
-        webBrowser.goTo("5");
-        webBrowser.goTo("6");
-        webBrowser.back();
-        webBrowser.back();
-        webBrowser.back();
-        webBrowser.goTo("7");
-        webBrowser.goTo("8");
-        webBrowser.back();
-        webBrowser.back();
-        webBrowser.back();
-        System.out.println(webBrowser.getCurrentUrl());
-        System.out.println(webBrowser.getHistory());
     }
 }
