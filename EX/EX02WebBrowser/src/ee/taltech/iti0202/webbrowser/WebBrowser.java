@@ -4,8 +4,8 @@ import java.util.*;
 
 public class WebBrowser {
     private String homePage;
-    private List<String> bookMarks = new ArrayList<>();
-    private List<String> history = new ArrayList<>();
+    private final List<String> bookMarks = new ArrayList<>();
+    private final List<String> history = new ArrayList<>();
     private List<String> backAndForwardHistory = new ArrayList<>();
     private Integer positionInHistory = 0;
     /**
@@ -54,10 +54,10 @@ public class WebBrowser {
      * @param url where to go
      */
     public void goTo(String url) {
-        for (int i = backAndForwardHistory.size() - 1; i > positionInHistory; i--) {
-            backAndForwardHistory.remove(i);
+        if (backAndForwardHistory.size() > positionInHistory + 1) {
+            backAndForwardHistory.subList(positionInHistory + 1, backAndForwardHistory.size()).clear();
         }
-        if (!url.equals(history.get(history.size() - 1))) {
+        if (!url.equals(history.getLast())) {
             history.add(url);
             backAndForwardHistory.add(url);
         }
@@ -79,9 +79,7 @@ public class WebBrowser {
      * @param bookmark to remove
      */
     public void removeBookmark(String bookmark) {
-        if (bookMarks.contains(bookmark)) {
-            bookMarks.remove(bookmark);
-        }
+        bookMarks.remove(bookmark);
     }
 
     public List<String> getBookmarks() {
