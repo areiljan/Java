@@ -20,7 +20,8 @@ public class WebBrowser {
      * Goes to homepage.
      */
     public void homePage() {
-        history.add(this.homePage);
+        backAndForwardHistory.add(this.homePage);
+        positionInHistory = backAndForwardHistory.size() - 1;
     }
 
     /**
