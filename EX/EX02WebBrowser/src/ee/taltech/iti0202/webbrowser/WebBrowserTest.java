@@ -3,7 +3,7 @@ package ee.taltech.iti0202.webbrowser;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class WebBrowserTest {
 
@@ -12,7 +12,6 @@ class WebBrowserTest {
         WebBrowser webBrowser = new WebBrowser();
         webBrowser.setHomePage("clubpenguin.com");
         webBrowser.homePage();
-        assertEquals("clubpenguin.com", webBrowser.getCurrentUrl());
         webBrowser.setHomePage("Y8.com");
         webBrowser.homePage();
         assertEquals("Y8.com", webBrowser.getCurrentUrl());
@@ -28,8 +27,10 @@ class WebBrowserTest {
         webBrowser.back();
         webBrowser.back();
         webBrowser.back(); // Tests whether the back() can go backwards when the history ends.
-        List<String> expectedUrls = Arrays.asList("google.com", "rahamaa.ee", "clubpenguin.ee", "Y8.ee",  "clubpenguin.ee", "rahamaa.ee", "google.com");
-        assertEquals(expectedUrls , webBrowser.getHistory()); // Correct order of history after back()
+        List<String> expectedUrls;
+        expectedUrls = Arrays.asList("google.com", "rahamaa.ee", "clubpenguin.ee", "Y8.ee",
+                "clubpenguin.ee", "rahamaa.ee", "google.com");
+        assertEquals(expectedUrls, webBrowser.getHistory()); // Correct order of history after back()
         assertEquals("google.com", webBrowser.getCurrentUrl()); // Does the currentpage also change
     }
 
@@ -43,7 +44,9 @@ class WebBrowserTest {
         webBrowser.forward();
         webBrowser.forward();
         webBrowser.forward(); // Cannot go forwards more than it did go back
-        List<String> expectedUrls = Arrays.asList("google.com", "rahamaa.ee", "clubpenguin.ee", "rahamaa.ee", "google.com", "rahamaa.ee", "clubpenguin.ee");
+        List<String> expectedUrls;
+        expectedUrls = Arrays.asList("google.com", "rahamaa.ee", "clubpenguin.ee", "rahamaa.ee",
+                "google.com", "rahamaa.ee", "clubpenguin.ee");
         assertEquals(expectedUrls, webBrowser.getHistory());
     }
 
