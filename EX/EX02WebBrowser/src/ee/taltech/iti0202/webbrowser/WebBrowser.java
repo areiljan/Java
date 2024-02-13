@@ -20,6 +20,9 @@ public class WebBrowser {
      * Goes to homepage.
      */
     public void homePage() {
+        if (positionInHistory < backAndForwardHistory.size() - 1) {
+            backAndForwardHistory = backAndForwardHistory.subList(0, positionInHistory + 1);
+        }
         backAndForwardHistory.add(this.homePage);
         history.add(this.homePage);
         positionInHistory = backAndForwardHistory.size() - 1;
