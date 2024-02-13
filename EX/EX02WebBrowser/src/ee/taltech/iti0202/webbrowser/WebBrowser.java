@@ -6,13 +6,14 @@ public class WebBrowser {
     private String homePage;
     private List<String> bookMarks = new ArrayList<>();
     private List<String> history = new ArrayList<>();
-    private List<String> forwardHistory = new ArrayList<>();
-    private Integer positionInHistory;
+    private List<String> backAndForwardHistory = new ArrayList<>();
+    private Integer positionInHistory = 0;
     /**
      * Constructor.
      */
     public WebBrowser() {
         history.add("google.com");
+        backAndForwardHistory.add("google.com");
     }
 
     /**
@@ -26,12 +27,9 @@ public class WebBrowser {
      * Goes back to previous page.
      */
     public void back() {
-        if (!positionInHistory.equals(null)) {
-            if (positionInHistory >= 1) {
-                forwardHistory.add(history.get(positionInHistory));
-                positionInHistory = positionInHistory - 1;
-                history.add(history.get(positionInHistory));
-            }
+        if (positionInHistory >= 1) {
+            positionInHistory--;
+            history.add(backAndForwardHistory.get(positionInHistory));
         }
     }
 
@@ -39,9 +37,9 @@ public class WebBrowser {
      * Goes forward to next page.
      */
     public void forward() {
-        if (!forwardHistory.isEmpty()) {
-            history.add(forwardHistory.get(forwardHistory.size() - 1));
-            forwardHistory.remove(forwardHistory.size() - 1);
+        if (positionInHistory < backAndForwardHistory.size() - 1) {
+            positionInHistory++;
+            history.add(backAndForwardHistory.get(positionInHistory));
         }
     }
 
@@ -53,17 +51,17 @@ public class WebBrowser {
     public void goTo(String url) {
         if (!url.equals(history.get(history.size() - 1))) {
             history.add(url);
-            forwardHistory.clear();
+            backAndForwardHistory.add(url);
         }
-        positionInHistory = history.size() - 1;
+        positionInHistory = backAndForwardHistory.size() - 1;
     }
 
     /**
      * Add the current webpage as a bookmark.
      */
     public void addAsBookmark() {
-        if (!bookMarks.contains(history.get(history.size() - 1))) {
-            bookMarks.add(history.get(history.size() - 1));
+        if (!bookMarks.contains(backAndForwardHistory.get(positionInHistory))) {
+            bookMarks.add(backAndForwardHistory.get(positionInHistory));
         }
     }
 
@@ -95,7 +93,7 @@ public class WebBrowser {
      * then the whole history would be: ["google.com", "facebook.com", "google.com"]
      * @return list of all visited pages
      */
-    public List<String> getHistory() {;
+    public List<String> getHistory() {
         return history;
     }
 
@@ -152,21 +150,25 @@ public class WebBrowser {
      * @return active web page
      */
     public String getCurrentUrl() {
-        try {
-            int lastIndex = history.size() - 1;
-            return history.get(lastIndex);
-        } catch (Exception e) {
-            return "";
-        }
+        return backAndForwardHistory.get(positionInHistory);
     }
 
     public static void main(String[] args) {
         WebBrowser webBrowser = new WebBrowser();
-        webBrowser.goTo("rahamaa.ee");
-        webBrowser.goTo("clubpenguin.ee");
+        webBrowser.goTo("1");
+        webBrowser.goTo("2");
+        webBrowser.goTo("3");
+        webBrowser.goTo("4");
+        webBrowser.goTo("5");
         webBrowser.back();
-        webBrowser.forward();
-        webBrowser.forward(); // Cannot go forwards more than it did go back
-        System.out.println(webBrowser.getTop3VisitedPages());
+        webBrowser.back();
+        webBrowser.back();
+        webBrowser.goTo("6");
+        webBrowser.goTo("7");
+        webBrowser.back();
+        webBrowser.back();
+        webBrowser.back();
+        System.out.println(webBrowser.getHistory());
+        System.out.println(webBrowser.getCurrentUrl());
     }
 }
