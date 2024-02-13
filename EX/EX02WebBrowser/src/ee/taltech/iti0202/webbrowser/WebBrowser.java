@@ -54,8 +54,8 @@ public class WebBrowser {
      * @param url where to go
      */
     public void goTo(String url) {
-        if (positionInHistory < backAndForwardHistory.size() - 1) {
-            backAndForwardHistory.subList(positionInHistory + 1, history.size()).clear();
+        for (int i = backAndForwardHistory.size() - 1; i > positionInHistory; i--) {
+            backAndForwardHistory.remove(i);
         }
         if (!url.equals(history.get(history.size() - 1))) {
             history.add(url);
@@ -160,4 +160,5 @@ public class WebBrowser {
     public String getCurrentUrl() {
         return backAndForwardHistory.get(positionInHistory);
     }
+
 }
