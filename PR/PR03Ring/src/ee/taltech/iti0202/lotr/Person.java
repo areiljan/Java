@@ -21,7 +21,7 @@ public class Person {
     }
 
     public String isSauron() {
-        if (!this.ring.equals(null)) {
+        if (ring != null) {
             if (this.name.equals("Sauron") && this.ring.type.equals(Ring.Type.THE_ONE) && this.ring.material.equals(Ring.Material.GOLD)) {
                 return "Affirmative";
             } else if (this.name.equals("Sauron") && this.ring.type.equals(Ring.Type.THE_ONE)) {
