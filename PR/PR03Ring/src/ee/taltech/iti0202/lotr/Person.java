@@ -31,11 +31,11 @@ public class Person {
             } else if (this.ring.type.equals(Ring.Type.THE_ONE) && this.ring.material.equals(Ring.Material.GOLD)) {
                 return "No, he just stole the ring";
             } else {
-                return "No.";
+                return "No";
             }
         } else {
             if (this.name.equals("Sauron")) {
-                return "No, but he's claiming to be.";
+                return "No, but he's claiming to be";
             } else {
                 return "No";
             }
