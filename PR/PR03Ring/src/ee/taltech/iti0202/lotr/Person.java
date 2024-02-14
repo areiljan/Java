@@ -27,9 +27,9 @@ public class Person {
             } else if (this.name.equals("Sauron") && this.ring.type.equals(Ring.Type.THE_ONE)) {
                 return "No, the ring is fake!";
             } else if (this.name.equals("Sauron")) {
-                return "No, but he's claiming to be.";
+                return "No, but he's claiming to be";
             } else if (this.ring.type.equals(Ring.Type.THE_ONE) && this.ring.material.equals(Ring.Material.GOLD)) {
-                return "No, he just stole the ring.";
+                return "No, he just stole the ring";
             } else {
                 return "No.";
             }
