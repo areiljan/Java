@@ -1,8 +1,8 @@
 package ee.taltech.iti0202.lotr;
 
 public class Ring {
-    public Type type;
-    public Material material;
+    private Type type;
+    private Material material;
 
     public Ring(Type type, Material material) {
         this.type = type;
