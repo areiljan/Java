@@ -5,6 +5,12 @@ public class Person {
     private String name = null;
     private Ring ring = null;
 
+    public Person(String race, String name, Ring ring) {
+        this.race = race;
+        this.name = name;
+        this.ring = ring;
+    }
+
     public Person(String race, String name) {
         this.race = race;
         this.name = name;
