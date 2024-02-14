@@ -23,7 +23,7 @@ public class Person {
     public String isSauron() {
         if (!this.ring.equals(null)) {
             if (this.name.equals("Sauron") && this.ring.type.equals(Ring.Type.THE_ONE) && this.ring.material.equals(Ring.Material.GOLD)) {
-                return "Affirmative.";
+                return "Affirmative";
             } else if (this.name.equals("Sauron") && this.ring.type.equals(Ring.Type.THE_ONE)) {
                 return "No, the ring is fake!";
             } else if (this.name.equals("Sauron")) {
