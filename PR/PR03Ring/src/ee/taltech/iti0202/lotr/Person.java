@@ -1,9 +1,9 @@
 package ee.taltech.iti0202.lotr;
 
 public class Person {
-    private String race;
-    private String name = null;
-    private Ring ring = null;
+    public String race;
+    public String name = null;
+    public Ring ring = null;
 
     public Person(String race, String name, Ring ring) {
         this.race = race;
