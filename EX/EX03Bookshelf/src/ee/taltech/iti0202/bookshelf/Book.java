@@ -12,7 +12,7 @@ public class Book {
     private static int id;
     private final int ID;
     private boolean createdWithOF;
-    public static Person owner;
+    public Person owner;
     static HashMap<Book, Person> bookInfo = new HashMap<>();
     private static Book lastadded = null;
     public static int getAndIncrementNextId() {
@@ -25,9 +25,9 @@ public class Book {
         this.author = author;
         this.yearOfPublishing = yearOfPublishing;
         this.price = price;
-        this.owner = null;
         this.ID = getAndIncrementNextId();
         this.createdWithOF = false;
+        this.owner = null;
         bookInfo.put(this, owner);
         Book.lastadded = this;
     }
@@ -48,11 +48,13 @@ public class Book {
 
     public void setOwner(Person newOwner) {
         owner = newOwner;
+        bookInfo.put(this, owner);
     }
 
     public int getPrice() {
         return price;
     }
+
 
     public int getId() {
         return ID;
@@ -109,8 +111,9 @@ public class Book {
         List<Book> ownerBooks = new ArrayList<>();
         for (Map.Entry<Book, Person> entry : bookInfo.entrySet()) {
             if (entry.getValue() != null) {
-                    entry.getValue().equals(owner);
-                ownerBooks.add(entry.getKey());
+                if (entry.getValue().getName().equalsIgnoreCase(owner.getName())) {
+                    ownerBooks.add(entry.getKey());
+                }
             }
         }
         return ownerBooks;
