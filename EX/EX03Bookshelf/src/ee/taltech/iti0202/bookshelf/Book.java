@@ -2,11 +2,11 @@ package ee.taltech.iti0202.bookshelf;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static jdk.jfr.internal.EventWriterKey.getKey;
 
 public class Book {
     private String title;
@@ -18,6 +18,7 @@ public class Book {
     private boolean createdWithOF;
     public Person owner;
     static HashMap<Person, Book> bookInfo = new HashMap<>();
+    private static Book lastadded = null;
     public static int getAndIncrementNextId() {
         id++;
         return id - 1;
@@ -32,6 +33,7 @@ public class Book {
         this.ID = getAndIncrementNextId();
         this.createdWithOF = false;
         bookInfo.put(owner, this);
+        this.lastadded = this;
     }
 
     public String getTitle() {
@@ -69,7 +71,7 @@ public class Book {
         this.createdWithOF = createdWithOf;
     }
 
-    public Book of(String title, String author, int yearOfPublishing, int price, ) {
+    public Book of(String title, String author, int yearOfPublishing, int price) {
         for (Map.Entry<Person, Book> entry : bookInfo.entrySet()) {
             Book book = entry.getValue();
             if (book.createdWithOF == true) {
@@ -84,26 +86,31 @@ public class Book {
     }
 
     public static Book of(String title, int price) {
+        boolean someBookWasCreated = false;
         for (Map.Entry<Person, Book> entry : bookInfo.entrySet()) {
             Book book = entry.getValue();
             if (book.createdWithOF == true) {
-                if (book.getAuthor() == title && book.getTitle() == author && book.getYearOfPublishing() == yearOfPublishing) {
+                if (book.getTitle() == title) {
                     return book;
                 }
+                someBookWasCreated = true;
             }
         }
-        Book book = new Book(title, author, yearOfPublishing, price);
-        book.setCreatedWithOF(true);
-        return book;
+        if (someBookWasCreated) {
+            Book book = new Book(title, lastadded.getAuthor(), lastadded.getYearOfPublishing(), price);
+            book.setCreatedWithOF(true);
+            return book;
+        }
+        return null;
     }
     public static List<Book> getBooksByOwner(Person owner) {
-
+        return new ArrayList<>();
     }
     public static boolean removeBook(Book book) {
-
+        return true;
     }
     public static List<Book> getBooksByAuthor(String author) {
-
+        return new ArrayList<>();
     }
 
 }
