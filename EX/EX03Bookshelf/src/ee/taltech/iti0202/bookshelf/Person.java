@@ -24,7 +24,7 @@ public class Person {
     }
 
     public boolean buyBook(Book book) {
-        if (book.getOwner() == null && getMoney() > book.getPrice()) {
+        if (book.getOwner() == null && getMoney() >= book.getPrice()) {
             this.money -= book.getPrice();
             book.owner = this;
             return true;
@@ -33,10 +33,12 @@ public class Person {
     }
 
     public boolean sellBook(Book book) {
-        if (book.getOwner().getName().equals(this.getName()) && book != null) {
-            this.money += book.getPrice();
-            book.setOwner(null);
-            return true;
+        if (book.getOwner() != null) {
+            if (book.getOwner().getName().equals(this.getName()) && book != null) {
+                this.money += book.getPrice();
+                book.setOwner(null);
+                return true;
+            }
         }
         return false;
     }

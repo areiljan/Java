@@ -1,5 +1,6 @@
 package ee.taltech.iti0202.bookshelf;
 
+import java.security.Key;
 import java.util.*;
 
 
@@ -12,7 +13,7 @@ public class Book {
     private final int ID;
     private boolean createdWithOF;
     public static Person owner;
-    static HashMap<Person, Book> bookInfo = new HashMap<>();
+    static HashMap<Book, Person> bookInfo = new HashMap<>();
     private static Book lastadded = null;
     public static int getAndIncrementNextId() {
         id++;
@@ -27,7 +28,7 @@ public class Book {
         this.owner = null;
         this.ID = getAndIncrementNextId();
         this.createdWithOF = false;
-        bookInfo.put(owner, this);
+        bookInfo.put(this, owner);
         Book.lastadded = this;
     }
 
@@ -58,14 +59,10 @@ public class Book {
     }
 
     public boolean buy(Person buyer) {
-        if (getOwner() != null) {
+        if (owner != null && buyer != this.getOwner()) {
             this.getOwner().sellBook(this);
         }
-        buyer.buyBook(this);
-        if (buyer == null) {
-            buyer.setMoney(-this.getPrice());
-        }
-        return false;
+        return buyer.buyBook(this);
     }
 
     public void setCreatedWithOF(boolean createdWithOf) {
@@ -76,9 +73,9 @@ public class Book {
         return createdWithOF;
     }
 
-    public Book of(String title, String author, int yearOfPublishing, int price) {
-        for (Map.Entry<Person, Book> entry : bookInfo.entrySet()) {
-            Book book = entry.getValue();
+    public static Book of(String title, String author, int yearOfPublishing, int price) {
+        for (Map.Entry<Book, Person> entry : bookInfo.entrySet()) {
+            Book book = entry.getKey();
             if (book.createdWithOF) {
                 if (Objects.equals(book.getAuthor(), author) && Objects.equals(book.getTitle(), title) && book.getYearOfPublishing() == yearOfPublishing) {
                     return book;
@@ -92,10 +89,10 @@ public class Book {
 
     public static Book of(String title, int price) {
         boolean someBookWasCreated = false;
-        for (Map.Entry<Person, Book> entry : bookInfo.entrySet()) {
-            Book book = entry.getValue();
+        for (Map.Entry<Book, Person> entry : bookInfo.entrySet()) {
+            Book book = entry.getKey();
             if (book.createdWithOF) {
-                if (Objects.equals(book.getTitle(), title)) {
+                if (book.getTitle() == title) {
                     return book;
                 }
                 someBookWasCreated = true;
@@ -110,9 +107,10 @@ public class Book {
     }
     public static List<Book> getBooksByOwner(Person owner) {
         List<Book> ownerBooks = new ArrayList<>();
-        for (Map.Entry<Person, Book> entry : bookInfo.entrySet()) {
-            if (entry.getKey().equals(owner)) {
-                ownerBooks.add(entry.getValue());
+        for (Map.Entry<Book, Person> entry : bookInfo.entrySet()) {
+            if (entry.getValue()) {
+                    entry.getValue().equals(owner))
+                ownerBooks.add(entry.getKey());
             }
         }
         return ownerBooks;
@@ -123,8 +121,8 @@ public class Book {
         }
 
         // Iterate through the bookInfo hashmap to find and remove the book
-        for (Map.Entry<Person, Book> entry : bookInfo.entrySet()) {
-            if (entry.getValue().equals(book) && entry.getValue().getCreatedWithOF()) {
+        for (Map.Entry<Book, Person> entry : bookInfo.entrySet()) {
+            if (entry.getKey().equals(book) && entry.getKey().getCreatedWithOF()) {
                 // Remove the book if it was created using the 'of' method
                 bookInfo.remove(entry.getKey());
                 // If the book is owned by someone, increase their money by the book's price
@@ -138,7 +136,7 @@ public class Book {
     }
     public static List<Book> getBooksByAuthor(String author) {
         List<Book> authorBooks = new ArrayList<>();
-        for (Book book : bookInfo.values()) {
+        for (Book book : bookInfo.keySet()) {
             if (book.getAuthor().equalsIgnoreCase(author)) {
                 authorBooks.add(book);
             }
