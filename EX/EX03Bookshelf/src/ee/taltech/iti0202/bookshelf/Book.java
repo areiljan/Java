@@ -1,22 +1,17 @@
 package ee.taltech.iti0202.bookshelf;
 
-import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class Book {
-    private String title;
-    private String author;
-    private int yearOfPublishing;
+    private final String title;
+    private final String author;
+    private final int yearOfPublishing;
     private int price;
     private static int id;
-    private int ID;
+    private final int ID;
     private boolean createdWithOF;
-    public Person owner;
+    public static Person owner;
     static HashMap<Person, Book> bookInfo = new HashMap<>();
     private static Book lastadded = null;
     public static int getAndIncrementNextId() {
@@ -33,7 +28,7 @@ public class Book {
         this.ID = getAndIncrementNextId();
         this.createdWithOF = false;
         bookInfo.put(owner, this);
-        this.lastadded = this;
+        Book.lastadded = this;
     }
 
     public String getTitle() {
@@ -50,6 +45,10 @@ public class Book {
         return owner;
     }
 
+    public void setOwner(Person newOwner) {
+        owner = newOwner;
+    }
+
     public int getPrice() {
         return price;
     }
@@ -64,7 +63,7 @@ public class Book {
         }
         buyer.buyBook(this);
         if (buyer == null) {
-            buyer.money += getPrice();
+            buyer.setMoney(-this.getPrice());
         }
         return false;
     }
@@ -80,8 +79,8 @@ public class Book {
     public Book of(String title, String author, int yearOfPublishing, int price) {
         for (Map.Entry<Person, Book> entry : bookInfo.entrySet()) {
             Book book = entry.getValue();
-            if (book.createdWithOF == true) {
-                if (book.getAuthor() == author && book.getTitle() == title && book.getYearOfPublishing() == yearOfPublishing) {
+            if (book.createdWithOF) {
+                if (Objects.equals(book.getAuthor(), author) && Objects.equals(book.getTitle(), title) && book.getYearOfPublishing() == yearOfPublishing) {
                     return book;
                 }
             }
@@ -95,8 +94,8 @@ public class Book {
         boolean someBookWasCreated = false;
         for (Map.Entry<Person, Book> entry : bookInfo.entrySet()) {
             Book book = entry.getValue();
-            if (book.createdWithOF == true) {
-                if (book.getTitle() == title) {
+            if (book.createdWithOF) {
+                if (Objects.equals(book.getTitle(), title)) {
                     return book;
                 }
                 someBookWasCreated = true;
