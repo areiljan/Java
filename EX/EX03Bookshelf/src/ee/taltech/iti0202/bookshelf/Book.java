@@ -71,6 +71,10 @@ public class Book {
         this.createdWithOF = createdWithOf;
     }
 
+    public boolean getCreatedWithOF() {
+        return createdWithOF;
+    }
+
     public Book of(String title, String author, int yearOfPublishing, int price) {
         for (Map.Entry<Person, Book> entry : bookInfo.entrySet()) {
             Book book = entry.getValue();
@@ -104,13 +108,41 @@ public class Book {
         return null;
     }
     public static List<Book> getBooksByOwner(Person owner) {
-        return new ArrayList<>();
+        List<Book> ownerBooks = new ArrayList<>();
+        for (Map.Entry<Person, Book> entry : bookInfo.entrySet()) {
+            if (entry.getKey().equals(owner)) {
+                ownerBooks.add(entry.getValue());
+            }
+        }
+        return ownerBooks;
     }
     public static boolean removeBook(Book book) {
-        return true;
+        if (book == null || !bookInfo.containsValue(book)) {
+            return false; // Return false if the book is null or not found in bookInfo
+        }
+
+        // Iterate through the bookInfo hashmap to find and remove the book
+        for (Map.Entry<Person, Book> entry : bookInfo.entrySet()) {
+            if (entry.getValue().equals(book) && entry.getValue().getCreatedWithOF()) {
+                // Remove the book if it was created using the 'of' method
+                bookInfo.remove(entry.getKey());
+                // If the book is owned by someone, increase their money by the book's price
+                if (book.getOwner() != null) {
+                    book.getOwner().setMoney(book.getPrice());
+                }
+                return true; // Return true after successfully removing the book
+            }
+        }
+        return false; // Return false if the book was not removed
     }
     public static List<Book> getBooksByAuthor(String author) {
-        return new ArrayList<>();
+        List<Book> authorBooks = new ArrayList<>();
+        for (Book book : bookInfo.values()) {
+            if (book.getAuthor().equalsIgnoreCase(author)) {
+                authorBooks.add(book);
+            }
+        }
+        return authorBooks;
     }
 
 }

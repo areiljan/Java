@@ -1,6 +1,7 @@
 package ee.taltech.iti0202.bookshelf;
 
 
+
 public class Person {
     public String name;
     public int money;
@@ -12,6 +13,10 @@ public class Person {
 
     public int getMoney() {
         return money;
+    }
+
+    public void setMoney(int bookPrice) {
+        money += bookPrice;
     }
 
     public String getName() {
