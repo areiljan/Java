@@ -108,8 +108,8 @@ public class Book {
     public static List<Book> getBooksByOwner(Person owner) {
         List<Book> ownerBooks = new ArrayList<>();
         for (Map.Entry<Book, Person> entry : bookInfo.entrySet()) {
-            if (entry.getValue()) {
-                    entry.getValue().equals(owner))
+            if (entry.getValue() != null) {
+                    entry.getValue().equals(owner);
                 ownerBooks.add(entry.getKey());
             }
         }
