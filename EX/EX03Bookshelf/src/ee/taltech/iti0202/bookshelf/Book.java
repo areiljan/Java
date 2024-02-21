@@ -59,7 +59,9 @@ public class Book {
     }
 
     public boolean buy(Person buyer) {
-        this.getOwner().sellBook(this);
+        if (getOwner() != null) {
+            this.getOwner().sellBook(this);
+        }
         buyer.buyBook(this);
         if (buyer == null) {
             buyer.money += getPrice();
