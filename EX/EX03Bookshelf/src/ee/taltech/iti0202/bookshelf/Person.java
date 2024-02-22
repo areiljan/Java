@@ -35,7 +35,7 @@ public class Person {
     }
 
     public boolean sellBook(Book book) {
-        if (book.getOwner() != null) {
+        if (book.getOwner() != null && book != null) {
             if (book.getOwner().equals(this) && book != null) {
                 this.money += book.getPrice();
                 book.setOwner(null);
