@@ -119,7 +119,7 @@ public class Book {
         return ownerBooks;
     }
     public static boolean removeBook(Book book) {
-        if (book == null || !bookInfo.containsValue(book)) {
+        if (book == null) {
             return false; // Return false if the book is null or not found in bookInfo
         }
 
@@ -127,7 +127,7 @@ public class Book {
         for (Map.Entry<Book, Person> entry : bookInfo.entrySet()) {
             if (entry.getKey().equals(book) && entry.getKey().getCreatedWithOF()) {
                 // Remove the book if it was created using the 'of' method
-                bookInfo.remove(entry.getKey());
+                bookInfo.remove(book);
                 // If the book is owned by someone, increase their money by the book's price
                 if (book.getOwner() != null) {
                     book.getOwner().setMoney(book.getPrice());
