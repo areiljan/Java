@@ -24,10 +24,12 @@ public class Person {
     }
 
     public boolean buyBook(Book book) {
-        if (book.getOwner() == null && getMoney() >= book.getPrice()) {
-            this.money -= book.getPrice();
-            book.setOwner(this);
-            return true;
+        if (book != null) {
+            if (book.getOwner() == null && getMoney() >= book.getPrice()) {
+                this.money -= book.getPrice();
+                book.setOwner(this);
+                return true;
+            }
         }
         return false;
     }
