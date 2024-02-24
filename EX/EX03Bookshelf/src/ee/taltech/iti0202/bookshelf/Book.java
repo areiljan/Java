@@ -112,7 +112,8 @@ public class Book {
         for (Map.Entry<Book, Person> entry : bookInfo.entrySet()) {
             Book book = entry.getKey();
             if (book.createdWithOF) {
-                if (Objects.equals(book.getAuthor(), author) && Objects.equals(book.getTitle(), title) && book.getYearOfPublishing() == yearOfPublishing) {
+                if (Objects.equals(book.getAuthor(), author) && Objects.equals(book.getTitle(), title) &&
+                        book.getYearOfPublishing() == yearOfPublishing) {
                     return book;
                 }
             }
