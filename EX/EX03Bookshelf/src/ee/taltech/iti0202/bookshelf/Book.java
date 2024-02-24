@@ -68,9 +68,9 @@ public class Book {
 
         if (owner != null && buyer != this.getOwner()) {
             this.getOwner().sellBook(this);
-        }
-        if (money > this.getPrice()) {
-            return buyer.buyBook(this);
+            if (buyer != null && money >= this.getPrice()) {
+                return buyer.buyBook(this);
+            }
         }
         return false;
     }
