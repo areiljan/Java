@@ -1,6 +1,11 @@
 package ee.taltech.iti0202.bookshelf;
 
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import static ee.taltech.iti0202.bookshelf.Book.bookInfo;
 
 public class Person {
     public String name;
@@ -55,5 +60,22 @@ public class Person {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Special method to just return the books owned by the person.
+     *
+     * @return list of books.
+     */
+    public List<Book> getBooks() {
+        List<Book> ownerBooks = new ArrayList<>();
+        for (Map.Entry<Book, Person> entry : bookInfo.entrySet()) {
+            if (entry.getValue() != null) {
+                if (entry.getValue().getName().equalsIgnoreCase(this.getName())) {
+                    ownerBooks.add(entry.getKey());
+                }
+            }
+        }
+        return ownerBooks;
     }
 }

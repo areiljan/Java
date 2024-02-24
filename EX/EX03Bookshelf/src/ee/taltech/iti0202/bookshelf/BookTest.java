@@ -41,6 +41,17 @@ class BookTest {
     }
 
     @Test
+    void getBooks() {
+        Book harry1 = Book.of("Harry Potter: The Philosopher's Stone", "J. K. rowling", 1997, 1000);
+        Book harry2 = Book.of("Harry Potter: The Chamber of Secrets", "J. K. Rowling", 1998, 1000);
+        Person mati = new Person("Mati", 2000);
+        harry1.buy(mati);
+        harry2.buy(mati);
+        List<Book> matiBooks = mati.getBooks();
+        assertEquals(matiBooks.size(), 2);
+    }
+
+    @Test
     void getBooksByOwner() {
         Book harry1 = Book.of("Harry Potter: The Philosopher's Stone", "J. K. rowling", 1997, 1000);
         Book harry2 = Book.of("Harry Potter: The Chamber of Secrets", "J. K. Rowling", 1998, 1000);
