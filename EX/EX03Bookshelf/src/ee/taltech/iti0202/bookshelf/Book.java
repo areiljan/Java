@@ -64,6 +64,9 @@ public class Book {
         if (owner != null && buyer != this.getOwner()) {
             this.getOwner().sellBook(this);
         }
+        if (buyer == null) {
+            return false;
+        }
         return buyer.buyBook(this);
     }
 
