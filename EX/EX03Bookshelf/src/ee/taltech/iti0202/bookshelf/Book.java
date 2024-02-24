@@ -1,7 +1,10 @@
 package ee.taltech.iti0202.bookshelf;
 
-
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Book {
     private final String title;
@@ -14,6 +17,10 @@ public class Book {
     public Person owner;
     static HashMap<Book, Person> bookInfo = new HashMap<>();
     private static Book lastadded = null;
+
+    /**
+     * Add one integer to the id counter every time this is called.
+     */
     public static int getAndIncrementNextId() {
         id++;
         return id - 1;
@@ -37,17 +44,19 @@ public class Book {
     public String getTitle() {
         return title;
     }
-
     public String getAuthor() {
         return author;
     }
-
-    public int getYearOfPublishing() {return yearOfPublishing;}
-
+    public int getYearOfPublishing() {
+        return yearOfPublishing;
+    }
     public Person getOwner() {
         return owner;
     }
 
+    /**
+     * Set the book owner.
+     */
     public void setOwner(Person newOwner) {
         owner = newOwner;
         bookInfo.put(this, owner);
@@ -98,7 +107,8 @@ public class Book {
      *
      * @return the created book object.
      */
-    public static Book of(String title, String author, int yearOfPublishing, int price) {
+    public static Book of(String title, String author,
+                          int yearOfPublishing, int price) {
         for (Map.Entry<Book, Person> entry : bookInfo.entrySet()) {
             Book book = entry.getKey();
             if (book.createdWithOF) {
