@@ -61,13 +61,16 @@ public class Book {
     }
 
     public boolean buy(Person buyer) {
-        if (owner != null && buyer != this.getOwner()) {
-            this.getOwner().sellBook(this);
+        if (buyer.getMoney() >= this.getPrice()) {
+            if (owner != null && buyer != this.getOwner()) {
+                this.getOwner().sellBook(this);
+            }
+            if (buyer == null) {
+                return false;
+            }
+            return buyer.buyBook(this);
         }
-        if (buyer == null) {
-            return false;
-        }
-        return buyer.buyBook(this);
+        return false;
     }
 
     public void setCreatedWithOF(boolean createdWithOf) {
