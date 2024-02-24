@@ -18,6 +18,9 @@ public class Person {
         return money;
     }
 
+    /**
+     * Add money to the person money counter.
+     */
     public void setMoney(int bookPrice) {
         money += bookPrice;
     }
