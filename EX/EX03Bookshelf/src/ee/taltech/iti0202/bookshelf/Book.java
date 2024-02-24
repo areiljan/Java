@@ -1,16 +1,14 @@
 package ee.taltech.iti0202.bookshelf;
 
-import java.security.Key;
-import java.util.*;
 
+import java.util.*;
 
 public class Book {
     private final String title;
     private final String author;
     private final int yearOfPublishing;
-    private int price;
+    private final int price;
     private static int id;
-    private final int ID;
     private boolean createdWithOF;
     public Person owner;
     static HashMap<Book, Person> bookInfo = new HashMap<>();
@@ -20,12 +18,15 @@ public class Book {
         return id - 1;
     }
 
+    /**
+     * Book constructor.
+     */
     public Book(String title, String author, int yearOfPublishing, int price) {
         this.title = title;
         this.author = author;
         this.yearOfPublishing = yearOfPublishing;
         this.price = price;
-        this.ID = getAndIncrementNextId();
+        this.id = getAndIncrementNextId();
         this.createdWithOF = false;
         this.owner = null;
         bookInfo.put(this, owner);
@@ -57,9 +58,14 @@ public class Book {
 
 
     public int getId() {
-        return ID;
+        return id;
     }
 
+    /**
+     * Buy the book.
+     *
+     * @return true if the transaction was successful, else false.
+     */
     public boolean buy(Person buyer) {
         int money = 0;
         if (buyer != null) {
@@ -86,6 +92,11 @@ public class Book {
         return createdWithOF;
     }
 
+    /**
+     * Special method to add marked books with four arguments.
+     *
+     * @return the created book object.
+     */
     public static Book of(String title, String author, int yearOfPublishing, int price) {
         for (Map.Entry<Book, Person> entry : bookInfo.entrySet()) {
             Book book = entry.getKey();
@@ -100,6 +111,11 @@ public class Book {
         return book;
     }
 
+    /**
+     * Special method to add marked books with two arguments.
+     *
+     * @return the created book object.
+     */
     public static Book of(String title, int price) {
         boolean someBookWasCreated = false;
         for (Map.Entry<Book, Person> entry : bookInfo.entrySet()) {
@@ -118,6 +134,12 @@ public class Book {
         }
         return null;
     }
+
+    /**
+     * Special method to get the marked books by the owner.
+     *
+     * @return list of books that the owner has.
+     */
     public static List<Book> getBooksByOwner(Person owner) {
         List<Book> ownerBooks = new ArrayList<>();
         for (Map.Entry<Book, Person> entry : bookInfo.entrySet()) {
@@ -129,6 +151,12 @@ public class Book {
         }
         return ownerBooks;
     }
+
+    /**
+     * Special method to remove marked books.
+     *
+     * @return true if the removal was successful, else false.
+     */
     public static boolean removeBook(Book book) {
         if (book == null) {
             return false; // Return false if the book is null or not found in bookInfo
@@ -148,6 +176,12 @@ public class Book {
         }
         return false; // Return false if the book was not removed
     }
+
+    /**
+     * Special method to get the books by the named author.
+     *
+     * @return a list of books that were written by the author.
+     */
     public static List<Book> getBooksByAuthor(String author) {
         List<Book> authorBooks = new ArrayList<>();
         for (Book book : bookInfo.keySet()) {
@@ -157,5 +191,4 @@ public class Book {
         }
         return authorBooks;
     }
-
 }
