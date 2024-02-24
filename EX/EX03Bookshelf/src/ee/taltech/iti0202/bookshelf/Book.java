@@ -8,7 +8,7 @@ public class Book {
     private final String author;
     private final int yearOfPublishing;
     private final int price;
-    private static int id;
+    private static int id = 1;
     private boolean createdWithOF;
     public Person owner;
     static HashMap<Book, Person> bookInfo = new HashMap<>();
