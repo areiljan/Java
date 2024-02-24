@@ -24,18 +24,16 @@ public class Person {
     }
 
     public boolean buyBook(Book book) {
-        if (book != null) {
-            if (book.getOwner() == null && getMoney() >= book.getPrice()) {
-                this.money -= book.getPrice();
-                book.setOwner(this);
-                return true;
-            }
+        if (book != null && book.getOwner() == null && getMoney() >= book.getPrice()) {
+            this.money -= book.getPrice();
+            book.setOwner(this);
+            return true;
         }
         return false;
     }
 
     public boolean sellBook(Book book) {
-        if (book.getOwner() != null && book != null) {
+        if (book != null && book.getOwner() != null) {
             if (book.getOwner().equals(this) && book != null) {
                 this.money += book.getPrice();
                 book.setOwner(null);
