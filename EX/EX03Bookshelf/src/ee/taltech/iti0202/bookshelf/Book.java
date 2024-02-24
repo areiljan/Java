@@ -8,7 +8,8 @@ public class Book {
     private final String author;
     private final int yearOfPublishing;
     private final int price;
-    private static int id = 1;
+    private static int id = 0;
+    private final int idToReturn;
     private boolean createdWithOF;
     public Person owner;
     static HashMap<Book, Person> bookInfo = new HashMap<>();
@@ -26,7 +27,7 @@ public class Book {
         this.author = author;
         this.yearOfPublishing = yearOfPublishing;
         this.price = price;
-        this.id = getAndIncrementNextId();
+        this.idToReturn = getAndIncrementNextId();
         this.createdWithOF = false;
         this.owner = null;
         bookInfo.put(this, owner);
@@ -58,7 +59,7 @@ public class Book {
 
 
     public int getId() {
-        return id;
+        return idToReturn;
     }
 
     /**
