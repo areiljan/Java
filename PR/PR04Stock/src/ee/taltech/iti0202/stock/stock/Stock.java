@@ -74,53 +74,13 @@ public class Stock {
      * @return Optional
      */
     public Optional<Product> getProduct(String name) {
-        String theProduct;
-        List<Product> sameNameList = new ArrayList<>();
-        List<Product> samePriceList = new ArrayList<>();
-        Integer minPrice = -1;
-        for (Map.Entry<String, Product> product : productMap.entrySet()) {
-            String productName = product.getKey();
-            Product aProduct = product.getValue();
-            if (name.equals(productName)) {
-                sameNameList.add(aProduct);
+        Product cheapestProduct = null;
+        for (Product product : productMap.values()) {
+            if (product.getName().equals(name) && (cheapestProduct == null || product.getPrice() < cheapestProduct.getPrice() || (product.getPrice() == cheapestProduct.getPrice() && product.getId() < cheapestProduct.getId()))) {
+                cheapestProduct = product;
             }
         }
-        // go through the elements with the same name
-        if (sameNameList.size() == 1) {
-            return Optional.of(sameNameList.get(0));
-        } else if (sameNameList.size() > 1) {
-            for (Product sameNameProduct : sameNameList) {
-                int price = sameNameProduct.getPrice();
-                if (minPrice == -1 || price < minPrice) {
-                    Product minPriceProduct = sameNameProduct;
-                    minPrice = price;
-                }
-            }
-            // add the elements with the minimum price to the list
-            for (Product sameNameProduct : sameNameList) {
-                if (minPrice == sameNameProduct.getPrice()) {
-                    samePriceList.add(sameNameProduct);
-                }
-            }
-            if (samePriceList.size() == 1) {
-                return Optional.of(samePriceList.get(0));
-            } else if (samePriceList.size() > 1) {
-                // Find the element with the lowest id
-                int minId = -1;
-                Product minIdProduct = null;
-                for (Product samePriceProduct : samePriceList) {
-                    if(minId == -1 || samePriceProduct.getId() < minId) {
-                        minId = samePriceProduct.getId();
-                        minIdProduct = samePriceProduct;
-                    }
-                }
-                return Optional.of(minIdProduct);
-            } else {
-                return Optional.empty();
-            }
-        } else {
-            return Optional.empty();
-        }
+        return Optional.ofNullable(cheapestProduct);
     }
 
     /**
