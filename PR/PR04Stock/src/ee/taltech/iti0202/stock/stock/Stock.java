@@ -24,7 +24,6 @@ import java.util.Comparator;
  * When getting (not removing) a product from our stock,
  * it is important to find the product with the lowest price first.
  */
-
 public class Stock {
 
     private final String name;
@@ -133,7 +132,6 @@ public class Stock {
      * @param name Name of the product to be removed
      * @return Optional
      */
-
     public Optional<Product> removeProduct(String name) {
         if(productMap.containsKey(name)) {
             return Optional.ofNullable(productMap.remove(name));
@@ -197,5 +195,4 @@ public class Stock {
             return false;
         }
     }
-
 }

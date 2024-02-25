@@ -1,10 +1,6 @@
 package ee.taltech.iti0202.bookshelf;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Book {
     private final String title;

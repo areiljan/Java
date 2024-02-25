@@ -6,7 +6,7 @@ public class Product {
     private static int idToIncrement = 0;
     protected final String name;
     protected final int price;
-    private final int id;
+    private int id = 0;
 
     /**
      * Create a new product with the given name and price.
@@ -42,7 +42,7 @@ public class Product {
      * @return id of the product.
      */
     public int getId() {
-        return 0;
+        return id;
     }
 
     /**
