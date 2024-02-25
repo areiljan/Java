@@ -53,10 +53,12 @@ public class Stock {
      * @throws StockException STOCK_ALREADY_CONTAINS_PRODUCT, STOCK_IS_FULL
      */
     public void addProduct(Product product) throws StockException {
-        if(productMap.size() >= maxCapacity) {
+        if (isFull()) {
             throw new StockException(StockException.Reason.STOCK_IS_FULL);
         } else if (productMap.containsValue(product)) {
             throw new StockException(StockException.Reason.STOCK_ALREADY_CONTAINS_PRODUCT);
+        } else if (product.getPrice() < 0) {
+            throw new StockException(StockException.Reason.NEGATIVE_PRICE);
         } else {
             productMap.put(product.getName(), product);
         }
@@ -133,7 +135,7 @@ public class Stock {
      * @return Optional
      */
     public Optional<Product> removeProduct(String name) {
-        if(productMap.containsKey(name)) {
+        if (productMap.containsKey(name)) {
             return Optional.ofNullable(productMap.remove(name));
         }
         return Optional.empty();
@@ -189,7 +191,7 @@ public class Stock {
      * @return boolean
      */
     public boolean isFull() {
-        if(productMap.size() >= maxCapacity) {
+        if (productMap.size() >= maxCapacity) {
             return true;
         } else {
             return false;
