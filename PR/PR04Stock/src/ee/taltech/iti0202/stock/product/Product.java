@@ -20,7 +20,7 @@ public class Product {
     public Product(String name, int price) throws StockException {
         this.name = name;
         if (price < 0) {
-            throw new StockException(StockException.Reason.STOCK_IS_FULL);
+            throw new StockException(StockException.Reason.NEGATIVE_PRICE);
         } else {
             this.price = price;
         }

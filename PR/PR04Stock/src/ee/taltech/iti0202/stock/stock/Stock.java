@@ -93,8 +93,12 @@ public class Stock {
      * @return Optional
      */
     public Optional<Product> removeProduct(String name) {
-        List<Product> orderedProductList = this.getProducts(name);
-        return Optional.ofNullable(orderedProductList.get(0));
+        List<Product> orderedProductList = new ArrayList<>();
+        if (!productList.isEmpty()) {
+            orderedProductList = this.getProducts(name);
+
+        }
+        return orderedProductList.isEmpty() ? Optional.empty() : Optional.ofNullable(orderedProductList.get(0));
     }
 
     /**
