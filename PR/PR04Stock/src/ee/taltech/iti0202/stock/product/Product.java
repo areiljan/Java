@@ -19,7 +19,11 @@ public class Product {
      */
     public Product(String name, int price) throws StockException {
         this.name = name;
-        this.price = price;
+        if (price < 0) {
+            throw new StockException(StockException.Reason.STOCK_IS_FULL);
+        } else {
+            this.price = price;
+        }
         this.id = getNextId();
     }
 

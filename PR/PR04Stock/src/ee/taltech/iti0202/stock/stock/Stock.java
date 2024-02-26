@@ -28,7 +28,7 @@ public class Stock {
 
     private final String name;
     private final int maxCapacity;
-    private Map<String, Product> productMap;
+    private List<Product> productList;
 
     /**
      * Create a new stock with the given name and the max capacity for the products.
@@ -37,7 +37,7 @@ public class Stock {
      * @param maxCapacity max amount of products allowed in the stock.
      */
     public Stock(String name, int maxCapacity) {
-        productMap = new LinkedHashMap<>();
+        this.productList = new ArrayList<>();
         this.name = name;
         this.maxCapacity = maxCapacity;
     }
@@ -55,12 +55,10 @@ public class Stock {
     public void addProduct(Product product) throws StockException {
         if (isFull()) {
             throw new StockException(StockException.Reason.STOCK_IS_FULL);
-        } else if (productMap.containsValue(product)) {
+        } else if (productList.contains(product)) {
             throw new StockException(StockException.Reason.STOCK_ALREADY_CONTAINS_PRODUCT);
-        } else if (product.getPrice() < 0) {
-            throw new StockException(StockException.Reason.NEGATIVE_PRICE);
         } else {
-            productMap.put(product.getName(), product);
+            productList.add(product);
         }
     }
 
@@ -75,7 +73,7 @@ public class Stock {
      */
     public Optional<Product> getProduct(String name) {
         Product cheapestProduct = null;
-        for (Product product : productMap.values()) {
+        for (Product product : productList) {
             if (product.getName().equals(name) && (cheapestProduct == null || product.getPrice() < cheapestProduct.getPrice() || (product.getPrice() == cheapestProduct.getPrice() && product.getId() < cheapestProduct.getId()))) {
                 cheapestProduct = product;
             }
@@ -95,10 +93,8 @@ public class Stock {
      * @return Optional
      */
     public Optional<Product> removeProduct(String name) {
-        if (productMap.containsKey(name)) {
-            return Optional.ofNullable(productMap.remove(name));
-        }
-        return Optional.empty();
+        List<Product> orderedProductList = this.getProducts(name);
+        return Optional.ofNullable(orderedProductList.get(0));
     }
 
     /**
@@ -107,11 +103,7 @@ public class Stock {
      * @return List
      */
     public List<Product> getProducts() {
-        List<Product> products = new ArrayList<>();
-        for (Map.Entry<String, Product> product : productMap.entrySet()) {
-            products.add(product.getValue());
-        }
-        return products;
+        return productList;
     }
 
     /**
@@ -123,12 +115,15 @@ public class Stock {
      * @return List
      */
     public List<Product> getProducts(String name) {
-        // Using stream to filter by name
-        List<Product> filteredProducts = productMap.entrySet().stream()
-                .filter(entry -> entry.getKey().equals(name)) // Only keeps the entries with the given name
-                .map(entry -> entry.getValue()) // Get the values (Product objects)
-                .collect(Collectors.toList()); // Collect Product objects into a list
-        filteredProducts.sort(Comparator.comparing(Product::getPrice).thenComparing(Product::getId)); // Neat comparator method for list
+        List<Product> filteredProducts = new ArrayList<Product>();
+        if (productList.size() > 0) {
+            filteredProducts = productList.stream()
+                    .filter(product -> product.getName().equals(name)) // Only keeps the entries with the given name
+                    .collect(Collectors.toList()); // Collect Product objects into a list
+            // Sort filtered products by price, then by ID
+            filteredProducts.sort(Comparator.comparing(Product::getPrice).thenComparing(Product::getId)); // Great way to
+        }
+        // Return the cheapest product if it exists
         return filteredProducts;
     }
 
@@ -139,8 +134,8 @@ public class Stock {
      */
     public int getTotalPrice() {
         int sumOfPrices = 0;
-        for (Map.Entry<String, Product> product : productMap.entrySet()) {
-            sumOfPrices += product.getValue().getPrice();
+        for (Product product : productList) {
+            sumOfPrices += product.getPrice();
         }
         return sumOfPrices;
     }
@@ -151,7 +146,7 @@ public class Stock {
      * @return boolean
      */
     public boolean isFull() {
-        if (productMap.size() >= maxCapacity) {
+        if (productList.size() >= maxCapacity) {
             return true;
         } else {
             return false;
