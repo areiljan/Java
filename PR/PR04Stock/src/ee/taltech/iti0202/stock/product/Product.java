@@ -4,8 +4,8 @@ import ee.taltech.iti0202.stock.exceptions.StockException;
 
 public class Product {
     private static int idToIncrement = 0;
-    protected final String name;
-    protected final int price;
+    public String name;
+    public final int price;
     private int id = 0;
 
     /**

@@ -3,13 +3,10 @@ package ee.taltech.iti0202.stock.stock;
 import ee.taltech.iti0202.stock.exceptions.StockException;
 import ee.taltech.iti0202.stock.product.Product;
 
-import java.util.Map;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.ArrayList;
-import java.util.Comparator;
+
 
 /**
  * The stock class.
@@ -29,6 +26,7 @@ public class Stock {
     private final String name;
     private final int maxCapacity;
     private List<Product> productList;
+    private Object Product;
 
     /**
      * Create a new stock with the given name and the max capacity for the products.
@@ -93,12 +91,11 @@ public class Stock {
      * @return Optional
      */
     public Optional<Product> removeProduct(String name) {
-        List<Product> orderedProductList = new ArrayList<>();
-        if (!productList.isEmpty()) {
-            orderedProductList = this.getProducts(name);
-
+        Optional<Product> productToRemove = getProduct(name);
+        if (productToRemove.isPresent()) {
+            productList.remove(productToRemove.get());
         }
-        return orderedProductList.isEmpty() ? Optional.empty() : Optional.ofNullable(orderedProductList.get(0));
+        return productToRemove;
     }
 
     /**
@@ -119,15 +116,38 @@ public class Stock {
      * @return List
      */
     public List<Product> getProducts(String name) {
-        List<Product> filteredProducts = new ArrayList<Product>();
-        if (productList.size() > 0) {
-            filteredProducts = productList.stream()
-                    .filter(product -> product.getName().equals(name)) // Only keeps the entries with the given name
-                    .collect(Collectors.toList()); // Collect Product objects into a list
-            // Sort filtered products by price, then by ID
-            filteredProducts.sort(Comparator.comparing(Product::getPrice).thenComparing(Product::getId)); // Great way to
+        List<Product> filteredProducts = new ArrayList<>();
+        if (name != null && !productList.isEmpty()) {
+            List<Product> list = new ArrayList<>();
+            for (Product product : productList) {
+                if (name.equals(product.getName())) {
+                    list.add(product);
+                }
+            }
+            for (int i = 0; i < productList.size() - 1; i++) {
+                for (int j = i + 1; j < productList.size(); j++) {
+                    Product productI = productList.get(i);
+                    Product productJ = productList.get(j);
+
+                    // First, compare by price
+                    if (productI.getPrice() > productJ.getPrice()) {
+                        // Swap the elements
+                        Product temp = productList.get(i);
+                        productList.set(i, productList.get(j));
+                        productList.set(j, temp);
+                    }
+                    // If prices are equal, compare by ID
+                    else if (productI.getPrice() == productJ.getPrice() && productI.getId() > productJ.getId()) {
+                        // Swap the elements
+                        Product temp = productList.get(i);
+                        productList.set(i, productList.get(j));
+                        productList.set(j, temp);
+                    }
+                }
+            }
+
+            filteredProducts = list;
         }
-        // Return the cheapest product if it exists
         return filteredProducts;
     }
 
