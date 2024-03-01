@@ -23,14 +23,13 @@ import java.util.ArrayList;
  */
 public class Stock {
 
-    private final String name;
     private final int maxCapacity;
+    private final String name;
     private List<Product> productList;
-    private Object Product;
 
     /**
      * Create a new stock with the given name and the max capacity for the products.
-     * 
+     *
      * @param name the name of the stock.
      * @param maxCapacity max amount of products allowed in the stock.
      */
@@ -72,7 +71,9 @@ public class Stock {
     public Optional<Product> getProduct(String name) {
         Product cheapestProduct = null;
         for (Product product : productList) {
-            if (product.getName().equals(name) && (cheapestProduct == null || product.getPrice() < cheapestProduct.getPrice() || (product.getPrice() == cheapestProduct.getPrice() && product.getId() < cheapestProduct.getId()))) {
+            if (product.getName().equals(name) && (cheapestProduct == null
+                    || product.getPrice() < cheapestProduct.getPrice() || (product.getPrice() == cheapestProduct.getPrice()
+                    && product.getId() < cheapestProduct.getId()))) {
                 cheapestProduct = product;
             }
         }
@@ -82,9 +83,7 @@ public class Stock {
     /**
      * Remove and return a product from a stock,
      * if stock has a given product.
-     *
      * Use getProduct() method to get the product.
-     * 
      * If there is nothing to remove, return Optional.empty()
      *
      * @param name Name of the product to be removed
@@ -123,8 +122,6 @@ public class Stock {
                     filteredProducts.add(product);
                 }
             }
-            // Assuming you have a list of Product objects called list
-
             for (int i = 0; i < filteredProducts.size() - 1; i++) {
                 for (int j = i + 1; j < filteredProducts.size(); j++) {
                     Product productI = filteredProducts.get(i);
@@ -170,10 +167,6 @@ public class Stock {
      * @return boolean
      */
     public boolean isFull() {
-        if (productList.size() >= maxCapacity) {
-            return true;
-        } else {
-            return false;
-        }
+        return productList.size() >= maxCapacity;
     }
 }
