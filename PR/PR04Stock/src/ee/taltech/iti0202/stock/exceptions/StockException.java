@@ -33,7 +33,7 @@ public class StockException extends Exception {
 
     /**
      * Returns the reason of the exception.
-     * 
+     *
      * @return The reason.
      */
     public Reason getReason() {

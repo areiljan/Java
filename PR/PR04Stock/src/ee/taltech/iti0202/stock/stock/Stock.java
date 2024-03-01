@@ -72,7 +72,8 @@ public class Stock {
         Product cheapestProduct = null;
         for (Product product : productList) {
             if (product.getName().equals(name) && (cheapestProduct == null
-                    || product.getPrice() < cheapestProduct.getPrice() || (product.getPrice() == cheapestProduct.getPrice()
+                    || product.getPrice() < cheapestProduct.getPrice()
+                    || (product.getPrice() == cheapestProduct.getPrice()
                     && product.getId() < cheapestProduct.getId()))) {
                 cheapestProduct = product;
             }
@@ -133,10 +134,8 @@ public class Stock {
                         Product temp = filteredProducts.get(i);
                         filteredProducts.set(i, filteredProducts.get(j));
                         filteredProducts.set(j, temp);
-                    }
-                    // If prices are equal, compare by ID
-                    else if (productI.getPrice() == productJ.getPrice() && productI.getId() > productJ.getId()) {
-                        // Swap the elements
+                    } else if (productI.getPrice() == productJ.getPrice()
+                            && productI.getId() > productJ.getId()) {
                         Product temp = filteredProducts.get(i);
                         filteredProducts.set(i, filteredProducts.get(j));
                         filteredProducts.set(j, temp);
