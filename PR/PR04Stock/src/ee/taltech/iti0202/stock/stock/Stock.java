@@ -51,7 +51,7 @@ public class Stock {
      * @throws StockException STOCK_ALREADY_CONTAINS_PRODUCT, STOCK_IS_FULL
      */
     public void addProduct(Product product) throws StockException {
-        if (isFull()) {
+        if (this.isFull()) {
             throw new StockException(StockException.Reason.STOCK_IS_FULL);
         } else if (productList.contains(product)) {
             throw new StockException(StockException.Reason.STOCK_ALREADY_CONTAINS_PRODUCT);
@@ -118,35 +118,35 @@ public class Stock {
     public List<Product> getProducts(String name) {
         List<Product> filteredProducts = new ArrayList<>();
         if (name != null && !productList.isEmpty()) {
-            List<Product> list = new ArrayList<>();
             for (Product product : productList) {
                 if (name.equals(product.getName())) {
-                    list.add(product);
+                    filteredProducts.add(product);
                 }
             }
-            for (int i = 0; i < productList.size() - 1; i++) {
-                for (int j = i + 1; j < productList.size(); j++) {
-                    Product productI = productList.get(i);
-                    Product productJ = productList.get(j);
+            // Assuming you have a list of Product objects called list
+
+            for (int i = 0; i < filteredProducts.size() - 1; i++) {
+                for (int j = i + 1; j < filteredProducts.size(); j++) {
+                    Product productI = filteredProducts.get(i);
+                    Product productJ = filteredProducts.get(j);
 
                     // First, compare by price
                     if (productI.getPrice() > productJ.getPrice()) {
                         // Swap the elements
-                        Product temp = productList.get(i);
-                        productList.set(i, productList.get(j));
-                        productList.set(j, temp);
+                        Product temp = filteredProducts.get(i);
+                        filteredProducts.set(i, filteredProducts.get(j));
+                        filteredProducts.set(j, temp);
                     }
                     // If prices are equal, compare by ID
                     else if (productI.getPrice() == productJ.getPrice() && productI.getId() > productJ.getId()) {
                         // Swap the elements
-                        Product temp = productList.get(i);
-                        productList.set(i, productList.get(j));
-                        productList.set(j, temp);
+                        Product temp = filteredProducts.get(i);
+                        filteredProducts.set(i, filteredProducts.get(j));
+                        filteredProducts.set(j, temp);
                     }
                 }
             }
 
-            filteredProducts = list;
         }
         return filteredProducts;
     }
