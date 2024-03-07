@@ -61,7 +61,7 @@ public class Group {
      * @param user The new owner of the group.
      */
     public void setOwner(User user) {
-        if (participants.contains(user)){
+        if (participants.contains(user)) {
             this.owner = user;
         }
         if (!participants.contains(user)) {
