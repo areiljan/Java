@@ -45,6 +45,7 @@ public class Group {
         if(participants.size() == 1) {
             setOwner(participants.get(0));
         }
+        user.addGroup(this);
     }
 
     public List<User> getParticipants() {
@@ -63,19 +64,29 @@ public class Group {
     
     public void removeUser(User user) {
         participants.remove(user);
+        for(Message message : user.getMessages()) {
+            if(message.getAuthor().equals(user)) {
+                messages.remove(message);
+            }
+        }
         if(!participants.contains(owner)) {
             this.owner = null;
         }
         if(!participants.isEmpty() && owner == null) {
             setOwner(participants.get(0));
         }
+        user.removeGroup(this);
     }
     
     public void banUser(User user) {
         if(participants.contains(user)) {
             bannedUsers.add(user);
-            participants.remove(user);
+            this.removeUser(user);
         }
+    }
+
+    public boolean isGroupEmpty() {
+        return participants.isEmpty();
     }
     
     public Set<User> getBannedUsers() {

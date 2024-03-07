@@ -20,6 +20,6 @@ public class Feed {
     }
 
     public Set<Message> getMessages() {
-        return user.getMessages();
+        return messages;
     }
 }

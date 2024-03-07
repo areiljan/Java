@@ -24,9 +24,11 @@
         
         public void banUser(User user) {
             for(Group group : groups) {
-                for(User userInGroup : group.getParticipants()) {
-                    if(userInGroup == user) {
-                        group.banUser(user);
+                if(!group.isGroupEmpty()) {
+                    for (User userInGroup : group.getParticipants()) {
+                        if (userInGroup.equals(user)) {
+                            group.banUser(user);
+                        }
                     }
                 }
             }
