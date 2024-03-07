@@ -37,6 +37,9 @@ public class Group {
         if(participants.contains(user)){
             this.owner = user;
         }
+        if(!participants.contains(user)) {
+            user.addGroup(this);
+        }
     }
 
     public void addUser(User user) {
@@ -64,19 +67,25 @@ public class Group {
     }
     
     public void removeUser(User user) {
-        participants.remove(user);
+        // Eradicate all traces of the user
+        // Get rid of the messages
         for(Message message : user.getMessages()) {
             if(message.getAuthor().equals(user)) {
                 messages.remove(message);
             }
         }
-        if(!participants.contains(owner)) {
+        // Make the owner null first (if the removable user is the owner).
+        if(owner == user) {
             this.owner = null;
         }
+        // If there are viable candidates in the group and the owner is null, assign new owner.
         if(!participants.isEmpty() && owner == null) {
             setOwner(participants.get(0));
         }
+        // Remove the group from the owner
         user.removeGroup(this);
+        // Remove the player
+        participants.remove(user);
     }
     
     public void banUser(User user) {

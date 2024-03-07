@@ -12,7 +12,7 @@ public class Admin extends User {
         super(name, age);
     }
     public void banUserFromSocialNetwork(User user, SocialNetwork socialNetwork) {
-        if(!this.equals(user)) {
+        if(!this.getName().equals(user.getName())) {
             socialNetwork.banUser(user);
         }
     }
