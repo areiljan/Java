@@ -24,6 +24,7 @@
         }
         
         public void banUser(User user) {
+            
             bannedUsers.add(user);
         }
     }

@@ -40,6 +40,9 @@ public class Group {
         if (!participants.contains(user) && !bannedUsers.contains(user)) {
             participants.add(user);
         }
+        if(participants.size() == 1) {
+            setOwner(participants.get(0));
+        }
     }
 
     public List<User> getParticipants() {
@@ -56,6 +59,9 @@ public class Group {
     
     public void removeUser(User user) {
         participants.remove(user);
+        if(!participants.isEmpty()) {
+            setOwner(participants.get(0));
+        }
     }
     
     public void banUser(User user) {
