@@ -33,7 +33,9 @@ public class Group {
     }
     
     public void setOwner(User user) {
-        this.owner = user;
+        if(participants.contains(user)){
+            this.owner = user;
+        }
     }
 
     public void addUser(User user) {
@@ -59,7 +61,10 @@ public class Group {
     
     public void removeUser(User user) {
         participants.remove(user);
-        if(!participants.isEmpty()) {
+        if(!participants.contains(owner)) {
+            this.owner = null;
+        }
+        if(!participants.isEmpty() && owner.equals(null)) {
             setOwner(participants.get(0));
         }
     }

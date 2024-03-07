@@ -8,7 +8,6 @@
     import java.util.Set;
 
     public class SocialNetwork {
-        private Set<User> bannedUsers = new HashSet<>();
         private Set<Group> groups = new HashSet<>();
 
         public void registerGroup(Group group) {
@@ -24,7 +23,12 @@
         }
         
         public void banUser(User user) {
-            
-            bannedUsers.add(user);
+            for(Group group : groups) {
+                for(User userInGroup : group.getParticipants()) {
+                    if(userInGroup == user) {
+                        group.banUser(user);
+                    }
+                }
+            }
         }
     }
