@@ -46,11 +46,11 @@ public class Group {
     public void addUser(User user) {
         if (!participants.contains(user) && !bannedUsers.contains(user)) {
             participants.add(user);
+            user.addGroup(this);
         }
         if(participants.size() == 1) {
             setOwner(participants.get(0));
         }
-        user.addGroup(this);
     }
 
     public List<User> getParticipants() {
@@ -84,14 +84,12 @@ public class Group {
         if(!participants.isEmpty() && owner == null) {
             setOwner(participants.get(0));
         }
-        // Remove the group from the owner
-        user.removeGroup(this);
     }
     
     public void banUser(User user) {
         bannedUsers.add(user);
         if(participants.contains(user)) {
-            this.removeUser(user);
+            removeUser(user);
         }
     }
 

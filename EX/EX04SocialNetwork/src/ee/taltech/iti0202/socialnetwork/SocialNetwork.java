@@ -27,6 +27,7 @@
         public void banUser(User user) {
             for(Group group : groups) {
                 group.banUser(user);
+                user.removeGroup(group);
             }
         }
     }
