@@ -12,14 +12,8 @@ public class Admin extends User {
         super(name, age);
     }
     public void banUserFromSocialNetwork(User user, SocialNetwork socialNetwork) {
-        for (Group group : socialNetwork.getGroups()) {
-            if (group.getParticipants().contains(user)) {
-                group.removeUser(user);
-            }
+        if(!this.equals(user)) {
+            socialNetwork.banUser(user);
         }
-        socialNetwork.banUser(user);
-    }
-    public String getName() {
-        return name;
     }
 }

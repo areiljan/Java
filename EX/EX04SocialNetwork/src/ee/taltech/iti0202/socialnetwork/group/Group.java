@@ -52,7 +52,9 @@ public class Group {
     }
 
     public void publishMessage(Message message) {
-        messages.add(message);
+        if(participants.contains(message.getAuthor())) {
+            messages.add(message);
+        }
     }
 
     public List<Message> getMessages() {
@@ -70,7 +72,10 @@ public class Group {
     }
     
     public void banUser(User user) {
-        bannedUsers.add(user);
+        if(participants.contains(user)) {
+            bannedUsers.add(user);
+            participants.remove(user);
+        }
     }
     
     public Set<User> getBannedUsers() {
