@@ -12,20 +12,41 @@
     public class SocialNetwork {
         private Set<Group> groups = new HashSet<>();
 
+        /**
+         * Registers a group in the social network.
+         *
+         * @param group The group to register.
+         */
         public void registerGroup(Group group) {
             groups.add(group);
         }
 
+        /**
+         * Gets the set of all groups in the social network.
+         *
+         * @return The set of all groups in the social network.
+         */
         public Set<Group> getGroups() {
             return groups;
         }
 
+        /**
+         * Gets the feed for a specific user in the social network.
+         *
+         * @param user The user for whom to get the feed.
+         * @return The feed for the specified user.
+         */
         public Feed getFeedForUser(User user) {
             return new Feed(user, user.getMessages());
         }
-        
+
+        /**
+         * Bans a user from the social network.
+         *
+         * @param user The user to ban.
+         */
         public void banUser(User user) {
-            for(Group group : groups) {
+            for (Group group : groups) {
                 group.banUser(user);
                 user.removeGroup(group);
             }
