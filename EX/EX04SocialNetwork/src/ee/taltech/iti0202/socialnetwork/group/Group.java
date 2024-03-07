@@ -61,10 +61,10 @@ public class Group {
      * @param user The new owner of the group.
      */
     public void setOwner(User user) {
-        if(participants.contains(user)){
+        if (participants.contains(user)){
             this.owner = user;
         }
-        if(!participants.contains(user)) {
+        if (!participants.contains(user)) {
             user.addGroup(this);
         }
     }
@@ -79,7 +79,7 @@ public class Group {
             participants.add(user);
             user.addGroup(this);
         }
-        if(participants.size() == 1) {
+        if (participants.size() == 1) {
             setOwner(participants.get(0));
         }
     }
@@ -99,7 +99,7 @@ public class Group {
      * @param message The message to publish in the group.
      */
     public void publishMessage(Message message) {
-        if(participants.contains(message.getAuthor())) {
+        if (participants.contains(message.getAuthor())) {
             messages.add(message);
         }
     }
@@ -121,19 +121,19 @@ public class Group {
     public void removeUser(User user) {
         // Eradicate all traces of the user
         // Get rid of the messages
-        for(Message message : user.getMessages()) {
-            if(message.getAuthor().equals(user)) {
+        for (Message message : user.getMessages()) {
+            if (message.getAuthor().equals(user)) {
                 messages.remove(message);
             }
         }
         // Make the owner null first (if the removable user is the owner).
-        if(owner == user) {
+        if (owner == user) {
             this.owner = null;
         }
         participants.remove(user);
         user.removeGroup(this);
         // If there are viable candidates in the group and the owner is null, assign new owner.
-        if(!participants.isEmpty() && owner == null) {
+        if (!participants.isEmpty() && owner == null) {
             setOwner(participants.get(0));
         }
     }
@@ -145,7 +145,7 @@ public class Group {
      */
     public void banUser(User user) {
         bannedUsers.add(user);
-        if(participants.contains(user)) {
+        if (participants.contains(user)) {
             removeUser(user);
         }
     }
