@@ -80,6 +80,7 @@ public class Group {
             this.owner = null;
         }
         participants.remove(user);
+        user.removeGroup(this);
         // If there are viable candidates in the group and the owner is null, assign new owner.
         if(!participants.isEmpty() && owner == null) {
             setOwner(participants.get(0));
