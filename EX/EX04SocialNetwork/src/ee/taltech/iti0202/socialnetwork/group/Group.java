@@ -80,8 +80,8 @@ public class Group {
     }
     
     public void banUser(User user) {
+        bannedUsers.add(user);
         if(participants.contains(user)) {
-            bannedUsers.add(user);
             this.removeUser(user);
         }
     }

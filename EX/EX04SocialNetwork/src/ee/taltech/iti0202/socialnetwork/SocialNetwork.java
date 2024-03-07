@@ -27,18 +27,7 @@
         public void banUser(User user) {
             for(Group group : groups) {
                 if (!group.isGroupEmpty()) {
-                    List<User> participants = group.getParticipants();
-                    Set<User> usersToRemove = new HashSet<>();
-
-                    // Find users to remove
-                    for (User userInGroup : participants) {
-                        if (userInGroup.equals(user)) {
-                            usersToRemove.add(userInGroup);
-                        }
-                    }
-
-                    // Remove users
-                    for (User userToRemove : usersToRemove) group.banUser(user);
+                    group.banUser(user);
                 }
             }
         }
