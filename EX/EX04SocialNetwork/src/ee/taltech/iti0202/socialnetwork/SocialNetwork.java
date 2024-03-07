@@ -5,6 +5,8 @@
     import ee.taltech.iti0202.socialnetwork.user.User;
 
     import java.util.HashSet;
+    import java.util.Iterator;
+    import java.util.List;
     import java.util.Set;
 
     public class SocialNetwork {
@@ -24,11 +26,20 @@
         
         public void banUser(User user) {
             for(Group group : groups) {
-                if(!group.isGroupEmpty()) {
-                    for (User userInGroup : group.getParticipants()) {
+                if (!group.isGroupEmpty()) {
+                    List<User> participants = group.getParticipants();
+                    Set<User> usersToRemove = new HashSet<>();
+
+                    // Find users to remove
+                    for (User userInGroup : participants) {
                         if (userInGroup.equals(user)) {
-                            group.banUser(user);
+                            usersToRemove.add(userInGroup);
                         }
+                    }
+
+                    // Remove users
+                    for (User userToRemove : usersToRemove) {
+                        group.banUser(user);
                     }
                 }
             }
