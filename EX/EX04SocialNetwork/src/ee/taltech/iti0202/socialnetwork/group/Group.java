@@ -64,7 +64,7 @@ public class Group {
         if(!participants.contains(owner)) {
             this.owner = null;
         }
-        if(!participants.isEmpty() && owner.equals(null)) {
+        if(!participants.isEmpty() && owner == null) {
             setOwner(participants.get(0));
         }
     }
