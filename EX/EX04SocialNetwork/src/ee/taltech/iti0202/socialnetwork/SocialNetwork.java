@@ -38,9 +38,7 @@
                     }
 
                     // Remove users
-                    for (User userToRemove : usersToRemove) {
-                        group.banUser(user);
-                    }
+                    for (User userToRemove : usersToRemove) group.banUser(user);
                 }
             }
         }

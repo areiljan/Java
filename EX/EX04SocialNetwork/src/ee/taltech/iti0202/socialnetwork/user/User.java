@@ -11,8 +11,8 @@ import java.util.Set;
 
 public class User {
     protected final String name;
-    private final Integer age;
-    private Set<Group> groups = new HashSet<>();
+    protected final Integer age;
+    protected Set<Group> groups = new HashSet<>();
 
     public User(String name) {
         this.name = name;

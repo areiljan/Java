@@ -16,4 +16,9 @@ public class Admin extends User {
             socialNetwork.banUser(user);
         }
     }
+
+    @Override
+    public String getName() {
+        return "(Admin) " + name;
+    }
 }
