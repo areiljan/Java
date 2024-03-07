@@ -19,6 +19,7 @@ public class Group {
         this.name = name;
         this.owner = owner;
         participants.add(owner);
+        owner.addGroup(this);
     }
 
     public String getName() {
