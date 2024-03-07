@@ -10,9 +10,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class User {
-    protected final String name;
-    protected final Integer age;
-    protected Set<Group> groups = new HashSet<>();
+    private final String name;
+    private final Integer age;
+    private Set<Group> groups = new HashSet<>();
 
     public User(String name) {
         this.name = name;
