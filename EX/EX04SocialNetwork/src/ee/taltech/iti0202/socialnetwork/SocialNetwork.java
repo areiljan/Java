@@ -26,9 +26,7 @@
         
         public void banUser(User user) {
             for(Group group : groups) {
-                if (!group.isGroupEmpty()) {
-                    group.banUser(user);
-                }
+                group.banUser(user);
             }
         }
     }
