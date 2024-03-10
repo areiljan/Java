@@ -14,7 +14,9 @@ public class ResourceStorage {
     }
 
     public void addResource(String resource, int amount) {
-        resourceAmounts.put(resource.toLowerCase(), amount);
+        if(!resource.trim().isEmpty()) {
+            resourceAmounts.put(resource.toLowerCase(), amount);
+        }
     }
 
     public int getResourceAmount(String resource) {
@@ -22,7 +24,7 @@ public class ResourceStorage {
     }
 
     public boolean hasEnoughResource(String resource, int amount) {
-        return amount > 0 && getResourceAmount(resource) > amount;
+        return amount > 0 && getResourceAmount(resource) >= amount;
     }
 
     public boolean takeResource(String resource, int amount) {

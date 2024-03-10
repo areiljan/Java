@@ -20,14 +20,14 @@ public class Orb {
     public Orb(String creator) {
         this.name = creator;
         this.currentCharge = 0;
-    }
+        // Found no other way to do this.
+        }
 
     public void charge(String resource, int amount) {
-        if(!resource.toLowerCase().equals("dust") || !resource.trim().isEmpty()) {
+        if(!resource.equalsIgnoreCase("dust") && !resource.trim().isEmpty()) {
             currentCharge += amount * resource.length();
         }
     }
-
 
     public int getEnergy() {
         return currentCharge;

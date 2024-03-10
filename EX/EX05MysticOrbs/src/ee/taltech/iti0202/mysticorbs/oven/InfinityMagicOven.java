@@ -6,7 +6,7 @@ import ee.taltech.iti0202.mysticorbs.storage.ResourceStorage;
 
 import java.util.Optional;
 
-public class InfinityMagicOven extends Oven {
+public class InfinityMagicOven extends MagicOven {
     private int orbCounter;
 
     public InfinityMagicOven(String name, ResourceStorage resourceStorage) {
@@ -14,19 +14,12 @@ public class InfinityMagicOven extends Oven {
         this.orbCounter = 0;
     }
 
-    @Override
-    public Optional<Orb> craftOrb() {
-        if(!this.isBroken() && resourceStorage.hasEnoughResource("gold", 1) && resourceStorage.hasEnoughResource("dust", 3)) {
-            incrementOrbs();
-            orbCounter++;
-            if(orbCounter / 2 == 0) {
-                return Optional.of(new MagicOrb(name));
-            } else {
-                return Optional.of(new Orb(name));
-            }
-        } else {
-            return Optional.empty();
-        }
+    /**
+     * Returns whether the oven is fixable.
+     * @return true if it is fixable.
+     */
+    public boolean isFixable() {
+        return false;
     }
 
     @Override
