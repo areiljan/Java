@@ -80,7 +80,8 @@ public class MagicOven extends Oven implements Fixable {
      */
     @Override
     public Optional<Orb> craftOrb() {
-        if (!this.isBroken() && resourceStorage.hasEnoughResource("gold", 1) && resourceStorage.hasEnoughResource("dust", 3)) {
+        if (!this.isBroken() && resourceStorage.hasEnoughResource("gold", 1)
+                && resourceStorage.hasEnoughResource("dust", 3)) {
             incrementOrbs();
             orbCounter++;
             resourceStorage.takeResource("gold", 1);
