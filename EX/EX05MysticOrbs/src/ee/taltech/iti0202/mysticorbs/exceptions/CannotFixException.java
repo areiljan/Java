@@ -6,7 +6,7 @@ public class CannotFixException extends Throwable {
     private final Oven oven;
     private final Reason reason;
 
-    public CannotFixException (Oven oven, Reason reason) {
+    public CannotFixException(Oven oven, Reason reason) {
         this.oven = oven;
         this.reason = reason;
     }

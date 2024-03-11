@@ -29,8 +29,8 @@ public class Orb {
 
     /**
      * Charge the orb by the multiplication of the resource length and amount.
-     * @param resource
-     * @param amount
+     * @param resource - resource that is charged with.
+     * @param amount - amount of resource used.
      */
     public void charge(String resource, int amount) {
         if (!resource.equalsIgnoreCase("dust") && !resource.trim().isEmpty()
@@ -39,10 +39,18 @@ public class Orb {
         }
     }
 
+    /**
+     * Get the current charge of the Orb.
+     * @return currentCharge.
+     */
     public int getEnergy() {
         return currentCharge;
     }
 
+    /**
+     * Write the orb as a String.
+     * @return String.
+     */
     public String toString() {
         return "Orb by " + name;
     }

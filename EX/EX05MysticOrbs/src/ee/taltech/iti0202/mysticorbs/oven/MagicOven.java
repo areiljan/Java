@@ -14,6 +14,12 @@ public class MagicOven extends Oven implements Fixable {
     private int clayDemand;
     private int orbCounter;
 
+    /**
+     * MagicOrb constructor.
+     * Initialize the orbCounter, clayDemand, freezingPowderDemand, fixCount and orbLimit.
+     * @param creator - Oven name.
+     * @param resourceStorage - resourceStorage.
+     */
     public MagicOven(String creator, ResourceStorage resourceStorage) {
         super(creator, resourceStorage);
         this.orbCounter = 0;
@@ -31,9 +37,14 @@ public class MagicOven extends Oven implements Fixable {
         return fixCount < 10 && this.isBroken();
     }
 
+    /**
+     * Fix the oven.
+     * Oven is fixable if the fixCount is not 10 and the
+     * @throws CannotFixException
+     */
     @Override
     public void fix() throws CannotFixException {
-        if(!this.isBroken()) {
+        if (!this.isBroken()) {
             throw new CannotFixException(this, CannotFixException.Reason.IS_NOT_BROKEN);
         } else if (fixCount == 10) {
             throw new CannotFixException(this, CannotFixException.Reason.FIXED_MAXIMUM_TIMES);
@@ -49,19 +60,28 @@ public class MagicOven extends Oven implements Fixable {
         }
     }
 
+    /**
+     * FixCount getter.
+     * @return fixCount
+     */
     @Override
     public int getTimesFixed() {
         return fixCount;
     }
 
+    /**
+     * Create an Orb.
+     * A magicOven will create a magicOrb every second time if it has the necessary components.
+     * @return
+     */
     @Override
     public Optional<Orb> craftOrb() {
-        if(!this.isBroken() && resourceStorage.hasEnoughResource("gold", 1) && resourceStorage.hasEnoughResource("dust", 3)) {
+        if (!this.isBroken() && resourceStorage.hasEnoughResource("gold", 1) && resourceStorage.hasEnoughResource("dust", 3)) {
             incrementOrbs();
             orbCounter++;
             resourceStorage.takeResource("gold", 1);
             resourceStorage.takeResource("dust", 3);
-            if(orbCounter % 2 == 0) {
+            if (orbCounter % 2 == 0) {
                 Orb createdOrb = new MagicOrb(name);
                 createdOrb.charge("gold", 1);
                 createdOrb.charge("dust", 3);
@@ -77,6 +97,11 @@ public class MagicOven extends Oven implements Fixable {
         }
     }
 
+    /**
+     * Check the Oven for broken status.
+     * The Oven is broken if the createdOrbs outnumber the orbLimit.
+     * @return true if the machine is broken.
+     */
     @Override
     public boolean isBroken() {
         return createdOrbs >= orbLimit;

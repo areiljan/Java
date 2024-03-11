@@ -104,6 +104,9 @@ public class OrbFactory {
     }
 
 
+    /**
+     * Remove all the ovens that cannot produce anything anymore.
+     */
     public void optimizeOvensOrder() {
         Collections.sort(ovenList);
     }

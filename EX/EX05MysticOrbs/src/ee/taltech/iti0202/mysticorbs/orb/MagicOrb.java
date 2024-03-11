@@ -17,11 +17,15 @@ public class MagicOrb extends Orb {
      */
     @Override
     public void charge(String resource, int amount) {
-        if(!resource.equalsIgnoreCase("dust") && !resource.trim().isEmpty() && amount > 0) {
+        if (!resource.equalsIgnoreCase("dust") && !resource.trim().isEmpty() && amount > 0) {
             setCurrentCharge(getCurrentCharge() + amount * resource.length() * 2);
         }
     }
 
+    /**
+     * Write the orb as a String.
+     * @return String.
+     */
     @Override
     public String toString() {
         return "MagicOrb by " + getName();

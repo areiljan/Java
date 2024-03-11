@@ -29,6 +29,10 @@ public class Oven implements Comparable<Oven> {
         this.orbLimit = 15;
     }
 
+    /**
+     * Getter for the resourceStorage.
+     * @return resourceStorage.
+     */
     public ResourceStorage resourceStorage() {
         return resourceStorage;
     }
@@ -46,7 +50,7 @@ public class Oven implements Comparable<Oven> {
      */
     public int compareTo(Oven o) {
         // A broken oven is always weaker
-        if(this.isBroken() && !o.isBroken()) {
+        if (this.isBroken() && !o.isBroken()) {
             return -1;
         } else if (!this.isBroken() && o.isBroken()) {
             return 1;
@@ -133,7 +137,7 @@ public class Oven implements Comparable<Oven> {
      * @return the Optional Orb.
      */
     public Optional<Orb> craftOrb() {
-        if(!this.isBroken() && resourceStorage.hasEnoughResource("pearl", 1) && resourceStorage.hasEnoughResource("silver", 1)) {
+        if (!this.isBroken() && resourceStorage.hasEnoughResource("pearl", 1) && resourceStorage.hasEnoughResource("silver", 1)) {
             incrementOrbs();
             Orb createdOrb = new Orb(name);
             resourceStorage.takeResource("pearl", 1);
@@ -146,6 +150,11 @@ public class Oven implements Comparable<Oven> {
         }
     }
 
+    /**
+     * Fix the oven.
+     * You cannot fix these kinds of ovens.
+     * @throws CannotFixException
+     */
     public void fix() throws CannotFixException {
         // Do nothing.
     }
