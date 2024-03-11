@@ -11,7 +11,7 @@ public class ResourceStorage {
      */
     public boolean isEmpty() {
         for (int value : resourceAmounts.values()) {
-            if(value != 0) {
+            if (value != 0) {
                 return false;
             }
         }

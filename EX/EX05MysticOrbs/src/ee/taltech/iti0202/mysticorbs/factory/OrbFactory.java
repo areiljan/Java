@@ -15,6 +15,11 @@ public class OrbFactory {
     private List<Orb> orbList;
     private List<Oven> ovenList = new ArrayList<>();
     private List<Oven> unfixableOvens = new ArrayList<>();
+
+    /**
+     * OrbFactory constructor.
+     * @param resourceStorage - which storage does the OrbFactory use.
+     */
     public OrbFactory(ResourceStorage resourceStorage) {
         this.resourceStorage = resourceStorage;
         this.orbList = new ArrayList<>();

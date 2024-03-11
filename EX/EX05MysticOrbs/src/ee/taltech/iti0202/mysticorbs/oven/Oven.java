@@ -1,15 +1,13 @@
 package ee.taltech.iti0202.mysticorbs.oven;
 
 import ee.taltech.iti0202.mysticorbs.exceptions.CannotFixException;
-import ee.taltech.iti0202.mysticorbs.orb.MagicOrb;
 import ee.taltech.iti0202.mysticorbs.orb.Orb;
 import ee.taltech.iti0202.mysticorbs.storage.ResourceStorage;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 public class Oven implements Comparable<Oven> {
+    public static final int ORB_LIMIT = 15;
     protected final String name;
     protected final ResourceStorage resourceStorage;
     protected int orbLimit;
@@ -26,7 +24,7 @@ public class Oven implements Comparable<Oven> {
         this.resourceStorage = resourceStorage;
         this.createdOrbs = 0;
         this.fixCount = 0;
-        this.orbLimit = 15;
+        this.orbLimit = ORB_LIMIT;
     }
 
     /**
@@ -137,7 +135,8 @@ public class Oven implements Comparable<Oven> {
      * @return the Optional Orb.
      */
     public Optional<Orb> craftOrb() {
-        if (!this.isBroken() && resourceStorage.hasEnoughResource("pearl", 1) && resourceStorage.hasEnoughResource("silver", 1)) {
+        if (!this.isBroken() && resourceStorage.hasEnoughResource("pearl", 1)
+                && resourceStorage.hasEnoughResource("silver", 1)) {
             incrementOrbs();
             Orb createdOrb = new Orb(name);
             resourceStorage.takeResource("pearl", 1);

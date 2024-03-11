@@ -8,6 +8,8 @@ import ee.taltech.iti0202.mysticorbs.storage.ResourceStorage;
 import java.util.Optional;
 
 public class MagicOven extends Oven implements Fixable {
+    public static final int CLAY_DEMAND = 25;
+    public static final int FREEZING_POWDER_DEMAND = 100;
     private int orbLimit;
     private int freezingPowderDemand;
     private int fixCount;
@@ -23,8 +25,8 @@ public class MagicOven extends Oven implements Fixable {
     public MagicOven(String creator, ResourceStorage resourceStorage) {
         super(creator, resourceStorage);
         this.orbCounter = 0;
-        this.clayDemand = 25;
-        this.freezingPowderDemand = 100;
+        this.clayDemand = CLAY_DEMAND;
+        this.freezingPowderDemand = FREEZING_POWDER_DEMAND;
         this.fixCount = 0;
         this.orbLimit = 5;
     }
@@ -48,7 +50,8 @@ public class MagicOven extends Oven implements Fixable {
             throw new CannotFixException(this, CannotFixException.Reason.IS_NOT_BROKEN);
         } else if (fixCount == 10) {
             throw new CannotFixException(this, CannotFixException.Reason.FIXED_MAXIMUM_TIMES);
-        } else if (!resourceStorage.hasEnoughResource("freezing powder", freezingPowderDemand) || !resourceStorage.hasEnoughResource("clay", clayDemand)) {
+        } else if (!resourceStorage.hasEnoughResource("freezing powder", freezingPowderDemand)
+                || !resourceStorage.hasEnoughResource("clay", clayDemand)) {
             throw new CannotFixException(this, CannotFixException.Reason.NOT_ENOUGH_RESOURCES);
         } else {
             resourceStorage.takeResource("freezing powder", freezingPowderDemand);
@@ -71,7 +74,8 @@ public class MagicOven extends Oven implements Fixable {
 
     /**
      * Create an Orb.
-     * A magicOven will create a magicOrb every second time if it has the necessary components.
+     * A magicOven will create a magicOrb every second time
+     * if it has the necessary components.
      * @return
      */
     @Override

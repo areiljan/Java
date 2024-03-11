@@ -59,7 +59,7 @@ public class SpaceOven extends Oven implements Fixable {
             if (resourceStorage().hasEnoughResource("liquid silver", liquidSilverDemand)) {
                 resourceStorage.takeResource("liquid silver", liquidSilverDemand);
                 liquidSilverDemand += liquidSilverDemand;
-            } else if (resourceStorage().hasEnoughResource("star essence", starEssenceDemand)){
+            } else if (resourceStorage().hasEnoughResource("star essence", starEssenceDemand)) {
                 resourceStorage.takeResource("star essence", liquidSilverDemand);
             }
             orbLimit += ORB_LIMIT;
@@ -100,12 +100,14 @@ public class SpaceOven extends Oven implements Fixable {
      */
     @Override
     public Optional<Orb> craftOrb() {
-        if (!this.isBroken() && resourceStorage.hasEnoughResource("meteorite stone", 1) && resourceStorage.hasEnoughResource("star fragment", 15)) {
+        if (!this.isBroken() && resourceStorage.hasEnoughResource("meteorite stone", 1)
+                && resourceStorage.hasEnoughResource("star fragment", AMOUNT)) {
             incrementOrbs();
             resourceStorage.takeResource("meteorite stone", 1);
             resourceStorage.takeResource("star fragment", AMOUNT);
             return Optional.of(new SpaceOrb(name));
-        } else if (resourceStorage.hasEnoughResource("pearl", 1) && resourceStorage.hasEnoughResource("silver", 1)) {
+        } else if (resourceStorage.hasEnoughResource("pearl", 1)
+                && resourceStorage.hasEnoughResource("silver", 1)) {
             resourceStorage.takeResource("pearl", 1);
             resourceStorage.takeResource("silver", 1);
             return Optional.of(new Orb(name));
