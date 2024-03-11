@@ -14,13 +14,20 @@ public class ResourceStorage {
     }
 
     public void addResource(String resource, int amount) {
-        if(!resource.trim().isEmpty()) {
-            resourceAmounts.put(resource.toLowerCase(), amount);
+        if (!resource.trim().isEmpty() && amount > 0) {
+            resource = resource.toLowerCase();
+            int currentAmount = resourceAmounts.getOrDefault(resource, 0);
+            resourceAmounts.put(resource, currentAmount + amount);
         }
     }
 
     public int getResourceAmount(String resource) {
-        return resourceAmounts.get(resource.toLowerCase());
+        Integer amount = resourceAmounts.get(resource.toLowerCase());
+        if (amount == null) {
+            return 0;
+        } else {
+            return amount;
+        }
     }
 
     public boolean hasEnoughResource(String resource, int amount) {

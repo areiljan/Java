@@ -16,10 +16,10 @@ public class InfinityMagicOven extends MagicOven {
 
     /**
      * Returns whether the oven is fixable.
-     * @return true if it is fixable.
+     * @return true if it is fixable. false if broken and unfixable.
      */
     public boolean isFixable() {
-        return false;
+        return true;
     }
 
     @Override

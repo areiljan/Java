@@ -55,18 +55,20 @@ public class OrbFactory {
     public int produceOrbs() {
         int producedOrbs = 0;
         for (Oven oven : ovenList) {
+            if (!oven.isFixable() && !unfixableOvens.contains(oven)) {
+                unfixableOvens.add(oven);
+            }
+            try {
+                oven.fix(); // Attempt to fix the oven
+            } catch (CannotFixException e) {
+                // Do nothing.
+            }
+
+            // If oven is fixed or doesn't need fixing, proceed to crafting orbs
             Optional<Orb> orbOptional = oven.craftOrb();
-            if(orbOptional.isPresent()) {
+            if (orbOptional.isPresent()) {
                 orbList.add(orbOptional.get());
                 producedOrbs++;
-            }
-            if (!oven.isFixable()) {
-                unfixableOvens.add(oven);
-            }
-        }
-        for (Oven oven : ovenList) {
-            if (!oven.isFixable()) {
-                unfixableOvens.add(oven);
             }
         }
         return producedOrbs;
@@ -81,10 +83,9 @@ public class OrbFactory {
         int producedOrbs = 0;
         for (int i = 0; i < cycles; i++) {
             for (Oven oven : ovenList) {
-                if (!oven.isFixable()) {
+                if (!oven.isFixable() && !unfixableOvens.contains(oven)) {
                     unfixableOvens.add(oven);
                 }
-
                 try {
                     oven.fix(); // Attempt to fix the oven
                 } catch (CannotFixException e) {

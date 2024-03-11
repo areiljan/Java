@@ -17,12 +17,21 @@ public class Orb {
         return name;
     }
 
+    /**
+     * Orb constructor.
+     * Assigns the creator name and sets the current charge.
+     * @param creator - oven name.
+     */
     public Orb(String creator) {
         this.name = creator;
         this.currentCharge = 0;
-        // Found no other way to do this.
-        }
+    }
 
+    /**
+     * Charge the orb by the multiplication of the resource length and amount.
+     * @param resource
+     * @param amount
+     */
     public void charge(String resource, int amount) {
         if(!resource.equalsIgnoreCase("dust") && !resource.trim().isEmpty()) {
             currentCharge += amount * resource.length();

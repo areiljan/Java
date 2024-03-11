@@ -26,21 +26,29 @@ public class SpaceOven extends Oven implements Fixable {
 
     /**
      * Returns whether the oven is fixable.
-     * @return true if it is fixable.
+     * @return true if it is fixable. false if broken and unfixable.
      */
     public boolean isFixable() {
-        return fixCount < 5 && this.isBroken();
+        return true;
     }
 
     @Override
     public void fix() throws CannotFixException {
         if(!this.isBroken()) {
             throw new CannotFixException(this, CannotFixException.Reason.IS_NOT_BROKEN);
-        } else if (fixCount == 5) {
+        } else if (fixCount > 5) {
             throw new CannotFixException(this, CannotFixException.Reason.FIXED_MAXIMUM_TIMES);
-        } else if (!resourceStorage.hasEnoughResource("liquid silver", liquidSilverDemand) || !resourceStorage.hasEnoughResource("star essence", starEssenceDemand)) {
-            throw new CannotFixException(this, CannotFixException.Reason.NOT_ENOUGH_RESOURCES);
+        } else if (!resourceStorage.hasEnoughResource("liquid silver", liquidSilverDemand)) {
+            if (!resourceStorage.hasEnoughResource("star essence", starEssenceDemand)) {
+                throw new CannotFixException(this, CannotFixException.Reason.NOT_ENOUGH_RESOURCES);
+            }
         } else {
+            if(resourceStorage().hasEnoughResource("liquid silver", liquidSilverDemand)) {
+                resourceStorage.takeResource("liquid silver", liquidSilverDemand);
+                liquidSilverDemand += liquidSilverDemand;
+            } else if (resourceStorage().hasEnoughResource("star essence", starEssenceDemand)){
+                resourceStorage.takeResource("star essence", liquidSilverDemand);
+            }
             orbLimit += 25;
             liquidSilverDemand += liquidSilverDemand;
             starEssenceDemand += starEssenceDemand;
@@ -55,7 +63,7 @@ public class SpaceOven extends Oven implements Fixable {
 
     @Override
     public boolean isBroken() {
-        if(fixCount == 5) {
+        if(fixCount >= 5) {
             return false;
         }
         return createdOrbs >= orbLimit;

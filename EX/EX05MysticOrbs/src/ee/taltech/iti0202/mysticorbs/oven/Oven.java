@@ -91,7 +91,7 @@ public class Oven implements Comparable<Oven> {
      * @return true if it is fixable.
      */
     public boolean isFixable() {
-        return false;
+        return !this.isBroken();
     }
 
     /**

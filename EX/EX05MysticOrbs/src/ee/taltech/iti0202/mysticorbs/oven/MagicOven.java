@@ -28,7 +28,7 @@ public class MagicOven extends Oven implements Fixable {
      * @return true if it is fixable.
      */
     public boolean isFixable() {
-        return fixCount <= 10;
+        return fixCount < 10 && this.isBroken();
     }
 
     @Override
