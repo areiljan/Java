@@ -62,9 +62,15 @@ public class MagicOven extends Oven implements Fixable {
             resourceStorage.takeResource("gold", 1);
             resourceStorage.takeResource("dust", 3);
             if(orbCounter % 2 == 0) {
-                return Optional.of(new MagicOrb(name));
+                Orb createdOrb = new MagicOrb(name);
+                createdOrb.charge("gold", 1);
+                createdOrb.charge("dust", 3);
+                return Optional.of(createdOrb);
             } else {
-                return Optional.of(new Orb(name));
+                Orb createdOrb = new Orb(name);
+                createdOrb.charge("gold", 1);
+                createdOrb.charge("dust", 3);
+                return Optional.of(createdOrb);
             }
         } else {
             return Optional.empty();

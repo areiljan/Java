@@ -17,7 +17,7 @@ public class MagicOrb extends Orb {
      */
     @Override
     public void charge(String resource, int amount) {
-        if(!resource.equalsIgnoreCase("dust") && !resource.trim().isEmpty()) {
+        if(!resource.equalsIgnoreCase("dust") && !resource.trim().isEmpty() && amount > 0) {
             setCurrentCharge(getCurrentCharge() + amount * resource.length() * 2);
         }
     }

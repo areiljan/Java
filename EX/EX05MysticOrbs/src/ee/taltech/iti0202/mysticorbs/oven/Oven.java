@@ -1,6 +1,7 @@
 package ee.taltech.iti0202.mysticorbs.oven;
 
 import ee.taltech.iti0202.mysticorbs.exceptions.CannotFixException;
+import ee.taltech.iti0202.mysticorbs.orb.MagicOrb;
 import ee.taltech.iti0202.mysticorbs.orb.Orb;
 import ee.taltech.iti0202.mysticorbs.storage.ResourceStorage;
 
@@ -137,6 +138,8 @@ public class Oven implements Comparable<Oven> {
             Orb createdOrb = new Orb(name);
             resourceStorage.takeResource("pearl", 1);
             resourceStorage.takeResource("silver", 1);
+            createdOrb.charge("pearl", 1);
+            createdOrb.charge("silver", 1);
             return Optional.of(createdOrb);
         } else {
             return Optional.empty();

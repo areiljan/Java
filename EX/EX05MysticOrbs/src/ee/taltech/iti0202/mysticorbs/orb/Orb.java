@@ -33,7 +33,8 @@ public class Orb {
      * @param amount
      */
     public void charge(String resource, int amount) {
-        if(!resource.equalsIgnoreCase("dust") && !resource.trim().isEmpty()) {
+        if (!resource.equalsIgnoreCase("dust") && !resource.trim().isEmpty()
+            && amount > 0) {
             currentCharge += amount * resource.length();
         }
     }
