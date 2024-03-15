@@ -29,18 +29,17 @@ public class AnimalShelter {
      * @return Maximum {count} number of animals with the given type and color.
      */
     public List<Animal> getAnimals(Animal.Type animalType, String color, int count) {
-        List<Animal> uniqueAnimals = new ArrayList<>(animalProvider.provide(animalType));
-        System.out.println(uniqueAnimals);
         int totalCount = 0;
 
         List<Animal> result = new ArrayList<>();
         while (totalCount < count) {
+            List<Animal> uniqueAnimals = new ArrayList<>(animalProvider.provide(animalType));
             if (uniqueAnimals == null || uniqueAnimals.isEmpty()) {
                 break; // Stop if the provider returns an empty list
             }
 
             for (Animal animal : uniqueAnimals) {
-                if (animal.getColor().equals(color)) {
+                if (animal.getColor().equals(color) && !result.contains(animal)) {
                     result.add(animal);
                     totalCount++;
 
@@ -51,8 +50,6 @@ public class AnimalShelter {
             }
 
         }
-        System.out.println(result);
-
         return result;
     }
 
