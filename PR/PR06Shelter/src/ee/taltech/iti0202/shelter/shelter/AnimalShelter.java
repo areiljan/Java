@@ -29,26 +29,19 @@ public class AnimalShelter {
      * @return Maximum {count} number of animals with the given type and color.
      */
     public List<Animal> getAnimals(Animal.Type animalType, String color, int count) {
-        // Removing the duplicates
-        Set<Animal> providedAnimalsSet = new HashSet<>(animalProvider.provide(animalType));
-        List<Animal> uniqueAnimals = new ArrayList<>(providedAnimalsSet);
-
+        List<Animal> uniqueAnimals = new ArrayList<>(animalProvider.provide(animalType));
+        System.out.println(uniqueAnimals);
         int totalCount = 0;
-        int providerIndex = 0;
 
-        // Recursive While loop :)
         List<Animal> result = new ArrayList<>();
         while (totalCount < count) {
-            List<Animal> animals = animalProvider.provide(animalType);
-
-            if (animals == null || animals.isEmpty()) {
+            if (uniqueAnimals == null || uniqueAnimals.isEmpty()) {
                 break; // Stop if the provider returns an empty list
             }
 
-            for (Animal animal : animals) {
-                if (animal.getColor().equals(color) && !uniqueAnimals.contains(animal)) {
+            for (Animal animal : uniqueAnimals) {
+                if (animal.getColor().equals(color)) {
                     result.add(animal);
-                    uniqueAnimals.add(animal);
                     totalCount++;
 
                     if (totalCount == count) {
@@ -57,8 +50,8 @@ public class AnimalShelter {
                 }
             }
 
-            providerIndex++;
         }
+        System.out.println(result);
 
         return result;
     }
