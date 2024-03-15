@@ -7,6 +7,11 @@ public abstract class Animal {
     }
     private String color;
 
+    /**
+     * Animal initializer.
+     * This is a superclass for the Hirola, Tarantula and Wombat.
+     * @param color - what color is the specimen.
+     */
     public Animal(String color) {
         this.color = color;
     }

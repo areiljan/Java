@@ -3,11 +3,16 @@ package ee.taltech.iti0202.shelter.shelter;
 import ee.taltech.iti0202.shelter.animal.Animal;
 import ee.taltech.iti0202.shelter.animalprovider.AnimalProvider;
 
-import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
 
 public class AnimalShelter {
     private final AnimalProvider animalProvider;
 
+    /**
+     * AnimalShelter initializer.
+     * @param animalProvider - From which source does the AnimalShelter receive its animals.
+     */
     public AnimalShelter(AnimalProvider animalProvider) {
         this.animalProvider = animalProvider;
     }
@@ -52,5 +57,4 @@ public class AnimalShelter {
         }
         return result;
     }
-
 }
