@@ -3,9 +3,7 @@ package ee.taltech.iti0202.shelter.shelter;
 import ee.taltech.iti0202.shelter.animal.Animal;
 import ee.taltech.iti0202.shelter.animalprovider.AnimalProvider;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TreeSet;
+import java.util.*;
 
 public class AnimalShelter {
     private final AnimalProvider animalProvider;
@@ -32,7 +30,7 @@ public class AnimalShelter {
      */
     public List<Animal> getAnimals(Animal.Type animalType, String color, int count) {
         // Removing the duplicates
-        TreeSet<Animal> providedAnimalsSet = new TreeSet<>(animalProvider.provide(animalType));
+        Set<Animal> providedAnimalsSet = new HashSet<>(animalProvider.provide(animalType));
         List<Animal> uniqueAnimals = new ArrayList<>(providedAnimalsSet);
 
         int totalCount = 0;
@@ -41,9 +39,9 @@ public class AnimalShelter {
         // Recursive While loop :)
         List<Animal> result = new ArrayList<>();
         while (totalCount < count) {
-            List<Animal> animals = animalProvider.getAnimals(animalType, providerIndex);
+            List<Animal> animals = animalProvider.provide(animalType);
 
-            if (animals.isEmpty()) {
+            if (animals == null || animals.isEmpty()) {
                 break; // Stop if the provider returns an empty list
             }
 

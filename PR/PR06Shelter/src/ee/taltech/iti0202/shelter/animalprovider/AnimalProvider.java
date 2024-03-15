@@ -23,6 +23,4 @@ public interface AnimalProvider {
      * @return A limited list of animals of asked type
      */
     List<Animal> provide(Animal.Type type);
-
-    List<Animal> getAnimals(Animal.Type animalType, int providerIndex);
 }
