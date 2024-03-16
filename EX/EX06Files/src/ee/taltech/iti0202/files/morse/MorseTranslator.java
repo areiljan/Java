@@ -24,27 +24,40 @@ public class MorseTranslator {
     private String translateLineToMorse(String line) {
         String lineWithoutSpaces = line.replaceAll("\\s+", "");
         char[] letters = lineWithoutSpaces.toCharArray();
-        String morseCode = "";
+        StringBuilder morseCodeBuilder = new StringBuilder();
+
         for (Character letter : letters) {
-            morseCode += (morseTranslator.get(letter));
-            morseCode += (" ");
+            // Check if the character exists in the morseTranslator map
+            String translation = morseTranslator.get(letter);
+
+            if (translation != null) {
+                morseCodeBuilder.append(translation).append(" ");
+            } else {
+                // Handle characters not found in the map (e.g., skip or provide default translation)
+                // For now, we'll just skip the character
+                System.out.println("Character '" + letter + "' not found in the translator. Skipping.");
+            }
         }
-        return morseCode;
+
+        return morseCodeBuilder.toString();
     }
 
+
     private String translateLineFromMorse(String line) {
-        String[] words = line.split("   ");
         String unicodeText = "";
-        for (String word : words) {
-            String[] symbols = word.split(" ");
-            for (String symbol : symbols) {
-                for (String key : morseTranslator.keySet()) {
-                    if (morseTranslator.get(key).equals(symbol)) {
-                        unicodeText = unicodeText + key;
+        if (line != null) {
+            String[] words = line.split("   ");
+            for (String word : words) {
+                String[] symbols = word.split(" ");
+                for (String symbol : symbols) {
+                    for (String key : morseTranslator.keySet()) {
+                        if (morseTranslator.get(key).equals(symbol)) {
+                            unicodeText = unicodeText + key;
+                        }
                     }
                 }
+                unicodeText = unicodeText + (" ");
             }
-            unicodeText = unicodeText + (" ");
         }
         return unicodeText;
     }
