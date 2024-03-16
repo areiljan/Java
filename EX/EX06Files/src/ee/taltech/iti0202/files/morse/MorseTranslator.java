@@ -22,6 +22,11 @@ public class MorseTranslator {
     }
 
     private String translateLineToMorse(String line) {
+        if (line == null || line.isEmpty()) {
+            System.out.println("Input line is empty or null.");
+            return ""; // Or handle this case according to your requirements
+        }
+
         String lineWithoutSpaces = line.replaceAll("\\s+", "");
         char[] letters = lineWithoutSpaces.toCharArray();
         StringBuilder morseCodeBuilder = new StringBuilder();
@@ -41,6 +46,7 @@ public class MorseTranslator {
 
         return morseCodeBuilder.toString();
     }
+
 
 
     private String translateLineFromMorse(String line) {
