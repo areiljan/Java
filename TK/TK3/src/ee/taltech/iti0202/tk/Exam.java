@@ -27,32 +27,33 @@ public class Exam {
      * integerBattles(123456) => 246
      */
     public static int integerBattles(int contestants) {
-        String contestantsString = String.valueOf(contestants);
         List<Integer> numberList = new ArrayList<>();
+        int temp = contestants;
 
-        // Iterate over each character in the string and add it to the list
-        for (int i = 0; i < contestantsString.length(); i++) {
-
-            numberList.add((int) contestantsString.charAt(i));
+        while (temp > 0) {
+            numberList.add(temp % 10);
+            temp /= 10;
         }
-        for (int i = 0; i < numberList.size(); i++) {
-            if (i % 2 == 1) {
-                Integer j = i - 1;
-                if (numberList.get(i) > numberList.get(j)) {
-                    numberList.remove(j);
-                } else if (numberList.get(i) == numberList.get(j)) {
-                    numberList.remove(i);
-                    numberList.remove(j);
-                } else {
-                    numberList.remove(i);
-                }
+
+        for (int i = 0; i < numberList.size() - 1; i++) {
+            if (numberList.get(i) < numberList.get(i + 1)) {
+                numberList.remove(i);
+                if (i > 0) i--;
+            } else if (numberList.get(i) > numberList.get(i + 1)) {
+                numberList.remove(i + 1);
+            } else {
+                numberList.remove(i);
+                numberList.remove(i);
+                if (i > 0) i--;
             }
         }
-        String numbersString = "";
-        for (int i = 0; i < numberList.size(); i++) {
-            numbersString = numbersString + numberList.get(i);
+
+        int result = 0;
+        for (int digit : numberList) {
+            result = result * 10 + digit;
         }
-        return Integer.parseInt(numbersString);
+
+        return result;
     }
 
     /**
