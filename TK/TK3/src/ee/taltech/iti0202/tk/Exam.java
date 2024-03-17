@@ -1,9 +1,6 @@
 package ee.taltech.iti0202.tk;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Exam {
 
@@ -34,6 +31,9 @@ public class Exam {
             numberList.add(temp % 10);
             temp /= 10;
         }
+
+        Collections.reverse(numberList);
+
 
         for (int i = 0; i < numberList.size() - 1; i++) {
             if (numberList.get(i) < numberList.get(i + 1)) {
