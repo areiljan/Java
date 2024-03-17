@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Exam {
@@ -6,7 +7,7 @@ public class Exam {
      * Defeat the integer that is weaker.
      * @param Contestants - the Integers.
      */
-    public Integer integerBattles (Integer Contestants) {
+    public Integer IntegerBattles (Integer Contestants) {
         String contestantsString = Contestants.toString();
         List<Integer> numberList = new ArrayList<>();
 
@@ -33,6 +34,18 @@ public class Exam {
             numbersString = numbersString + numberList.get(i);
         }
         return Integer.parseInt(numbersString);
+    }
+
+    public boolean evenlySpaced (Integer a, Integer b, Integer c) {
+        int[] numbers = {a, b, c};
+        Arrays.sort(numbers);
+        int min = numbers[0];
+        int mid = numbers[1];
+        int max = numbers[2];
+        if (Math.abs(min - mid) == Math.abs(max - mid)) {
+            return true;
+        }
+        return false;
     }
 
 }
