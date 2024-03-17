@@ -1,6 +1,12 @@
 package ee.taltech.iti0202.tk;
 
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Exam {
 
@@ -113,7 +119,7 @@ public class Exam {
     public static Map<String, String> mapSwitchKeysAndValues(Map<String, String> map) {
         Map<String, String> switchedMap = new HashMap<>();
         for (Map.Entry<String, String> entry : map.entrySet()) {
-            if(entry.getKey() != entry.getValue()) {
+            if (entry.getKey() != entry.getValue()) {
                 switchedMap.put(entry.getValue(), entry.getKey());
             }
         }
