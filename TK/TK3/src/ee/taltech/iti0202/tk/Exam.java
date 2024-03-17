@@ -98,7 +98,7 @@ public class Exam {
             if (i >= 2) {
                 int g = i - 2;
                 int h = i - 1;
-                if ('p' == str.charAt(i)) && 'z' == str.charAt(g)) {
+                if (('p' == str.charAt(i)) && ('z' == str.charAt(g))) {
                     newStr = newStr.substring(0, h) + newStr.substring(i);
                 }
             }
