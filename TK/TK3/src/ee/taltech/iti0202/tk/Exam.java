@@ -1,6 +1,10 @@
 package ee.taltech.iti0202.tk;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Arrays;
+import java.util.Map;
 
 public class Exam {
 
