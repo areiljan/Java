@@ -93,7 +93,17 @@ public class Exam {
      * zipZap("zzzopzop") => "zzzpzp"
      */
     public static String zipZap(String str) {
-        return null;
+        String newStr = str;
+        for (int i = 0; i < str.length() - 1; i++) {
+            if (i >= 2) {
+                int g = i - 2;
+                int h = i - 1;
+                if ('p' == str.charAt(i)) && 'z' == str.charAt(g)) {
+                    newStr = newStr.substring(0, h) + newStr.substring(i);
+                }
+            }
+        }
+        return newStr;
     }
 
     /**
