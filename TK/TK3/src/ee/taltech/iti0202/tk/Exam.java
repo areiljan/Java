@@ -1,10 +1,6 @@
 package ee.taltech.iti0202.tk;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Collections;
-import java.util.Arrays;
-import java.util.Map;
+import java.util.*;
 
 public class Exam {
 
@@ -115,6 +111,13 @@ public class Exam {
      * mapSwitchKeysAndValues({"a": "a", "e": "e"}) => {}
      */
     public static Map<String, String> mapSwitchKeysAndValues(Map<String, String> map) {
-        return null;
+        Map<String, String> switchedMap = new HashMap<>();
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            if(entry.getKey() != entry.getValue()) {
+                switchedMap.put(entry.getValue(), entry.getKey());
+            }
+        }
+
+        return switchedMap;
     }
 }
