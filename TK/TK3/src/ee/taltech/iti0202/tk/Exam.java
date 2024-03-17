@@ -12,7 +12,7 @@ public class Exam {
      * Defeat the integer that is weaker.
      * @param contestants - the Integers.
      */
-    public Integer IntegerBattles (Integer contestants) {
+    public Integer integerBattles (Integer contestants) {
         String contestantsString = contestants.toString();
         List<Integer> numberList = new ArrayList<>();
 
