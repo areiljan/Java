@@ -3,12 +3,15 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Exam {
+    public Exam(){
+        // Whatever.
+    }
     /**
      * Defeat the integer that is weaker.
-     * @param Contestants - the Integers.
+     * @param contestants - the Integers.
      */
-    public Integer IntegerBattles (Integer Contestants) {
-        String contestantsString = Contestants.toString();
+    public Integer IntegerBattles (Integer contestants) {
+        String contestantsString = contestants.toString();
         List<Integer> numberList = new ArrayList<>();
 
         // Iterate over each character in the string and add it to the list
