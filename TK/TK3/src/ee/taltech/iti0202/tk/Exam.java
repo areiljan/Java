@@ -93,18 +93,18 @@ public class Exam {
      * zipZap("zzzopzop") => "zzzpzp"
      */
     public static String zipZap(String str) {
-        String newStr = str;
-        for (int i = 0; i < str.length() - 1; i++) {
-            if (i >= 2) {
-                int g = i - 2;
-                int h = i - 1;
-                if (('p' == str.charAt(i)) && ('z' == str.charAt(g))) {
-                    newStr = newStr.substring(0, h) + newStr.substring(i);
-                }
+        StringBuilder newStr = new StringBuilder(str);
+
+        for (int i = 2; i < newStr.length(); i++) {
+            if (newStr.charAt(i - 2) == 'z' && newStr.charAt(i) == 'p') {
+                newStr.deleteCharAt(i - 1);
+                i--;
             }
         }
-        return newStr;
+
+        return newStr.toString();
     }
+
 
     /**
      * Create a new map and switch keys and values in the input map.
