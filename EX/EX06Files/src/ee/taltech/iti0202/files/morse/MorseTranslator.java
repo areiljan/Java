@@ -52,10 +52,6 @@ public class MorseTranslator {
 
             if ((translation != null)) {
                 morseCodeBuilder.append(translation);
-            } else {
-                // Handle characters not found in the map (e.g., skip or provide default translation)
-                // For now, we'll just skip the character
-                System.out.println("Character '" + letter + "' not found in the translator. Skipping.");
             }
             if (!(i == (letters.length - 1))) {
                 morseCodeBuilder.append(" ");
