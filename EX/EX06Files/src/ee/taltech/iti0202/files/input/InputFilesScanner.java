@@ -7,6 +7,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class InputFilesScanner implements InputFilesReader {
+    /**
+     * Read lines from file using the Scanner method.
+     * @param filename - which file.
+     * @return - read files.
+     */
     @Override
     public List<String> readTextFromFile(String filename) {
         List<String> textFromFile = new ArrayList<>();
