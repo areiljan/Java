@@ -6,7 +6,7 @@ import java.util.List;
 
 class InputFilesReaderTest {
     @org.junit.jupiter.api.Test
-    void InputFilesLines() {
+    void inputFilesLines() {
         InputFilesReader reader = new InputFilesBufferReader();
         List<String> readlines = reader.readTextFromFile("morse.txt");
         Assertions.assertEquals("helloworld", readlines); //key and value

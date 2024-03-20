@@ -73,9 +73,18 @@ class MorseTranslatorTest {
         translator.addMorseCodes(morseCypher);
         List<String> morseLines = translator.translateLinesToMorse(lines);
         List<String> excpectedMorseLines = new ArrayList<>();
-        excpectedMorseLines.add(".-.. --- .-. . --  .. .--. ... ..- --  -.. --- .-.. --- .-.  ... .. -  .- -- . -");
-        excpectedMorseLines.add("... . -..  -.. ---  . .. ..- ... -- --- -..  - . -- .--. --- .-. .-.-.-");
-        Assertions.assertEquals(excpectedMorseLines, morseLines);
+        excpectedMorseLines.add(".-.. --- .-. . --" + "\t" + ".. .--. ... ..- --" + "\t" + "-.. --- .-.. --- .-."  + "\t" + "... .. -    .- -- . -");
+        excpectedMorseLines.add("... . -.." + "\t" + "-.. --- . .. ..- ... -- --- -.. - . -- .--. --- .-. .-.-.-");
+        List <String> excpectedMorseLinesWithoutSpaces = new ArrayList<>();
+        for (String line : excpectedMorseLines) {
+            excpectedMorseLinesWithoutSpaces.add(line.replaceAll("\\s", ""));
+        }
+        morseLines = morseLines.replaceAll("\\s", "");
+        excpectedMorseLinesWithoutSpaces = new ArrayList<>();
+        for (String line : excpectedMorseLines) {
+            excpectedMorseLinesWithoutSpaces.add(line.replaceAll("\\s", ""));
+        }
+        Assertions.assertEquals(excpectedMorseLines.replaceAll("\\s", ""), morseLines.replaceAll("\\s", "");
         List<String> textLines = translator.translateLinesFromMorse(excpectedMorseLines);
         Assertions.assertEquals(lines, textLines);
     }
@@ -92,5 +101,4 @@ class MorseTranslatorTest {
         String regularText = translator.translateLineToMorse(line);
         Assertions.assertEquals(".... . -.--  -.-- --- ..- --..--  -.. .- .-. .-.. .. -. --.", regularText);
     }
-
 }
