@@ -51,7 +51,7 @@ public class MorseTranslator {
             for (int i = 0; i < letters.length; i++) {
                 // Check if the character exists in the morseTranslator map
                 Character letter = letters[i];
-                String translation = morseTranslator.get(letter.toString());
+                String translation = morseTranslator.get(letter.toString().toLowerCase());
 
                 if ((translation != null)) {
                     morseCodeBuilder.append(translation);
@@ -74,7 +74,7 @@ public class MorseTranslator {
     public String translateLineFromMorse(String line) {
         StringBuilder unicodeText = new StringBuilder();
         if (line != null) {
-            String[] words = line.split("\\s{2}");
+            String[] words = line.split("\\s{2,}");
             for (String word : words) {
                 // Add a space to the beginning of each word, except the first one.
                 if (!unicodeText.isEmpty()) {
@@ -83,7 +83,7 @@ public class MorseTranslator {
                 String[] symbols = word.split(" ");
                 for (String symbol : symbols) {
                     for (String key : morseTranslator.keySet()) {
-                        if (morseTranslator.get(key).equals(symbol)) {
+                        if (morseTranslator.get(key).equals(symbol.toLowerCase())) {
                             unicodeText.append(key);
                         }
                     }
@@ -114,6 +114,7 @@ public class MorseTranslator {
     public List<String> translateLinesFromMorse(List<String> lines) {
         List<String> unicodeLines = new ArrayList<>();
         for (String line : lines) {
+            String translatedLine = translateLineFromMorse(line) + "\\t";
             unicodeLines.add(translateLineFromMorse(line));
         }
         return unicodeLines;
