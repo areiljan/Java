@@ -45,7 +45,7 @@ public class MorseTranslator {
 
         for (String word : words) {
             if (!morseCodeBuilder.isEmpty()) {
-                morseCodeBuilder.append("  ");
+                morseCodeBuilder.append("\t");
             }
             char[] letters = word.toCharArray();
             for (int i = 0; i < letters.length; i++) {
