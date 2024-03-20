@@ -8,7 +8,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class InputFilesLines implements InputFilesReader {
-
+    /**
+     * Read text from file using the Files.lines.
+     * @param filename - file to read from.
+     * @return - read lines.
+     */
     @Override
     public List<String> readTextFromFile(String filename) {
         try (Stream<String> lines = Files.lines(Paths.get(filename))) {

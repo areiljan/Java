@@ -4,11 +4,13 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
 public class InputFilesBufferReader implements InputFilesReader {
+    /**
+     * Read text from file using the BufferedReader.
+     */
     @Override
     public List<String> readTextFromFile(String filename) {
         List<String> readLines = new ArrayList<>();
