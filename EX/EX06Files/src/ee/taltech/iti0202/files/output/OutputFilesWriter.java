@@ -8,6 +8,12 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class OutputFilesWriter {
+    /**
+     * Write lines to file using the BufferedWriter.
+     * @param lines - which lines to write.
+     * @param filename - the filename.
+     * @return - true, if succeeded.
+     */
     public boolean writeLinesToFile(List<String> lines, String filename) {
         Path path = Paths.get(filename);
         boolean fileExists = Files.exists(path);
