@@ -35,26 +35,31 @@ public class MorseTranslator {
      * @param line - the UniCode line to translate.
      * @return - line as morse string.
      */
-    private String translateLineToMorse(String line) {
+    public String translateLineToMorse(String line) {
         if (line == null || line.isEmpty()) {
             System.out.println("Input line is empty or null.");
-            return ""; // Or handle this case according to your requirements
         }
 
-        String lineWithoutSpaces = line.replaceAll("\\s+", "");
-        char[] letters = lineWithoutSpaces.toCharArray();
+        String[] words = line.split(" ");
         StringBuilder morseCodeBuilder = new StringBuilder();
 
-        for (int i = 0; i < letters.length; i++) {
-            // Check if the character exists in the morseTranslator map
-            Character letter = letters[i];
-            String translation = morseTranslator.get(letter.toString());
-
-            if ((translation != null)) {
-                morseCodeBuilder.append(translation);
+        for (String word : words) {
+            if (!morseCodeBuilder.isEmpty()) {
+                morseCodeBuilder.append("  ");
             }
-            if (!(i == (letters.length - 1))) {
-                morseCodeBuilder.append(" ");
+            char[] letters = word.toCharArray();
+            for (int i = 0; i < letters.length; i++) {
+                // Check if the character exists in the morseTranslator map
+                Character letter = letters[i];
+                String translation = morseTranslator.get(letter.toString());
+
+                if ((translation != null)) {
+                    morseCodeBuilder.append(translation);
+                }
+                // If not the last character.
+                if (!(i == (letters.length - 1))) {
+                    morseCodeBuilder.append(" ");
+                }
             }
         }
         return morseCodeBuilder.toString();
@@ -66,23 +71,26 @@ public class MorseTranslator {
      * @param line - the Morse line to translate.
      * @return - line as UniCode string.
      */
-    private String translateLineFromMorse(String line) {
-        String unicodeText = "";
+    public String translateLineFromMorse(String line) {
+        StringBuilder unicodeText = new StringBuilder();
         if (line != null) {
-            String[] words = line.split("   ");
+            String[] words = line.split("\\s{2}");
             for (String word : words) {
+                // Add a space to the beginning of each word, except the first one.
+                if (!unicodeText.isEmpty()) {
+                    unicodeText.append(" ");
+                }
                 String[] symbols = word.split(" ");
                 for (String symbol : symbols) {
                     for (String key : morseTranslator.keySet()) {
                         if (morseTranslator.get(key).equals(symbol)) {
-                            unicodeText = unicodeText + key;
+                            unicodeText.append(key);
                         }
                     }
                 }
-                unicodeText = unicodeText + (" ");
             }
         }
-        return unicodeText;
+        return unicodeText.toString();
     }
 
     /**
