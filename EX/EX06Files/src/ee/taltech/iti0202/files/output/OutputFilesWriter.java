@@ -15,6 +15,7 @@ public class OutputFilesWriter {
         try (BufferedWriter writer = Files.newBufferedWriter(path)) {
             for (String line : lines) {
                 writer.write(line);
+                writer.newLine();
             }
             return true;
         } catch (IOException e) {
