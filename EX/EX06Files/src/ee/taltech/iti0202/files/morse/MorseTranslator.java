@@ -74,7 +74,7 @@ public class MorseTranslator {
     public String translateLineFromMorse(String line) {
         StringBuilder unicodeText = new StringBuilder();
         if (line != null) {
-            String[] words = line.split("\\s{2,}");
+            String[] words = line.split("\\t");
             for (String word : words) {
                 // Add a space to the beginning of each word, except the first one.
                 if (!unicodeText.isEmpty()) {
