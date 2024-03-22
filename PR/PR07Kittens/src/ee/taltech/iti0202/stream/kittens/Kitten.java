@@ -30,5 +30,5 @@ public class Kitten {
         return gender;
     }
 
-    public enum Gender {MALE, FEMALE}
+    public enum Gender { MALE, FEMALE }
 }

@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 public class KittenStatistics {
 
     private List<Kitten> kittens;
-    
     /**
      * Sets the list of kittens.
      *
@@ -97,7 +96,7 @@ public class KittenStatistics {
      */
     public Optional<Kitten> findFirstKittenWithGivenName(final String givenName) {
         return kittens.stream()
-                .filter(kitten -> kitten.getName().equals(givenName))
+                .filter(kitten -> kitten.getName().equalsIgnoreCase(givenName))
                 .findFirst();
     }
 
