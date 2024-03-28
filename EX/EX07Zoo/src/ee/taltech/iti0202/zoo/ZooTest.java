@@ -9,7 +9,49 @@ import java.util.Map;
 
 class ZooTest {
     @org.junit.jupiter.api.Test
-    void turtleMakesRightSound() {
+    void AnimalHasAName() {
+        Zoo zoo = new Zoo();
+        Animal crocodileGena = new Animal("Gena", Animal.AnimalTypes.REPTILE, "Bing Chi Ling", 2);
+        zoo.addAnimal(crocodileGena);
+
+        String expectedAnimalName = "Gena";
+        Assertions.assertEquals(expectedAnimalName, crocodileGena.getName());
+    }
+
+    @org.junit.jupiter.api.Test
+    void lambAlwaysAMammal() {
+        Zoo zoo = new Zoo();
+        Animal blackSheep = new Lamb("Fluffy", Animal.AnimalTypes.REPTILE, "Bing Chi Ling", 15);
+        zoo.addAnimal(blackSheep);
+
+        Animal.AnimalTypes expectedType = Animal.AnimalTypes.MAMMAL;
+        Assertions.assertEquals(expectedType, blackSheep.getAnimalType());
+    }
+
+    @org.junit.jupiter.api.Test
+    void turtleAlwaysAnAmphibian() {
+        Zoo zoo = new Zoo();
+        Animal oceanTurtle = new Turtle("Billy", Animal.AnimalTypes.AMPHIBIAN, "Ni Hao Ma", 15);
+        zoo.addAnimal(oceanTurtle);
+        zoo.aDayPasses();
+
+        Animal.AnimalTypes expectedType = Animal.AnimalTypes.AMPHIBIAN;
+        Assertions.assertEquals(expectedType, oceanTurtle.getAnimalType());
+    }
+
+    @org.junit.jupiter.api.Test
+    void monkeyAlwaysAMammal() {
+        Zoo zoo = new Zoo();
+        Animal orangutan = new Monkey("Oogabooga", Animal.AnimalTypes.REPTILE, "Ching", 2);
+        zoo.addAnimal(orangutan);
+        zoo.aDayPasses();
+
+        Animal.AnimalTypes expectedType = Animal.AnimalTypes.MAMMAL;
+        Assertions.assertEquals(expectedType, orangutan.getAnimalType());
+    }
+
+    @org.junit.jupiter.api.Test
+    void turtleMakesNoSound() {
         Zoo zoo = new Zoo();
         Animal oceanTurtle = new Turtle("Billy", Animal.AnimalTypes.AMPHIBIAN, "Ni Hao Ma", 15);
         zoo.addAnimal(oceanTurtle);
@@ -58,6 +100,17 @@ class ZooTest {
 
         Map<String, String> expectedSounds = new HashMap<>();
         expectedSounds.put(String.format("%s: %s", crocodileGena.getAnimalType(), crocodileGena.getName()), "");
+        Assertions.assertEquals(expectedSounds, zoo.makeSound());
+    }
+
+    @org.junit.jupiter.api.Test
+    void regularAnimalsMakeRightSoundFed() {
+        Zoo zoo = new Zoo();
+        Animal crocodileGena = new Animal("Gena", Animal.AnimalTypes.REPTILE, "Bing Chi Ling", 2);
+        zoo.addAnimal(crocodileGena);
+        
+        Map<String, String> expectedSounds = new HashMap<>();
+        expectedSounds.put(String.format("%s: %s", crocodileGena.getAnimalType(), crocodileGena.getName()), "Bing Chi Ling");
         Assertions.assertEquals(expectedSounds, zoo.makeSound());
     }
 

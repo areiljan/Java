@@ -13,8 +13,8 @@ public class Monkey extends Animal {
      */
     public Monkey(String name, AnimalTypes animalType, String sound, Integer endurance) {
         super(name, animalType, sound, endurance);
-        animalType = AnimalTypes.MAMMAL;
-        sound = "BANANA";
+        this.animalType = AnimalTypes.MAMMAL;
+        this.sound = "BANANA";
     }
 
     @Override

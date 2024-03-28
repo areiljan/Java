@@ -12,7 +12,7 @@ public class Turtle extends Animal {
      */
     public Turtle(String name, AnimalTypes animalType, String sound, Integer endurance) {
         super(name, animalType, sound, endurance);
-        animalType = AnimalTypes.AMPHIBIAN;
+        this.animalType = AnimalTypes.AMPHIBIAN;
     }
 
     @Override

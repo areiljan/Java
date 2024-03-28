@@ -8,9 +8,9 @@ public class Animal {
     }
 
     protected final Integer endurance;
-    protected final AnimalTypes animalType;
+    protected AnimalTypes animalType;
     protected Integer hungerLevel;
-    protected final String sound;
+    protected String sound;
     protected final String name;
 
     /**

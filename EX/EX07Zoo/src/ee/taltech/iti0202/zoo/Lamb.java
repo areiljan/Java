@@ -10,8 +10,8 @@ public class Lamb extends Animal {
      */
     public Lamb(String name, AnimalTypes animalType, String sound, Integer endurance) {
         super(name, animalType, sound, endurance);
-        animalType = AnimalTypes.MAMMAL;
-        sound = "Mää";
+        this.animalType = AnimalTypes.MAMMAL;
+        this.sound = "Mää";
     }
 
     /**
