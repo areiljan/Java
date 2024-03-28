@@ -3,17 +3,21 @@ package ee.taltech.iti0202.zoo;
 import java.util.Optional;
 
 public class Animal {
-    private final Integer endurance;
-    private final AnimalType animalType;
-    private Integer hungerLevel;
-    private final String sound;
-    private final String name;
+    public Integer getEndurance() {
+        return endurance;
+    }
+
+    protected final Integer endurance;
+    protected final AnimalTypes animalType;
+    protected Integer hungerLevel;
+    protected final String sound;
+    protected final String name;
 
     /**
      * Getter for type.
      * @return - animalType.
      */
-    public AnimalType getAnimalType() {
+    public AnimalTypes getAnimalType() {
         return animalType;
     }
 
@@ -33,7 +37,7 @@ public class Animal {
         return name;
     }
 
-    public Animal(String name, AnimalType animalType , String sound, Integer endurance) {
+    public Animal(String name, AnimalTypes animalType , String sound, Integer endurance) {
         this.name = name;
         this.sound = sound;
         this.endurance = endurance;
@@ -41,7 +45,7 @@ public class Animal {
         this.animalType = animalType;
     }
 
-    public enum AnimalType {
+    public enum AnimalTypes {
         MAMMAL, BIRD, FISH, REPTILE, AMPHIBIAN
     }
 
@@ -50,7 +54,7 @@ public class Animal {
      * @return - Sound or Optional.empty().
      */
     public Optional<String> makeSound() {
-        if (hungerLevel > 0) {
+        if (hungerLevel.equals(endurance)) {
             return Optional.ofNullable(sound);
         }
         return Optional.empty();
