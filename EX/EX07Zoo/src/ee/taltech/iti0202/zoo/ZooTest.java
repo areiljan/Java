@@ -17,7 +17,8 @@ class ZooTest {
 
 
         Map<String, String> expectedSounds = new HashMap<>();
-        expectedSounds.put(String.format("%s: %s", oceanTurtle.getAnimalType(), oceanTurtle.getName()), ""); // A turtle makes no sound
+        // A turtle makes no sound
+        expectedSounds.put(String.format("%s: %s", oceanTurtle.getAnimalType(), oceanTurtle.getName()), "");
         Assertions.assertEquals(expectedSounds, zoo.makeSound());
     }
 

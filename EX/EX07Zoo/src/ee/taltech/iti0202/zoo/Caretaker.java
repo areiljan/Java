@@ -17,7 +17,7 @@ public class Caretaker {
      * @param specialisation - the specialisation he/she has.
      */
     public Caretaker(String name, ArrayList specialisation) {
-        this.specialisation = specialisation; 
+        this.specialisation = specialisation;
         this.name = name;
     }
 
