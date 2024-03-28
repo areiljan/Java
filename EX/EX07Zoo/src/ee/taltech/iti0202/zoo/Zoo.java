@@ -8,6 +8,10 @@ import java.util.stream.Collectors;
 public class Zoo {
     private List<Caretaker> caretakerList;
     private List<Animal> animalList;
+
+    /**
+     * Zoo constructor.
+     */
     public Zoo() {
         this.caretakerList = new ArrayList<>();
         this.animalList = new ArrayList<>();

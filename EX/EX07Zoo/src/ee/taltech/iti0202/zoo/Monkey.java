@@ -4,8 +4,17 @@ import java.util.Optional;
 import java.util.Random;
 
 public class Monkey extends Animal {
+    /**
+     * Monkey constructor.
+     * @param name - the name of the monkey.
+     * @param animalType - the type of animal.
+     * @param sound - the sound he makes.
+     * @param endurance - how many days does he get hungrier.
+     */
     public Monkey(String name, AnimalTypes animalType, String sound, Integer endurance) {
-        super(name, animalType = AnimalTypes.MAMMAL, sound = "BANANA", endurance);
+        super(name, animalType, sound, endurance);
+        animalType = AnimalTypes.MAMMAL;
+        sound = "BANANA";
     }
 
     @Override

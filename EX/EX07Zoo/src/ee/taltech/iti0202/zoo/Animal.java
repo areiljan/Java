@@ -37,7 +37,14 @@ public class Animal {
         return name;
     }
 
-    public Animal(String name, AnimalTypes animalType , String sound, Integer endurance) {
+    /**
+     * Animal constructor.
+     * @param name - name of the animal.
+     * @param animalType - the type of the animal.
+     * @param sound - the sound the animal makes.
+     * @param endurance how many days does he get hungrier.
+     */
+    public Animal(String name, AnimalTypes animalType, String sound, Integer endurance) {
         this.name = name;
         this.sound = sound;
         this.endurance = endurance;
@@ -64,7 +71,7 @@ public class Animal {
      * Feed the animal.
      * The animals hunger level will be maxed.
      */
-    public void feedAnimal () {
+    public void feedAnimal() {
         this.hungerLevel = this.endurance;
     }
 
@@ -72,7 +79,7 @@ public class Animal {
      * A day passes.
      * The animal will get hungrier.
      */
-    public void getHungrier () {
+    public void getHungrier() {
         this.hungerLevel -= 1;
     }
 
