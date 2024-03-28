@@ -9,7 +9,7 @@ import java.util.Map;
 
 class ZooTest {
     @org.junit.jupiter.api.Test
-    void AnimalHasAName() {
+    void animalHasAName() {
         Zoo zoo = new Zoo();
         Animal crocodileGena = new Animal("Gena", Animal.AnimalTypes.REPTILE, "Bing Chi Ling", 2);
         zoo.addAnimal(crocodileGena);
@@ -110,7 +110,8 @@ class ZooTest {
         zoo.addAnimal(crocodileGena);
         
         Map<String, String> expectedSounds = new HashMap<>();
-        expectedSounds.put(String.format("%s: %s", crocodileGena.getAnimalType(), crocodileGena.getName()), "Bing Chi Ling");
+        expectedSounds.put(String.format("%s: %s", crocodileGena.getAnimalType(),
+                crocodileGena.getName()), "Bing Chi Ling");
         Assertions.assertEquals(expectedSounds, zoo.makeSound());
     }
 
