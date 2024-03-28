@@ -108,7 +108,7 @@ class ZooTest {
         Zoo zoo = new Zoo();
         Animal crocodileGena = new Animal("Gena", Animal.AnimalTypes.REPTILE, "Bing Chi Ling", 2);
         zoo.addAnimal(crocodileGena);
-        
+
         Map<String, String> expectedSounds = new HashMap<>();
         expectedSounds.put(String.format("%s: %s", crocodileGena.getAnimalType(),
                 crocodileGena.getName()), "Bing Chi Ling");
@@ -200,7 +200,7 @@ class ZooTest {
         ArrayList<Animal.AnimalTypes> caretaker1Specializations = new ArrayList<>();
         caretaker1Specializations.add(Animal.AnimalTypes.REPTILE);
         caretaker1Specializations.add(Animal.AnimalTypes.BIRD);
-        Caretaker caretaker1 = new Caretaker("Sveta", caretaker1Specializations);
+        Caretaker caretaker1 = new Caretaker("Svet", caretaker1Specializations);
 
         zoo.addCaretaker(caretaker1);
         zoo.addAnimal(orangutan);
