@@ -86,7 +86,7 @@ class ZooTest {
         Zoo zoo = new Zoo();
         Animal orangutan = new Monkey("Oogabooga", Animal.AnimalTypes.MAMMAL, "Ching", 2);
         zoo.addAnimal(orangutan);
-        
+
         Map<String, String> expectedSounds = new HashMap<>();
         expectedSounds.put(String.format("%s: %s", orangutan.getAnimalType(), orangutan.getName()), "BANANA");
         Assertions.assertEquals(expectedSounds, zoo.makeSound());
