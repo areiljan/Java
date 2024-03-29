@@ -14,10 +14,11 @@ public class Room {
 
     private Map<LocalDate, Client> bookings;
 
-    public Room(RoomType roomType) {
+    public Room(Hotel hotelTheRoomIsIn, RoomType roomType) {
         this.roomType = roomType;
         this.roomNumber += 1;
         this.bookings = new HashMap<>();
+        this.hotel = hotelTheRoomIsIn;
     }
 
     // The different rooms do not have different functionality, so I will use enum.
@@ -72,10 +73,6 @@ public class Room {
 
     public Hotel getHotel() {
         return hotel;
-    }
-
-    public void setHotel(Hotel hotelToAssign) {
-        hotel = hotelToAssign;
     }
 
     public RoomType getRoomType() {
