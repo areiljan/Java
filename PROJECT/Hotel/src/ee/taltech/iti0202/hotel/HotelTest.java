@@ -2,6 +2,7 @@ package ee.taltech.iti0202.hotel;
 
 import ee.taltech.iti0202.hotel.client.Client;
 import ee.taltech.iti0202.hotel.exceptions.CannotCancelBookingIfNotBooked;
+import ee.taltech.iti0202.hotel.exceptions.CannotWriteReviewIfNotBookedInHotelException;
 import ee.taltech.iti0202.hotel.exceptions.NotEnoughMoneyToBookException;
 import ee.taltech.iti0202.hotel.exceptions.OverlappingBookingException;
 import ee.taltech.iti0202.hotel.room.Room;
@@ -97,7 +98,7 @@ class HotelTest {
         client1.bookRoom(hotel, economyRoom, LocalDate.of(2024, 3, 28));
         client1.cancelBooking(hotel, economyRoom, LocalDate.of(2024, 3, 28));
 
-        Assertions.assertEquals(0, economyRoom.getBookings().size());
+        Assertions.assertEquals(0, hotel.getBookings().size());
     }
 
     @Test
@@ -121,6 +122,19 @@ class HotelTest {
         
         hotel.addClient(client1);
 
-        Assertions.assertThrows(CannotCancelBookingIfNotBooked.class, () -> client1.cancelBooking(hotel, economyRoom, LocalDate.of(2024, 3, 28)));
+        Assertions.assertThrows(CannotCancelBookingIfNotBooked.class,
+                () -> client1.cancelBooking(hotel, economyRoom, LocalDate.of(2024, 3, 28)));
+    }
+
+    @Test
+    void clientWritesReviewHasNoBooking() throws CannotWriteReviewIfNotBookedInHotelException {
+        Hotel hotel = new Hotel("Grand Budapest");
+        Room economyRoom = new Room(hotel, Room.RoomType.ECONOMYROOM);
+        Client client1 = new Client("Joonas", 2000);
+
+        hotel.addClient(client1);
+
+        Assertions.assertThrows(CannotWriteReviewIfNotBookedInHotelException.class,
+                () -> client1.writeReview(hotel, "Horrible place to stay at", 1));
     }
 }

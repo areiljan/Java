@@ -63,6 +63,7 @@ public class Client {
             Booking newBooking = new Booking(hotelToBook, roomToBook, this, dateToBook);
             clientBookings.add(newBooking);
             hotelToBook.addBooking(newBooking);
+            money -= roomToBook.getRoomType().getPrice();
         } else {
             throw new NotEnoughMoneyToBookException(money, roomToBook.getRoomType());
         }
@@ -78,6 +79,7 @@ public class Client {
             if (existingBooking.getRoom().equals(roomToBook) && existingBooking.getBookDate().equals(dateToBook)) {
                 clientBookings.remove(existingBooking);
                 hotelToBook.removeBooking(existingBooking);
+                money += roomToBook.getRoomType().getPrice();
                 return;
             }
         }
@@ -91,16 +93,17 @@ public class Client {
      * @param rating - 1-5 rating.
      */
     public void writeReview(Hotel hotelToReview, String reviewText, Integer rating) throws RatingOutOfBoundsException, CannotWriteReviewIfNotBookedInHotelException {
-        if (hotelToReview.getClients().contains(this)) {
-            if (rating >= 1 && rating <= 5) {
-                Review newReview = new Review(hotelToReview, reviewText, rating);
-                clientReviews.add(newReview);
-                hotelToReview.addReview(newReview);
-            } else {
-                throw new RatingOutOfBoundsException();
+        for (Booking existingBooking : hotelToReview.getBookings()) {
+            if (existingBooking.getClient().equals(this)) {
+                if (rating >= 1 && rating <= 5) {
+                    Review newReview = new Review(hotelToReview, reviewText, rating);
+                    clientReviews.add(newReview);
+                    hotelToReview.addReview(newReview);
+                } else {
+                    throw new RatingOutOfBoundsException();
+                }
             }
-        } else {
-            throw new CannotWriteReviewIfNotBookedInHotelException(this, hotelToReview);
         }
+        throw new CannotWriteReviewIfNotBookedInHotelException(this, hotelToReview);
     }
 }
