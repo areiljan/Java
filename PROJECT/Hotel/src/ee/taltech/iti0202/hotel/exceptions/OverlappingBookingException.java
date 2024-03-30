@@ -1,4 +1,4 @@
-package ee.taltech.iti0202.hotel.room;
+package ee.taltech.iti0202.hotel.exceptions;
 
 import java.time.LocalDate;
 
