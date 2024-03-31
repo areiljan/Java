@@ -1,7 +1,13 @@
 package ee.taltech.iti0202.hotel;
 
 import ee.taltech.iti0202.hotel.client.Client;
-import ee.taltech.iti0202.hotel.exceptions.*;
+import ee.taltech.iti0202.hotel.exceptions.CannotBookHotelIfNotClientException;
+import ee.taltech.iti0202.hotel.exceptions.CannotCancelBookingIfNotBooked;
+import ee.taltech.iti0202.hotel.exceptions.CannotWriteReviewIfNotBookedInHotelException;
+import ee.taltech.iti0202.hotel.exceptions.NotEnoughMoneyToBookException;
+import ee.taltech.iti0202.hotel.exceptions.OverlappingBookingException;
+import ee.taltech.iti0202.hotel.exceptions.RatingOutOfBoundsException;
+import ee.taltech.iti0202.hotel.exceptions.ReviewAlreadyWrittenException;
 import ee.taltech.iti0202.hotel.room.Room;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -155,10 +161,10 @@ class HotelTest {
 
         hotel.addClient(client1);
         client1.bookRoom(economyRoom, LocalDate.now());
-        client1.writeReview(hotel,"Good", 5);
+        client1.writeReview(hotel, "Good", 5);
 
         Assertions.assertThrows(ReviewAlreadyWrittenException.class,
-                () -> client1.writeReview(hotel,"Changed my mind", 1));
+                () -> client1.writeReview(hotel, "Changed my mind", 1));
     }
 
     @Test
@@ -172,7 +178,7 @@ class HotelTest {
         client1.bookRoom(economyRoom, LocalDate.of(2024, 3, 28));
 
         Assertions.assertThrows(RatingOutOfBoundsException.class,
-                () -> client1.writeReview(hotel,"Horrible place to stay at", 6));
+                () -> client1.writeReview(hotel, "Horrible place to stay at", 6));
     }
 
     @Test
@@ -186,7 +192,7 @@ class HotelTest {
         client1.bookRoom(economyRoom, LocalDate.of(2024, 3, 28));
 
         Assertions.assertThrows(RatingOutOfBoundsException.class,
-                () -> client1.writeReview(hotel,"Horrible place to stay at", -1));
+                () -> client1.writeReview(hotel, "Horrible place to stay at", -1));
     }
 
     @Test

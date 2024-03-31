@@ -99,13 +99,15 @@ public class Hotel {
      */
     public void addClient(Client clientToAdd) {
         clients.add(clientToAdd);
-        clientToAdd.SetHotel(this);
+        clientToAdd.setHotel(this);
     }
 
     /**
      * Method to remove a client from the Hotel.
      */
-    public void removeClient(Client clientToRemove) {clients.remove(clientToRemove);}
+    public void removeClient(Client clientToRemove) {
+        clients.remove(clientToRemove);
+    }
 
     /**
      * Add a booking to the hotel.
@@ -191,7 +193,7 @@ public class Hotel {
             boolean isVacant = true;
             for (Booking existingBooking : bookings) {
                 if (existingBooking.getBookDate().equals(dateToFind)
-                        && existingBooking.getRoom().equals(room)){
+                        && existingBooking.getRoom().equals(room)) {
                     isVacant = false;
                     break;
                 }

@@ -42,5 +42,7 @@ public class Review {
     /**
      * Client getter.
      */
-    public Client getClient() { return client; }
+    public Client getClient() {
+        return client;
+    }
 }

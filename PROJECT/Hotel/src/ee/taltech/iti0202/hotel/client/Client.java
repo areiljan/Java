@@ -39,8 +39,7 @@ public class Client {
     /**
      * Set current hotel.
      */
-
-    public void SetHotel(Hotel hotel) {
+    public void setHotel(Hotel hotel) {
         currentHotel = hotel;
     }
 
@@ -115,7 +114,8 @@ public class Client {
         if (money < roomToBook.getRoomType().getPrice()) {
             throw new NotEnoughMoneyToBookException(money, roomToBook.getRoomType());
         } else if (currentHotel == null) {
-            // The requirement for the booker to be a client is not specified in the assignment, but I assumed it to be logical.
+            // The requirement for the booker to be a client is not specified in the assignment,
+            // but I assumed it to be logical.
             throw new CannotBookHotelIfNotClientException(this);
         } else {
             for (Booking existingBooking : currentHotel.getBookings()) {
