@@ -53,7 +53,8 @@ class HotelTest {
     }
 
     @Test
-    void clientBooksFreeRoomHasMoneyWhichGoesAway() throws OverlappingBookingException, NotEnoughMoneyToBookException, CannotBookHotelIfNotClientException {
+    void clientBooksFreeRoomHasMoneyWhichGoesAway() throws OverlappingBookingException,
+            NotEnoughMoneyToBookException, CannotBookHotelIfNotClientException {
         Hotel hotel = new Hotel("Grand Budapest");
         Room suiteRoom = new Room(hotel, Room.RoomType.SUITE);
         Client client1 = new Client("Joonas", 5000);
@@ -72,11 +73,13 @@ class HotelTest {
 
         hotel.addClient(client1);
 
-        Assertions.assertThrows(NotEnoughMoneyToBookException.class, () -> client1.bookRoom(economyRoom, LocalDate.of(2024, 3, 28)));
+        Assertions.assertThrows(NotEnoughMoneyToBookException.class,
+                () -> client1.bookRoom(economyRoom, LocalDate.of(2024, 3, 28)));
     }
 
     @Test
-    void clientBooksBookedRoomThrowsOverLappingBookingException() throws OverlappingBookingException, NotEnoughMoneyToBookException, CannotBookHotelIfNotClientException {
+    void clientBooksBookedRoomThrowsOverLappingBookingException() throws OverlappingBookingException,
+            NotEnoughMoneyToBookException, CannotBookHotelIfNotClientException {
         Hotel hotel = new Hotel("Grand Budapest");
         Room economyRoom = new Room(hotel, Room.RoomType.ECONOMYROOM);
         Client client1 = new Client("Joonas", 2000);
@@ -86,11 +89,13 @@ class HotelTest {
         hotel.addClient(client2);
         client1.bookRoom(economyRoom, LocalDate.of(2024, 3, 28));
 
-        Assertions.assertThrows(OverlappingBookingException.class, () -> client2.bookRoom(economyRoom, LocalDate.of(2024, 3, 28)));
+        Assertions.assertThrows(OverlappingBookingException.class,
+                () -> client2.bookRoom(economyRoom, LocalDate.of(2024, 3, 28)));
     }
 
     @Test
-    void clientCancelsBookingBookingDisappears() throws OverlappingBookingException, NotEnoughMoneyToBookException, CannotCancelBookingIfNotBooked, CannotBookHotelIfNotClientException {
+    void clientCancelsBookingBookingDisappears() throws OverlappingBookingException,
+            NotEnoughMoneyToBookException, CannotCancelBookingIfNotBooked, CannotBookHotelIfNotClientException {
         Hotel hotel = new Hotel("Grand Budapest");
         Room economyRoom = new Room(hotel, Room.RoomType.ECONOMYROOM);
         Client client1 = new Client("Joonas", 2000);
@@ -103,7 +108,8 @@ class HotelTest {
     }
 
     @Test
-    void clientCancelsBookingGetsRefunded() throws OverlappingBookingException, NotEnoughMoneyToBookException, CannotCancelBookingIfNotBooked, CannotBookHotelIfNotClientException {
+    void clientCancelsBookingGetsRefunded() throws OverlappingBookingException,
+            NotEnoughMoneyToBookException, CannotCancelBookingIfNotBooked, CannotBookHotelIfNotClientException {
         Hotel hotel = new Hotel("Grand Budapest");
         Room economyRoom = new Room(hotel, Room.RoomType.ECONOMYROOM);
         Client client1 = new Client("Joonas", 2000);
@@ -116,7 +122,7 @@ class HotelTest {
     }
 
     @Test
-    void clientCancelsBookingHasNoBooking() {
+    void clientCancelsBookingHasNoBookingThrowsException() {
         Hotel hotel = new Hotel("Grand Budapest");
         Room economyRoom = new Room(hotel, Room.RoomType.ECONOMYROOM);
         Client client1 = new Client("Joonas", 2000);
@@ -140,7 +146,9 @@ class HotelTest {
     }
 
     @Test
-    void clientWritesReviewHasAlreadyWrittenAReviewAboutHotelThrowsException() throws RatingOutOfBoundsException, ReviewAlreadyWrittenException, CannotWriteReviewIfNotBookedInHotelException, CannotBookHotelIfNotClientException, NotEnoughMoneyToBookException, OverlappingBookingException {
+    void clientWritesReviewHasAlreadyWrittenAReviewAboutHotelThrowsException() throws RatingOutOfBoundsException,
+            ReviewAlreadyWrittenException, CannotWriteReviewIfNotBookedInHotelException,
+            CannotBookHotelIfNotClientException, NotEnoughMoneyToBookException, OverlappingBookingException {
         Hotel hotel = new Hotel("Grand Budapest");
         Room economyRoom = new Room(hotel, Room.RoomType.ECONOMYROOM);
         Client client1 = new Client("Joonas", 2000);
@@ -154,7 +162,8 @@ class HotelTest {
     }
 
     @Test
-    void clientWritesReviewRatingTooBigThrowsException() throws NotEnoughMoneyToBookException, OverlappingBookingException, CannotBookHotelIfNotClientException {
+    void clientWritesReviewRatingTooBigThrowsException() throws NotEnoughMoneyToBookException,
+            OverlappingBookingException, CannotBookHotelIfNotClientException {
         Hotel hotel = new Hotel("Grand Budapest");
         Room economyRoom = new Room(hotel, Room.RoomType.ECONOMYROOM);
         Client client1 = new Client("Joonas", 2000);
@@ -167,7 +176,8 @@ class HotelTest {
     }
 
     @Test
-    void clientWritesReviewNegativeRatingThrowsException() throws NotEnoughMoneyToBookException, OverlappingBookingException, CannotBookHotelIfNotClientException {
+    void clientWritesReviewNegativeRatingThrowsException() throws NotEnoughMoneyToBookException,
+            OverlappingBookingException, CannotBookHotelIfNotClientException {
         Hotel hotel = new Hotel("Grand Budapest");
         Room economyRoom = new Room(hotel, Room.RoomType.ECONOMYROOM);
         Client client1 = new Client("Joonas", 2000);
@@ -180,7 +190,8 @@ class HotelTest {
     }
 
     @Test
-    void hotelOrdersClientsByAmountOfRoomsBooked() throws NotEnoughMoneyToBookException, OverlappingBookingException, RatingOutOfBoundsException, CannotWriteReviewIfNotBookedInHotelException, ReviewAlreadyWrittenException, CannotBookHotelIfNotClientException {
+    void hotelOrdersClientsByAmountOfRoomsBooked() throws NotEnoughMoneyToBookException,
+            OverlappingBookingException, CannotBookHotelIfNotClientException {
         Hotel hotel = new Hotel("Grand Budapest");
         Room economyRoom1 = new Room(hotel, Room.RoomType.ECONOMYROOM);
         Room economyRoom2 = new Room(hotel, Room.RoomType.ECONOMYROOM);
@@ -211,7 +222,9 @@ class HotelTest {
     }
 
     @Test
-    void hotelOrdersClientsByRatingGivenByClient() throws NotEnoughMoneyToBookException, OverlappingBookingException, CannotBookHotelIfNotClientException, RatingOutOfBoundsException, ReviewAlreadyWrittenException, CannotWriteReviewIfNotBookedInHotelException {
+    void hotelOrdersClientsByRatingGivenByClient() throws NotEnoughMoneyToBookException,
+            OverlappingBookingException, CannotBookHotelIfNotClientException,
+            RatingOutOfBoundsException, ReviewAlreadyWrittenException, CannotWriteReviewIfNotBookedInHotelException {
         Hotel hotel = new Hotel("Grand Budapest");
         Room economyRoom1 = new Room(hotel, Room.RoomType.ECONOMYROOM);
         Client client1 = new Client("Joonas", 2000);
@@ -236,7 +249,8 @@ class HotelTest {
     }
 
     @Test
-    void searchForFreeRoomsRightOnesAvailableByDateOnly() throws NotEnoughMoneyToBookException, OverlappingBookingException, CannotBookHotelIfNotClientException, RatingOutOfBoundsException, ReviewAlreadyWrittenException, CannotWriteReviewIfNotBookedInHotelException {
+    void searchForFreeRoomsRightOnesAvailableByDateOnly() throws NotEnoughMoneyToBookException,
+            OverlappingBookingException, CannotBookHotelIfNotClientException {
         Hotel hotel = new Hotel("Grand Budapest");
         Room economyRoom1 = new Room(hotel, Room.RoomType.ECONOMYROOM);
         Room economyRoom2 = new Room(hotel, Room.RoomType.ECONOMYROOM);
@@ -253,11 +267,13 @@ class HotelTest {
         ArrayList<Room> expectedFreeRooms = new ArrayList<>();
         expectedFreeRooms.add(economyRoom1);
         expectedFreeRooms.add(economyRoom3);
-        Assertions.assertEquals(expectedFreeRooms, hotel.searchForFreeRooms(LocalDate.of(2024, 3, 27)));
+        Assertions.assertEquals(expectedFreeRooms,
+                hotel.searchForFreeRooms(LocalDate.of(2024, 3, 27)));
     }
 
     @Test
-    void searchForFreeRoomsNoneAvailableByDateOnly() throws NotEnoughMoneyToBookException, OverlappingBookingException, CannotBookHotelIfNotClientException, RatingOutOfBoundsException, ReviewAlreadyWrittenException, CannotWriteReviewIfNotBookedInHotelException {
+    void searchForFreeRoomsNoneAvailableByDateOnly() throws NotEnoughMoneyToBookException,
+            OverlappingBookingException, CannotBookHotelIfNotClientException {
         Hotel hotel = new Hotel("Grand Budapest");
         Room economyRoom1 = new Room(hotel, Room.RoomType.ECONOMYROOM);
         Client client1 = new Client("Joonas", 2000);
@@ -270,7 +286,8 @@ class HotelTest {
     }
 
     @Test
-    void searchForFreeRoomsRightOnesAvailableByTypeOnly() throws NotEnoughMoneyToBookException, OverlappingBookingException, CannotBookHotelIfNotClientException, RatingOutOfBoundsException, ReviewAlreadyWrittenException, CannotWriteReviewIfNotBookedInHotelException {
+    void searchForFreeRoomsRightOnesAvailableByTypeOnly() throws NotEnoughMoneyToBookException,
+            OverlappingBookingException, CannotBookHotelIfNotClientException {
         Hotel hotel = new Hotel("Grand Budapest");
         Room economyRoom1 = new Room(hotel, Room.RoomType.ECONOMYROOM);
         Room economyRoom2 = new Room(hotel, Room.RoomType.ECONOMYROOM);
@@ -290,7 +307,8 @@ class HotelTest {
     }
 
     @Test
-    void searchForFreeRoomsNoneAvailableByTypeOnly() throws NotEnoughMoneyToBookException, OverlappingBookingException, CannotBookHotelIfNotClientException, RatingOutOfBoundsException, ReviewAlreadyWrittenException, CannotWriteReviewIfNotBookedInHotelException {
+    void searchForFreeRoomsNoneAvailableByTypeOnly() throws NotEnoughMoneyToBookException, OverlappingBookingException,
+            CannotBookHotelIfNotClientException {
         Hotel hotel = new Hotel("Grand Budapest");
         Room economyRoom1 = new Room(hotel, Room.RoomType.ECONOMYROOM);
         Client client1 = new Client("Joonas", 2000);
@@ -303,7 +321,8 @@ class HotelTest {
     }
 
     @Test
-    void searchForFreeRoomsRightOnesAvailableDateAndType() throws NotEnoughMoneyToBookException, OverlappingBookingException, CannotBookHotelIfNotClientException, RatingOutOfBoundsException, ReviewAlreadyWrittenException, CannotWriteReviewIfNotBookedInHotelException {
+    void searchForFreeRoomsRightOnesAvailableDateAndType() throws NotEnoughMoneyToBookException,
+            OverlappingBookingException, CannotBookHotelIfNotClientException {
         Hotel hotel = new Hotel("Grand Budapest");
         Room economyRoom1 = new Room(hotel, Room.RoomType.ECONOMYROOM);
         Room economyRoom2 = new Room(hotel, Room.RoomType.ECONOMYROOM);
@@ -319,11 +338,13 @@ class HotelTest {
 
         ArrayList<Room> expectedFreeRooms = new ArrayList<>();
         expectedFreeRooms.add(economyRoom1);
-        Assertions.assertEquals(expectedFreeRooms, hotel.searchForFreeRooms(LocalDate.of(2024, 3, 27), Room.RoomType.ECONOMYROOM));
+        Assertions.assertEquals(expectedFreeRooms,
+                hotel.searchForFreeRooms(LocalDate.of(2024, 3, 27), Room.RoomType.ECONOMYROOM));
     }
 
     @Test
-    void searchForFreeRoomsNoneAvailableDateAndType() throws NotEnoughMoneyToBookException, OverlappingBookingException, CannotBookHotelIfNotClientException, RatingOutOfBoundsException, ReviewAlreadyWrittenException, CannotWriteReviewIfNotBookedInHotelException {
+    void searchForFreeRoomsNoneAvailableDateAndType() throws NotEnoughMoneyToBookException,
+            OverlappingBookingException, CannotBookHotelIfNotClientException {
         Hotel hotel = new Hotel("Grand Budapest");
         Room economyRoom1 = new Room(hotel, Room.RoomType.ECONOMYROOM);
         Client client1 = new Client("Joonas", 2000);
@@ -332,11 +353,14 @@ class HotelTest {
         client1.bookRoom(economyRoom1, LocalDate.of(2024, 3, 28));
 
         ArrayList<Room> expectedFreeRooms = new ArrayList<>();
-        Assertions.assertEquals(expectedFreeRooms, hotel.searchForFreeRooms(LocalDate.of(2024, 3, 28), Room.RoomType.ECONOMYROOM));
+        Assertions.assertEquals(expectedFreeRooms,
+                hotel.searchForFreeRooms(LocalDate.of(2024, 3, 28), Room.RoomType.ECONOMYROOM));
     }
 
     @Test
-    void clientHasOverviewOfReviews() throws RatingOutOfBoundsException, NotEnoughMoneyToBookException, OverlappingBookingException, CannotWriteReviewIfNotBookedInHotelException, ReviewAlreadyWrittenException, CannotBookHotelIfNotClientException {
+    void clientHasOverviewOfReviews() throws RatingOutOfBoundsException, NotEnoughMoneyToBookException,
+            OverlappingBookingException, CannotWriteReviewIfNotBookedInHotelException,
+            ReviewAlreadyWrittenException, CannotBookHotelIfNotClientException {
         Hotel hotel1 = new Hotel("Grand Budapest");
         Hotel hotel2 = new Hotel("Grand Delphi");
         Room economyRoom = new Room(hotel1, Room.RoomType.ECONOMYROOM);
@@ -353,7 +377,8 @@ class HotelTest {
     }
 
     @Test
-    void clientHasOverviewOfBookings() throws NotEnoughMoneyToBookException, OverlappingBookingException, CannotBookHotelIfNotClientException {
+    void clientHasOverviewOfBookings() throws NotEnoughMoneyToBookException,
+            OverlappingBookingException, CannotBookHotelIfNotClientException {
         Hotel hotel = new Hotel("Grand Budapest");
         Room economyRoom = new Room(hotel, Room.RoomType.ECONOMYROOM);
         Room suiteRoom = new Room(hotel, Room.RoomType.SUITE);
@@ -367,7 +392,7 @@ class HotelTest {
     }
 
     @Test
-    void hotelHasOverviewOfRooms() throws RatingOutOfBoundsException, NotEnoughMoneyToBookException, OverlappingBookingException {
+    void hotelHasOverviewOfRooms() {
         Hotel hotel = new Hotel("Grand Budapest");
         Room economyRoom = new Room(hotel, Room.RoomType.ECONOMYROOM);
         Room suiteRoom = new Room(hotel, Room.RoomType.SUITE);
@@ -376,7 +401,7 @@ class HotelTest {
     }
 
     @Test
-    void hotelHasOverviewOfClients() throws RatingOutOfBoundsException, NotEnoughMoneyToBookException, OverlappingBookingException {
+    void hotelHasOverviewOfClients() {
         Hotel hotel = new Hotel("Grand Budapest");
         Client client1 = new Client("Joonas", 2000);
         Client client2 = new Client("Heinrich", 5000);
@@ -388,7 +413,8 @@ class HotelTest {
     }
 
     @Test
-    void hotelHasOverviewOfBookings() throws RatingOutOfBoundsException, NotEnoughMoneyToBookException, OverlappingBookingException, CannotBookHotelIfNotClientException {
+    void hotelHasOverviewOfBookings() throws NotEnoughMoneyToBookException,
+            OverlappingBookingException, CannotBookHotelIfNotClientException {
         Hotel hotel = new Hotel("Grand Budapest");
         Room economyRoom = new Room(hotel, Room.RoomType.ECONOMYROOM);
         Room suiteRoom = new Room(hotel, Room.RoomType.SUITE);
@@ -402,7 +428,9 @@ class HotelTest {
     }
 
     @Test
-    void hotelHasOverviewOfReviews() throws RatingOutOfBoundsException, NotEnoughMoneyToBookException, OverlappingBookingException, CannotWriteReviewIfNotBookedInHotelException, ReviewAlreadyWrittenException, CannotBookHotelIfNotClientException {
+    void hotelHasOverviewOfReviews() throws RatingOutOfBoundsException, NotEnoughMoneyToBookException,
+            OverlappingBookingException, CannotWriteReviewIfNotBookedInHotelException,
+            ReviewAlreadyWrittenException, CannotBookHotelIfNotClientException {
         Hotel hotel = new Hotel("Grand Mumbai");
         Room economyRoom = new Room(hotel, Room.RoomType.ECONOMYROOM);
         Client client1 = new Client("Sanjay", 2000);
@@ -420,7 +448,9 @@ class HotelTest {
     }
 
     @Test
-    void hotelHasOverviewOfAverageReviewScore() throws NotEnoughMoneyToBookException, OverlappingBookingException, RatingOutOfBoundsException, CannotWriteReviewIfNotBookedInHotelException, ReviewAlreadyWrittenException, CannotBookHotelIfNotClientException {
+    void hotelHasOverviewOfAverageReviewScore() throws NotEnoughMoneyToBookException, OverlappingBookingException,
+            RatingOutOfBoundsException, CannotWriteReviewIfNotBookedInHotelException,
+            ReviewAlreadyWrittenException, CannotBookHotelIfNotClientException {
         Hotel hotel = new Hotel("Grand Budapest");
         Room economyRoom = new Room(hotel, Room.RoomType.ECONOMYROOM);
         Client client1 = new Client("Joonas", 2000);

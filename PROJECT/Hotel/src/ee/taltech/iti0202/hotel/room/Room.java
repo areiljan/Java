@@ -7,6 +7,11 @@ public class Room {
     private Integer roomNumber = 0;
     private Hotel hotel;
 
+    /**
+     * Room Initializer.
+     * @param hotelTheRoomIsIn - the hotel.
+     * @param roomType - the type of room.
+     */
     public Room(Hotel hotelTheRoomIsIn, RoomType roomType) {
         this.roomType = roomType;
         this.roomNumber += 1;

@@ -2,7 +2,13 @@ package ee.taltech.iti0202.hotel.client;
 
 import ee.taltech.iti0202.hotel.Hotel;
 import ee.taltech.iti0202.hotel.booking.Booking;
-import ee.taltech.iti0202.hotel.exceptions.*;
+import ee.taltech.iti0202.hotel.exceptions.CannotBookHotelIfNotClientException;
+import ee.taltech.iti0202.hotel.exceptions.CannotCancelBookingIfNotBooked;
+import ee.taltech.iti0202.hotel.exceptions.CannotWriteReviewIfNotBookedInHotelException;
+import ee.taltech.iti0202.hotel.exceptions.NotEnoughMoneyToBookException;
+import ee.taltech.iti0202.hotel.exceptions.OverlappingBookingException;
+import ee.taltech.iti0202.hotel.exceptions.RatingOutOfBoundsException;
+import ee.taltech.iti0202.hotel.exceptions.ReviewAlreadyWrittenException;
 import ee.taltech.iti0202.hotel.review.Review;
 import ee.taltech.iti0202.hotel.room.Room;
 
@@ -65,7 +71,8 @@ public class Client {
                 return review.getRating();
             }
         }
-        return 0; // returns 0, so the clients who have not written a review will be ranked lowest.
+        return 0;
+        // returns 0, so the clients who have not written a review will be ranked lowest.
     }
 
     /**
@@ -102,7 +109,9 @@ public class Client {
      * @throws OverlappingBookingException - thrown if the date is taken.
      * @throws NotEnoughMoneyToBookException - thrown if the client does not have enough money.
      */
-    public void bookRoom(Room roomToBook, LocalDate dateToBook) throws OverlappingBookingException, NotEnoughMoneyToBookException, CannotBookHotelIfNotClientException {
+    public void bookRoom(Room roomToBook, LocalDate dateToBook)
+            throws OverlappingBookingException, NotEnoughMoneyToBookException,
+            CannotBookHotelIfNotClientException {
         if (money < roomToBook.getRoomType().getPrice()) {
             throw new NotEnoughMoneyToBookException(money, roomToBook.getRoomType());
         } else if (currentHotel == null) {
@@ -131,7 +140,8 @@ public class Client {
      * @param dateToCancel - which date.
      * @throws CannotCancelBookingIfNotBooked - thrown if the client has not booked this.
      */
-    public void cancelBooking(Hotel hotelToCancel, Room roomToBook, LocalDate dateToCancel) throws CannotCancelBookingIfNotBooked {
+    public void cancelBooking(Hotel hotelToCancel, Room roomToBook, LocalDate dateToCancel)
+            throws CannotCancelBookingIfNotBooked {
         for (Booking existingBooking : clientBookings) {
             if (existingBooking.getRoom().equals(roomToBook) && existingBooking.getBookDate().equals(dateToCancel)) {
                 clientBookings.remove(existingBooking);
@@ -150,7 +160,9 @@ public class Client {
      * @param reviewText - the content of the review in text.
      * @param rating - 1-5 rating.
      */
-    public void writeReview(Hotel hotelToReview, String reviewText, Integer rating) throws RatingOutOfBoundsException, CannotWriteReviewIfNotBookedInHotelException, ReviewAlreadyWrittenException {
+    public void writeReview(Hotel hotelToReview, String reviewText, Integer rating)
+            throws RatingOutOfBoundsException, CannotWriteReviewIfNotBookedInHotelException,
+            ReviewAlreadyWrittenException {
         for (Review existingReview : hotelToReview.getReviews()) {
             if (this.equals(existingReview.getClient())) {
                 throw new ReviewAlreadyWrittenException(this);

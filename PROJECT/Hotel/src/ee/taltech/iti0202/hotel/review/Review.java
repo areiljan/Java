@@ -9,6 +9,13 @@ public class Review {
     private final Hotel hotel;
     private final Client client;
 
+    /**
+     * Review initializer.
+     * @param hotel - which hotel.
+     * @param client - which client.
+     * @param reviewText - the content.
+     * @param rating - the rating.
+     */
     public Review(Hotel hotel, Client client, String reviewText, Integer rating) {
         this.reviewText = reviewText;
         this.rating = rating;

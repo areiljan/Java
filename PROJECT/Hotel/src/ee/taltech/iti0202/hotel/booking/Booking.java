@@ -12,6 +12,13 @@ public class Booking {
     private final Client clientWhoBooked;
     private final Hotel hotelToBook;
 
+    /**
+     * Booking initializer.
+     * @param hotelToBook - which hotel to make a booking in.
+     * @param roomToBook - which room.
+     * @param clientWhoBooked - the client who booked the room.
+     * @param bookDate - the date of booking.
+     */
     public Booking(Hotel hotelToBook, Room roomToBook, Client clientWhoBooked, LocalDate bookDate) {
         this.hotelToBook = hotelToBook;
         this.roomToBook = roomToBook;
