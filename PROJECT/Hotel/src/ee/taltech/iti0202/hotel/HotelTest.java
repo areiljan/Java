@@ -132,7 +132,7 @@ class HotelTest {
         Hotel hotel = new Hotel("Grand Budapest");
         Room economyRoom = new Room(hotel, Room.RoomType.ECONOMYROOM);
         Client client1 = new Client("Joonas", 2000);
-        
+
         hotel.addClient(client1);
 
         Assertions.assertThrows(CannotCancelBookingIfNotBooked.class,
@@ -245,8 +245,8 @@ class HotelTest {
         client2.bookRoom(economyRoom1, LocalDate.of(2024, 3, 30));
         client3.bookRoom(economyRoom1, LocalDate.of(2024, 4, 2));
         client3.writeReview(hotel, "Wonderful place to stay at.", 5);
-        client2.writeReview(hotel,"Very average", 3);
-        client1.writeReview(hotel,"Horrible, I am disgusted", 1);
+        client2.writeReview(hotel, "Very average", 3);
+        client1.writeReview(hotel, "Horrible, I am disgusted", 1);
         ArrayList<Client> expectedOrderedClientList = new ArrayList<>();
         expectedOrderedClientList.add(client3);
         expectedOrderedClientList.add(client2);
@@ -378,7 +378,7 @@ class HotelTest {
         hotel2.addClient(client1);
         client1.bookRoom(economyRoom, LocalDate.of(2024, 3, 28));
         client1.writeReview(hotel2, "Wonderful place to stay at.", 5);
-        
+
         Assertions.assertEquals(2, client1.getReviews().size());
     }
 
