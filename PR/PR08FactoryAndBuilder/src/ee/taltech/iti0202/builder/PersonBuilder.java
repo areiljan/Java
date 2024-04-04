@@ -18,14 +18,22 @@ import ee.taltech.iti0202.person.Person;
             this.idCode = idCode;
         }
 
-        // Method to set name
-        public PersonBuilder withName(String name) {
+    /**
+     * PersonBuilder name setter.
+     * @param name - Persons name.
+     * @return - name.
+     */
+    public PersonBuilder withName(String name) {
             this.name = name;
             return this;
         }
 
-        // Method to set age
-        public PersonBuilder withAge(Integer age) {
+    /**
+     * Age setter.
+     * @param age - Persons age.
+     * @return - person.
+     */
+    public PersonBuilder withAge(Integer age) throws IllegalArgumentException {
             if (age > 0) {
                 this.age = age;
             } else {
@@ -34,14 +42,22 @@ import ee.taltech.iti0202.person.Person;
             return this;
         }
 
-        // Method to set gender
-        public PersonBuilder isMale(boolean isMale) {
+    /**
+     * Male setter.
+     * @param isMale - male boolean.
+     * @return - person.
+     */
+    public PersonBuilder isMale(boolean isMale) {
             this.isMale = isMale;
             return this;
         }
 
-        // Method to build Person object
-        public Person build() {
+
+    /**
+     * Person builder.
+     * @return - new person same old mistakes.
+     */
+    public Person build() {
             return new Person(idCode, name, age, isMale);
         }
     }

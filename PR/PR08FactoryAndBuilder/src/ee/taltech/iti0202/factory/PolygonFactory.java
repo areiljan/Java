@@ -1,9 +1,14 @@
 package ee.taltech.iti0202.factory;
 
-import ee.taltech.iti0202.polygon.*;
-import ee.taltech.iti0202.polygon.IllegalArgumentException;
+import ee.taltech.iti0202.polygon.Hexagon;
+import ee.taltech.iti0202.polygon.Pentagon;
+import ee.taltech.iti0202.polygon.Polygon;
+import ee.taltech.iti0202.polygon.Square;
+import ee.taltech.iti0202.polygon.Triangle;
 
 public class PolygonFactory {
+
+    public static final int INT = 6;
 
     /**
      * Factory makes a new Polygon with given amount of sides.
@@ -18,7 +23,7 @@ public class PolygonFactory {
                 return new Square();
             case 5:
                 return new Pentagon();
-            case 6:
+            case INT:
                 return new Hexagon();
             default:
                 throw new IllegalArgumentException();
