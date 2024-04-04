@@ -7,7 +7,7 @@ import ee.taltech.iti0202.person.Person;
         private String idCode;
         private String name;
         private Integer age;
-        private boolean isMale;
+        private Boolean isMale;
 
     /**
      * PersonBuilder constructor.
