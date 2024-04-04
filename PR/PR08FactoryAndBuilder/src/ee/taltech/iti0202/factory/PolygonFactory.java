@@ -1,4 +1,7 @@
-package ee.taltech.iti0202.polygon;
+package ee.taltech.iti0202.factory;
+
+import ee.taltech.iti0202.polygon.*;
+import ee.taltech.iti0202.polygon.IllegalArgumentException;
 
 public class PolygonFactory {
 
