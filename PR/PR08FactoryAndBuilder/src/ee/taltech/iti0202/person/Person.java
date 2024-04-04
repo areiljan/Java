@@ -2,7 +2,7 @@ package ee.taltech.iti0202.person;
 
 public class Person {
 
-    private final Boolean isMale;
+    private final boolean isMale;
     private final String idCode;
     private final String name;
     private final Integer age;
