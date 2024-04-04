@@ -14,6 +14,7 @@ import ee.taltech.iti0202.person.Person;
      * @param idCode - id code as string.
      */
     public PersonBuilder(String idCode) {
+        // mandatory parameter.
             this.idCode = idCode;
         }
 
@@ -25,7 +26,7 @@ import ee.taltech.iti0202.person.Person;
 
         // Method to set age
         public PersonBuilder withAge(Integer age) {
-            if (age >= 0) {
+            if (age > 0) {
                 this.age = age;
             } else {
                 throw new IllegalArgumentException("Age must be a positive number");
