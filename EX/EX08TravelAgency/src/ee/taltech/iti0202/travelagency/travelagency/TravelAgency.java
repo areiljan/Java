@@ -3,17 +3,17 @@ package ee.taltech.iti0202.travelagency.travelagency;
 import ee.taltech.iti0202.travelagency.client.Client;
 import ee.taltech.iti0202.travelagency.travelpackage.TravelPackage;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class TravelAgency {
     private HashMap<Client, Integer> clients;
     private HashMap<TravelPackage, Integer> travelPackages;
     private static final Logger LOGGER = Logger.getLogger("TravelAgency Logger");
-
-
     /**
      * TravelAgency constructor.
      */
@@ -77,8 +77,8 @@ public class TravelAgency {
      */
     public List<Map.Entry<Client, Integer>> topClients() {
         return clients.entrySet().stream()
-                .sorted(Map.Entry.comparingByValue())
-                .toList();
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .collect(Collectors.toList());
     }
 
     /**
@@ -87,7 +87,7 @@ public class TravelAgency {
      */
     public List<Map.Entry<TravelPackage, Integer>> mostPopularPackages() {
         return travelPackages.entrySet().stream()
-                .sorted(Map.Entry.comparingByValue())
-                .toList();
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .collect(Collectors.toList());
     }
 }

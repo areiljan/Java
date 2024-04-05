@@ -63,6 +63,6 @@ public class TravelPackage {
     }
 
     public enum TravelType {
-        BEACH, CULTURE, HIKING
+        BEACH, CULTURE, HIKING, PARTY
     }
 }

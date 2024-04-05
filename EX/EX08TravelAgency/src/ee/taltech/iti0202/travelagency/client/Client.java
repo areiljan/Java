@@ -10,8 +10,6 @@ public class Client {
     private final Integer age;
     private final String email;
     private final String idCode;
-
-
     private final String name;
     private Integer budget;
     private clientType type;
@@ -39,6 +37,22 @@ public class Client {
         this.type = clientType.BASIC;
         this.phoneNumber = phoneNumber;
         this.city = city;
+    }
+
+    /**
+     * Budget getter.
+     * @return - budget.
+     */
+    public Integer getBudget() {
+        return budget;
+    }
+
+    /**
+     * ClientType getter.
+     * @return - the current type of the client.
+     */
+    public clientType getType() {
+        return type;
     }
 
     /**
@@ -77,7 +91,7 @@ public class Client {
      * @param travelAgency - where to buy the package from.
      * @param travelPackageToBuy - which package.
      */
-    public void buyTravelPackage(TravelAgency travelAgency, TravelPackage travelPackageToBuy) {
+    public void buyTravelPackage(TravelAgency travelAgency, TravelPackage travelPackageToBuy) throws InsufficientFundsException {
         float priceMultiplier = 1.0F;
         // if the length of the trip is longer than five days and you are a silver client, get 10 percent off.
         if (type == clientType.SILVER
@@ -94,14 +108,16 @@ public class Client {
         }
 
         if ((budget == null) || (budget > travelPackageToBuy.getPrice() * priceMultiplier)) {
-            if (travelAgency.getTravelPackages().containsKey(travelPackageToBuy)) {
-                purchasedPackages.add(travelPackageToBuy);
-                travelAgency.packageBought(this, travelPackageToBuy);
-                updateType();
-                System.out.println("Package purchased successfully!");
-            } else {
-                System.out.println("Unable to make this purchase.");
+            if (!travelAgency.getTravelPackages().containsKey(travelPackageToBuy)) {
+                // register the buyer as client when he is not upon buying.
+                travelAgency.addClient(this);
             }
+            purchasedPackages.add(travelPackageToBuy);
+            travelAgency.packageBought(this, travelPackageToBuy);
+            updateType();
+            budget -= travelPackageToBuy.getPrice();
+        } else {
+            throw new InsufficientFundsException("Not enough money.");
         }
     }
 }
