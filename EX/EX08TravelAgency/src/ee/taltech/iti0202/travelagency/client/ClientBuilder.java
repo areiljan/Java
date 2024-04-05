@@ -7,49 +7,62 @@ public class ClientBuilder {
     private Integer age;
     private String email;
     private int budget;
+    private String phoneNumber;
+    private String city;
 
     /**
      * ClientBuilder constructor.
      * @param idCode - Persons idCode.
      * @param name - Persons name.
-     * @param budget - Persons budget.
+     * @param age - Persons budget.
      * @return - Client.
      */
-    public ClientBuilder(String idCode, String name, int budget) {
-            this.idCode = idCode;
-            this.name = name;
-            this.budget = budget;
+    public ClientBuilder(String idCode, String name, String email, int age) {
+        if (age < 0) {
+            throw new IllegalArgumentException("Age cannot be negative.");
+        }
+        this.idCode = idCode;
+        this.name = name;
+        this.age = age;
+        this.email = email;
     }
 
     /**
-     * ClientBuilder email setter.
-     * @param email - Persons email.
-     * @return - person.
+     * ClientBuilder phoneNumber setter.
+     * @param phoneNumber - Persons phoneNumber.
+     * @return - ClientBuilder.
      */
-    public ClientBuilder withEmail(String email) {
-        this.email = email;
+    public ClientBuilder withPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
         return this;
     }
 
     /**
-     * Age setter.
-     * @param age - Persons age.
-     * @return - person.
+     * ClientBuilder city setter.
+     * @param city - Persons city.
+     * @return - ClientBuilder.
      */
-    public ClientBuilder withAge(int age) throws IllegalArgumentException {
-            if (age > 0) {
-                this.age = age;
-            } else {
-                throw new IllegalArgumentException("Age must be a positive number");
-            }
-            return this;
+    public ClientBuilder withCity(String city) {
+        this.city = city;
+        return this;
     }
 
     /**
-     * Person builder.
-     * @return - new person same old mistakes.
+     * ClientBuilder budget setter.
+     * If the budget is not set, then the client can buy everything.
+     * @param budget - Persons budget.
+     * @return - ClientBuilder.
+     */
+    public ClientBuilder withBudget(Integer budget) {
+        this.budget = budget;
+        return this;
+    }
+
+    /**
+     * Client builder.
+     * @return - Client.
      */
     public Client build() {
-            return new Client(idCode, name, email, age, budget);
+            return new Client(idCode, name, email, age, budget, phoneNumber, city);
         }
 }
