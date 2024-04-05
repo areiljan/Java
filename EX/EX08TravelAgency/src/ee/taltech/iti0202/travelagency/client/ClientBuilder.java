@@ -14,7 +14,6 @@ public class ClientBuilder {
      * @param idCode - Persons idCode.
      * @param name - Persons name.
      * @param age - Persons budget.
-     * @return - Client.
      */
     public ClientBuilder(String idCode, String name, String email, int age) {
         if (age < 0) {
