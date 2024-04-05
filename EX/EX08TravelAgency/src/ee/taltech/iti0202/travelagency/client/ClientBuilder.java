@@ -1,6 +1,5 @@
 package ee.taltech.iti0202.travelagency.client;
 
-// Builder class for creating Person objects
 public class ClientBuilder {
     private String idCode;
     private String name;

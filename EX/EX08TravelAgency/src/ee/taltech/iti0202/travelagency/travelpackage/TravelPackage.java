@@ -21,7 +21,9 @@ public class TravelPackage {
      * @param country - travelPackage country.
      * @param travelType - travelPackage type of travel.
      */
-    public TravelPackage(String id, String name, int price, LocalDate startDate, LocalDate endDate, String country, TravelType travelType) {
+    public TravelPackage(String id, String name,
+                         int price, LocalDate startDate,
+                         LocalDate endDate, String country, TravelType travelType) {
         this.id = id;
         this.name = name;
         this.price = price;

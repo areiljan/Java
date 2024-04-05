@@ -8,21 +8,28 @@ import ee.taltech.iti0202.travelagency.travelpackage.TravelPackage;
 import org.junit.jupiter.api.Assertions;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 class TravelAgencyTest {
 
     @org.junit.jupiter.api.Test
     void clientBuilderAgeNegativeThrowsIllegalArgumentException() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new ClientBuilder("5403039203", "Priit", "priittoobal@gmail.com", -15);
+            new ClientBuilder("5403039203", "Priit",
+                    "priittoobal@gmail.com", -15);
         });
     }
 
     @org.junit.jupiter.api.Test
-    void CannotBuyTravelPackageIfNoMoney() {
+    void cannotBuyTravelPackageIfNoMoney() {
         TravelAgency travelAgency1 = new TravelAgency("Reisihunt");
-        TravelPackage travelPackage1 = new TravelPackage("223", "Tenerife Toxic Boogaloo", 1500, LocalDate.of(2024, 12, 12), LocalDate.of(2024, 12, 20), "Spain", TravelPackage.TravelType.PARTY);
+        TravelPackage travelPackage1 = new TravelPackage("223", "Tenerife Toxic Boogaloo",
+                1500, LocalDate.of(2024, 12, 12), LocalDate.of(2024,
+                12, 20), "Spain", TravelPackage.TravelType.PARTY);
         Client client1 = new ClientBuilder("342143", "Fred", "fredpeep@gmail.com", 23)
                 .withPhoneNumber("+372 9921 2039")
                 .withCity("Tallinn")
@@ -38,9 +45,12 @@ class TravelAgencyTest {
     }
 
     @org.junit.jupiter.api.Test
-    void ClientsBudgetDecreasesUponTravelPackageBought() throws InsufficientFundsException {
+    void clientsBudgetDecreasesUponTravelPackageBought() throws InsufficientFundsException {
         TravelAgency travelAgency1 = new TravelAgency("Reisihunt");
-        TravelPackage travelPackage1 = new TravelPackage("223", "Tenerife Toxic Boogaloo", 1500, LocalDate.of(2024, 12, 12), LocalDate.of(2024, 12, 20), "Spain", TravelPackage.TravelType.PARTY);
+        TravelPackage travelPackage1 = new TravelPackage("223",
+                "Tenerife Toxic Boogaloo", 1500, LocalDate.of(2024,
+                12, 12), LocalDate.of(2024, 12, 20), "Spain",
+                TravelPackage.TravelType.PARTY);
         Client client1 = new ClientBuilder("342143", "Fred", "fredpeep@gmail.com", 23)
                 .withPhoneNumber("+372 9921 2039")
                 .withCity("Tallinn")
@@ -56,8 +66,9 @@ class TravelAgencyTest {
     }
 
     @org.junit.jupiter.api.Test
-    void CanEditBudget() throws InsufficientFundsException {
-        Client client1 = new ClientBuilder("342143", "Fred", "fredpeep@gmail.com", 23)
+    void canEditBudget() throws InsufficientFundsException {
+        Client client1 = new ClientBuilder("342143", "Fred",
+                "fredpeep@gmail.com", 23)
                 .withPhoneNumber("+372 9921 2039")
                 .withCity("Tallinn")
                 .withBudget(10000)
@@ -69,11 +80,17 @@ class TravelAgencyTest {
     }
 
     @org.junit.jupiter.api.Test
-    void ThreePurchasedPackagesClientTypeChangesToSilver() throws InsufficientFundsException {
+    void threePurchasedPackagesClientTypeChangesToSilver() throws InsufficientFundsException {
         TravelAgency travelAgency1 = new TravelAgency("Reisihunt");
-        TravelPackage travelPackage1 = new TravelPackage("223", "Tenerife Toxic Boogaloo", 1500, LocalDate.of(2024, 12, 12), LocalDate.of(2024, 12, 20), "Spain", TravelPackage.TravelType.PARTY);
-        TravelPackage travelPackage2 = new TravelPackage("124", "Berlin Beach", 1500, LocalDate.of(2024, 6, 12), LocalDate.of(2024, 6, 15), "Germany", TravelPackage.TravelType.BEACH);
-        TravelPackage travelPackage3 = new TravelPackage("543", "Paris tour", 1500, LocalDate.of(2024, 5, 12), LocalDate.of(2025, 5, 20), "France", TravelPackage.TravelType.CULTURE);
+        TravelPackage travelPackage1 = new TravelPackage("223",
+                "Tenerife Toxic Boogaloo", 1500, LocalDate.of(2024, 12, 12),
+                LocalDate.of(2024, 12, 20), "Spain", TravelPackage.TravelType.PARTY);
+        TravelPackage travelPackage2 = new TravelPackage("124",
+                "Berlin Beach", 1500, LocalDate.of(2024, 6, 12),
+                LocalDate.of(2024, 6, 15), "Germany", TravelPackage.TravelType.BEACH);
+        TravelPackage travelPackage3 = new TravelPackage("543",
+                "Paris tour", 1500, LocalDate.of(2024, 5, 12),
+                LocalDate.of(2025, 5, 20), "France", TravelPackage.TravelType.CULTURE);
         Client client1 = new ClientBuilder("342143", "Fred", "fredpeep@gmail.com", 23)
                 .withPhoneNumber("+372 9921 2039")
                 .withCity("Tallinn")
@@ -88,17 +105,27 @@ class TravelAgencyTest {
         client1.buyTravelPackage(travelAgency1, travelPackage2);
         client1.buyTravelPackage(travelAgency1, travelPackage3);
 
-        Assertions.assertEquals(Client.clientType.SILVER, client1.getType());
+        Assertions.assertEquals(Client.ClientType.SILVER, client1.getType());
     }
 
     @org.junit.jupiter.api.Test
-    void FivePurchasedPackagesClientTypeChangesToGold() throws InsufficientFundsException {
+    void fivePurchasedPackagesClientTypeChangesToGold() throws InsufficientFundsException {
         TravelAgency travelAgency1 = new TravelAgency("Reisihunt");
-        TravelPackage travelPackage1 = new TravelPackage("223", "Tenerife Toxic Boogaloo", 1500, LocalDate.of(2024, 12, 12), LocalDate.of(2024, 12, 20), "Spain", TravelPackage.TravelType.PARTY);
-        TravelPackage travelPackage2 = new TravelPackage("124", "Berlin Beach", 1500, LocalDate.of(2024, 6, 12), LocalDate.of(2024, 6, 15), "Germany", TravelPackage.TravelType.BEACH);
-        TravelPackage travelPackage3 = new TravelPackage("543", "Paris tour", 1500, LocalDate.of(2024, 5, 12), LocalDate.of(2025, 5, 20), "France", TravelPackage.TravelType.CULTURE);
-        TravelPackage travelPackage4 = new TravelPackage("512", "December Decadence", 1500, LocalDate.of(2024, 12, 12), LocalDate.of(2025, 12, 20), "Cyprus", TravelPackage.TravelType.PARTY);
-        TravelPackage travelPackage5 = new TravelPackage("523", "Mongolia Throat Singing", 1500, LocalDate.of(2024, 5, 12), LocalDate.of(2025, 5, 20), "Mongolia", TravelPackage.TravelType.CULTURE);
+        TravelPackage travelPackage1 = new TravelPackage("223", "Tenerife Toxic Boogaloo",
+                1500, LocalDate.of(2024, 12, 12),
+                LocalDate.of(2024, 12, 20), "Spain", TravelPackage.TravelType.PARTY);
+        TravelPackage travelPackage2 = new TravelPackage("124", "Berlin Beach",
+                1500, LocalDate.of(2024, 6, 12),
+                LocalDate.of(2024, 6, 15), "Germany", TravelPackage.TravelType.BEACH);
+        TravelPackage travelPackage3 = new TravelPackage("543", "Paris tour",
+                1500, LocalDate.of(2024, 5, 12),
+                LocalDate.of(2025, 5, 20), "France", TravelPackage.TravelType.CULTURE);
+        TravelPackage travelPackage4 = new TravelPackage("512", "December Decadence",
+                1500, LocalDate.of(2024, 12, 12),
+                LocalDate.of(2025, 12, 20), "Cyprus", TravelPackage.TravelType.PARTY);
+        TravelPackage travelPackage5 = new TravelPackage("523", "Mongolia Throat Singing",
+                1500, LocalDate.of(2024, 5, 12),
+                LocalDate.of(2025, 5, 20), "Mongolia", TravelPackage.TravelType.CULTURE);
         Client client1 = new ClientBuilder("342143", "Fred", "fredpeep@gmail.com", 23)
                 .withPhoneNumber("+372 9921 2039")
                 .withCity("Tallinn")
@@ -118,13 +145,14 @@ class TravelAgencyTest {
         client1.buyTravelPackage(travelAgency1, travelPackage5);
 
 
-        Assertions.assertEquals(Client.clientType.GOLD, client1.getType());
+        Assertions.assertEquals(Client.ClientType.GOLD, client1.getType());
     }
 
     @org.junit.jupiter.api.Test
     void travelAgencyAddClientsCanAccessFromAgency() {
         TravelAgency travelAgency1 = new TravelAgency("Reisihunt");
-        Client client1 = new ClientBuilder("3493943", "Fred", "fredpeep@gmail.com", 10)
+        Client client1 = new ClientBuilder("3493943",
+                "Fred", "fredpeep@gmail.com", 10)
                 .withPhoneNumber("+372 9932 2039")
                 .withCity("Narva")
                 .withBudget(100000)
@@ -140,7 +168,10 @@ class TravelAgencyTest {
     @org.junit.jupiter.api.Test
     void travelAgencyAddTravelPackageCanAccessFromAgency() {
         TravelAgency travelAgency1 = new TravelAgency("Reisihunt");
-        TravelPackage travelPackage1 = new TravelPackage("223", "Toxic Boogaloo", 1500, LocalDate.of(2024, 12, 12), LocalDate.of(2024, 12, 20), "Spain", TravelPackage.TravelType.PARTY);
+        TravelPackage travelPackage1 = new TravelPackage("223",
+                "Toxic Boogaloo", 1500, LocalDate.of(2024, 12,
+                12), LocalDate.of(2024, 12, 20),
+                "Spain", TravelPackage.TravelType.PARTY);
 
         travelAgency1.addTravelPackage(travelPackage1);
 
@@ -152,9 +183,15 @@ class TravelAgencyTest {
     @org.junit.jupiter.api.Test
     void getTopClientOrderedByPackagesBought() throws InsufficientFundsException {
         TravelAgency travelAgency1 = new TravelAgency("Reisihunt");
-        TravelPackage travelPackage1 = new TravelPackage("223", "Tenerife Toxic Boogaloo", 1500, LocalDate.of(2024, 12, 12), LocalDate.of(2024, 12, 20), "Spain", TravelPackage.TravelType.PARTY);
-        TravelPackage travelPackage2 = new TravelPackage("124", "Berlin Beach", 1500, LocalDate.of(2024, 6, 12), LocalDate.of(2024, 6, 15), "Germany", TravelPackage.TravelType.BEACH);
-        TravelPackage travelPackage3 = new TravelPackage("543", "Paris tour", 1500, LocalDate.of(2024, 5, 12), LocalDate.of(2025, 5, 20), "France", TravelPackage.TravelType.CULTURE);
+        TravelPackage travelPackage1 = new TravelPackage("223", "Tenerife Toxic Boogaloo",
+                1500, LocalDate.of(2024, 12, 12),
+                LocalDate.of(2024, 12, 20), "Spain", TravelPackage.TravelType.PARTY);
+        TravelPackage travelPackage2 = new TravelPackage("124", "Berlin Beach",
+                1500, LocalDate.of(2024, 6, 12),
+                LocalDate.of(2024, 6, 15), "Germany", TravelPackage.TravelType.BEACH);
+        TravelPackage travelPackage3 = new TravelPackage("543", "Paris tour",
+                1500, LocalDate.of(2024, 5, 12),
+                LocalDate.of(2025, 5, 20), "France", TravelPackage.TravelType.CULTURE);
         Client client1 = new ClientBuilder("342143", "Fred", "fredpeep@gmail.com", 23)
                 .withPhoneNumber("+372 9921 2039")
                 .withCity("Tallinn")
@@ -197,9 +234,15 @@ class TravelAgencyTest {
     @org.junit.jupiter.api.Test
     void getMostPopularPackagesRightOrder() throws InsufficientFundsException {
         TravelAgency travelAgency1 = new TravelAgency("Reisihunt");
-        TravelPackage travelPackage1 = new TravelPackage("223", "Tenerife Toxic Boogaloo", 1500, LocalDate.of(2024, 12, 12), LocalDate.of(2024, 12, 20), "Spain", TravelPackage.TravelType.PARTY);
-        TravelPackage travelPackage2 = new TravelPackage("124", "Berlin Beach", 1500, LocalDate.of(2024, 6, 12), LocalDate.of(2024, 6, 15), "Germany", TravelPackage.TravelType.BEACH);
-        TravelPackage travelPackage3 = new TravelPackage("543", "Paris tour", 1500, LocalDate.of(2024, 5, 12), LocalDate.of(2025, 5, 20), "France", TravelPackage.TravelType.CULTURE);
+        TravelPackage travelPackage1 = new TravelPackage("223", "Tenerife Toxic Boogaloo",
+                1500, LocalDate.of(2024, 12, 12),
+                LocalDate.of(2024, 12, 20), "Spain", TravelPackage.TravelType.PARTY);
+        TravelPackage travelPackage2 = new TravelPackage("124", "Berlin Beach",
+                1500, LocalDate.of(2024, 6, 12),
+                LocalDate.of(2024, 6, 15), "Germany", TravelPackage.TravelType.BEACH);
+        TravelPackage travelPackage3 = new TravelPackage("543", "Paris tour",
+                1500, LocalDate.of(2024, 5, 12),
+                LocalDate.of(2025, 5, 20), "France", TravelPackage.TravelType.CULTURE);
         Client client1 = new ClientBuilder("342143", "Fred", "fredpeep@gmail.com", 23)
                 .withPhoneNumber("+372 9921 2039")
                 .withCity("Tallinn")
