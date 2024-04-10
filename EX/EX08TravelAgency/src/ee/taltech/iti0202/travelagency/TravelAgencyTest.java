@@ -97,10 +97,13 @@ class TravelAgencyTest {
                 .withBudget(100000)
                 .build();
 
+        // adding all travelPackages
         travelAgency1.addTravelPackage(travelPackage1);
         travelAgency1.addTravelPackage(travelPackage2);
         travelAgency1.addTravelPackage(travelPackage3);
+        // adding the client
         travelAgency1.addClient(client1);
+        // buying three travelPackages
         client1.buyTravelPackage(travelAgency1, travelPackage1);
         client1.buyTravelPackage(travelAgency1, travelPackage2);
         client1.buyTravelPackage(travelAgency1, travelPackage3);
@@ -132,12 +135,15 @@ class TravelAgencyTest {
                 .withBudget(100000)
                 .build();
 
+        // adding all travelPackages
         travelAgency1.addTravelPackage(travelPackage1);
         travelAgency1.addTravelPackage(travelPackage2);
         travelAgency1.addTravelPackage(travelPackage3);
         travelAgency1.addTravelPackage(travelPackage4);
         travelAgency1.addTravelPackage(travelPackage5);
+        // adding a client
         travelAgency1.addClient(client1);
+        // buying all travelPackages
         client1.buyTravelPackage(travelAgency1, travelPackage1);
         client1.buyTravelPackage(travelAgency1, travelPackage2);
         client1.buyTravelPackage(travelAgency1, travelPackage3);
@@ -158,8 +164,10 @@ class TravelAgencyTest {
                 .withBudget(100000)
                 .build();
 
+        // adding the client
         travelAgency1.addClient(client1);
 
+        // the getter will have the clients as a hashmap of clients and amount of packages bought
         HashMap<Object, Integer> expectedClients = new HashMap<>();
         expectedClients.put(client1, 0);
         Assertions.assertEquals(expectedClients, travelAgency1.getClients());
@@ -173,8 +181,10 @@ class TravelAgencyTest {
                 12), LocalDate.of(2024, 12, 20),
                 "Spain", TravelPackage.TravelType.PARTY);
 
+        // adding the travelPackage
         travelAgency1.addTravelPackage(travelPackage1);
 
+        // the getter will have the travelPackages as a hashmap of travelPackages and amount of times bought
         HashMap<Object, Integer> expectedPackages = new HashMap<>();
         expectedPackages.put(travelPackage1, 0);
         Assertions.assertEquals(expectedPackages, travelAgency1.getTravelPackages());
@@ -208,19 +218,25 @@ class TravelAgencyTest {
                 .withBudget(50000)
                 .build();
 
+        // adding all travelPackages
         travelAgency1.addTravelPackage(travelPackage1);
         travelAgency1.addTravelPackage(travelPackage2);
         travelAgency1.addTravelPackage(travelPackage3);
+        // adding all clients
         travelAgency1.addClient(client1);
         travelAgency1.addClient(client2);
         travelAgency1.addClient(client3);
+        // client1 buys 1 package
         client1.buyTravelPackage(travelAgency1, travelPackage1);
+        // client2 buys 2 packages
         client2.buyTravelPackage(travelAgency1, travelPackage1);
         client2.buyTravelPackage(travelAgency1, travelPackage2);
+        // client3 buys 3 packages
         client3.buyTravelPackage(travelAgency1, travelPackage1);
         client3.buyTravelPackage(travelAgency1, travelPackage2);
         client3.buyTravelPackage(travelAgency1, travelPackage3);
 
+        // the clients should be in descending order based on the packages bought.
         Map.Entry<Client, Integer> entry1 = new AbstractMap.SimpleEntry<>(client3, 3);
         Map.Entry<Client, Integer> entry2 = new AbstractMap.SimpleEntry<>(client2, 2);
         Map.Entry<Client, Integer> entry3 = new AbstractMap.SimpleEntry<>(client1, 1);
@@ -259,12 +275,17 @@ class TravelAgencyTest {
                 .withBudget(50000)
                 .build();
 
+        // adding all travelPackages
         travelAgency1.addTravelPackage(travelPackage1);
         travelAgency1.addTravelPackage(travelPackage2);
         travelAgency1.addTravelPackage(travelPackage3);
+        // adding all clients
         travelAgency1.addClient(client1);
         travelAgency1.addClient(client2);
         travelAgency1.addClient(client3);
+        // travelPackage 1 is bought 3 times
+        // travelPackage 2 is bought 2 times
+        // travelPackage 3 is bought 1 time
         client1.buyTravelPackage(travelAgency1, travelPackage1);
         client2.buyTravelPackage(travelAgency1, travelPackage1);
         client2.buyTravelPackage(travelAgency1, travelPackage2);
@@ -272,6 +293,8 @@ class TravelAgencyTest {
         client3.buyTravelPackage(travelAgency1, travelPackage2);
         client3.buyTravelPackage(travelAgency1, travelPackage3);
 
+        // the getter will have the most popular as a list of travelPackages that were bought in
+        // descending order by the times they were bought.
         Map.Entry<TravelPackage, Integer> entry1 = new AbstractMap.SimpleEntry<>(travelPackage1, 3);
         Map.Entry<TravelPackage, Integer> entry2 = new AbstractMap.SimpleEntry<>(travelPackage2, 2);
         Map.Entry<TravelPackage, Integer> entry3 = new AbstractMap.SimpleEntry<>(travelPackage3, 1);
