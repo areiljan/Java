@@ -30,7 +30,7 @@ public class Booking {
     }
 
     public void setStrategy(BookingStrategy strategy) {
-        bookingStrategy = bookingStrategy;
+        bookingStrategy = strategy;
     }
 
     public BookingStrategy getStrategy() {
