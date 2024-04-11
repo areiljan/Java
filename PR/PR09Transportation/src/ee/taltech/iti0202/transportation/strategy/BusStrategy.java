@@ -5,6 +5,8 @@ import ee.taltech.iti0202.transportation.ticket.Ticket;
 
 import java.time.LocalDate;
 
+import static java.lang.Math.round;
+
 public class BusStrategy implements BookingStrategy {
     @Override
     public Ticket bookTicket(Person person, LocalDate date, double price) {
@@ -14,6 +16,6 @@ public class BusStrategy implements BookingStrategy {
         } else {
             adjustedPrice = price * (1 - ((100 - person.getName().length()) / 100));
         }
-        return new Ticket(adjustedPrice);
+        return new Ticket(round(adjustedPrice));
     }
 }
