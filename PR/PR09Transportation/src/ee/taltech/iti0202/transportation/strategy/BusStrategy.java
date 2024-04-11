@@ -14,7 +14,8 @@ public class BusStrategy implements BookingStrategy {
         if (date.getDayOfMonth() % 2 == 0) {
             adjustedPrice = price * 0.5;
         } else {
-            adjustedPrice = price * ((100 - person.getName().length()) / 100);
+            int discountPercentage = Math.max(0, 100 - person.getName().length()); // Ensure discount is not negative
+            adjustedPrice = price * (discountPercentage / 100.0);
         }
         return new Ticket(round(adjustedPrice));
     }

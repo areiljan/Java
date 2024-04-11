@@ -12,7 +12,7 @@ public class TrainStrategy implements BookingStrategy {
     @Override
     public Ticket bookTicket(Person person, LocalDate date, double price) {
         if (!date.getDayOfWeek().equals(DayOfWeek.SATURDAY) && !date.getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
-            return new Ticket(round(price * 0.75));
+            return new Ticket(round(price * 0.70));
         } else {
             return new Ticket(round(price));
         }
