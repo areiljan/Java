@@ -28,6 +28,7 @@ public class TextEditor {
      * @param text - text to edit.
      */
     public void addText(String text) {
+        textsBuffer = (ArrayList<String>) textsBuffer.subList(0, index);
         if (strategy == null) {
             textsBuffer.add(text);
             history.add(text);
@@ -75,7 +76,9 @@ public class TextEditor {
      * @return - current text.
      */
     public String redo() {
-        index += 1;
+        if (index < textsBuffer.size()) {
+            index += 1;
+        }
         return getCurrentText();
     }
 
