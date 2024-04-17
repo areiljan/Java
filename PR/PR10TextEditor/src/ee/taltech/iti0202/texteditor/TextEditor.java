@@ -33,7 +33,7 @@ public class TextEditor {
             history.add(text);
         } else {
             textsBuffer.add(strategy.format(text));
-            history.add(text);
+            history.add(strategy.format(text));
         }
     }
 
