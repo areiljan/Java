@@ -5,6 +5,8 @@ import ee.taltech.iti0202.texteditor.textformatter.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import static ee.taltech.iti0202.texteditor.TextType.*;
+
 public class TextEditor {
     private ArrayList<String> textsBuffer;
     private ArrayList<String> history;
@@ -18,7 +20,7 @@ public class TextEditor {
     public TextEditor() {
         this.textsBuffer = new ArrayList<>();
         this.history = new ArrayList<>();
-        this.editorType = TextType.PLAIN;
+        this.editorType = PLAIN;
     }
 
     /**
@@ -89,15 +91,15 @@ public class TextEditor {
      * @param type - type of text editing.
      */
     public void setStrategy(TextType type) {
-        if (type.equals(TextType.PLAIN)) {
+        if (type.equals(PLAIN)) {
             strategy = null;
-        } else if (type.equals(TextType.SCREAMING)) {
+        } else if (type.equals(SCREAMING)) {
             strategy = new UppercaseFormatter();
-        } else if (type.equals(TextType.CAMELCASE)) {
+        } else if (type.equals(CAMELCASE)) {
             strategy = new CamelCaseFormatter();
-        } else if (type.equals(TextType.BINARY)) {
+        } else if (type.equals(BINARY)) {
             strategy = new BinaryFormatter();
-        } else if (type.equals(TextType.TITLE)) {
+        } else if (type.equals(TITLE)) {
             strategy = new TitleCaseFormatter();
         }
     }
@@ -116,5 +118,52 @@ public class TextEditor {
      */
     public TextFormatter getStrategy() {
         return strategy;
+    }
+
+    class Main {
+        public static void main(String[] args) {
+            TextEditor textEditor = new TextEditor();
+            textEditor.addText("diary of a programmer", TITLE);
+            textEditor.addText("Day1: Finally started with my new project today.", PLAIN);
+            textEditor.addText("I have \nbeen working on my camelcase.\n", CAMELCASE);
+            System.out.println(textEditor.getCurrentText());
+            // Diary of a Programmer
+            // Day1: Finally started with my new project today. iHaveBeenWorkingOnMyCamelcase.
+            textEditor.addText("Day2: ", PLAIN);
+            textEditor.addText("i'm losing my mind, this bug keeps avoiding meeeeeeeee.\n", SCREAMING);
+            textEditor.addText("Day3: ", PLAIN);
+            textEditor.addText("help me\n", BINARY);
+            System.out.println(textEditor.getCurrentText());
+            // Diary of a Programmer
+            // Day1: Finally started with my new project today. iHaveBeenWorkingOnMyCamelcase.
+            // Day2: I'M LOSING MY MIND, THIS BUG KEEPS AVOIDING MEEEEEEEEE. 01101000011001010110110001110000001000000110110101100101
+            // Day3: 01101000011001010110110001110000001000000110110101100101
+            System.out.println(textEditor.undo());
+            System.out.println();
+            // Diary of a Programmer
+            // Day1: Finally started with my new project today. iHaveBeenWorkingOnMyCamelcase.
+            // Day2: I'M LOSING MY MIND, THIS BUG KEEPS AVOIDING MEEEEEEEEE.
+            // Day3:
+            textEditor.addText("Fixed the bug, it was a typo.");
+            System.out.println(textEditor.getCurrentText());
+            System.out.println();
+            // Diary of a Programmer
+            // Day1: Finally started with my new project today. iHaveBeenWorkingOnMyCamelcase.
+            // Day2: I'M LOSING MY MIND, THIS BUG KEEPS AVOIDING MEEEEEEEEE.
+            // Day3: 0100011001101001011110000110010101100100001000000111010001101000011001010010000001100010011101010110011100101100001000000110100101110100001000000111011101100001011100110010000001100001001000000111010001111001011100000110111100101110
+
+            textEditor.undo();
+            textEditor.setStrategy(PLAIN);
+            textEditor.addText("Fixed the bug, it was a typo.");
+            System.out.println(textEditor.getCurrentText());
+            System.out.println();
+            // Diary of a Programmer
+            // Day1: Finally started with my new project today. iHaveBeenWorkingOnMyCamelcase.
+            // Day2: I'M LOSING MY MIND, THIS BUG KEEPS AVOIDING MEEEEEEEEE.
+            // Day3: Fixed the bug, it was a typo.
+
+            textEditor.clear();
+            System.out.println(textEditor.redo().isEmpty()); // true
+        }
     }
 }
