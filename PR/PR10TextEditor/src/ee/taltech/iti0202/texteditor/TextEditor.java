@@ -50,7 +50,11 @@ public class TextEditor {
      * @return - text.
      */
     public String getCurrentText() {
-        return textsBuffer.get(index);
+        StringBuilder allText = new StringBuilder();
+        for (int i = 0; i < index; i++) {
+            allText.append(textsBuffer.get(i));
+        }
+        return allText.toString();
     }
 
     /**
