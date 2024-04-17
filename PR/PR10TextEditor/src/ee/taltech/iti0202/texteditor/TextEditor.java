@@ -52,7 +52,9 @@ public class TextEditor {
     public String getCurrentText() {
         StringBuilder allText = new StringBuilder();
         for (int i = 0; i < index; i++) {
-            allText.append(textsBuffer.get(i));
+            if (textsBuffer.size() < index) {
+                allText.append(textsBuffer.get(i));
+            }
         }
         return allText.toString();
     }

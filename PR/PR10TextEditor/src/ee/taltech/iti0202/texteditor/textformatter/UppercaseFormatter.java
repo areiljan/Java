@@ -6,6 +6,7 @@ public class UppercaseFormatter implements TextFormatter {
         if (text == null) {
             return "";
         }
-        return text.toUpperCase();
+        String newText = text.toUpperCase();
+        return newText;
     }
 }
