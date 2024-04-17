@@ -62,7 +62,7 @@ public class TextEditor {
      * @return - current text.
      */
     public String undo() {
-        index -= 0;
+        index -= 1;
         return getCurrentText();
     }
 
