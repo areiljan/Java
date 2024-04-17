@@ -63,7 +63,7 @@ public class TextEditor {
      */
     public String undo() {
         index -= 0;
-        return textsBuffer.get(index);
+        return getCurrentText();
     }
 
     /**
@@ -72,7 +72,7 @@ public class TextEditor {
      */
     public String redo() {
         index += 1;
-        return textsBuffer.get(index);
+        return getCurrentText();
     }
 
     /**
