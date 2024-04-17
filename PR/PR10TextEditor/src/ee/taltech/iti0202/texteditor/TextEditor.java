@@ -22,13 +22,6 @@ public class TextEditor {
     }
 
     /**
-     * Different types of text formatting styles.
-     */
-    public enum TextType {
-        PLAIN, SCREAMING, TITLE, CAMELCASE, BINARY
-    }
-
-    /**
      * Add a text with the current text formatting to the TextEditor.
      * @param text - text to edit.
      */
