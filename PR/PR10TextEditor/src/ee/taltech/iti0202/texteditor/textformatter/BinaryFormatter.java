@@ -4,7 +4,9 @@ public class BinaryFormatter implements TextFormatter {
     @Override
     public String format(String text) {
         StringBuilder binaryString = new StringBuilder();
-
+        if (text.isBlank()) {
+            return "";
+        }
         for (int i = 0; i < text.length(); i++) {
             char c = text.charAt(i);
             String binary = Integer.toBinaryString(c);
