@@ -8,7 +8,7 @@ import ee.taltech.iti0202.polygon.Triangle;
 
 public class PolygonFactory {
 
-    public static final int INT = 6;
+    public static final int HEXAGONSIDES = 6;
 
     /**
      * Factory makes a new Polygon with given amount of sides.
@@ -23,7 +23,7 @@ public class PolygonFactory {
                 return new Square();
             case 5:
                 return new Pentagon();
-            case INT:
+            case HEXAGONSIDES:
                 return new Hexagon();
             default:
                 throw new IllegalArgumentException();
