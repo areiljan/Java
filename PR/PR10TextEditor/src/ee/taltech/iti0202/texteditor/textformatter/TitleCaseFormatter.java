@@ -5,6 +5,9 @@ import java.util.ArrayList;
 public class TitleCaseFormatter implements TextFormatter {
     @Override
     public String format(String text) {
+        if (text.isBlank()) {
+            return "";
+        }
         String[] words = text.split(" ");
         String newText = "";
         ArrayList<String> listOfWords = new ArrayList<>();
