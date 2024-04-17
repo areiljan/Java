@@ -97,7 +97,7 @@ public class TextEditor {
         } else if (type.equals(TextType.CAMELCASE)) {
             strategy = new CamelCaseFormatter();
         } else if (type.equals(TextType.BINARY)) {
-            strategy = new BinaryCaseFormatter();
+            strategy = new BinaryFormatter();
         } else if (type.equals(TextType.TITLE)) {
             strategy = new TitleCaseFormatter();
         }

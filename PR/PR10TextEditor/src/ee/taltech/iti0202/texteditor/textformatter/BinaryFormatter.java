@@ -1,6 +1,6 @@
 package ee.taltech.iti0202.texteditor.textformatter;
 
-public class BinaryCaseFormatter implements TextFormatter {
+public class BinaryFormatter implements TextFormatter {
     @Override
     public String format(String text) {
         StringBuilder binaryString = new StringBuilder();
