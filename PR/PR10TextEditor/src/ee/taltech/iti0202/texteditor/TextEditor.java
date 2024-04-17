@@ -26,7 +26,7 @@ public class TextEditor {
      * @param text - text to edit.
      */
     public void addText(String text) {
-        if (strategy.equals(null)) {
+        if (strategy == null) {
             textsBuffer.add(text);
             history.add(text);
         } else {
