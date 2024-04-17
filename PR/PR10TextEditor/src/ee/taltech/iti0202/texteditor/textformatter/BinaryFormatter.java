@@ -12,6 +12,6 @@ public class BinaryFormatter implements TextFormatter {
         for (char c : text.toCharArray()) {
             binaryString.append(Integer.toBinaryString(c)).append(" ");
         }
-        return binaryString.toString().trim();
+        return binaryString.toString();
     }
 }
