@@ -4,6 +4,7 @@ import ee.taltech.iti0202.texteditor.textformatter.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import static ee.taltech.iti0202.texteditor.TextType.*;
 
@@ -28,13 +29,18 @@ public class TextEditor {
      * @param text - text to edit.
      */
     public void addText(String text) {
-        textsBuffer = (ArrayList<String>) textsBuffer.subList(0, index);
         if (strategy == null) {
+            List<String> subList = textsBuffer.subList(0, index);
+            textsBuffer = new ArrayList<>(subList);
             textsBuffer.add(text);
             history.add(text);
+            index = textsBuffer.size();
         } else {
+            List<String> subList = textsBuffer.subList(0, index);
+            textsBuffer = new ArrayList<>(subList);
             textsBuffer.add(strategy.format(text));
             history.add(strategy.format(text));
+            index = textsBuffer.size();
         }
     }
 
