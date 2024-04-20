@@ -5,7 +5,8 @@ public class CamelCaseFormatter implements TextFormatter {
     @Override
     public String format(String text) {
         StringBuilder camelCaseString = new StringBuilder();
-        String[] words = text.split(" ");
+        String cleanedText = text.replaceAll("[\\n\\r]+(?!$)", "");
+        String[] words = cleanedText.split(" ");
         for (int i = 0; i < words.length; i++) {
             String word = words[i];
             if (word.isEmpty()) {
@@ -17,8 +18,8 @@ public class CamelCaseFormatter implements TextFormatter {
                 // Check if the previous character is a symbol and should be retained
                 boolean retainPreviousSymbol = false;
                 if (i > 1 && word.length() >= 2) {
-                    char prevChar = word.charAt(word.length() - 2);
-                    char lastChar = word.charAt(word.length() - 1);
+                    char prevChar = text.charAt(word.length() - 2);
+                    char lastChar = text.charAt(word.length() - 1);
                     if ((prevChar == '\n' || !Character.isLetterOrDigit(prevChar)) && (Character.isLetterOrDigit(lastChar) || lastChar == '\n')) {
                         retainPreviousSymbol = true;
                     }

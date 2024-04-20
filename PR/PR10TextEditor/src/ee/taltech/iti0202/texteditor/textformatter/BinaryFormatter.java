@@ -10,7 +10,7 @@ public class BinaryFormatter implements TextFormatter {
 
         StringBuilder binaryString = new StringBuilder();
         for (char c : text.toCharArray()) {
-            binaryString.append(Integer.toBinaryString(c)).append("0");
+            binaryString.append(Integer.toBinaryString(c)).append(" ");
         }
         return binaryString.toString();
     }
