@@ -60,9 +60,9 @@ public class TextEditor {
      */
     public String getCurrentText() {
         StringBuilder allText = new StringBuilder();
-        for (int i = 0; i < index; i++) {
+        for (int i = 1; i < index; i++) {
             if (textsBuffer.size() < index) {
-                allText.append(textsBuffer.get(i));
+                allText.append(textsBuffer.get(i - 1));
             }
         }
         return allText.toString();
