@@ -4,8 +4,8 @@ public class CamelCaseFormatter implements TextFormatter {
 
     @Override
     public String format(String text) {
-        String[] words = text.split("[^\\p{Alnum}]+");
         StringBuilder camelCaseString = new StringBuilder();
+        String[] words = text.split(" ");
         for (int i = 0; i < words.length; i++) {
             String word = words[i];
             if (word.isEmpty()) {
