@@ -5,35 +5,33 @@ public class CamelCaseFormatter implements TextFormatter {
     @Override
     public String format(String text) {
         StringBuilder camelCaseString = new StringBuilder();
-        String cleanedText = text.replaceAll("[^a-zA-Z0-9](?![^a-zA-Z0-9])", "");
+
+//        // Replace unwanted symbols with a single space, but not those at the end of the string or before a newline
+//        String cleanedText = text.replaceAll("[^a-zA-Z0-9\\n](?!$|\\n)", " ");
+//        cleanedText = cleanedText.replaceAll("[^a-zA-Z0-9\n]+(?=\n)", "");
+
+        String cleanedText = text.replaceAll("[^a-zA-Z0-9\\.\\n]|\n(?!$)", " ");
+        cleanedText.replaceAll("(\\n)(?!.*\\1)", "");
+
+        // Split the cleaned text into words
         String[] words = cleanedText.split(" ");
+
         for (int i = 0; i < words.length; i++) {
             String word = words[i];
             if (word.isEmpty()) {
                 continue; // Skip empty strings
             }
+
             if (i == 0) {
+                // If it's the first word, convert it to lowercase
                 camelCaseString.append(word.toLowerCase());
             } else {
-                // Check if the previous character is a symbol and should be retained
-                boolean retainPreviousSymbol = false;
-                if (i > 1 && word.length() >= 2) {
-                    char prevChar = text.charAt(word.length() - 2);
-                    char lastChar = text.charAt(word.length() - 1);
-                    if ((prevChar == '\n' || prevChar == ',' || !Character.isLetterOrDigit(prevChar)) && (Character.isLetterOrDigit(lastChar) || lastChar == '\n')) {
-                        retainPreviousSymbol = true;
-                    }
-                } else if (i > 0 && word.length() >= 1) {
-                    char prevChar = words[i - 1].charAt(words[i - 1].length() - 1);
-                    if (!Character.isLetterOrDigit(prevChar) && prevChar != '.' && prevChar != '\n') {
-                        retainPreviousSymbol = true;
-                    }
-                }
-                // Append the current word in camel case format
-                camelCaseString.append(retainPreviousSymbol ? word.substring(0, word.length() - 1) : word.substring(0, 1).toUpperCase())
+                // Convert the first character to uppercase and the rest to lowercase
+                camelCaseString.append(word.substring(0, 1).toUpperCase())
                         .append(word.substring(1).toLowerCase());
             }
         }
+
         return camelCaseString.toString();
     }
 }

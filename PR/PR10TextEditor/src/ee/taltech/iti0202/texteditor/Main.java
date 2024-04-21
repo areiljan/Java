@@ -7,7 +7,7 @@ class Main {
             TextEditor textEditor = new TextEditor();
             textEditor.addText("diary of a programmer", TITLE);
             textEditor.addText("Day1: Finally started with my new project today.", PLAIN);
-            textEditor.addText("I have \nbeen working on my camelcase.\n", CAMELCASE);
+            textEditor.addText("I have \nbeen, working,on my camelcase.\n", CAMELCASE);
             System.out.println(textEditor.getCurrentText());
             // Diary of a Programmer
             // Day1: Finally started with my new project today. iHaveBeenWorkingOnMyCamelcase.
