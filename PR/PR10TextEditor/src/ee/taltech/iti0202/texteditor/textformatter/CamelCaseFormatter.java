@@ -5,7 +5,7 @@ public class CamelCaseFormatter implements TextFormatter {
     @Override
     public String format(String text) {
         StringBuilder camelCaseString = new StringBuilder();
-        String cleanedText = text.replaceAll("[\\n\\r]+(?!$)", "");
+        String cleanedText = text.replaceAll("[^a-zA-Z0-9](?![^a-zA-Z0-9])", "");
         String[] words = cleanedText.split(" ");
         for (int i = 0; i < words.length; i++) {
             String word = words[i];
