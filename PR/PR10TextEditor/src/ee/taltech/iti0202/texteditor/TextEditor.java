@@ -63,6 +63,7 @@ public class TextEditor {
         if (!textsBuffer.isEmpty()) {
             for (int i = 1; i < index + 1; i++) {
                 allText.append(textsBuffer.get(i - 1));
+                allText.append(" ");
             }
         }
         return allText.toString();
