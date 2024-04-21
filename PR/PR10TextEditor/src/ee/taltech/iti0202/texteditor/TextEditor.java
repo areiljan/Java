@@ -61,20 +61,15 @@ public class TextEditor {
     public String getCurrentText() {
         StringBuilder allText = new StringBuilder();
         if (!textsBuffer.isEmpty()) {
-            for (int i = 0; i < index; i++) {
-                String currentText = textsBuffer.get(i);
-                allText.append(currentText);
-                if (i + 1 < index) {
-                    String nextText = textsBuffer.get(i + 1);
-                    // If currentText ends with a newline and nextText starts with a newline, add a space
-                    if (currentText.endsWith("\n") && nextText.startsWith("\n")) {
+            boolean isFirstEntry = true;
+            for (String text : textsBuffer) { // Iterate over text directly
+                if (!isFirstEntry) {
+                    if (!text.isEmpty() && !text.endsWith("\n")) { // Check for empty line or newline at the end
                         allText.append(" ");
                     }
                 }
-            }
-            // Append the last text buffer if present
-            if (index > 0) {
-                allText.append(textsBuffer.get(index - 1));
+                allText.append(text);
+                isFirstEntry = !text.endsWith("\n"); // Update based on newline at the end
             }
         }
         return allText.toString();
