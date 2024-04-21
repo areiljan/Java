@@ -61,15 +61,12 @@ public class TextEditor {
     public String getCurrentText() {
         StringBuilder allText = new StringBuilder();
         if (!textsBuffer.isEmpty()) {
-            boolean isFirstEntry = true;
-            for (String text : textsBuffer) { // Iterate over text directly
-                if (!isFirstEntry) {
-                    if (!text.isEmpty() || !text.endsWith("\n")) { // Check for empty line or newline at the end
-                        allText.append(" ");
-                    }
+            for (int i = 1; i < index + 1; i++) {
+                String currentText = textsBuffer.get(i - 1);
+                allText.append(currentText);
+                if (!currentText.contains("\n") && !currentText.contains("Day")) {
+                    allText.append(" ");
                 }
-                allText.append(text);
-                isFirstEntry = !text.endsWith("\n"); // Update based on newline at the end
             }
         }
         return allText.toString();
