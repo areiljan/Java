@@ -11,7 +11,7 @@ public class BinaryFormatter implements TextFormatter {
         StringBuilder binaryString = new StringBuilder();
         char[] characters = text.toCharArray();
         for (int i = 0; i < characters.length; i++) {
-            if (i == characters.length - 2 && characters[i + 1] == 'n' && characters[i] == '/') {
+            if (i == characters.length && characters[i] ) {
                 break;
             }
             String binaryLetter = Integer.toBinaryString(characters[i]);

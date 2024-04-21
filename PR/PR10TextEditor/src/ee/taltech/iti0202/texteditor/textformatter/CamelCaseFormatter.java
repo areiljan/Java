@@ -20,7 +20,7 @@ public class CamelCaseFormatter implements TextFormatter {
                 if (i > 1 && word.length() >= 2) {
                     char prevChar = text.charAt(word.length() - 2);
                     char lastChar = text.charAt(word.length() - 1);
-                    if ((prevChar == '\n' || !Character.isLetterOrDigit(prevChar)) && (Character.isLetterOrDigit(lastChar) || lastChar == '\n')) {
+                    if ((prevChar == '\n' || prevChar == ',' || !Character.isLetterOrDigit(prevChar)) && (Character.isLetterOrDigit(lastChar) || lastChar == '\n')) {
                         retainPreviousSymbol = true;
                     }
                 } else if (i > 0 && word.length() >= 1) {
