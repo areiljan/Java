@@ -64,7 +64,7 @@ public class TextEditor {
             boolean isFirstEntry = true;
             for (String text : textsBuffer) { // Iterate over text directly
                 if (!isFirstEntry) {
-                    if (!text.isEmpty() && !text.endsWith("\n")) { // Check for empty line or newline at the end
+                    if (!text.isEmpty() || !text.endsWith("\n")) { // Check for empty line or newline at the end
                         allText.append(" ");
                     }
                 }
