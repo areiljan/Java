@@ -10,8 +10,8 @@ public class CamelCaseFormatter implements TextFormatter {
 //        String cleanedText = text.replaceAll("[^a-zA-Z0-9\\n](?!$|\\n)", " ");
 //        cleanedText = cleanedText.replaceAll("[^a-zA-Z0-9\n]+(?=\n)", "");
 
-        String cleanedText = text.replaceAll("[^a-zA-Z0-9\\.\\n]|\n(?!$)", " ");
-        cleanedText.replaceAll("(\\n)(?!.*\\1)", "");
+        String cleanedText = text.replaceAll("[^a-zA-Z0-9\n](?<!$|\n)", " ");
+        cleanedText = cleanedText.replaceAll("\\n(?!$)", " ");
 
         // Split the cleaned text into words
         String[] words = cleanedText.split(" ");
