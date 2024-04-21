@@ -9,8 +9,16 @@ public class BinaryFormatter implements TextFormatter {
         }
 
         StringBuilder binaryString = new StringBuilder();
-        for (char c : text.toCharArray()) {
-            binaryString.append(Integer.toBinaryString(c)).append(" ");
+        char[] characters = text.toCharArray();
+        for (int i = 0; i < characters.length; i++) {
+            if (i == characters.length - 2 && characters[i + 1] == 'n' && characters[i] == '/') {
+                break;
+            }
+            String binaryLetter = Integer.toBinaryString(characters[i]);
+            while (binaryLetter.length() < 8) {
+                binaryLetter = "0" + binaryLetter;
+            }
+            binaryString.append(binaryLetter);
         }
         return binaryString.toString();
     }

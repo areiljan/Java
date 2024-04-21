@@ -60,8 +60,8 @@ public class TextEditor {
      */
     public String getCurrentText() {
         StringBuilder allText = new StringBuilder();
-        for (int i = 1; i < index; i++) {
-            if (textsBuffer.size() < index) {
+        if (!textsBuffer.isEmpty()) {
+            for (int i = 1; i < index + 1; i++) {
                 allText.append(textsBuffer.get(i - 1));
             }
         }
@@ -74,7 +74,7 @@ public class TextEditor {
      */
     public String undo() {
         if (index > 0) {
-            index += 1;
+            index -= 1;
         }
         return getCurrentText();
     }
