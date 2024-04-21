@@ -64,7 +64,7 @@ public class TextEditor {
             for (int i = 1; i < index + 1; i++) {
                 String currentText = textsBuffer.get(i - 1);
                 allText.append(currentText);
-                if (!currentText.contains("\n") && !currentText.contains("Day")) {
+                if (!currentText.contains("\n") && !currentText.contains("Day") && i != index) {
                     allText.append(" ");
                 }
             }
