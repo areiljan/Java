@@ -62,10 +62,11 @@ public class TextEditor {
         StringBuilder allText = new StringBuilder();
         if (!textsBuffer.isEmpty()) {
             for (int i = 1; i < index + 1; i++) {
-                allText.append(textsBuffer.get(i - 1));
-                if (i != index) {
-                    allText.append(" ");
+                String currentText = textsBuffer.get(i - 1);
+                if (currentText.length() > 0 && currentText.charAt(currentText.length() - 1) == '\n') {
+                    currentText = currentText + " ";
                 }
+                allText.append(currentText);
             }
         }
         return allText.toString();
