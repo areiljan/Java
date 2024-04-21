@@ -13,6 +13,7 @@ public class BinaryFormatter implements TextFormatter {
         for (int i = 0; i < characters.length; i++) {
             char currentChar = characters[i];
             if (i == characters.length - 1 && currentChar == '\n') {
+                binaryString.append("\n");
                 break;
             }
             String binaryLetter = Integer.toBinaryString(characters[i]);
