@@ -61,12 +61,19 @@ public class TextEditor {
     public String getCurrentText() {
         StringBuilder allText = new StringBuilder();
         if (!textsBuffer.isEmpty()) {
-            for (int i = 1; i < index + 1; i++) {
-                String currentText = textsBuffer.get(i - 1);
-                if (currentText.length() > 0 && currentText.charAt(currentText.length() - 1) == '\n') {
-                    currentText = currentText + " ";
-                }
+            for (int i = 0; i < index; i++) {
+                String currentText = textsBuffer.get(i);
+                String nextText = (i + 1 < index) ? textsBuffer.get(i + 1) : null;
+
                 allText.append(currentText);
+                // Check if the current text ends with a newline and the next text starts with a newline
+                if (currentText.endsWith("\n") && nextText != null && nextText.startsWith("\n")) {
+                    allText.append(" ");
+                }
+            }
+            // Append the last text buffer if present
+            if (index > 0) {
+                allText.append(textsBuffer.get(index - 1));
             }
         }
         return allText.toString();
