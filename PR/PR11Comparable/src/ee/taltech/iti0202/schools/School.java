@@ -125,7 +125,9 @@ public abstract class School implements Comparable<School> {
      * Clears list containing all schools
      */
     public static void clearSchools() {
-        schoolList.clear();
+        if (schoolList != null) {
+            schoolList.clear();
+        }
     }
 
     /**
