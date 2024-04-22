@@ -19,6 +19,8 @@ public abstract class School implements Comparable<School> {
         this.name = name;
         this.location = location;
         this.studentList = new ArrayList<>();
+        // the schoolList will only be initialized once (because it is static)
+        this.schoolList = new ArrayList<>();
         addSchool(this);
     }
 
@@ -31,7 +33,7 @@ public abstract class School implements Comparable<School> {
             studentList.add(student);
         }
     }
-    
+
     /**
       * Returns name of school
       * @return name
@@ -107,7 +109,7 @@ public abstract class School implements Comparable<School> {
             return 0;
         }
     }
-    
+
     /**
      * Adds given school to a list containing all Schools.
      * Does not add it to list if it's already added.
