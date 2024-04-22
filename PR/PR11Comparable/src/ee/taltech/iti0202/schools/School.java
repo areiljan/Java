@@ -9,7 +9,7 @@ public abstract class School implements Comparable<School> {
     private final String name;
     private final Location location;
     private ArrayList<Student> studentList;
-    private static ArrayList<School> schoolList;
+    private static ArrayList<School> schoolList = new ArrayList<>();
     /**
      * Construct a new school with a name and Location.
      * @param name name of school
@@ -20,7 +20,6 @@ public abstract class School implements Comparable<School> {
         this.location = location;
         this.studentList = new ArrayList<>();
         // the schoolList will only be initialized once (because it is static)
-        this.schoolList = new ArrayList<>();
         addSchool(this);
     }
 
@@ -116,7 +115,9 @@ public abstract class School implements Comparable<School> {
      * @param school School
      */
     public static void addSchool(School school) {
-        schoolList.add(school);
+        if (!schoolList.contains(school)) {
+            schoolList.add(school);
+        }
     }
 
     /**
@@ -133,7 +134,6 @@ public abstract class School implements Comparable<School> {
      * @return sorted list of schools
      */
     public static List<School> getSchools() {
-        schoolList.sort(null);
         return schoolList;
     }
 }
