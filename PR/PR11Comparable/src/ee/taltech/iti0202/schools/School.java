@@ -81,7 +81,7 @@ public abstract class School implements Comparable<School> {
         }
 
         // Comparing country names
-        int countryComparison = location.country().compareTo(o.getLocation().country());
+        int countryComparison = o.getLocation().country().compareTo(location.country());
         if (countryComparison != 0) {
             return countryComparison;
         }
@@ -96,7 +96,7 @@ public abstract class School implements Comparable<School> {
         return this.name.compareTo(o.getName());
     }
 
-    // Method to determine school type priority
+    // Helper method to determine school type priority
     private int getTypePriority(School school) {
         if (school instanceof University) {
             return 5;
