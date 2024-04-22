@@ -98,11 +98,11 @@ public abstract class School implements Comparable<School> {
 
     // Helper method to determine school type priority
     private int getTypePriority(School school) {
-        if (school instanceof PrimarySchool) {
+        if (school instanceof University) {
             return 5;
         } else if (school instanceof SecondarySchool) {
             return 4;
-        } else if (school instanceof University) {
+        } else if (school instanceof PrimarySchool) {
             return 3;
         } else {
             return 0;
@@ -134,6 +134,7 @@ public abstract class School implements Comparable<School> {
      * @return sorted list of schools
      */
     public static List<School> getSchools() {
+        schoolList.sort(null);
         return schoolList;
     }
 }
