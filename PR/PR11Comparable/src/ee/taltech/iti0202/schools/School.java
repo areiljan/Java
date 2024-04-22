@@ -81,7 +81,7 @@ public abstract class School implements Comparable<School> {
         }
 
         // Comparing country names
-        int countryComparison = o.getLocation().country().compareTo(location.country());
+        int countryComparison = location.country().compareTo(o.getLocation().country());
         if (countryComparison != 0) {
             return countryComparison;
         }
