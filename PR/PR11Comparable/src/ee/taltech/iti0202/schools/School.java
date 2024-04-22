@@ -94,7 +94,7 @@ public abstract class School implements Comparable<School> {
         }
 
         // Comparing school names
-        return this.name.compareTo(o.name);
+        return this.name.compareTo(o.getName());
     }
 
     // Method to determine school type priority
@@ -116,9 +116,7 @@ public abstract class School implements Comparable<School> {
      * @param school School
      */
     public static void addSchool(School school) {
-        if (!schoolList.contains(school)) {
-            schoolList.add(school);
-        }
+        schoolList.add(school);
     }
 
     /**
