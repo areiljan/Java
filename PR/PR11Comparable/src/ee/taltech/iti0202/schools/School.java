@@ -98,11 +98,11 @@ public abstract class School implements Comparable<School> {
 
     // Helper method to determine school type priority
     private int getTypePriority(School school) {
-        if (school instanceof University) {
+        if (school instanceof PrimarySchool) {
             return 5;
         } else if (school instanceof SecondarySchool) {
             return 4;
-        } else if (school instanceof PrimarySchool) {
+        } else if (school instanceof University) {
             return 3;
         } else {
             return 0;
