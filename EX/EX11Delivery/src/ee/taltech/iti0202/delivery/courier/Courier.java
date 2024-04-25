@@ -15,6 +15,7 @@ public class Courier {
     private Location target; // target location
     private int distanceToTarget; // distance left to move
 
+
     public Courier(String name, Location startingLocation) {
         this.name = name;
         location = startingLocation;
@@ -54,10 +55,24 @@ public class Courier {
     }
 
     /**
+     * Return currentPackages.
+     * @return currentPackages.
+     */
+    public List<String> currentPackages() {
+        return currentPackages;
+    }
+
+    /**
      * Move to the target.
      */
     public void move() {
-        // move
+        if (distanceToTarget > 0) {
+            distanceToTarget -= 20;
+        }
+
+        if (distanceToTarget <= 0) {
+            location = target;
+        }
     }
 
 

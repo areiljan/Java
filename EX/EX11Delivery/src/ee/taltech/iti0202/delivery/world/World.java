@@ -1,5 +1,6 @@
 package ee.taltech.iti0202.delivery.world;
 
+import ee.taltech.iti0202.delivery.action.Action;
 import ee.taltech.iti0202.delivery.courier.Courier;
 import ee.taltech.iti0202.delivery.location.Location;
 import ee.taltech.iti0202.delivery.strategy.Strategy;
@@ -84,11 +85,13 @@ public class World {
                 // courier at location
                 Action action = courier.getStrategy().getAction();
                 // deposit
-
+                for (Packet packet : courier.get)
                 // take
 
                 // setTarget
                 courier.setTarget();
+            } else {
+                courier.move();
             }
         }
     }
