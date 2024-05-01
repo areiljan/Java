@@ -13,21 +13,52 @@ import java.util.stream.Collectors;
 
 public class Hotel {
     private final String name;
-
+    private final String city;
+    private final String country;
+    private ReservationSystem reservationSystem;
     private ArrayList<Room> rooms;
     private ArrayList<Client> clients;
     private ArrayList<Booking> bookings;
     private ArrayList<Review> reviews;
 
+
     /**
      * Hotel constructor.
      */
-    public Hotel(String name) {
+    public Hotel(String name, String country, String city, ReservationSystem reservationSystem) {
         this.name = name;
+        this.country = country;
+        this.city = city;
         this.rooms = new ArrayList<>();
         this.clients = new ArrayList<>();
         this.bookings = new ArrayList<>();
         this.reviews = new ArrayList<>();
+        this.reservationSystem = reservationSystem;
+        reservationSystem.addHotel(this);
+    }
+
+    /**
+     * City getter.
+     * @return city.
+     */
+    public String getCity() {
+        return city;
+    }
+
+    /**
+     * Country getter.
+     * @return country.
+     */
+    public String getCountry() {
+        return country;
+    }
+
+    /**
+     * BookingSystem getter.
+     * @return bookingSystem.
+     */
+    public ReservationSystem getBookingSystem() {
+        return reservationSystem;
     }
 
     /**
@@ -127,7 +158,7 @@ public class Hotel {
 
     /**
      * Order clients.
-     * The clients, the first criterion for ordering is the amount of bookings per client in descending order.
+     * The clients, the first criteria for ordering is the amount of bookings per client in descending order.
      * If the amount of bookings is the same then order by the rating that the client has given the hotel.
      */
     public List<Client> orderClients() {

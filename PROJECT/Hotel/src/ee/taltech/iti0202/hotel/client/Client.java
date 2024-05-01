@@ -1,14 +1,10 @@
 package ee.taltech.iti0202.hotel.client;
 
 import ee.taltech.iti0202.hotel.Hotel;
+import ee.taltech.iti0202.hotel.ReservationSystem;
 import ee.taltech.iti0202.hotel.booking.Booking;
-import ee.taltech.iti0202.hotel.exceptions.CannotBookHotelIfNotClientException;
-import ee.taltech.iti0202.hotel.exceptions.CannotCancelBookingIfNotBooked;
-import ee.taltech.iti0202.hotel.exceptions.CannotWriteReviewIfNotBookedInHotelException;
-import ee.taltech.iti0202.hotel.exceptions.NotEnoughMoneyToBookException;
-import ee.taltech.iti0202.hotel.exceptions.OverlappingBookingException;
-import ee.taltech.iti0202.hotel.exceptions.RatingOutOfBoundsException;
-import ee.taltech.iti0202.hotel.exceptions.ReviewAlreadyWrittenException;
+import ee.taltech.iti0202.hotel.booking.Service;
+import ee.taltech.iti0202.hotel.exceptions.*;
 import ee.taltech.iti0202.hotel.review.Review;
 import ee.taltech.iti0202.hotel.room.Room;
 
@@ -21,19 +17,21 @@ import java.util.Set;
 public class Client {
     private final ArrayList<Booking> clientBookings;
     private final ArrayList<Review> clientReviews;
-    private Integer money;
+    private float money;
     private String clientName;
     private Hotel currentHotel;
+    private ReservationSystem reservationSystem;
 
     /**
      * Client constructor.
      */
-    public Client(String clientName, Integer money) {
+    public Client(String clientName, Integer money, ReservationSystem reservationSystem) {
         this.clientName = clientName;
         this.money = money;
         this.clientBookings = new ArrayList<>();
         this.clientReviews = new ArrayList<>();
         this.currentHotel = null;
+        this.reservationSystem = reservationSystem;
     }
 
     /**
@@ -78,7 +76,7 @@ public class Client {
      * Money getter.
      * @return - money amount.
      */
-    public Integer getMoney() {
+    public float getMoney() {
         return money;
     }
 
@@ -108,10 +106,17 @@ public class Client {
      * @throws OverlappingBookingException - thrown if the date is taken.
      * @throws NotEnoughMoneyToBookException - thrown if the client does not have enough money.
      */
-    public void bookRoom(Room roomToBook, LocalDate dateToBook)
+    public void bookRoom(Room roomToBook, LocalDate dateToBook, ArrayList<Service> services)
             throws OverlappingBookingException, NotEnoughMoneyToBookException,
             CannotBookHotelIfNotClientException {
-        if (money < roomToBook.getRoomType().getPrice()) {
+        float discount = checkForDiscount(currentHotel);
+        // check for service cost
+        int serviceTotalCost = 0;
+        for (Service service : services) {
+            serviceTotalCost += service.getPrice().intValue();
+        }
+        // if not enough money for a room and services, throw exception.
+        if (money < (roomToBook.getRoomType().getPrice().intValue() * discount) + serviceTotalCost) {
             throw new NotEnoughMoneyToBookException(money, roomToBook.getRoomType());
         } else if (currentHotel == null) {
             // The requirement for the booker to be a client is not specified in the assignment,
@@ -126,11 +131,74 @@ public class Client {
             }
 
             // No overlapping bookings found, add the new booking
-            Booking newBooking = new Booking(currentHotel, roomToBook, this, dateToBook);
+            Booking newBooking = new Booking.BookingBuilder(currentHotel, roomToBook, this, dateToBook)
+                    .addServices(services)
+                    .build();
+
             clientBookings.add(newBooking);
             currentHotel.addBooking(newBooking);
-            money -= roomToBook.getRoomType().getPrice();
+            money -= (roomToBook.getRoomType().getPrice().intValue() * discount) + serviceTotalCost;
         }
+    }
+
+
+    /**
+     * Check for discount.
+     * @return - the discount as multiplier. 0 - 1
+     */
+    public float checkForDiscount(Hotel hotelToCheckFor) {
+        List<Client> clients = hotelToCheckFor.orderClients();
+        if (clients.size() > 3) {
+            if (clients.get(0).equals(this)) {
+                return 0.85f;
+            } else if (clients.get(1).equals(this)) {
+                return 0.9f;
+            } else if (clients.get(2).equals(this)) {
+                return 0.95f;
+            }
+        }
+        // full price.
+        return 1;
+    }
+
+    /**
+     * Search for a hotel using location.
+     */
+    public List<Hotel> filterHotels(String country, String city) {
+        return reservationSystem.filterByLocation(country, city);
+    }
+
+    /**
+     * Search for a hotel using rating.
+     */
+    public List<Hotel> filterHotels(Integer rating) {
+        return reservationSystem.filterByRating(rating);
+    }
+
+    /**
+     * Search for a hotel using rating.
+     */
+    public List<Hotel> filterHotels(Integer rating, String country, String city) {
+        Set<Hotel> hotelsWithSufficientRatings = new HashSet<>(reservationSystem.filterByRating(rating));
+        Set<Hotel> hotelsInRightLocation = new HashSet<>(reservationSystem.filterByLocation(country, city));
+        hotelsWithSufficientRatings.retainAll(hotelsInRightLocation);
+        return new ArrayList<>(hotelsWithSufficientRatings);
+    }
+
+    /**
+     * Search for rooms in the specified price range.
+     * @param hotel - where to find rooms.
+     * @param budget - the budget of the rooms.
+     */
+    public ArrayList<Room> filterRooms(Hotel hotel, Integer budget) {
+        ArrayList<Room> roomsInPriceRange = new ArrayList<>();
+        for (Room room : hotel.getRooms()) {
+            float discount = checkForDiscount(hotel);
+            if (room.getRoomType().getPrice().intValue() * discount <= budget) {
+                roomsInPriceRange.add(room);
+            }
+        }
+        return roomsInPriceRange;
     }
 
     /**
@@ -146,7 +214,7 @@ public class Client {
             if (existingBooking.getRoom().equals(roomToBook) && existingBooking.getBookDate().equals(dateToCancel)) {
                 clientBookings.remove(existingBooking);
                 hotelToCancel.removeBooking(existingBooking);
-                money += roomToBook.getRoomType().getPrice();
+                money += roomToBook.getRoomType().getPrice().intValue();
                 return;
             }
         }

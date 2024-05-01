@@ -12,7 +12,7 @@ public class NotEnoughMoneyToBookException extends Exception {
      * @param clientMoney - clients balance.
      * @param roomType - room, which the client wants to book.
      */
-    public NotEnoughMoneyToBookException(Integer clientMoney, Room.RoomType roomType) {
+    public NotEnoughMoneyToBookException(float clientMoney, Room.RoomType roomType) {
         super("The client has " + clientMoney + " Euros, but you need "
                 + roomType.getPrice() + " Euros to book a " + roomType);
     }
