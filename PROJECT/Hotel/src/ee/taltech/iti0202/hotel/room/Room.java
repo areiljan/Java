@@ -35,7 +35,7 @@ public class Room {
 
         /**
          * Rooms have different prices.
-         * @param price - price of the room.
+         * @param price - price of the room per day.
          */
         RoomType(BigDecimal price) {
             this.price = price;

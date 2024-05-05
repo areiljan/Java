@@ -7,9 +7,10 @@ public class OverlappingBookingException extends Exception {
 
     /**
      * Booking for when the room is already booked on that date.
-     * @param dateToBook - which date the attempt was made.
+     * @param startDateToBook - which date the booking will start.
+     * @param endDateToBook - which date the booking will end.
      */
-    public OverlappingBookingException(LocalDate dateToBook) {
-        super("Booking period " + dateToBook + " overlaps with an existing booking.");
+    public OverlappingBookingException(LocalDate startDateToBook, LocalDate endDateToBook) {
+        super("Booking period " + startDateToBook + "to" + endDateToBook + " overlaps with an existing booking.");
     }
 }

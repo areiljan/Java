@@ -9,10 +9,13 @@ import ee.taltech.iti0202.hotel.review.Review;
 import ee.taltech.iti0202.hotel.room.Room;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import static ee.taltech.iti0202.hotel.Hotel.isOverlap;
 
 public class Client {
     private final ArrayList<Booking> clientBookings;
@@ -102,36 +105,44 @@ public class Client {
     /**
      * Book a room in the hotel.
      * @param roomToBook - which room.
-     * @param dateToBook - which date.
+     * @param startDateToBook - which date the booking will start.
+     * @param endDateToBook - which date the booking will end.
      * @throws OverlappingBookingException - thrown if the date is taken.
      * @throws NotEnoughMoneyToBookException - thrown if the client does not have enough money.
      */
-    public void bookRoom(Room roomToBook, LocalDate dateToBook, ArrayList<Service> services)
+    public void bookRoom(Room roomToBook, LocalDate startDateToBook, LocalDate endDateToBook, ArrayList<Service> services)
             throws OverlappingBookingException, NotEnoughMoneyToBookException,
             CannotBookHotelIfNotClientException {
-        float discount = checkForDiscount(currentHotel);
+        if (currentHotel == null) {
+            // The requirement for the booker to be a client is not specified in the assignment,
+            // but I assumed it to be logical.
+            throw new CannotBookHotelIfNotClientException(this);
+        }
+
+        float discount = checkForDiscount(currentHotel, startDateToBook, endDateToBook);
+        int daysBetween = (int) ChronoUnit.DAYS.between(startDateToBook, endDateToBook);
+
         // check for service cost
         int serviceTotalCost = 0;
         for (Service service : services) {
             serviceTotalCost += service.getPrice().intValue();
         }
+
         // if not enough money for a room and services, throw exception.
-        if (money < (roomToBook.getRoomType().getPrice().intValue() * discount) + serviceTotalCost) {
+        if (money < (daysBetween * roomToBook.getRoomType().getPrice().intValue() * discount) + serviceTotalCost) {
             throw new NotEnoughMoneyToBookException(money, roomToBook.getRoomType());
-        } else if (currentHotel == null) {
-            // The requirement for the booker to be a client is not specified in the assignment,
-            // but I assumed it to be logical.
-            throw new CannotBookHotelIfNotClientException(this);
         } else {
             for (Booking existingBooking : currentHotel.getBookings()) {
                 // Check if the new booking overlaps with an existing booking, if it does, throw a custom exception.
-                if (dateToBook.equals(existingBooking.getBookDate()) && roomToBook.equals(existingBooking.getRoom())) {
-                    throw new OverlappingBookingException(dateToBook);
+                if (roomToBook.equals(existingBooking.getRoom())) {
+                    // Check for overlap in date ranges
+                    if (isOverlap(existingBooking.getStartDate(), existingBooking.getEndDate(), startDateToBook, endDateToBook)) {
+                        throw new OverlappingBookingException(startDateToBook, endDateToBook);
+                    }
                 }
             }
-
             // No overlapping bookings found, add the new booking
-            Booking newBooking = new Booking.BookingBuilder(currentHotel, roomToBook, this, dateToBook)
+            Booking newBooking = new Booking.BookingBuilder(currentHotel, roomToBook, this, startDateToBook, endDateToBook)
                     .addServices(services)
                     .build();
 
@@ -146,19 +157,31 @@ public class Client {
      * Check for discount.
      * @return - the discount as multiplier. 0 - 1
      */
-    public float checkForDiscount(Hotel hotelToCheckFor) {
+    public float checkForDiscount(Hotel hotelToCheckFor, LocalDate startDate, LocalDate endDate) {
+        float topClientDiscount = 0.0f;
+        // discounts from being a top client.
         List<Client> clients = hotelToCheckFor.orderClients();
         if (clients.size() > 3) {
             if (clients.get(0).equals(this)) {
-                return 0.85f;
+                topClientDiscount = 0.15f;
             } else if (clients.get(1).equals(this)) {
-                return 0.9f;
+                topClientDiscount = 0.10f;
             } else if (clients.get(2).equals(this)) {
-                return 0.95f;
+                topClientDiscount = 0.5f;
+            } else {
+                topClientDiscount = 0;
             }
+        } else {
+            topClientDiscount = 0;
         }
-        // full price.
-        return 1;
+        
+        // discounts from strategies
+        if (hotelToCheckFor.getStrategy() == null) {
+            return 1.0f - topClientDiscount;
+        } else {
+            float strategyDiscount = hotelToCheckFor.getStrategy().getDiscount(hotelToCheckFor, startDate, endDate);
+            return 1.0f - topClientDiscount - strategyDiscount;
+        }
     }
 
     /**
@@ -189,12 +212,15 @@ public class Client {
      * Search for rooms in the specified price range.
      * @param hotel - where to find rooms.
      * @param budget - the budget of the rooms.
+     * @param startDate - the date that the room booking would start.
+     * @param endDate - the date that the room booking would end.
      */
-    public ArrayList<Room> filterRooms(Hotel hotel, Integer budget) {
+    public ArrayList<Room> filterRooms(Hotel hotel, LocalDate startDate, LocalDate endDate, Integer budget) {
         ArrayList<Room> roomsInPriceRange = new ArrayList<>();
+        int daysBetween = (int) ChronoUnit.DAYS.between(startDate, endDate);
         for (Room room : hotel.getRooms()) {
-            float discount = checkForDiscount(hotel);
-            if (room.getRoomType().getPrice().intValue() * discount <= budget) {
+            float discount = checkForDiscount(hotel, startDate, endDate);
+            if (daysBetween * room.getRoomType().getPrice().intValue() * discount <= budget) {
                 roomsInPriceRange.add(room);
             }
         }
@@ -205,13 +231,14 @@ public class Client {
      * Cancel a booking.
      * The client can currently cancel a booking from a hotel, where he has already left.
      * @param hotelToCancel - which hotel.
-     * @param dateToCancel - which date.
+     * @param dateToCancel - which date. If it overlaps with a booking, cancel it.
      * @throws CannotCancelBookingIfNotBooked - thrown if the client has not booked this.
      */
     public void cancelBooking(Hotel hotelToCancel, Room roomToBook, LocalDate dateToCancel)
             throws CannotCancelBookingIfNotBooked {
         for (Booking existingBooking : clientBookings) {
-            if (existingBooking.getRoom().equals(roomToBook) && existingBooking.getBookDate().equals(dateToCancel)) {
+            if (existingBooking.getRoom().equals(roomToBook) &&
+                    isOverlap(existingBooking.getStartDate(), existingBooking.getEndDate(), dateToCancel, dateToCancel)) {
                 clientBookings.remove(existingBooking);
                 hotelToCancel.removeBooking(existingBooking);
                 money += roomToBook.getRoomType().getPrice().intValue();

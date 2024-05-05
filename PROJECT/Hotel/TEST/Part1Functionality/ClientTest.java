@@ -21,7 +21,7 @@ class ClientTest {
         Client client1 = new Client("Joonas", 5000, reservationSystem);
 
         Assertions.assertThrows(CannotBookHotelIfNotClientException.class,
-                () -> client1.bookRoom(suiteRoom, LocalDate.of(2024, 3, 28), new ArrayList<Service>()));
+                () -> client1.bookRoom(suiteRoom, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 28), new ArrayList<Service>()));
     }
 
     @Test
@@ -33,7 +33,7 @@ class ClientTest {
         Client client1 = new Client("Joonas", 5000, reservationSystem);
 
         hotel.addClient(client1);
-        client1.bookRoom(suiteRoom, LocalDate.of(2024, 3, 28), new ArrayList<Service>());
+        client1.bookRoom(suiteRoom, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 29), new ArrayList<Service>());
 
         Assertions.assertEquals(0, client1.getMoney());
     }
@@ -48,7 +48,7 @@ class ClientTest {
         hotel.addClient(client1);
 
         Assertions.assertThrows(NotEnoughMoneyToBookException.class,
-                () -> client1.bookRoom(economyRoom, LocalDate.of(2024, 3, 28), new ArrayList<Service>()));
+                () -> client1.bookRoom(economyRoom, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 29), new ArrayList<Service>()));
     }
 
     @Test
@@ -62,10 +62,10 @@ class ClientTest {
 
         hotel.addClient(client1);
         hotel.addClient(client2);
-        client1.bookRoom(economyRoom, LocalDate.of(2024, 3, 28), new ArrayList<Service>());
+        client1.bookRoom(economyRoom, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 28), new ArrayList<Service>());
 
         Assertions.assertThrows(OverlappingBookingException.class,
-                () -> client2.bookRoom(economyRoom, LocalDate.of(2024, 3, 28), new ArrayList<Service>()));
+                () -> client2.bookRoom(economyRoom, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 28), new ArrayList<Service>()));
     }
 
     @Test
@@ -77,7 +77,7 @@ class ClientTest {
         Client client1 = new Client("Joonas", 2000, reservationSystem);
 
         hotel.addClient(client1);
-        client1.bookRoom(economyRoom, LocalDate.of(2024, 3, 28), new ArrayList<Service>());
+        client1.bookRoom(economyRoom, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 28), new ArrayList<Service>());
         client1.cancelBooking(hotel, economyRoom, LocalDate.of(2024, 3, 28));
 
         Assertions.assertEquals(0, hotel.getBookings().size());
@@ -92,7 +92,7 @@ class ClientTest {
         Client client1 = new Client("Joonas", 2000, reservationSystem);
 
         hotel.addClient(client1);
-        client1.bookRoom(economyRoom, LocalDate.of(2024, 3, 28), new ArrayList<Service>());
+        client1.bookRoom(economyRoom, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 28), new ArrayList<Service>());
         client1.cancelBooking(hotel, economyRoom, LocalDate.of(2024, 3, 28));
 
         Assertions.assertEquals(2000, client1.getMoney());
@@ -134,7 +134,7 @@ class ClientTest {
         Client client1 = new Client("Joonas", 2000, reservationSystem);
 
         hotel.addClient(client1);
-        client1.bookRoom(economyRoom, LocalDate.now(), new ArrayList<Service>());
+        client1.bookRoom(economyRoom, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 28), new ArrayList<Service>());
         client1.writeReview(hotel, "Good", 5);
 
         Assertions.assertThrows(ReviewAlreadyWrittenException.class,
@@ -150,7 +150,7 @@ class ClientTest {
         Client client1 = new Client("Joonas", 2000, reservationSystem);
 
         hotel.addClient(client1);
-        client1.bookRoom(economyRoom, LocalDate.of(2024, 3, 28), new ArrayList<Service>());
+        client1.bookRoom(economyRoom, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 28), new ArrayList<Service>());
 
         Assertions.assertThrows(RatingOutOfBoundsException.class,
                 () -> client1.writeReview(hotel, "Horrible place to stay at", 6));
@@ -165,7 +165,7 @@ class ClientTest {
         Client client1 = new Client("Joonas", 2000, reservationSystem);
 
         hotel.addClient(client1);
-        client1.bookRoom(economyRoom, LocalDate.of(2024, 3, 28), new ArrayList<Service>());
+        client1.bookRoom(economyRoom, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 28), new ArrayList<Service>());
 
         Assertions.assertThrows(RatingOutOfBoundsException.class,
                 () -> client1.writeReview(hotel, "Horrible place to stay at", -1));
@@ -182,10 +182,10 @@ class ClientTest {
         Client client1 = new Client("Joonas", 2000, reservationSystem);
 
         hotel1.addClient(client1);
-        client1.bookRoom(economyRoom, LocalDate.of(2024, 3, 28), new ArrayList<Service>());
+        client1.bookRoom(economyRoom, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 28), new ArrayList<Service>());
         client1.writeReview(hotel1, "Wonderful place to stay at.", 5);
         hotel2.addClient(client1);
-        client1.bookRoom(economyRoom, LocalDate.of(2024, 3, 28), new ArrayList<Service>());
+        client1.bookRoom(economyRoom, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 28), new ArrayList<Service>());
         client1.writeReview(hotel2, "Wonderful place to stay at.", 5);
 
         Assertions.assertEquals(2, client1.getReviews().size());
@@ -201,8 +201,8 @@ class ClientTest {
         Client client1 = new Client("Joonas", 6000, reservationSystem);
 
         hotel.addClient(client1);
-        client1.bookRoom(economyRoom, LocalDate.of(2024, 3, 28), new ArrayList<Service>());
-        client1.bookRoom(suiteRoom, LocalDate.of(2024, 3, 28), new ArrayList<Service>());
+        client1.bookRoom(economyRoom, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 28), new ArrayList<Service>());
+        client1.bookRoom(suiteRoom, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 28), new ArrayList<Service>());
 
         Assertions.assertEquals(2, client1.getBookings().size());
     }

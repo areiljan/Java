@@ -9,31 +9,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Booking {
-    private final LocalDate bookDate;
     private final Room roomToBook;
     private final Client clientWhoBooked;
     private final Hotel hotelToBook;
     private final List<Service> serviceList;
+    private final LocalDate startDate;
+    private final LocalDate endDate;
 
     /**
      * Booking initializer.
      * @param hotelToBook - which hotel to make a booking in.
      * @param roomToBook - which room.
      * @param clientWhoBooked - the client who booked the room.
-     * @param bookDate - the date of booking.
+     * @param startDate - the start date of booking.
+     * @param endDate - the end date of booking.
      */
-    public Booking(Hotel hotelToBook, Room roomToBook, Client clientWhoBooked, LocalDate bookDate, List<Service> serviceList) {
+    public Booking(Hotel hotelToBook, Room roomToBook, Client clientWhoBooked, LocalDate startDate, LocalDate endDate, List<Service> serviceList) {
         this.hotelToBook = hotelToBook;
         this.roomToBook = roomToBook;
         this.clientWhoBooked = clientWhoBooked;
-        this.bookDate = bookDate;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.serviceList = serviceList;
     }
 
-    public LocalDate getBookDate() {
-        return bookDate;
+    public LocalDate getStartDate() {
+        return startDate;
     }
-
+    public LocalDate getEndDate() {
+        return endDate;
+    }
     public Room getRoom() {
         return roomToBook;
     }
@@ -51,19 +56,21 @@ public class Booking {
     }
 
     public static class BookingBuilder {
+        private final LocalDate startDate;
+        private final LocalDate endDate;
         private Hotel hotelToBook;
         private Room roomToBook;
         private Client clientWhoBooked;
-        private LocalDate bookDate;
 
 
         private List<Service> serviceList = new ArrayList<>();
         public BookingBuilder(Hotel hotelToBook, Room roomToBook, Client clientWhoBooked,
-                              LocalDate bookDate) {
+                              LocalDate startDate, LocalDate endDate) {
             this.hotelToBook = hotelToBook;
             this.roomToBook = roomToBook;
             this.clientWhoBooked = clientWhoBooked;
-            this.bookDate = bookDate;
+            this.startDate = startDate;
+            this.endDate = endDate;
         }
 
         public BookingBuilder addServices(List<Service> services) {
@@ -72,7 +79,7 @@ public class Booking {
         }
 
         public Booking build() {
-            return new Booking(hotelToBook, roomToBook, clientWhoBooked, bookDate, serviceList);
+            return new Booking(hotelToBook, roomToBook, clientWhoBooked, startDate, endDate, serviceList);
         }
     }
 }

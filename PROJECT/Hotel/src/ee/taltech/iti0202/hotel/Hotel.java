@@ -1,9 +1,11 @@
 package ee.taltech.iti0202.hotel;
 
 import ee.taltech.iti0202.hotel.booking.Booking;
+import ee.taltech.iti0202.hotel.booking.Service;
 import ee.taltech.iti0202.hotel.client.Client;
 import ee.taltech.iti0202.hotel.review.Review;
 import ee.taltech.iti0202.hotel.room.Room;
+import ee.taltech.iti0202.hotel.strategies.Strategy;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ public class Hotel {
     private ArrayList<Client> clients;
     private ArrayList<Booking> bookings;
     private ArrayList<Review> reviews;
+    private Strategy strategy;
 
 
     /**
@@ -33,8 +36,24 @@ public class Hotel {
         this.clients = new ArrayList<>();
         this.bookings = new ArrayList<>();
         this.reviews = new ArrayList<>();
+        this.strategy = null;
         this.reservationSystem = reservationSystem;
         reservationSystem.addHotel(this);
+    }
+
+    /**
+     * Set current Strategy.
+     */
+    public void setStrategy(Strategy strategy) {
+        this.strategy = strategy;
+    }
+
+    /**
+     * Get the current Strategy.
+     * @return - strategy.
+     */
+    public Strategy getStrategy() {
+        return strategy;
     }
 
     /**
@@ -168,8 +187,33 @@ public class Hotel {
                                 .reversed()
                                 .thenComparingInt(client -> client.getRatingAboutHotel(this))
                                 .reversed()
+                                .thenComparingDouble(client -> calculateAverageServiceCost(client))
+                                .reversed()
                 )
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Calculate the average cost of service for a client.
+     * @param client - the client whose average cost is to be calculated.
+     * @return - average score as double.
+     */
+    private double calculateAverageServiceCost(Client client) {
+        List<Service> services = new ArrayList<>();
+        for (Booking booking : client.getBookings()) {
+            for (Service service : booking.getServices()) {
+                services.add(service);
+            }
+        }
+        if (services.size() == 0) {
+            return 0.0;
+        }
+        double totalCost = 0.0;
+        for (Service service : services) {
+            double price = service.getPrice().doubleValue();
+            totalCost += price;
+        }
+        return totalCost / services.size();
     }
 
     /**
@@ -180,7 +224,7 @@ public class Hotel {
         for (Room room : rooms) {
             boolean isVacant = true;
             for (Booking existingBooking : bookings) {
-                if (existingBooking.getBookDate().equals(dateToFind) && existingBooking.getRoom().equals(room)) {
+                if (isOverlap(existingBooking.getStartDate(), existingBooking.getEndDate(), dateToFind, dateToFind) && existingBooking.getRoom().equals(room)) {
                     isVacant = false;
                     break;
                 }
@@ -202,7 +246,7 @@ public class Hotel {
         for (Room room : rooms) {
             boolean isVacant = true;
             for (Booking existingBooking : bookings) {
-                if (existingBooking.getBookDate().equals(currentDate)
+                if (isOverlap(existingBooking.getStartDate(), existingBooking.getEndDate(), currentDate, currentDate)
                         && existingBooking.getRoom().equals(room)) {
                     isVacant = false;
                     break;
@@ -223,7 +267,7 @@ public class Hotel {
         for (Room room : rooms) {
             boolean isVacant = true;
             for (Booking existingBooking : bookings) {
-                if (existingBooking.getBookDate().equals(dateToFind)
+                if (isOverlap(existingBooking.getStartDate(), existingBooking.getEndDate(), dateToFind, dateToFind)
                         && existingBooking.getRoom().equals(room)) {
                     isVacant = false;
                     break;
@@ -235,4 +279,17 @@ public class Hotel {
         }
         return vacantRooms;
     }
+
+    /**
+     * Helper function to check for overlap of dates.
+     * @param start1 - start date of the first booking.
+     * @param finish1 - finish date of the first booking.
+     * @param start2 - start date of the second booking.
+     * @param finish2 - finish date of the second booking.
+     * @return - true if there is overlap.
+     */
+    public static boolean isOverlap(LocalDate start1, LocalDate finish1, LocalDate start2, LocalDate finish2) {
+        return !start1.isAfter(finish2) && !finish1.isBefore(start2);
+    }
+
 }

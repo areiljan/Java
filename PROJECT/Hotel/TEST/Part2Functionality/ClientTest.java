@@ -29,8 +29,8 @@ public class ClientTest {
         hotel.addClient(client1);
         hotel.addClient(client2);
         hotel.addClient(client3);
-        client1.bookRoom(suiteRoom, LocalDate.of(2024, 3, 28), new ArrayList<Service>());
-        client1.bookRoom(economyRoom, LocalDate.of(2024, 3, 29), new ArrayList<Service>());
+        client1.bookRoom(suiteRoom, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 28), new ArrayList<Service>());
+        client1.bookRoom(economyRoom, LocalDate.of(2024, 3, 29), LocalDate.of(2024, 3, 29), new ArrayList<Service>());
 
         Assertions.assertEquals(0, client1.getMoney());
     }
@@ -49,17 +49,17 @@ public class ClientTest {
         hotel.addClient(client1);
         hotel.addClient(client2);
         hotel.addClient(client3);
-        client1.bookRoom(suiteRoom, LocalDate.of(2024, 3, 28), new ArrayList<Service>());
+        client1.bookRoom(suiteRoom, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 28), new ArrayList<Service>());
         client1.writeReview(hotel, "bad", 1);
-        client2.bookRoom(suiteRoom, LocalDate.of(2024, 3, 29), new ArrayList<Service>());
+        client2.bookRoom(suiteRoom, LocalDate.of(2024, 3, 29), LocalDate.of(2024, 3, 29), new ArrayList<Service>());
         client2.writeReview(hotel, "bad", 1);
-        client3.bookRoom(suiteRoom, LocalDate.of(2024, 3, 30), new ArrayList<Service>());
+        client3.bookRoom(suiteRoom, LocalDate.of(2024, 3, 30), LocalDate.of(2024, 3, 30), new ArrayList<Service>());
         client3.writeReview(hotel, "bad", 1);
 
         Client client4 = new Client("Soomas", 5000, reservationSystem);
         hotel.addClient(client4);
         // now eligible to get a discount of 15%.
-        client4.bookRoom(suiteRoom, LocalDate.of(2024, 3, 31), new ArrayList<Service>());
+        client4.bookRoom(suiteRoom, LocalDate.of(2024, 3, 31), LocalDate.of(2024, 3, 31), new ArrayList<Service>());
         Assertions.assertEquals(750, client4.getMoney());
     }
 
@@ -77,17 +77,17 @@ public class ClientTest {
         hotel.addClient(client1);
         hotel.addClient(client2);
         hotel.addClient(client3);
-        client1.bookRoom(suiteRoom, LocalDate.of(2024, 3, 28), new ArrayList<Service>());
+        client1.bookRoom(suiteRoom, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 28), new ArrayList<Service>());
         client1.writeReview(hotel, "bad", 1);
-        client2.bookRoom(suiteRoom, LocalDate.of(2024, 3, 29), new ArrayList<Service>());
+        client2.bookRoom(suiteRoom, LocalDate.of(2024, 3, 29), LocalDate.of(2024, 3, 29), new ArrayList<Service>());
         client2.writeReview(hotel, "bad", 1);
-        client3.bookRoom(suiteRoom, LocalDate.of(2024, 3, 30), new ArrayList<Service>());
+        client3.bookRoom(suiteRoom, LocalDate.of(2024, 3, 30), LocalDate.of(2024, 3, 30), new ArrayList<Service>());
         client3.writeReview(hotel, "bad", 1);
 
         Client client4 = new Client("Soomas", 5000, reservationSystem);
         hotel.addClient(client4);
         // now eligible to get a discount of 10%.
-        client1.bookRoom(suiteRoom, LocalDate.of(2024, 3, 31), new ArrayList<Service>());
+        client1.bookRoom(suiteRoom, LocalDate.of(2024, 3, 31), LocalDate.of(2024, 3, 31), new ArrayList<Service>());
         Assertions.assertEquals(500, client1.getMoney());
     }
 
@@ -105,17 +105,17 @@ public class ClientTest {
         hotel.addClient(client1);
         hotel.addClient(client2);
         hotel.addClient(client3);
-        client1.bookRoom(suiteRoom, LocalDate.of(2024, 3, 28), new ArrayList<Service>());
+        client1.bookRoom(suiteRoom, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 29), new ArrayList<Service>());
         client1.writeReview(hotel, "bad", 1);
-        client2.bookRoom(suiteRoom, LocalDate.of(2024, 3, 29), new ArrayList<Service>());
+        client2.bookRoom(suiteRoom, LocalDate.of(2024, 3, 29), LocalDate.of(2024, 3, 29), new ArrayList<Service>());
         client2.writeReview(hotel, "bad", 1);
-        client3.bookRoom(suiteRoom, LocalDate.of(2024, 3, 30), new ArrayList<Service>());
+        client3.bookRoom(suiteRoom, LocalDate.of(2024, 3, 30), LocalDate.of(2024, 3, 29), new ArrayList<Service>());
         client3.writeReview(hotel, "bad", 1);
 
         Client client4 = new Client("Soomas", 5000, reservationSystem);
         hotel.addClient(client4);
         // now eligible to get a discount of 5%.
-        client2.bookRoom(suiteRoom, LocalDate.of(2024, 3, 31), new ArrayList<Service>());
+        client2.bookRoom(suiteRoom, LocalDate.of(2024, 3, 31), LocalDate.of(2024, 3, 31), new ArrayList<Service>());
         Assertions.assertEquals(250, client2.getMoney());
     }
 
@@ -152,11 +152,11 @@ public class ClientTest {
         hotel1.addClient(client1);
         hotel2.addClient(client2);
         hotel3.addClient(client3);
-        client1.bookRoom(suiteRoom, LocalDate.of(2024, 3, 28), new ArrayList<Service>());
+        client1.bookRoom(suiteRoom, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 28), new ArrayList<Service>());
         client1.writeReview(hotel1, "Best", 4);
-        client2.bookRoom(suiteRoom, LocalDate.of(2024, 3, 29), new ArrayList<Service>());
+        client2.bookRoom(suiteRoom, LocalDate.of(2024, 3, 29), LocalDate.of(2024, 3, 29), new ArrayList<Service>());
         client2.writeReview(hotel2, "Worst", 1);
-        client3.bookRoom(suiteRoom, LocalDate.of(2024, 3, 30), new ArrayList<Service>());
+        client3.bookRoom(suiteRoom, LocalDate.of(2024, 3, 30), LocalDate.of(2024, 3, 30), new ArrayList<Service>());
         client3.writeReview(hotel3, "Mid", 3);
 
 
@@ -183,11 +183,11 @@ public class ClientTest {
         hotel1.addClient(client1);
         hotel2.addClient(client2);
         hotel3.addClient(client3);
-        client1.bookRoom(suiteRoom, LocalDate.of(2024, 3, 28), new ArrayList<Service>());
+        client1.bookRoom(suiteRoom, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 28), new ArrayList<Service>());
         client1.writeReview(hotel1, "Best", 4);
-        client2.bookRoom(suiteRoom, LocalDate.of(2024, 3, 29), new ArrayList<Service>());
+        client2.bookRoom(suiteRoom, LocalDate.of(2024, 3, 29), LocalDate.of(2024, 3, 29), new ArrayList<Service>());
         client2.writeReview(hotel2, "Worst", 1);
-        client3.bookRoom(suiteRoom, LocalDate.of(2024, 3, 30), new ArrayList<Service>());
+        client3.bookRoom(suiteRoom, LocalDate.of(2024, 3, 30), LocalDate.of(2024, 3, 30), new ArrayList<Service>());
         client3.writeReview(hotel3, "Mid", 3);
 
 
@@ -211,7 +211,7 @@ public class ClientTest {
         expectedRoomList.add(familyRoom);
         expectedRoomList.add(economyRoom);
 
-        Assertions.assertEquals(expectedRoomList, client1.filterRooms(hotel, 4000));
+        Assertions.assertEquals(expectedRoomList, client1.filterRooms(hotel, LocalDate.of(2024, 3, 30), LocalDate.of(2024, 3, 30), 4000));
     }
 
     @Test
@@ -227,7 +227,7 @@ public class ClientTest {
         servicesForClient1.add(Service.DINNER);
         servicesForClient1.add(Service.CLEANING);
         servicesForClient1.add(Service.JACUZZI);
-        client1.bookRoom(suiteRoom, LocalDate.of(2024, 12, 12), servicesForClient1);
+        client1.bookRoom(suiteRoom, LocalDate.of(2024, 12, 12), LocalDate.of(2024, 12, 12), servicesForClient1);
 
         Assertions.assertEquals(800, client1.getMoney());
     }
@@ -247,7 +247,7 @@ public class ClientTest {
         servicesForClient1.add(Service.JACUZZI);
 
         Assertions.assertThrows(NotEnoughMoneyToBookException.class,
-                () -> client1.bookRoom(economyRoom, LocalDate.of(2024, 12, 12), servicesForClient1));
+                () -> client1.bookRoom(economyRoom, LocalDate.of(2024, 12, 12), LocalDate.of(2024, 12, 12), servicesForClient1));
     }
 
     @Test
@@ -263,7 +263,7 @@ public class ClientTest {
         servicesForClient1.add(Service.DINNER);
         servicesForClient1.add(Service.CLEANING);
         servicesForClient1.add(Service.JACUZZI);
-        client1.bookRoom(suiteRoom, LocalDate.of(2024, 12, 12), servicesForClient1);
+        client1.bookRoom(suiteRoom, LocalDate.of(2024, 12, 12), LocalDate.of(2024, 12, 12), servicesForClient1);
 
         Booking booking = client1.getBookings().get(0);
         Assertions.assertEquals(servicesForClient1,

@@ -66,15 +66,15 @@ class HotelTest {
         hotel.addClient(client1);
         hotel.addClient(client2);
         hotel.addClient(client3);
-        client1.bookRoom(economyRoom1, LocalDate.of(2024, 3, 28), new ArrayList<Service>());
-        client1.bookRoom(economyRoom2, LocalDate.of(2024, 3, 29), new ArrayList<Service>());
-        client2.bookRoom(economyRoom1, LocalDate.of(2024, 3, 30), new ArrayList<Service>());
-        client2.bookRoom(economyRoom2, LocalDate.of(2024, 3, 31), new ArrayList<Service>());
-        client2.bookRoom(economyRoom3, LocalDate.of(2024, 4, 1), new ArrayList<Service>());
-        client3.bookRoom(economyRoom1, LocalDate.of(2024, 4, 2), new ArrayList<Service>());
-        client3.bookRoom(economyRoom2, LocalDate.of(2024, 4, 3), new ArrayList<Service>());
-        client3.bookRoom(economyRoom3, LocalDate.of(2024, 4, 4), new ArrayList<Service>());
-        client3.bookRoom(economyRoom4, LocalDate.of(2024, 4, 5), new ArrayList<Service>());
+        client1.bookRoom(economyRoom1, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 28), new ArrayList<Service>());
+        client1.bookRoom(economyRoom2, LocalDate.of(2024, 3, 29), LocalDate.of(2024, 3, 29), new ArrayList<Service>());
+        client2.bookRoom(economyRoom1, LocalDate.of(2024, 3, 30), LocalDate.of(2024, 3, 30), new ArrayList<Service>());
+        client2.bookRoom(economyRoom2, LocalDate.of(2024, 3, 31), LocalDate.of(2024, 3, 31), new ArrayList<Service>());
+        client2.bookRoom(economyRoom3, LocalDate.of(2024, 4, 1), LocalDate.of(2024, 4, 1), new ArrayList<Service>());
+        client3.bookRoom(economyRoom1, LocalDate.of(2024, 4, 2), LocalDate.of(2024, 4, 2), new ArrayList<Service>());
+        client3.bookRoom(economyRoom2, LocalDate.of(2024, 4, 3), LocalDate.of(2024, 4, 3), new ArrayList<Service>());
+        client3.bookRoom(economyRoom3, LocalDate.of(2024, 4, 4), LocalDate.of(2024, 4, 4), new ArrayList<Service>());
+        client3.bookRoom(economyRoom4, LocalDate.of(2024, 4, 5), LocalDate.of(2024, 4, 5), new ArrayList<Service>());
 
         ArrayList<Client> expectedOrderedClientList = new ArrayList<>();
         expectedOrderedClientList.add(client1);
@@ -98,9 +98,9 @@ class HotelTest {
         hotel.addClient(client2);
         hotel.addClient(client3);
         // each client has the same amount of bookings.
-        client1.bookRoom(economyRoom1, LocalDate.of(2024, 3, 28), new ArrayList<Service>());
-        client2.bookRoom(economyRoom1, LocalDate.of(2024, 3, 30), new ArrayList<Service>());
-        client3.bookRoom(economyRoom1, LocalDate.of(2024, 4, 2), new ArrayList<Service>());
+        client1.bookRoom(economyRoom1, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 28), new ArrayList<Service>());
+        client2.bookRoom(economyRoom1, LocalDate.of(2024, 3, 29), LocalDate.of(2024, 3, 29),  new ArrayList<Service>());
+        client3.bookRoom(economyRoom1, LocalDate.of(2024, 3, 30), LocalDate.of(2024, 3, 30), new ArrayList<Service>());
         client3.writeReview(hotel, "Wonderful place to stay at.", 5);
         client2.writeReview(hotel, "Very average", 3);
         client1.writeReview(hotel, "Horrible, I am disgusted", 1);
@@ -124,9 +124,9 @@ class HotelTest {
 
         hotel.addClient(client1);
         hotel.addClient(client2);
-        client1.bookRoom(economyRoom1, LocalDate.of(2024, 3, 28), new ArrayList<Service>());
-        client1.bookRoom(economyRoom2, LocalDate.of(2024, 3, 27), new ArrayList<Service>());
-        client2.bookRoom(economyRoom3, LocalDate.of(2024, 3, 29), new ArrayList<Service>());
+        client1.bookRoom(economyRoom1, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 28), new ArrayList<Service>());
+        client1.bookRoom(economyRoom2, LocalDate.of(2024, 3, 27), LocalDate.of(2024, 3, 27), new ArrayList<Service>());
+        client2.bookRoom(economyRoom3, LocalDate.of(2024, 3, 29), LocalDate.of(2024, 3, 29), new ArrayList<Service>());
 
         ArrayList<Room> expectedFreeRooms = new ArrayList<>();
         expectedFreeRooms.add(economyRoom1);
@@ -144,7 +144,7 @@ class HotelTest {
         Client client1 = new Client("Joonas", 2000, reservationSystem);
 
         hotel.addClient(client1);
-        client1.bookRoom(economyRoom1, LocalDate.of(2024, 3, 28), new ArrayList<Service>());
+        client1.bookRoom(economyRoom1, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 28), new ArrayList<Service>());
 
         ArrayList<Room> expectedFreeRooms = new ArrayList<>();
         Assertions.assertEquals(expectedFreeRooms, hotel.searchForFreeRooms(LocalDate.of(2024, 3, 28)));
@@ -163,9 +163,9 @@ class HotelTest {
 
         hotel.addClient(client1);
         hotel.addClient(client2);
-        client1.bookRoom(economyRoom1, LocalDate.now(), new ArrayList<Service>());
-        client1.bookRoom(economyRoom2, LocalDate.of(2024, 3, 27), new ArrayList<Service>());
-        client2.bookRoom(suiteRoom3, LocalDate.of(2024, 3, 29), new ArrayList<Service>());
+        client1.bookRoom(economyRoom1, LocalDate.of(2024, 3, 26), LocalDate.of(2024, 3, 26), new ArrayList<Service>());
+        client1.bookRoom(economyRoom2, LocalDate.of(2024, 3, 27), LocalDate.of(2024, 3, 27), new ArrayList<Service>());
+        client2.bookRoom(suiteRoom3, LocalDate.of(2024, 3, 29), LocalDate.of(2024, 3, 29), new ArrayList<Service>());
 
         ArrayList<Room> expectedFreeRooms = new ArrayList<>();
         expectedFreeRooms.add(economyRoom2);
@@ -181,7 +181,7 @@ class HotelTest {
         Client client1 = new Client("Joonas", 2000, reservationSystem);
 
         hotel.addClient(client1);
-        client1.bookRoom(economyRoom1, LocalDate.now(), new ArrayList<Service>());
+        client1.bookRoom(economyRoom1, LocalDate.of(2024, 3, 26), LocalDate.of(2024, 3, 26), new ArrayList<Service>());
 
         ArrayList<Room> expectedFreeRooms = new ArrayList<>();
         Assertions.assertEquals(expectedFreeRooms, hotel.searchForFreeRooms(Room.RoomType.ECONOMYROOM));
@@ -200,9 +200,9 @@ class HotelTest {
 
         hotel.addClient(client1);
         hotel.addClient(client2);
-        client1.bookRoom(economyRoom1, LocalDate.of(2024, 3, 28), new ArrayList<Service>());
-        client1.bookRoom(economyRoom2, LocalDate.of(2024, 3, 27), new ArrayList<Service>());
-        client2.bookRoom(suiteRoom3, LocalDate.of(2024, 3, 29), new ArrayList<Service>());
+        client1.bookRoom(economyRoom1, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 28),  new ArrayList<Service>());
+        client1.bookRoom(economyRoom2, LocalDate.of(2024, 3, 27), LocalDate.of(2024, 3, 27), new ArrayList<Service>());
+        client2.bookRoom(suiteRoom3, LocalDate.of(2024, 3, 29), LocalDate.of(2024, 3, 29), new ArrayList<Service>());
 
         ArrayList<Room> expectedFreeRooms = new ArrayList<>();
         expectedFreeRooms.add(economyRoom1);
@@ -219,7 +219,7 @@ class HotelTest {
         Client client1 = new Client("Joonas", 2000, reservationSystem);
 
         hotel.addClient(client1);
-        client1.bookRoom(economyRoom1, LocalDate.of(2024, 3, 28), new ArrayList<Service>());
+        client1.bookRoom(economyRoom1, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 28), new ArrayList<Service>());
 
         ArrayList<Room> expectedFreeRooms = new ArrayList<>();
         Assertions.assertEquals(expectedFreeRooms,
@@ -259,8 +259,8 @@ class HotelTest {
         Client client1 = new Client("Joonas", 6000, reservationSystem);
 
         hotel.addClient(client1);
-        client1.bookRoom(economyRoom, LocalDate.of(2024, 3, 28), new ArrayList<Service>());
-        client1.bookRoom(suiteRoom, LocalDate.of(2024, 3, 28), new ArrayList<Service>());
+        client1.bookRoom(economyRoom, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 28), new ArrayList<Service>());
+        client1.bookRoom(suiteRoom, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 28), new ArrayList<Service>());
 
         Assertions.assertEquals(2, hotel.getBookings().size());
     }
@@ -277,9 +277,9 @@ class HotelTest {
 
 
         hotel.addClient(client1);
-        client1.bookRoom(economyRoom, LocalDate.of(2024, 3, 28), new ArrayList<Service>());
+        client1.bookRoom(economyRoom, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 28), new ArrayList<Service>());
         hotel.addClient(client2);
-        client2.bookRoom(economyRoom, LocalDate.of(2024, 3, 29), new ArrayList<Service>());
+        client2.bookRoom(economyRoom, LocalDate.of(2024, 3, 29), LocalDate.of(2024, 3, 29), new ArrayList<Service>());
         client1.writeReview(hotel, "I found a snake in my toilet.", 1);
         client2.writeReview(hotel, "My name is Jeff.", 5);
 
@@ -297,9 +297,9 @@ class HotelTest {
         Client client2 = new Client("Fred", 5000, reservationSystem);
 
         hotel.addClient(client1);
-        client1.bookRoom(economyRoom, LocalDate.of(2024, 3, 28), new ArrayList<Service>());
+        client1.bookRoom(economyRoom, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 28), new ArrayList<Service>());
         hotel.addClient(client2);
-        client2.bookRoom(economyRoom, LocalDate.of(2024, 3, 29), new ArrayList<Service>());
+        client2.bookRoom(economyRoom, LocalDate.of(2024, 3, 29), LocalDate.of(2024, 3, 29), new ArrayList<Service>());
         client1.writeReview(hotel, "I found a snake in my toilet.", 1);
         client2.writeReview(hotel, "Great Interior design.", 5);
 

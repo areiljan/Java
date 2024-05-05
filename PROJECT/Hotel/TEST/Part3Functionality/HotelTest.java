@@ -1,0 +1,54 @@
+package Part3Functionality;
+
+import ee.taltech.iti0202.hotel.Hotel;
+import ee.taltech.iti0202.hotel.ReservationSystem;
+import ee.taltech.iti0202.hotel.booking.Service;
+import ee.taltech.iti0202.hotel.client.Client;
+import ee.taltech.iti0202.hotel.exceptions.CannotBookHotelIfNotClientException;
+import ee.taltech.iti0202.hotel.exceptions.NotEnoughMoneyToBookException;
+import ee.taltech.iti0202.hotel.exceptions.OverlappingBookingException;
+import ee.taltech.iti0202.hotel.room.Room;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+public class HotelTest {
+    @Test
+    void hotelOrdersClientsByServiceAverageCost() throws NotEnoughMoneyToBookException,
+            OverlappingBookingException, CannotBookHotelIfNotClientException {
+        ReservationSystem reservationSystem = new ReservationSystem();
+        Hotel hotel = new Hotel("Grand Budapest", "Hungary", "Budapest", reservationSystem);
+        Room economyRoom1 = new Room(hotel, Room.RoomType.ECONOMYROOM);
+        Room economyRoom2 = new Room(hotel, Room.RoomType.ECONOMYROOM);
+        Room economyRoom3 = new Room(hotel, Room.RoomType.ECONOMYROOM);
+        Room economyRoom4 = new Room(hotel, Room.RoomType.ECONOMYROOM);
+        Client client1 = new Client("Joonas", 10000, reservationSystem);
+        Client client2 = new Client("Fred", 10000, reservationSystem);
+        Client client3 = new Client("Kalle", 10000, reservationSystem);
+
+        hotel.addClient(client1);
+        hotel.addClient(client2);
+        hotel.addClient(client3);
+        ArrayList<Service> client1Services = new ArrayList<>();
+        ArrayList<Service> client2Services = new ArrayList<>();
+        ArrayList<Service> client3Services = new ArrayList<>();
+        client1Services.add(Service.BREAKFAST);
+        client1Services.add(Service.BREAKFAST); //average cost 200
+        client1Services.add(Service.BREAKFAST);
+        client2Services.add(Service.DINNER); // average cost 350
+        client2Services.add(Service.JACUZZI);
+        client3Services.add(Service.JACUZZI); // average cost 400
+
+        client1.bookRoom(economyRoom1, LocalDate.of(2024, 3, 28),  LocalDate.of(2024, 3, 28), client1Services);
+        client2.bookRoom(economyRoom2, LocalDate.of(2024, 3, 29),  LocalDate.of(2024, 3, 29), client2Services);
+        client3.bookRoom(economyRoom2, LocalDate.of(2024, 3, 30), LocalDate.of(2024, 3, 30), client3Services);
+
+        ArrayList<Client> expectedOrderedClientList = new ArrayList<>();
+        expectedOrderedClientList.add(client3);
+        expectedOrderedClientList.add(client2);
+        expectedOrderedClientList.add(client1);
+        Assertions.assertEquals(expectedOrderedClientList, hotel.orderClients());
+    }
+}
