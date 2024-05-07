@@ -8,7 +8,11 @@ import ee.taltech.iti0202.hotel.exceptions.*;
 import ee.taltech.iti0202.hotel.review.Review;
 import ee.taltech.iti0202.hotel.room.Room;
 
+import java.text.DecimalFormat;
+import java.time.Clock;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -49,7 +53,7 @@ public class Client {
      * @return - clients bookings as list.
      */
     public List<Booking> getBookings() {
-        return clientBookings;
+        return new ArrayList<>(clientBookings);
     }
 
     /**
@@ -57,7 +61,7 @@ public class Client {
      * @return - clients reviews as list.
      */
     public List<Review> getReviews() {
-        return clientReviews;
+        return new ArrayList<>(clientReviews);
     }
 
     /**
@@ -113,6 +117,9 @@ public class Client {
     public void bookRoom(Room roomToBook, LocalDate startDateToBook, LocalDate endDateToBook, ArrayList<Service> services)
             throws OverlappingBookingException, NotEnoughMoneyToBookException,
             CannotBookHotelIfNotClientException {
+        // defensive copy
+        startDateToBook = LocalDate.of(startDateToBook.getYear(), startDateToBook.getMonth(), startDateToBook.getDayOfMonth());
+        endDateToBook = LocalDate.of(endDateToBook.getYear(), endDateToBook.getMonth(), endDateToBook.getDayOfMonth());
         if (currentHotel == null) {
             // The requirement for the booker to be a client is not specified in the assignment,
             // but I assumed it to be logical.
@@ -120,7 +127,12 @@ public class Client {
         }
 
         float discount = checkForDiscount(currentHotel, startDateToBook, endDateToBook);
-        int daysBetween = (int) ChronoUnit.DAYS.between(startDateToBook, endDateToBook);
+        // a one day booking starts and ends on the same date.
+        Period period = Period.between(startDateToBook, endDateToBook);
+        int days = period.getDays(); // Days component
+        int months = period.getMonths(); // Months component
+        int years = period.getYears(); // Years component
+        int daysBetween = days + months * 30 + years * 365 + 1;
 
         // check for service cost
         int serviceTotalCost = 0;
@@ -129,8 +141,9 @@ public class Client {
         }
 
         // if not enough money for a room and services, throw exception.
-        if (money < (daysBetween * roomToBook.getRoomType().getPrice().intValue() * discount) + serviceTotalCost) {
-            throw new NotEnoughMoneyToBookException(money, roomToBook.getRoomType());
+        float roomPriceWithDiscounts = daysBetween * (roomToBook.getRoomType().getPrice().intValue() + serviceTotalCost) * discount;
+        if (money < roomPriceWithDiscounts) {
+            throw new NotEnoughMoneyToBookException(money, roomPriceWithDiscounts);
         } else {
             for (Booking existingBooking : currentHotel.getBookings()) {
                 // Check if the new booking overlaps with an existing booking, if it does, throw a custom exception.
@@ -148,7 +161,9 @@ public class Client {
 
             clientBookings.add(newBooking);
             currentHotel.addBooking(newBooking);
-            money -= (roomToBook.getRoomType().getPrice().intValue() * discount) + serviceTotalCost;
+            money -= roomPriceWithDiscounts;
+            DecimalFormat df = new DecimalFormat("0.00");
+            money = Float.parseFloat(df.format(money));
         }
     }
 
@@ -159,6 +174,8 @@ public class Client {
      */
     public float checkForDiscount(Hotel hotelToCheckFor, LocalDate startDate, LocalDate endDate) {
         float topClientDiscount = 0.0f;
+        startDate = LocalDate.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth());
+        endDate = LocalDate.of(endDate.getYear(), endDate.getMonth(), endDate.getDayOfMonth());
         // discounts from being a top client.
         List<Client> clients = hotelToCheckFor.orderClients();
         if (clients.size() > 3) {
@@ -167,7 +184,7 @@ public class Client {
             } else if (clients.get(1).equals(this)) {
                 topClientDiscount = 0.10f;
             } else if (clients.get(2).equals(this)) {
-                topClientDiscount = 0.5f;
+                topClientDiscount = 0.05f;
             } else {
                 topClientDiscount = 0;
             }
@@ -217,7 +234,9 @@ public class Client {
      */
     public ArrayList<Room> filterRooms(Hotel hotel, LocalDate startDate, LocalDate endDate, Integer budget) {
         ArrayList<Room> roomsInPriceRange = new ArrayList<>();
-        int daysBetween = (int) ChronoUnit.DAYS.between(startDate, endDate);
+        startDate = LocalDate.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth());
+        endDate = LocalDate.of(endDate.getYear(), endDate.getMonth(), endDate.getDayOfMonth());
+        int daysBetween = (int) ChronoUnit.DAYS.between(startDate, endDate) + 1;
         for (Room room : hotel.getRooms()) {
             float discount = checkForDiscount(hotel, startDate, endDate);
             if (daysBetween * room.getRoomType().getPrice().intValue() * discount <= budget) {
@@ -236,6 +255,7 @@ public class Client {
      */
     public void cancelBooking(Hotel hotelToCancel, Room roomToBook, LocalDate dateToCancel)
             throws CannotCancelBookingIfNotBooked {
+        dateToCancel = LocalDate.of(dateToCancel.getYear(), dateToCancel.getMonth(), dateToCancel.getDayOfMonth());
         for (Booking existingBooking : clientBookings) {
             if (existingBooking.getRoom().equals(roomToBook) &&
                     isOverlap(existingBooking.getStartDate(), existingBooking.getEndDate(), dateToCancel, dateToCancel)) {
@@ -276,5 +296,42 @@ public class Client {
             }
         }
         throw new CannotWriteReviewIfNotBookedInHotelException(this, hotelToReview);
+    }
+
+    /**
+     * Search for rooms in specified hotel.
+     * @param hotel - where.
+     * @param date - which date.
+     */
+    public List<Room> searchForRoom(Hotel hotel, LocalDate date) {
+        return hotel.searchForFreeRooms(date);
+    }
+
+    /**
+     * Search for rooms in specified hotel.
+     * @param hotel - where.
+     * @param type - which type of room.
+     */
+    public List<Room> searchForRoom(Hotel hotel, Room.RoomType type) {
+        return hotel.searchForFreeRooms(type);
+    }
+
+    /**
+     * Search for rooms in specified hotel.
+     * @param hotel - where.
+     * @param date - when.
+     * @param type - which type of room.
+     */
+    public List<Room> searchForRoom(Hotel hotel, LocalDate date, Room.RoomType type) {
+        return hotel.searchForFreeRooms(date, type);
+    }
+
+    /**
+     * Search for rooms in specified hotel.
+     * @param hotel - where.
+     * @param dayOfWeek - when.
+     */
+    public List<Room> searchForRoom(Hotel hotel, DayOfWeek dayOfWeek, Clock clock) {
+        return hotel.searchForFreeRooms(dayOfWeek, clock);
     }
 }

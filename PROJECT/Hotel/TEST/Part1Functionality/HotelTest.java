@@ -164,24 +164,26 @@ class HotelTest {
         hotel.addClient(client1);
         hotel.addClient(client2);
         client1.bookRoom(economyRoom1, LocalDate.of(2024, 3, 26), LocalDate.of(2024, 3, 26), new ArrayList<Service>());
-        client1.bookRoom(economyRoom2, LocalDate.of(2024, 3, 27), LocalDate.of(2024, 3, 27), new ArrayList<Service>());
+        client1.bookRoom(economyRoom2, LocalDate.now(), LocalDate.now(), new ArrayList<Service>());
         client2.bookRoom(suiteRoom3, LocalDate.of(2024, 3, 29), LocalDate.of(2024, 3, 29), new ArrayList<Service>());
 
         ArrayList<Room> expectedFreeRooms = new ArrayList<>();
-        expectedFreeRooms.add(economyRoom2);
+        // not currently booked and has the right type.
+        expectedFreeRooms.add(economyRoom1);
         Assertions.assertEquals(expectedFreeRooms, hotel.searchForFreeRooms(Room.RoomType.ECONOMYROOM));
     }
 
     @Test
     void searchForFreeRoomsNoneAvailableByTypeOnly() throws NotEnoughMoneyToBookException, OverlappingBookingException,
             CannotBookHotelIfNotClientException {
+
         ReservationSystem reservationSystem = new ReservationSystem();
         Hotel hotel = new Hotel("Grand Budapest", "Hungary", "Budapest", reservationSystem);
         Room economyRoom1 = new Room(hotel, Room.RoomType.ECONOMYROOM);
         Client client1 = new Client("Joonas", 2000, reservationSystem);
 
         hotel.addClient(client1);
-        client1.bookRoom(economyRoom1, LocalDate.of(2024, 3, 26), LocalDate.of(2024, 3, 26), new ArrayList<Service>());
+        client1.bookRoom(economyRoom1, LocalDate.now(), LocalDate.now(), new ArrayList<Service>());
 
         ArrayList<Room> expectedFreeRooms = new ArrayList<>();
         Assertions.assertEquals(expectedFreeRooms, hotel.searchForFreeRooms(Room.RoomType.ECONOMYROOM));
@@ -205,6 +207,7 @@ class HotelTest {
         client2.bookRoom(suiteRoom3, LocalDate.of(2024, 3, 29), LocalDate.of(2024, 3, 29), new ArrayList<Service>());
 
         ArrayList<Room> expectedFreeRooms = new ArrayList<>();
+        // the only room that is the right type and is not booked on the day that we are checking.
         expectedFreeRooms.add(economyRoom1);
         Assertions.assertEquals(expectedFreeRooms,
                 hotel.searchForFreeRooms(LocalDate.of(2024, 3, 27), Room.RoomType.ECONOMYROOM));

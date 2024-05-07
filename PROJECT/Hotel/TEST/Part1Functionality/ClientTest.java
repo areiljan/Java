@@ -33,7 +33,7 @@ class ClientTest {
         Client client1 = new Client("Joonas", 5000, reservationSystem);
 
         hotel.addClient(client1);
-        client1.bookRoom(suiteRoom, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 29), new ArrayList<Service>());
+        client1.bookRoom(suiteRoom, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 28), new ArrayList<Service>());
 
         Assertions.assertEquals(0, client1.getMoney());
     }

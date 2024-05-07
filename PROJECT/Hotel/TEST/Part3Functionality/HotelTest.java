@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class HotelTest {
     @Test
-    void hotelOrdersClientsByServiceAverageCost() throws NotEnoughMoneyToBookException,
+    void hotelOrdersClientsByServiceAverageCostAsLastParameter() throws NotEnoughMoneyToBookException,
             OverlappingBookingException, CannotBookHotelIfNotClientException {
         ReservationSystem reservationSystem = new ReservationSystem();
         Hotel hotel = new Hotel("Grand Budapest", "Hungary", "Budapest", reservationSystem);
@@ -34,13 +34,15 @@ public class HotelTest {
         ArrayList<Service> client1Services = new ArrayList<>();
         ArrayList<Service> client2Services = new ArrayList<>();
         ArrayList<Service> client3Services = new ArrayList<>();
+        // client 1 has the lowest average cost.
         client1Services.add(Service.BREAKFAST);
         client1Services.add(Service.BREAKFAST); //average cost 200
         client1Services.add(Service.BREAKFAST);
+        // client 2 has the middle average cost.
         client2Services.add(Service.DINNER); // average cost 350
         client2Services.add(Service.JACUZZI);
+        // client 3 has the highest average cost, therefore he is the first one.
         client3Services.add(Service.JACUZZI); // average cost 400
-
         client1.bookRoom(economyRoom1, LocalDate.of(2024, 3, 28),  LocalDate.of(2024, 3, 28), client1Services);
         client2.bookRoom(economyRoom2, LocalDate.of(2024, 3, 29),  LocalDate.of(2024, 3, 29), client2Services);
         client3.bookRoom(economyRoom2, LocalDate.of(2024, 3, 30), LocalDate.of(2024, 3, 30), client3Services);

@@ -10,11 +10,14 @@ public class LongBookingStrategy implements Strategy {
     public float getDiscount(Hotel hotel, LocalDate startDate, LocalDate endDate) {
         float discount = 0;
         Period period = Period.between(startDate, endDate);
-        int days = period.getDays();
-        if (days < 8) {
+        int days = period.getDays(); // Days component
+        int months = period.getMonths(); // Months component
+        int years = period.getYears(); // Years component
+        int totalDays = days + months * 30 + years * 365 + 1;
+        if (totalDays < 7) {
             return discount;
         } else {
-            discount += 0.15f + (0.005f * (days - 7));
+            discount += 0.15f + (0.005f * (totalDays - 7));
             return Math.min(discount, 0.3f);
         }
     }

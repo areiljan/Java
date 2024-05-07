@@ -9,16 +9,16 @@ public class LowSeasonStrategy implements Strategy {
     @Override
     public float getDiscount(Hotel hotel, LocalDate startDate, LocalDate endDate) {
         float discount = 0.1f;
-        Integer clientCount = 0;
+        Integer bookingCount = 0;
         for (Booking booking : hotel.getBookings()) {
             if (booking.getStartDate().getMonth() == startDate.getMonth()) {
-                clientCount++;
+                bookingCount++;
             }
         }
-        if (clientCount > 10) {
+        if (bookingCount >= 10) {
             return discount;
         } else {
-            discount += (float) (10 - clientCount) / 100;
+            discount += (float) (10 - bookingCount) / 100;
             return discount;
         }
     }

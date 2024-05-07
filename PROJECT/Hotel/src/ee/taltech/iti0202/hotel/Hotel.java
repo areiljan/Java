@@ -7,7 +7,10 @@ import ee.taltech.iti0202.hotel.review.Review;
 import ee.taltech.iti0202.hotel.room.Room;
 import ee.taltech.iti0202.hotel.strategies.Strategy;
 
+import java.time.Clock;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -95,16 +98,16 @@ public class Hotel {
      * Clients getter.
      * @return - list of clients.
      */
-    public ArrayList<Client> getClients() {
-        return clients;
+    public List<Client> getClients() {
+        return new ArrayList<>(clients);
     }
 
     /**
      * Reviews getter.
      * @return - list of reviews.
      */
-    public ArrayList<Review> getReviews() {
-        return reviews;
+    public List<Review> getReviews() {
+        return new ArrayList<>(reviews);
     }
 
     /**
@@ -118,16 +121,16 @@ public class Hotel {
     /**
      * Method to get total list of all bookings in the hotel.
      */
-    public ArrayList<Booking> getBookings() {
-        return bookings;
+    public List<Booking> getBookings() {
+        return new ArrayList<>(bookings);
     }
 
     /**
      * Method to get all rooms in the hotel.
      * @return - list of rooms.
      */
-    public ArrayList<Room> getRooms() {
-        return rooms;
+    public List<Room> getRooms() {
+        return new ArrayList<>(rooms);
     }
 
     /**
@@ -186,7 +189,6 @@ public class Hotel {
                         Comparator.comparingInt(Client::getRoomCount)
                                 .reversed()
                                 .thenComparingInt(client -> client.getRatingAboutHotel(this))
-                                .reversed()
                                 .thenComparingDouble(client -> calculateAverageServiceCost(client))
                                 .reversed()
                 )
@@ -201,11 +203,9 @@ public class Hotel {
     private double calculateAverageServiceCost(Client client) {
         List<Service> services = new ArrayList<>();
         for (Booking booking : client.getBookings()) {
-            for (Service service : booking.getServices()) {
-                services.add(service);
-            }
+            services.addAll(booking.getServices());
         }
-        if (services.size() == 0) {
+        if (services.isEmpty()) {
             return 0.0;
         }
         double totalCost = 0.0;
@@ -221,10 +221,11 @@ public class Hotel {
      */
     public List<Room> searchForFreeRooms(LocalDate dateToFind) {
         ArrayList<Room> vacantRooms = new ArrayList<>();
+        LocalDate copyDate = LocalDate.of(dateToFind.getYear(), dateToFind.getMonth(), dateToFind.getDayOfMonth());
         for (Room room : rooms) {
             boolean isVacant = true;
             for (Booking existingBooking : bookings) {
-                if (isOverlap(existingBooking.getStartDate(), existingBooking.getEndDate(), dateToFind, dateToFind) && existingBooking.getRoom().equals(room)) {
+                if (isOverlap(existingBooking.getStartDate(), existingBooking.getEndDate(), copyDate, copyDate) && existingBooking.getRoom().equals(room)) {
                     isVacant = false;
                     break;
                 }
@@ -264,16 +265,42 @@ public class Hotel {
      */
     public List<Room> searchForFreeRooms(LocalDate dateToFind, Room.RoomType roomType) {
         ArrayList<Room> vacantRooms = new ArrayList<>();
+        // making a defensive copy.
+        LocalDate copyDate = LocalDate.of(dateToFind.getYear(), dateToFind.getMonth(), dateToFind.getDayOfMonth());
         for (Room room : rooms) {
             boolean isVacant = true;
             for (Booking existingBooking : bookings) {
-                if (isOverlap(existingBooking.getStartDate(), existingBooking.getEndDate(), dateToFind, dateToFind)
+                if (isOverlap(existingBooking.getStartDate(), existingBooking.getEndDate(), copyDate, copyDate)
                         && existingBooking.getRoom().equals(room)) {
                     isVacant = false;
                     break;
                 }
             }
             if (isVacant && room.getRoomType().equals(roomType)) {
+                vacantRooms.add(room);
+            }
+        }
+        return vacantRooms;
+    }
+
+    /**
+     * Search for free rooms using weekday.
+     * If the next instance of this weekday is free, put it in the list.
+     */
+    public List<Room> searchForFreeRooms(DayOfWeek dayOfWeek, Clock clock) {
+        ArrayList<Room> vacantRooms = new ArrayList<>();
+        LocalDate currentDate = LocalDate.now(clock);
+        LocalDate nextDate = currentDate.with(TemporalAdjusters.next(dayOfWeek));
+        for (Room room : rooms) {
+            boolean isVacant = true;
+            for (Booking existingBooking : bookings) {
+                if (isOverlap(existingBooking.getStartDate(), existingBooking.getEndDate(), nextDate, nextDate)
+                        && existingBooking.getRoom().equals(room)) {
+                    isVacant = false;
+                    break;
+                }
+            }
+            if (isVacant) {
                 vacantRooms.add(room);
             }
         }
@@ -291,5 +318,4 @@ public class Hotel {
     public static boolean isOverlap(LocalDate start1, LocalDate finish1, LocalDate start2, LocalDate finish2) {
         return !start1.isAfter(finish2) && !finish1.isBefore(start2);
     }
-
 }

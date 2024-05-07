@@ -34,10 +34,10 @@ public class Booking {
     }
 
     public LocalDate getStartDate() {
-        return startDate;
+        return LocalDate.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth());
     }
     public LocalDate getEndDate() {
-        return endDate;
+        return LocalDate.of(endDate.getYear(), endDate.getMonth(), endDate.getDayOfMonth());
     }
     public Room getRoom() {
         return roomToBook;
@@ -52,7 +52,7 @@ public class Booking {
     }
 
     public List<Service> getServices() {
-        return serviceList;
+        return new ArrayList<>(serviceList);
     }
 
     public static class BookingBuilder {
