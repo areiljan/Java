@@ -1,4 +1,4 @@
-package secondPartFunctionality;
+package secondpartfunctionality;
 
 import ee.taltech.iti0202.hotel.ReservationSystem;
 import ee.taltech.iti0202.hotel.Hotel;
@@ -45,6 +45,4 @@ public class HotelTest {
 
         Assertions.assertInstanceOf(BigDecimal.class, room1.getRoomType().getPrice());
     }
-
-
 }

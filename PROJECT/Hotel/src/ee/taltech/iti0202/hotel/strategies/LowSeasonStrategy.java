@@ -6,6 +6,9 @@ import ee.taltech.iti0202.hotel.booking.Booking;
 import java.time.LocalDate;
 
 public class LowSeasonStrategy implements Strategy {
+
+    public static final float MINIMUM_DISCOUNT = 0.1f;
+
     /**
      * Get discount based on bookings made in the hotel on the same month.
      * @param hotel - hotel to get discount for.
@@ -15,8 +18,7 @@ public class LowSeasonStrategy implements Strategy {
      */
     @Override
     public float getDiscount(Hotel hotel, LocalDate startDate, LocalDate endDate) {
-        float minimumDiscount = 0.1f;
-        float discount = minimumDiscount;
+        float discount = MINIMUM_DISCOUNT;
         Integer bookingCount = 0;
         for (Booking booking : hotel.getBookings()) {
             if (booking.getStartDate().getMonth() == startDate.getMonth()) {

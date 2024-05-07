@@ -5,6 +5,7 @@ import ee.taltech.iti0202.hotel.Hotel;
 import java.time.LocalDate;
 
 public class CombinedStrategy implements Strategy {
+    public static final float MAX_DISCOUNT = 0.4f;
     private final Strategy longBooking;
     private final Strategy lowSeason;
 
@@ -27,7 +28,6 @@ public class CombinedStrategy implements Strategy {
     public float getDiscount(Hotel hotel, LocalDate startDate, LocalDate endDate) {
         float longBookingDiscount = longBooking.getDiscount(hotel, startDate, endDate);
         float lowSeasonDiscount = lowSeason.getDiscount(hotel, startDate, endDate);
-        float maxDiscount = 0.4f;
-        return Math.min(maxDiscount, lowSeasonDiscount + longBookingDiscount);
+        return Math.min(MAX_DISCOUNT, lowSeasonDiscount + longBookingDiscount);
     }
 }

@@ -1,4 +1,4 @@
-package thirdPartFunctionality;
+package thirdpartfunctionality;
 
 import ee.taltech.iti0202.hotel.Hotel;
 import ee.taltech.iti0202.hotel.ReservationSystem;
@@ -11,12 +11,12 @@ import ee.taltech.iti0202.hotel.room.Room;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.time.*;
-import java.util.ArrayList;
-
 import java.time.Clock;
+import java.time.DayOfWeek;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 
 public class ClientTest {
     @Test

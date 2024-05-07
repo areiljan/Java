@@ -1,4 +1,4 @@
-package thirdPartFunctionality;
+package thirdpartfunctionality;
 
 import ee.taltech.iti0202.hotel.Hotel;
 import ee.taltech.iti0202.hotel.ReservationSystem;
@@ -8,6 +8,8 @@ import ee.taltech.iti0202.hotel.exceptions.CannotBookHotelIfNotClientException;
 import ee.taltech.iti0202.hotel.exceptions.NotEnoughMoneyToBookException;
 import ee.taltech.iti0202.hotel.exceptions.OverlappingBookingException;
 import ee.taltech.iti0202.hotel.room.Room;
+import ee.taltech.iti0202.hotel.strategies.LowSeasonStrategy;
+import ee.taltech.iti0202.hotel.strategies.Strategy;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -55,5 +57,19 @@ public class HotelTest {
         expectedOrderedClientList.add(client2);
         expectedOrderedClientList.add(client1);
         Assertions.assertEquals(expectedOrderedClientList, hotel.orderClients());
+    }
+
+    @Test
+    void canSetStrategy() {
+        ReservationSystem reservationSystem = new ReservationSystem();
+        Hotel hotel1 = new Hotel("Grand Budapest", "Hungary", "Budapest", reservationSystem);
+        Room room1 = new Room(hotel1, Room.RoomType.ECONOMYROOM);
+
+        Strategy lowSeasonStrategy = new LowSeasonStrategy();
+        Strategy longBookingStrategy = new LowSeasonStrategy();
+        hotel1.setStrategy(lowSeasonStrategy);
+        hotel1.setStrategy(longBookingStrategy);
+
+        Assertions.assertEquals(hotel1.getStrategy(), longBookingStrategy);
     }
 }

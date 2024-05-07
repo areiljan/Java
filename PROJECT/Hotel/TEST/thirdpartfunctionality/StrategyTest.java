@@ -1,4 +1,4 @@
-package thirdPartFunctionality;
+package thirdpartfunctionality;
 
 import ee.taltech.iti0202.hotel.Hotel;
 import ee.taltech.iti0202.hotel.ReservationSystem;
@@ -18,20 +18,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class StrategyTest {
-    @Test
-    void CanSetStrategy() {
-        ReservationSystem reservationSystem = new ReservationSystem();
-        Hotel hotel1 = new Hotel("Grand Budapest", "Hungary", "Budapest", reservationSystem);
-        Room room1 = new Room(hotel1, Room.RoomType.ECONOMYROOM);
-
-        Strategy lowSeasonStrategy = new LowSeasonStrategy();
-        Strategy longBookingStrategy = new LowSeasonStrategy();
-        hotel1.setStrategy(lowSeasonStrategy);
-        hotel1.setStrategy(longBookingStrategy);
-
-        Assertions.assertEquals(hotel1.getStrategy(), longBookingStrategy);
-    }
-    
     @Test
     void LowSeasonStrategyDiscountsBasedOnBookingNumberNoBookingsMaximumDiscount() throws CannotBookHotelIfNotClientException,
             NotEnoughMoneyToBookException, OverlappingBookingException {
@@ -337,5 +323,4 @@ public class StrategyTest {
         int client1ExpectedMoney = 7300;
         Assertions.assertEquals(client1ExpectedMoney, client1.getMoney());
     }
-
 }

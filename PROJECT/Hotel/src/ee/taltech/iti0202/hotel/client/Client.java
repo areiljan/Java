@@ -28,6 +28,11 @@ import java.util.Set;
 import static ee.taltech.iti0202.hotel.Hotel.isOverlap;
 
 public class Client {
+    public static final int AVERAGE_AMOUNT_OF_DAYS_IN_MONTH = 30;
+    public static final int AVERAGE_AMOUNT_OF_DAYS_IN_YEAR = 365;
+    public static final float FIRST_PLACE_DISCOUNT = 0.15f;
+    public static final float SECOND_PLACE_DISCOUNT = 0.10f;
+    public static final float THIRD_PLACE_DISCOUNT = 0.05f;
     private final ArrayList<Booking> clientBookings;
     private final ArrayList<Review> clientReviews;
     private float money;
@@ -141,11 +146,9 @@ public class Client {
         int days = period.getDays(); // Days component
         int months = period.getMonths(); // Months component
         int years = period.getYears(); // Years component
-        int averageAmountOfDaysInMonth = 30;
-        int averageAmountOfDaysInYear = 365;
 
-        int daysBetween = days + months * averageAmountOfDaysInMonth
-                + years * averageAmountOfDaysInYear + 1;
+        int daysBetween = days + months * AVERAGE_AMOUNT_OF_DAYS_IN_MONTH
+                + years * AVERAGE_AMOUNT_OF_DAYS_IN_YEAR + 1;
 
         // check for service cost
         int serviceTotalCost = 0;
@@ -154,8 +157,8 @@ public class Client {
         }
 
         // if not enough money for a room and services, throw exception.
-        float roomPriceWithDiscounts = daysBetween *
-                (roomToBook.getRoomType().getPrice().intValue() + serviceTotalCost) * discount;
+        float roomPriceWithDiscounts = daysBetween
+                * (roomToBook.getRoomType().getPrice().intValue() + serviceTotalCost) * discount;
         if (money < roomPriceWithDiscounts) {
             throw new NotEnoughMoneyToBookException(money, roomPriceWithDiscounts);
         } else {
@@ -187,20 +190,19 @@ public class Client {
      */
     public float checkForDiscount(Hotel hotelToCheckFor, LocalDate startDate, LocalDate endDate) {
         float topClientDiscount;
+        // defensive copy.
         startDate = LocalDate.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth());
         endDate = LocalDate.of(endDate.getYear(), endDate.getMonth(), endDate.getDayOfMonth());
-        float firstPlaceDiscount = 0.15f;
-        float secondPlaceDiscount = 0.10f;
-        float thirdPlaceDiscount = 0.05f;
+
         // discounts from being a top client.
         List<Client> clients = hotelToCheckFor.orderClients();
         if (clients.size() > 3) {
             if (clients.get(0).equals(this)) {
-                topClientDiscount = firstPlaceDiscount;
+                topClientDiscount = FIRST_PLACE_DISCOUNT;
             } else if (clients.get(1).equals(this)) {
-                topClientDiscount = secondPlaceDiscount;
+                topClientDiscount = SECOND_PLACE_DISCOUNT;
             } else if (clients.get(2).equals(this)) {
-                topClientDiscount = thirdPlaceDiscount;
+                topClientDiscount = THIRD_PLACE_DISCOUNT;
             } else {
                 topClientDiscount = 0;
             }
