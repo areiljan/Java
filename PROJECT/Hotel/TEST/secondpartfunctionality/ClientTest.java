@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ClientTest {
+    // testing topClientDiscounts.
     @Test
     void clientBooksFreeRoomNoDiscountBecauseNotEnoughClients() throws OverlappingBookingException,
             NotEnoughMoneyToBookException, CannotBookHotelIfNotClientException {
@@ -67,7 +68,7 @@ public class ClientTest {
         client3.bookRoom(suiteRoom, LocalDate.of(2024, 3, 30),
                 LocalDate.of(2024, 3, 30), new ArrayList<Service>());
         client3.writeReview(hotel, "bad", 1);
-        
+
         // now eligible to get a discount of 15%.
         client4.bookRoom(suiteRoom, LocalDate.of(2024, 3, 31),
                 LocalDate.of(2024, 3, 31), new ArrayList<Service>());

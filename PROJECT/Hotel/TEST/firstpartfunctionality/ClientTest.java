@@ -129,7 +129,7 @@ class ClientTest {
         ReservationSystem reservationSystem = new ReservationSystem();
         Hotel hotel = new Hotel("Grand Budapest", "Hungary", "Budapest", reservationSystem);
         Room economyRoom = new Room(hotel, Room.RoomType.ECONOMYROOM);
-        Client client1 = new Client("Joonas", 2000, reservationSystem);
+        Client client1 = new Client("Poonas", 2000, reservationSystem);
 
         hotel.addClient(client1);
 

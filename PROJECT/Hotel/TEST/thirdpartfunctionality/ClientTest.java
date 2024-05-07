@@ -60,9 +60,9 @@ public class ClientTest {
         Assertions.assertEquals(expectedFreeRooms,
                 client1.searchForRoom(hotel, dayOfWeek, fixedClock));
     }
-    
+
     /*
-    Client can now directly access all room filtering methods.
+    Client can now directly access all room filtering methods
     Same tests as in part1functionality but filtered straight using client.
     */
     @Test

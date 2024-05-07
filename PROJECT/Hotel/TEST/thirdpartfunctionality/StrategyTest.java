@@ -273,7 +273,8 @@ public class StrategyTest {
         // the client will now have a 45 percent discount, 30% from the strategy and 15% from being a top client.
         client1.bookRoom(room1, LocalDate.of(2023, 1, 1),
                 LocalDate.of(2023, 2, 20), new ArrayList<>());
-        // the price of an economyroom is 1000 per day, so that a 45% discount equals to 450 euros saved per day for 50 days.
+        // the price of an economyroom is 1000 per day,
+        // so that a 45% discount equals to 450 euros saved per day for 50 days.
         int client1ExpectedMoney = 22500;
         Assertions.assertEquals(client1ExpectedMoney, client1.getMoney());
     }

@@ -209,8 +209,8 @@ public class Client {
         } else {
             topClientDiscount = 0;
         }
-        
-        // discounts from strategies
+
+        // discounts from strategies.
         if (hotelToCheckFor.getStrategy() == null) {
             return 1.0f - topClientDiscount;
         } else {
