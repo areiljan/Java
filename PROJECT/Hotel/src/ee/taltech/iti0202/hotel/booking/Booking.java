@@ -24,7 +24,8 @@ public class Booking {
      * @param startDate - the start date of booking.
      * @param endDate - the end date of booking.
      */
-    public Booking(Hotel hotelToBook, Room roomToBook, Client clientWhoBooked, LocalDate startDate, LocalDate endDate, List<Service> serviceList) {
+    public Booking(Hotel hotelToBook, Room roomToBook, Client clientWhoBooked,
+                   LocalDate startDate, LocalDate endDate, List<Service> serviceList) {
         this.hotelToBook = hotelToBook;
         this.roomToBook = roomToBook;
         this.clientWhoBooked = clientWhoBooked;
@@ -64,6 +65,15 @@ public class Booking {
 
 
         private List<Service> serviceList = new ArrayList<>();
+
+        /**
+         * Booking builder.
+         * @param hotelToBook - which hotel is booked.
+         * @param roomToBook - which room to book.
+         * @param clientWhoBooked - the client who booked.
+         * @param startDate - start date of booking.
+         * @param endDate - end date of booking.
+         */
         public BookingBuilder(Hotel hotelToBook, Room roomToBook, Client clientWhoBooked,
                               LocalDate startDate, LocalDate endDate) {
             this.hotelToBook = hotelToBook;
@@ -73,11 +83,20 @@ public class Booking {
             this.endDate = endDate;
         }
 
+        /**
+         * Add service to booking.
+         * @param services - services as list.
+         * @return - bookingBuilder.
+         */
         public BookingBuilder addServices(List<Service> services) {
             serviceList.addAll(services);
             return this;
         }
 
+        /**
+         * Build the Booking.
+         * @return - new booking.
+         */
         public Booking build() {
             return new Booking(hotelToBook, roomToBook, clientWhoBooked, startDate, endDate, serviceList);
         }

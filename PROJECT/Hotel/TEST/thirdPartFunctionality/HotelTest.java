@@ -1,4 +1,4 @@
-package Part3Functionality;
+package thirdPartFunctionality;
 
 import ee.taltech.iti0202.hotel.Hotel;
 import ee.taltech.iti0202.hotel.ReservationSystem;
@@ -43,9 +43,12 @@ public class HotelTest {
         client2Services.add(Service.JACUZZI);
         // client 3 has the highest average cost, therefore he is the first one.
         client3Services.add(Service.JACUZZI); // average cost 400
-        client1.bookRoom(economyRoom1, LocalDate.of(2024, 3, 28),  LocalDate.of(2024, 3, 28), client1Services);
-        client2.bookRoom(economyRoom2, LocalDate.of(2024, 3, 29),  LocalDate.of(2024, 3, 29), client2Services);
-        client3.bookRoom(economyRoom2, LocalDate.of(2024, 3, 30), LocalDate.of(2024, 3, 30), client3Services);
+        client1.bookRoom(economyRoom1, LocalDate.of(2024, 3, 28),
+                LocalDate.of(2024, 3, 28), client1Services);
+        client2.bookRoom(economyRoom2, LocalDate.of(2024, 3, 29),
+                LocalDate.of(2024, 3, 29), client2Services);
+        client3.bookRoom(economyRoom2, LocalDate.of(2024, 3, 30),
+                LocalDate.of(2024, 3, 30), client3Services);
 
         ArrayList<Client> expectedOrderedClientList = new ArrayList<>();
         expectedOrderedClientList.add(client3);

@@ -225,7 +225,8 @@ public class Hotel {
         for (Room room : rooms) {
             boolean isVacant = true;
             for (Booking existingBooking : bookings) {
-                if (isOverlap(existingBooking.getStartDate(), existingBooking.getEndDate(), copyDate, copyDate) && existingBooking.getRoom().equals(room)) {
+                if (isOverlap(existingBooking.getStartDate(), existingBooking.getEndDate(),
+                        copyDate, copyDate) && existingBooking.getRoom().equals(room)) {
                     isVacant = false;
                     break;
                 }

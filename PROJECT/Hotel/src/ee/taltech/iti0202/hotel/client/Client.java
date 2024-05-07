@@ -4,7 +4,13 @@ import ee.taltech.iti0202.hotel.Hotel;
 import ee.taltech.iti0202.hotel.ReservationSystem;
 import ee.taltech.iti0202.hotel.booking.Booking;
 import ee.taltech.iti0202.hotel.booking.Service;
-import ee.taltech.iti0202.hotel.exceptions.*;
+import ee.taltech.iti0202.hotel.exceptions.CannotBookHotelIfNotClientException;
+import ee.taltech.iti0202.hotel.exceptions.CannotCancelBookingIfNotBooked;
+import ee.taltech.iti0202.hotel.exceptions.CannotWriteReviewIfNotBookedInHotelException;
+import ee.taltech.iti0202.hotel.exceptions.NotEnoughMoneyToBookException;
+import ee.taltech.iti0202.hotel.exceptions.OverlappingBookingException;
+import ee.taltech.iti0202.hotel.exceptions.RatingOutOfBoundsException;
+import ee.taltech.iti0202.hotel.exceptions.ReviewAlreadyWrittenException;
 import ee.taltech.iti0202.hotel.review.Review;
 import ee.taltech.iti0202.hotel.room.Room;
 
@@ -25,9 +31,9 @@ public class Client {
     private final ArrayList<Booking> clientBookings;
     private final ArrayList<Review> clientReviews;
     private float money;
-    private String clientName;
+    private final String clientName;
     private Hotel currentHotel;
-    private ReservationSystem reservationSystem;
+    private final ReservationSystem reservationSystem;
 
     /**
      * Client constructor.
@@ -114,12 +120,15 @@ public class Client {
      * @throws OverlappingBookingException - thrown if the date is taken.
      * @throws NotEnoughMoneyToBookException - thrown if the client does not have enough money.
      */
-    public void bookRoom(Room roomToBook, LocalDate startDateToBook, LocalDate endDateToBook, ArrayList<Service> services)
+    public void bookRoom(Room roomToBook, LocalDate startDateToBook,
+                         LocalDate endDateToBook, List<Service> services)
             throws OverlappingBookingException, NotEnoughMoneyToBookException,
             CannotBookHotelIfNotClientException {
         // defensive copy
-        startDateToBook = LocalDate.of(startDateToBook.getYear(), startDateToBook.getMonth(), startDateToBook.getDayOfMonth());
-        endDateToBook = LocalDate.of(endDateToBook.getYear(), endDateToBook.getMonth(), endDateToBook.getDayOfMonth());
+        startDateToBook = LocalDate.of(startDateToBook.getYear(),
+                startDateToBook.getMonth(), startDateToBook.getDayOfMonth());
+        endDateToBook = LocalDate.of(endDateToBook.getYear(),
+                endDateToBook.getMonth(), endDateToBook.getDayOfMonth());
         if (currentHotel == null) {
             // The requirement for the booker to be a client is not specified in the assignment,
             // but I assumed it to be logical.
@@ -132,7 +141,11 @@ public class Client {
         int days = period.getDays(); // Days component
         int months = period.getMonths(); // Months component
         int years = period.getYears(); // Years component
-        int daysBetween = days + months * 30 + years * 365 + 1;
+        int averageAmountOfDaysInMonth = 30;
+        int averageAmountOfDaysInYear = 365;
+
+        int daysBetween = days + months * averageAmountOfDaysInMonth
+                + years * averageAmountOfDaysInYear + 1;
 
         // check for service cost
         int serviceTotalCost = 0;
@@ -141,21 +154,21 @@ public class Client {
         }
 
         // if not enough money for a room and services, throw exception.
-        float roomPriceWithDiscounts = daysBetween * (roomToBook.getRoomType().getPrice().intValue() + serviceTotalCost) * discount;
+        float roomPriceWithDiscounts = daysBetween *
+                (roomToBook.getRoomType().getPrice().intValue() + serviceTotalCost) * discount;
         if (money < roomPriceWithDiscounts) {
             throw new NotEnoughMoneyToBookException(money, roomPriceWithDiscounts);
         } else {
             for (Booking existingBooking : currentHotel.getBookings()) {
                 // Check if the new booking overlaps with an existing booking, if it does, throw a custom exception.
-                if (roomToBook.equals(existingBooking.getRoom())) {
-                    // Check for overlap in date ranges
-                    if (isOverlap(existingBooking.getStartDate(), existingBooking.getEndDate(), startDateToBook, endDateToBook)) {
+                if (roomToBook.equals(existingBooking.getRoom()) && (isOverlap(existingBooking.getStartDate(),
+                            existingBooking.getEndDate(), startDateToBook, endDateToBook))) {
                         throw new OverlappingBookingException(startDateToBook, endDateToBook);
-                    }
                 }
             }
             // No overlapping bookings found, add the new booking
-            Booking newBooking = new Booking.BookingBuilder(currentHotel, roomToBook, this, startDateToBook, endDateToBook)
+            Booking newBooking = new Booking.BookingBuilder(currentHotel, roomToBook,
+                    this, startDateToBook, endDateToBook)
                     .addServices(services)
                     .build();
 
@@ -173,18 +186,21 @@ public class Client {
      * @return - the discount as multiplier. 0 - 1
      */
     public float checkForDiscount(Hotel hotelToCheckFor, LocalDate startDate, LocalDate endDate) {
-        float topClientDiscount = 0.0f;
+        float topClientDiscount;
         startDate = LocalDate.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth());
         endDate = LocalDate.of(endDate.getYear(), endDate.getMonth(), endDate.getDayOfMonth());
+        float firstPlaceDiscount = 0.15f;
+        float secondPlaceDiscount = 0.10f;
+        float thirdPlaceDiscount = 0.05f;
         // discounts from being a top client.
         List<Client> clients = hotelToCheckFor.orderClients();
         if (clients.size() > 3) {
             if (clients.get(0).equals(this)) {
-                topClientDiscount = 0.15f;
+                topClientDiscount = firstPlaceDiscount;
             } else if (clients.get(1).equals(this)) {
-                topClientDiscount = 0.10f;
+                topClientDiscount = secondPlaceDiscount;
             } else if (clients.get(2).equals(this)) {
-                topClientDiscount = 0.05f;
+                topClientDiscount = thirdPlaceDiscount;
             } else {
                 topClientDiscount = 0;
             }
@@ -232,7 +248,7 @@ public class Client {
      * @param startDate - the date that the room booking would start.
      * @param endDate - the date that the room booking would end.
      */
-    public ArrayList<Room> filterRooms(Hotel hotel, LocalDate startDate, LocalDate endDate, Integer budget) {
+    public List<Room> filterRooms(Hotel hotel, LocalDate startDate, LocalDate endDate, Integer budget) {
         ArrayList<Room> roomsInPriceRange = new ArrayList<>();
         startDate = LocalDate.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth());
         endDate = LocalDate.of(endDate.getYear(), endDate.getMonth(), endDate.getDayOfMonth());
@@ -257,8 +273,9 @@ public class Client {
             throws CannotCancelBookingIfNotBooked {
         dateToCancel = LocalDate.of(dateToCancel.getYear(), dateToCancel.getMonth(), dateToCancel.getDayOfMonth());
         for (Booking existingBooking : clientBookings) {
-            if (existingBooking.getRoom().equals(roomToBook) &&
-                    isOverlap(existingBooking.getStartDate(), existingBooking.getEndDate(), dateToCancel, dateToCancel)) {
+            if (existingBooking.getRoom().equals(roomToBook)
+                    && isOverlap(existingBooking.getStartDate(),
+                    existingBooking.getEndDate(), dateToCancel, dateToCancel)) {
                 clientBookings.remove(existingBooking);
                 hotelToCancel.removeBooking(existingBooking);
                 money += roomToBook.getRoomType().getPrice().intValue();
@@ -271,7 +288,7 @@ public class Client {
     /**
      * Write a review.
      * The client can currently write one review per hotel.
-     * @param hotelToReview
+     * @param hotelToReview - which hotel to review.
      * @param reviewText - the content of the review in text.
      * @param rating - 1-5 rating.
      */

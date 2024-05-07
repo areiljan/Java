@@ -1,4 +1,4 @@
-package Part2Functionality;
+package secondPartFunctionality;
 
 import ee.taltech.iti0202.hotel.ReservationSystem;
 import ee.taltech.iti0202.hotel.Hotel;

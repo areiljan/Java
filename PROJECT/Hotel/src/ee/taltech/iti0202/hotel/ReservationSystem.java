@@ -6,10 +6,17 @@ import java.util.List;
 public class ReservationSystem {
     private ArrayList<Hotel> hotelList;
 
+    /**
+     * ReservationSystem constructor.
+     */
     public ReservationSystem() {
         hotelList = new ArrayList<>();
     }
 
+    /**
+     * Add a hotel to the reservationSystem.
+     * @param hotel - hotel to add.
+     */
     public void addHotel(Hotel hotel) {
         hotelList.add(hotel);
     }

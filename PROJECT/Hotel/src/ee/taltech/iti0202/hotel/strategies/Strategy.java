@@ -5,5 +5,12 @@ import ee.taltech.iti0202.hotel.Hotel;
 import java.time.LocalDate;
 
 public interface Strategy {
-    public float getDiscount(Hotel hotel, LocalDate startDate, LocalDate endDate);
+    /**
+     * Discount getter.
+     * @param hotel - hotel to get discount for.
+     * @param startDate - start date for booking.
+     * @param endDate - end date for booking
+     * @return - discount as float.
+     */
+    float getDiscount(Hotel hotel, LocalDate startDate, LocalDate endDate);
 }

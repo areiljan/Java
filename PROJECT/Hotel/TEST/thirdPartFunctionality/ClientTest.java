@@ -1,4 +1,4 @@
-package Part3Functionality;
+package thirdPartFunctionality;
 
 import ee.taltech.iti0202.hotel.Hotel;
 import ee.taltech.iti0202.hotel.ReservationSystem;
@@ -28,7 +28,8 @@ public class ClientTest {
         Client client1 = new Client("Joonas", 2000, reservationSystem);
 
         hotel.addClient(client1);
-        client1.bookRoom(economyRoom1, LocalDate.of(2025, 5, 8), LocalDate.of(2025, 5, 8), new ArrayList<Service>());
+        client1.bookRoom(economyRoom1, LocalDate.of(2025, 5, 8),
+                LocalDate.of(2025, 5, 8), new ArrayList<Service>());
         DayOfWeek dayOfWeek = LocalDate.of(2025, 5, 8).getDayOfWeek();
 
         ArrayList<Room> expectedFreeRooms = new ArrayList<>();
@@ -47,7 +48,8 @@ public class ClientTest {
         Client client1 = new Client("Joonas", 2000, reservationSystem);
 
         hotel.addClient(client1);
-        client1.bookRoom(economyRoom1, LocalDate.of(2025, 5, 8), LocalDate.of(2025, 5, 8), new ArrayList<Service>());
+        client1.bookRoom(economyRoom1, LocalDate.of(2025, 5, 8),
+                LocalDate.of(2025, 5, 8), new ArrayList<Service>());
 
 
         DayOfWeek dayOfWeek = DayOfWeek.MONDAY;
@@ -76,9 +78,12 @@ public class ClientTest {
 
         hotel.addClient(client1);
         hotel.addClient(client2);
-        client1.bookRoom(economyRoom1, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 28), new ArrayList<Service>());
-        client1.bookRoom(economyRoom2, LocalDate.of(2024, 3, 27), LocalDate.of(2024, 3, 27), new ArrayList<Service>());
-        client2.bookRoom(economyRoom3, LocalDate.of(2024, 3, 29), LocalDate.of(2024, 3, 29), new ArrayList<Service>());
+        client1.bookRoom(economyRoom1, LocalDate.of(2024, 3, 28),
+                LocalDate.of(2024, 3, 28), new ArrayList<Service>());
+        client1.bookRoom(economyRoom2, LocalDate.of(2024, 3, 27),
+                LocalDate.of(2024, 3, 27), new ArrayList<Service>());
+        client2.bookRoom(economyRoom3, LocalDate.of(2024, 3, 29),
+                LocalDate.of(2024, 3, 29), new ArrayList<Service>());
 
         ArrayList<Room> expectedFreeRooms = new ArrayList<>();
         expectedFreeRooms.add(economyRoom1);
@@ -96,7 +101,8 @@ public class ClientTest {
         Client client1 = new Client("Joonas", 2000, reservationSystem);
 
         hotel.addClient(client1);
-        client1.bookRoom(economyRoom1, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 28), new ArrayList<Service>());
+        client1.bookRoom(economyRoom1, LocalDate.of(2024, 3, 28),
+                LocalDate.of(2024, 3, 28), new ArrayList<Service>());
 
         ArrayList<Room> expectedFreeRooms = new ArrayList<>();
         Assertions.assertEquals(expectedFreeRooms, client1.searchForRoom(hotel, LocalDate.of(2024, 3, 28)));
@@ -115,9 +121,11 @@ public class ClientTest {
 
         hotel.addClient(client1);
         hotel.addClient(client2);
-        client1.bookRoom(economyRoom1, LocalDate.of(2024, 3, 26), LocalDate.of(2024, 3, 26), new ArrayList<Service>());
+        client1.bookRoom(economyRoom1, LocalDate.of(2024, 3, 26),
+                LocalDate.of(2024, 3, 26), new ArrayList<Service>());
         client1.bookRoom(economyRoom2, LocalDate.now(), LocalDate.now(), new ArrayList<Service>());
-        client2.bookRoom(suiteRoom3, LocalDate.of(2024, 3, 29), LocalDate.of(2024, 3, 29), new ArrayList<Service>());
+        client2.bookRoom(suiteRoom3, LocalDate.of(2024, 3, 29),
+                LocalDate.of(2024, 3, 29), new ArrayList<Service>());
 
         ArrayList<Room> expectedFreeRooms = new ArrayList<>();
         // not currently booked and has the right type.
@@ -154,9 +162,12 @@ public class ClientTest {
 
         hotel.addClient(client1);
         hotel.addClient(client2);
-        client1.bookRoom(economyRoom1, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 28),  new ArrayList<Service>());
-        client1.bookRoom(economyRoom2, LocalDate.of(2024, 3, 27), LocalDate.of(2024, 3, 27), new ArrayList<Service>());
-        client2.bookRoom(suiteRoom3, LocalDate.of(2024, 3, 29), LocalDate.of(2024, 3, 29), new ArrayList<Service>());
+        client1.bookRoom(economyRoom1, LocalDate.of(2024, 3, 28),
+                LocalDate.of(2024, 3, 28),  new ArrayList<Service>());
+        client1.bookRoom(economyRoom2, LocalDate.of(2024, 3, 27),
+                LocalDate.of(2024, 3, 27), new ArrayList<Service>());
+        client2.bookRoom(suiteRoom3, LocalDate.of(2024, 3, 29),
+                LocalDate.of(2024, 3, 29), new ArrayList<Service>());
 
         ArrayList<Room> expectedFreeRooms = new ArrayList<>();
         // the only room that is the right type and is not booked on the day that we are checking.
@@ -174,7 +185,8 @@ public class ClientTest {
         Client client1 = new Client("Joonas", 2000, reservationSystem);
 
         hotel.addClient(client1);
-        client1.bookRoom(economyRoom1, LocalDate.of(2024, 3, 28), LocalDate.of(2024, 3, 28), new ArrayList<Service>());
+        client1.bookRoom(economyRoom1, LocalDate.of(2024, 3, 28),
+                LocalDate.of(2024, 3, 28), new ArrayList<Service>());
 
         ArrayList<Room> expectedFreeRooms = new ArrayList<>();
         Assertions.assertEquals(expectedFreeRooms,
