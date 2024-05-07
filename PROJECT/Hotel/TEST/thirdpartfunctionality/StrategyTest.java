@@ -19,8 +19,9 @@ import java.util.ArrayList;
 
 public class StrategyTest {
     @Test
-    void LowSeasonStrategyDiscountsBasedOnBookingNumberNoBookingsMaximumDiscount() throws CannotBookHotelIfNotClientException,
-            NotEnoughMoneyToBookException, OverlappingBookingException {
+    void lowSeasonStrategyDiscountsBasedOnBookingNumberNoBookingsMaximumDiscount()
+            throws CannotBookHotelIfNotClientException, NotEnoughMoneyToBookException,
+            OverlappingBookingException {
         ReservationSystem reservationSystem = new ReservationSystem();
         Hotel hotel1 = new Hotel("Grand Budapest", "Hungary", "Budapest", reservationSystem);
         Room room1 = new Room(hotel1, Room.RoomType.ECONOMYROOM);
@@ -40,8 +41,9 @@ public class StrategyTest {
     }
 
     @Test
-    void LowSeasonStrategyDiscountsBasedOnBookingHotelFullyBookedMinimumDiscountNoTopClientDiscount()
-            throws CannotBookHotelIfNotClientException, NotEnoughMoneyToBookException, OverlappingBookingException {
+    void lowSeasonStrategyDiscountsBasedOnBookingHotelFullyBookedMinimumDiscountNoTopClientDiscount()
+            throws CannotBookHotelIfNotClientException, NotEnoughMoneyToBookException,
+            OverlappingBookingException {
         ReservationSystem reservationSystem = new ReservationSystem();
         Hotel hotel1 = new Hotel("Grand Budapest", "Hungary", "Budapest", reservationSystem);
         Room room1 = new Room(hotel1, Room.RoomType.ECONOMYROOM);
@@ -75,7 +77,8 @@ public class StrategyTest {
                 LocalDate.of(2022, 12, 21), new ArrayList<>());
         // all rooms are booked by the same client to not mess with the top client discount system.
 
-        // the client will now only have a 10 percent discount, because of 10 bookings each driving the price down one percent.
+        // the client will now only have a 10 percent discount,
+        // because of 10 bookings each driving the price down one percent.
         client1.bookRoom(room1, LocalDate.of(2022, 12, 25),
                 LocalDate.of(2022, 12, 26), new ArrayList<>());
         // the price of an economyroom is 1000 per day, so that a 10% discount equals to 100 euros saved per day.
@@ -84,7 +87,7 @@ public class StrategyTest {
     }
 
     @Test
-    void LowSeasonStrategyDiscountsBasedOnBookingHotelFullyBookedMinimumDiscountTopClientDiscountAlsoApplies()
+    void lowSeasonStrategyDiscountsBasedOnBookingHotelFullyBookedMinimumDiscountWithTopClientDiscount()
             throws CannotBookHotelIfNotClientException, NotEnoughMoneyToBookException, OverlappingBookingException {
         ReservationSystem reservationSystem = new ReservationSystem();
         Hotel hotel1 = new Hotel("Grand Budapest", "Hungary", "Budapest", reservationSystem);
@@ -135,8 +138,9 @@ public class StrategyTest {
     }
 
     @Test
-    void LongBookingNoDiscountBecauseBookingLessThanSevenDays()
-            throws CannotBookHotelIfNotClientException, NotEnoughMoneyToBookException, OverlappingBookingException {
+    void longBookingNoDiscountBecauseBookingLessThanSevenDays()
+            throws CannotBookHotelIfNotClientException, NotEnoughMoneyToBookException,
+            OverlappingBookingException {
         ReservationSystem reservationSystem = new ReservationSystem();
         Hotel hotel1 = new Hotel("Grand Budapest", "Hungary", "Budapest", reservationSystem);
         Room room1 = new Room(hotel1, Room.RoomType.ECONOMYROOM);
@@ -156,8 +160,9 @@ public class StrategyTest {
     }
 
     @Test
-    void LongBookingMinimumDiscountBecauseBookingLastsForExactlySevenDays()
-            throws CannotBookHotelIfNotClientException, NotEnoughMoneyToBookException, OverlappingBookingException {
+    void longBookingMinimumDiscountBecauseBookingLastsForExactlySevenDays()
+            throws CannotBookHotelIfNotClientException, NotEnoughMoneyToBookException,
+            OverlappingBookingException {
         ReservationSystem reservationSystem = new ReservationSystem();
         Hotel hotel1 = new Hotel("Grand Budapest", "Hungary", "Budapest", reservationSystem);
         Room room1 = new Room(hotel1, Room.RoomType.ECONOMYROOM);
@@ -177,8 +182,9 @@ public class StrategyTest {
     }
 
     @Test
-    void LongBookingDiscountTwentyDaysHalfAPercentPerDay()
-            throws CannotBookHotelIfNotClientException, NotEnoughMoneyToBookException, OverlappingBookingException {
+    void longBookingDiscountTwentyDaysHalfAPercentPerDay()
+            throws CannotBookHotelIfNotClientException, NotEnoughMoneyToBookException,
+            OverlappingBookingException {
         ReservationSystem reservationSystem = new ReservationSystem();
         Hotel hotel1 = new Hotel("Grand Budapest", "Hungary", "Budapest", reservationSystem);
         Room room1 = new Room(hotel1, Room.RoomType.ECONOMYROOM);
@@ -198,8 +204,9 @@ public class StrategyTest {
     }
 
     @Test
-    void LongBookingMaximumDiscountOfThirtyPercent()
-            throws CannotBookHotelIfNotClientException, NotEnoughMoneyToBookException, OverlappingBookingException {
+    void longBookingMaximumDiscountOfThirtyPercent()
+            throws CannotBookHotelIfNotClientException, NotEnoughMoneyToBookException,
+            OverlappingBookingException {
         ReservationSystem reservationSystem = new ReservationSystem();
         Hotel hotel1 = new Hotel("Grand Budapest", "Hungary", "Budapest", reservationSystem);
         Room room1 = new Room(hotel1, Room.RoomType.ECONOMYROOM);
@@ -219,8 +226,9 @@ public class StrategyTest {
     }
 
     @Test
-    void LongBookingStrategyDiscountTopClientDiscountAlsoApplies()
-            throws CannotBookHotelIfNotClientException, NotEnoughMoneyToBookException, OverlappingBookingException {
+    void longBookingStrategyDiscountTopClientDiscountAlsoApplies()
+            throws CannotBookHotelIfNotClientException, NotEnoughMoneyToBookException,
+            OverlappingBookingException {
         ReservationSystem reservationSystem = new ReservationSystem();
         Hotel hotel1 = new Hotel("Grand Budapest", "Hungary", "Budapest", reservationSystem);
         Room room1 = new Room(hotel1, Room.RoomType.ECONOMYROOM);
@@ -271,8 +279,9 @@ public class StrategyTest {
     }
 
     @Test
-    void CombinedStrategyDiscountsBasedOnBookingNumberNoBookingsAndLongBookingNoTopClientMaximumDiscount()
-            throws CannotBookHotelIfNotClientException, NotEnoughMoneyToBookException, OverlappingBookingException {
+    void combinedStrategyDiscountsBasedOnBookingNumberNoBookingsAndLongBookingNoTopClientMaximumDiscount()
+            throws CannotBookHotelIfNotClientException,
+            NotEnoughMoneyToBookException, OverlappingBookingException {
         ReservationSystem reservationSystem = new ReservationSystem();
         Hotel hotel1 = new Hotel("Grand Budapest", "Hungary", "Budapest", reservationSystem);
         Room room1 = new Room(hotel1, Room.RoomType.ECONOMYROOM);
@@ -292,7 +301,7 @@ public class StrategyTest {
     }
 
     @Test
-    void CombinedStrategyDiscountTwentyDaysAndHotelHalfBookedCombinesResults()
+    void combinedStrategyDiscountTwentyDaysAndHotelHalfBookedCombinesResults()
             throws CannotBookHotelIfNotClientException, NotEnoughMoneyToBookException, OverlappingBookingException {
         ReservationSystem reservationSystem = new ReservationSystem();
         Hotel hotel1 = new Hotel("Grand Budapest", "Hungary", "Budapest", reservationSystem);
@@ -319,7 +328,8 @@ public class StrategyTest {
                 LocalDate.of(2023, 1, 30), new ArrayList<>());
 
         // get discount of (15 + 12 * 0.5) + (0.1 + 5*1) = 36.5 percent.
-        // the price of an economyroom is 1000 per day, so that a 36.5% discount equals to 36.5 euros saved per day or 7300 euros per 20 days.
+        // the price of an economyroom is 1000 per day, so that a 36.5% discount equals
+        // to 36.5 euros saved per day or 7300 euros per 20 days.
         int client1ExpectedMoney = 7300;
         Assertions.assertEquals(client1ExpectedMoney, client1.getMoney());
     }
