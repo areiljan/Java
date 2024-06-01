@@ -1,6 +1,4 @@
-package ee.taltech.iti0202.delivery.packet;
-
-import ee.taltech.iti0202.delivery.location.Location;
+package ee.taltech.iti0202.delivery;
 
 public class Packet {
     private final Location target;

@@ -1,6 +1,4 @@
-package ee.taltech.iti0202.delivery.location;
-
-import ee.taltech.iti0202.delivery.packet.Packet;
+package ee.taltech.iti0202.delivery;
 
 import java.util.*;
 

@@ -1,6 +1,4 @@
-package ee.taltech.iti0202.delivery.strategy;
-
-import ee.taltech.iti0202.delivery.action.Action;
+package ee.taltech.iti0202.delivery;
 
 import java.util.ArrayList;
 import java.util.List;
