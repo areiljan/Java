@@ -19,7 +19,7 @@ public class Action {
      * Deposits getter.
      * @return - List of deposits.
      */
-    private List<String> getDeposit() {
+    public List<String> getDeposit() {
         return packagesToDeposit;
     }
 

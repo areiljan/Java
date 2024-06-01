@@ -10,6 +10,10 @@ public class Packet {
         this.target = target;
     }
 
+    public String toString() {
+        return "Packet [name=" + name + ", target=" + target + "]";
+    }
+
     /**
      * Getter for name.
      * @return - name of the packet.

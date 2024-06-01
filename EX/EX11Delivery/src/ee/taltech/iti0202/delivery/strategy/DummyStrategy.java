@@ -6,13 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DummyStrategy implements Strategy {
-    private List<Action> actions = new ArrayList<>();
+    private List<Action> actions;
     public DummyStrategy(List<Action> actions) {
-        this.actions = actions;
+        this.actions = new ArrayList<>(actions);
     }
 
     @Override
     public Action getAction() {
-        return actions.removeFirst();
+        if (!actions.isEmpty()) {
+            return actions.remove(0); // Remove and return the first action
+        } else {
+            // Handle the case when there are no actions left
+            return null; // or throw an exception, depending on your requirements
+        }
     }
 }

@@ -1,25 +1,51 @@
 package ee.taltech.iti0202.delivery.courier;
 
+import ee.taltech.iti0202.delivery.action.Action;
 import ee.taltech.iti0202.delivery.location.Location;
+import ee.taltech.iti0202.delivery.packet.Packet;
 import ee.taltech.iti0202.delivery.strategy.Strategy;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Optional;
 
 public class Courier {
     private Strategy strategy;
-    private List<String> currentPackages; // packages that the courier has right now
+    private HashMap<String, Packet> currentPackages; // packages that the courier has right now
     private String name; // courier name
     private Location location; // current location
+
+    public Location getTarget() {
+        return target;
+    }
+
     private Location target; // target location
     private int distanceToTarget; // distance left to move
+    private Action currentAction; // current Action
 
 
     public Courier(String name, Location startingLocation) {
         this.name = name;
         location = startingLocation;
-        currentPackages = new ArrayList<>();
+        currentPackages = new HashMap<>();
+    }
+
+    public Action getCurrentAction() {
+        return currentAction;
+    }
+
+    public void setCurrentAction(Action currentAction) {
+        this.currentAction = currentAction;
+        if (currentAction != null) {
+            target = currentAction.getGoTo();
+            if (!target.equals(location)) {
+                distanceToTarget = location.getDistanceTo(target.getName());
+            }
+        }
+    }
+
+    @Override
+    public String toString() {
+        return this.name + " PACKETS " + currentPackages.size();
     }
 
     /**
@@ -46,20 +72,31 @@ public class Courier {
         return Optional.ofNullable(location);
     }
 
+    public HashMap<String, Packet> getCurrentPackages() {
+        return currentPackages;
+    }
+
+
     /**
-     * Target location setter.
-     * @param location - target location.
+     * Drop a packet at the location.
+     * @param packetName - packet with this name to drop.
      */
-    public void setTarget(Location location) {
-        location.getDistanceTo(location.getName());
+    public void depositPackage (String packetName) {
+        Packet depositPackage = currentPackages.get(packetName);
+        location.addPacket(depositPackage);
+        currentPackages.remove(depositPackage);
     }
 
     /**
-     * Return currentPackages.
-     * @return currentPackages.
+     * Take a packet from the location.
+     * @param packetName - packet to take.
      */
-    public List<String> currentPackages() {
-        return currentPackages;
+    public void takePackage (String packetName) {
+        Optional<Packet> optionalPacket = location.getPacket(packetName);
+        if (optionalPacket.isPresent()) {
+            Packet packet = optionalPacket.get();
+            currentPackages.put(packetName, packet);
+        }
     }
 
     /**
@@ -68,12 +105,13 @@ public class Courier {
     public void move() {
         if (distanceToTarget > 0) {
             distanceToTarget -= 20;
+            location = null;
         }
 
         if (distanceToTarget <= 0) {
             location = target;
         }
+
+        System.out.println("distance left: " + distanceToTarget);
     }
-
-
 }
