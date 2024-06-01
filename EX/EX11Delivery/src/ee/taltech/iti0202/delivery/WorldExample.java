@@ -4,6 +4,7 @@ import ee.taltech.iti0202.delivery.action.Action;
 import ee.taltech.iti0202.delivery.courier.Courier;
 import ee.taltech.iti0202.delivery.location.Location;
 import ee.taltech.iti0202.delivery.packet.Packet;
+import ee.taltech.iti0202.delivery.strategy.DummyStrategy;
 import ee.taltech.iti0202.delivery.strategy.Strategy;
 import ee.taltech.iti0202.delivery.world.World;
 
@@ -50,7 +51,7 @@ public class WorldExample {
         System.out.println(courier2); // Kati (Tartu). PACKETS:
 
         world.tick();
-        System.out.println("TICK");
+        System.out.println("TICK"); // TICK
 
         System.out.println(tallinn);  // Tallinn   PACKETS: tal2
         System.out.println(tartu);    // Tartu   PACKETS:
@@ -58,16 +59,16 @@ public class WorldExample {
         System.out.println(courier2); // Kati (null). PACKETS: tartu1,tartu2
 
         world.tick();
-        System.out.println("TICK");
+        System.out.println("TICK"); // TICK
 
         System.out.println(courier1);  // same
         System.out.println(courier2);  // same
 
         world.tick();
-        System.out.println("TICK");
+        System.out.println("TICK"); // TICK
 
         System.out.println(courier1);  // Mati (Tartu). PACKETS: tal1
-        System.out.println(courier2);  // // Kati (Tallinn). PACKETS: tartu1,tartu2
+        System.out.println(courier2);  // // Kati (Tallinn). PACKETS: tartu1, tartu2
         world.tick();
         System.out.println("TICK");
 
