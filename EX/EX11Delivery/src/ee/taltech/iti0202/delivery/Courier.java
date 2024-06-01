@@ -18,6 +18,10 @@ public class Courier {
     private Action currentAction; // current Action
 
 
+    public String getName() {
+        return name;
+    }
+
     public Courier(String name, Location startingLocation) {
         this.name = name;
         location = startingLocation;
