@@ -1,4 +1,4 @@
-package ee.taltech.iti0202.generics;
+package ee.taltech.iti0202.generics.animal;
 
 public abstract class Animal {
 
