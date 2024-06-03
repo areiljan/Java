@@ -167,10 +167,11 @@ public class SchoolDatabase {
         for (Student student : students) {
             JsonElement jsonElement = JsonParser.parseString(getStudentAverageGrade(student.getId()));
             JsonObject jsonObject = jsonElement.getAsJsonObject();
-            studentAverageGrades.add(jsonObject.get("averageGrade");
+            double averageGrade = jsonObject.get("averageGrade").getAsDouble();
+            studentAverageGrades.add(averageGrade);
         }
         return studentAverageGrades.stream()
-                .mapToDouble()
+                .mapToDouble(Double::doubleValue)
                 .average()
                 .getAsDouble();
     }
