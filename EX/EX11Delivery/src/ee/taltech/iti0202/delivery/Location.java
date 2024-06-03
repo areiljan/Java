@@ -68,7 +68,11 @@ public class Location {
      * @return - the distance.
      */
     public int getDistanceTo(String name) {
-        return distanceMap.get(name);
+        if (distanceMap.containsKey(name)) {
+            return distanceMap.get(name);
+        } else {
+            return Integer.MAX_VALUE;
+        }
     }
 
     public String getFarthestOrClosestDistance(Boolean closest) {

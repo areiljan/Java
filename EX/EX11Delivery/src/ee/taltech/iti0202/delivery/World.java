@@ -51,7 +51,7 @@ public class World {
         for (int i = 0; i < otherLocations.size(); i++) {
             String otherLocationName = otherLocations.get(i);
 
-            if (i >= distances.size()) {
+            if (i <= distances.size()) {
                 locationToAdd.addDistance(otherLocationName, distances.get(i));
                 // add these distances to all locations
                 locationMap.get(otherLocationName).addDistance(name, distances.get(i));
