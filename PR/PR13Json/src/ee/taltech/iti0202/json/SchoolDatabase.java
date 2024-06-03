@@ -71,8 +71,8 @@ public class SchoolDatabase {
     private List getAllStudentNames(School school) {
         List<Student> students = school.getStudents();
         List<String> names = new ArrayList<>();
-        for (String name : names) {
-             names.add(name);
+        for (Student student : students) {
+             names.add(student.getName());
         }
         return names;
     }
