@@ -149,7 +149,7 @@ public class SchoolDatabase {
         Student student = gson.fromJson(studentJson, Student.class);
 
         double average = 0;
-        if (!student.getGrades().isEmpty()) {
+        if (!student.getGrades().isEmpty() || student.getGrades() != null) {
             List<Integer> grades = student.getGrades().stream()
                     .map(Grade::getGrade)
                     .toList();
@@ -190,8 +190,10 @@ public class SchoolDatabase {
         for (Student student : students) {
             JsonElement jsonElement = JsonParser.parseString(getStudentAverageGrade(student.getId()));
             JsonObject jsonObject = jsonElement.getAsJsonObject();
-            double averageGrade = jsonObject.get("averageGrade").getAsDouble();
-            studentAverageGrades.add(averageGrade);
+            if (jsonObject.get("averageGrade") != null) {
+                double averageGrade = jsonObject.get("averageGrade").getAsDouble();
+                studentAverageGrades.add(averageGrade);
+            }
         }
         return studentAverageGrades.stream()
                 .mapToDouble(Double::doubleValue)
@@ -225,10 +227,16 @@ public class SchoolDatabase {
         List<Map<String, Object>> studentsWithAverageGrade = new ArrayList<>();
         for (Student student : school.getStudents()) {
             Map<String, Object> studentData = new HashMap<>();
-            studentData.put("student", student.getName());
-            studentData.put("averageGrade",
-                    getStudentAverageGrade(student.getId()));
-            studentsWithAverageGrade.add(studentData);
+
+            JsonElement jsonElement = JsonParser.parseString(getStudentAverageGrade(student.getId()));
+            JsonObject jsonObject = jsonElement.getAsJsonObject();
+
+            if (jsonObject.get("averageGrade") != null) {
+                double averageGrade = jsonObject.get("averageGrade").getAsDouble();
+                studentData.put("student", student.getName());
+                studentData.put("averageGrade", averageGrade);
+                studentsWithAverageGrade.add(studentData);
+            }
         }
         return studentsWithAverageGrade;
     }
