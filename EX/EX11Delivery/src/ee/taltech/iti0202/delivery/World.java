@@ -50,9 +50,11 @@ public class World {
         Location locationToAdd = new Location(name);
         for (int i = 0; i < otherLocations.size(); i++) {
             String otherLocationName = otherLocations.get(i);
-            locationToAdd.addDistance(otherLocationName, distances.get(i));
-            // add these distances to all locations
-            locationMap.get(otherLocationName).addDistance(name, distances.get(i));
+
+            
+                locationToAdd.addDistance(otherLocationName, distances.get(i));
+                // add these distances to all locations
+                locationMap.get(otherLocationName).addDistance(name, distances.get(i));
         }
 
         locationMap.put(locationToAdd.getName(), locationToAdd);
