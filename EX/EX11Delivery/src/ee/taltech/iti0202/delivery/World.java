@@ -29,39 +29,26 @@ public class World {
      * @return - location if it exists.
      */
     public Optional<Location> addLocation(String name, List<String> otherLocations, List<Integer> distances) {
-        // making sure that the location is eligible to add.
-        // The location already exists.
+        // Check if the location already exists.
         if (locationMap.containsKey(name)) {
             return Optional.empty();
-        } else {
-            // if the otherLocations does not contain all locations in the locationMap.
-            for (String locationName : locationMap.keySet()) {
-                if (!otherLocations.contains(locationName)) {
-                    return Optional.empty();
-                }
-            }
-            // if all given locations do not have a distance linked to them.
-            if (distances.size() < locationMap.size()) {
-                return Optional.empty();
-            }
         }
 
-        // otherwise add a location.
+        // Validate other locations and distances.
+        if (otherLocations.size() != distances.size() || !locationMap.keySet().containsAll(otherLocations)) {
+            return Optional.empty();
+        }
+
+        // Create and add the new location.
         Location locationToAdd = new Location(name);
         for (int i = 0; i < otherLocations.size(); i++) {
             String otherLocationName = otherLocations.get(i);
-
-            if (i <= distances.size()) {
-                // if the locationMap has the specific location to add.
-                if (locationMap.containsKey(otherLocationName)) {
-                    locationToAdd.addDistance(otherLocationName, distances.get(i));
-                    // add these distances to all locations
-                    locationMap.get(otherLocationName).addDistance(name, distances.get(i));
-                }
-            }
+            int distance = distances.get(i);
+            locationToAdd.addDistance(otherLocationName, distance);
+            locationMap.get(otherLocationName).addDistance(name, distance);
         }
 
-        locationMap.put(locationToAdd.getName(), locationToAdd);
+        locationMap.put(name, locationToAdd);
         return Optional.of(locationToAdd);
     }
 
