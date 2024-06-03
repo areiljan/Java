@@ -35,7 +35,7 @@ public class World {
         }
 
         // Validate other locations and distances.
-        if (otherLocations.size() != distances.size() || !locationMap.keySet().containsAll(otherLocations)) {
+        if (!otherLocations.containsAll(locationMap.keySet())) {
             return Optional.empty();
         }
 
@@ -43,9 +43,11 @@ public class World {
         Location locationToAdd = new Location(name);
         for (int i = 0; i < otherLocations.size(); i++) {
             String otherLocationName = otherLocations.get(i);
-            int distance = distances.get(i);
-            locationToAdd.addDistance(otherLocationName, distance);
-            locationMap.get(otherLocationName).addDistance(name, distance);
+            if (distances.size() <= i) {
+                int distance = distances.get(i);
+                locationToAdd.addDistance(otherLocationName, distance);
+                locationMap.get(otherLocationName).addDistance(name, distance);
+            }
         }
 
         locationMap.put(name, locationToAdd);
