@@ -35,7 +35,7 @@ public class World {
             return Optional.empty();
         } else {
             // if the otherLocations does not contain all locations in the locationMap.
-            if (!otherLocations.containsAll(locationMap.keySet())) {
+            if (otherLocations.size() < locationMap.size() || distances.size() < locationMap.size()) {
                 return Optional.empty();
             }
         }
@@ -45,13 +45,14 @@ public class World {
         for (int i = 0; i < otherLocations.size(); i++) {
             String otherLocationName = otherLocations.get(i);
 
-            if (i <= distances.size()) {
-                // if the locationMap has the specific location to add.
-                if (locationMap.containsKey(otherLocationName)) {
-                    locationToAdd.addDistance(otherLocationName, distances.get(i));
-                    // add these distances to all locations
-                    locationMap.get(otherLocationName).addDistance(name, distances.get(i));
-                }
+            if (!locationMap.containsKey(otherLocationName)) {
+                return Optional.empty();
+            }
+            // if the locationMap has the specific location to add.
+            if (locationMap.containsKey(otherLocationName)) {
+                locationToAdd.addDistance(otherLocationName, distances.get(i));
+                // add these distances to all locations
+                locationMap.get(otherLocationName).addDistance(name, distances.get(i));
             }
         }
 

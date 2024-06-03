@@ -57,9 +57,7 @@ public class Location {
      * @param distance - distance.
      */
     public void addDistance(String location, int distance) {
-        if (!distanceMap.containsKey(location)) {
-            distanceMap.put(location, distance);
-        }
+        distanceMap.put(location, distance);
     }
 
     /**
