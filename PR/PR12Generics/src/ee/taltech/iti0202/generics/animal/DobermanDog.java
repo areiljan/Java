@@ -1,6 +1,11 @@
 package ee.taltech.iti0202.generics.animal;
 
 public class DobermanDog extends Animal {
+
+    /**
+     * DobermanDog.
+     * @param name - name of the dog.
+     */
     public DobermanDog(String name) {
         super(name);
     }

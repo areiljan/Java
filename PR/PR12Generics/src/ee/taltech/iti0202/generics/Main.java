@@ -1,5 +1,6 @@
 package ee.taltech.iti0202.generics;
 
+import ee.taltech.iti0202.generics.animal.DobermanDog;
 import ee.taltech.iti0202.generics.animal.PersianCat;
 import ee.taltech.iti0202.generics.animalbox.AnimalBox;
 import ee.taltech.iti0202.generics.food.Food;
