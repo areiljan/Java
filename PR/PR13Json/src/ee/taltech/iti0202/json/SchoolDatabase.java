@@ -43,7 +43,8 @@ public class SchoolDatabase {
         List<Student> students = schools.stream()
                 .flatMap(school -> school.getStudents().stream())
                 .collect(Collectors.toList());
-        return convertToJson(students);
+
+        return gson.toJson(students);
     }
 
     /**
@@ -53,7 +54,7 @@ public class SchoolDatabase {
      */
     public String getAllStudents(School school) {
         List<Student> students = school.getStudents();
-        return convertToJson(students);
+        return gson.toJson(students);
     }
 
     /**
@@ -64,7 +65,7 @@ public class SchoolDatabase {
     public String getStudent(int id) {
         for (Student student : getAllStudentsAsList()) {
             if (student.getId() == id) {
-                return convertToJson(studentA);
+                return gson.toJson(student);
             }
         }
         return "{}";
@@ -125,14 +126,14 @@ public class SchoolDatabase {
 
         List<Integer> grades = student.getGrades().stream()
                 .map(Grade::getGrade)
-                .toList()
+                .toList();
         double average = grades.stream()
                 .mapToDouble(Integer::doubleValue)
                 .average()
                 .orElse(0); // Return 0 if the list is empty
 
         Map<String, Object> averageGrades = new HashMap<>();
-        averageGrades.put("name", name);
+        averageGrades.put("name", student.getName());
         averageGrades.put("averageGrades", average);
         return gson.toJson(averageGrades);
     }
