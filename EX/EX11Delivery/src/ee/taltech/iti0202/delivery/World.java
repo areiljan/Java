@@ -95,46 +95,7 @@ public class World {
      */
     public void tick() {
         for (Courier courier : courierMap.values()) {
-            // If the courier has no current action or is at the target location, get a new action
-            if (courier.getCurrentAction() == null || courier.getLocation().equals(courier.getTarget())) {
-                Action action = courier.getStrategy().getAction();
-                if (action != null) {
-                    courier.setCurrentAction(action);
-                }
-            }
-
-            // If courier has a location and a current action
-            Location location = courier.getLocation().get();
-            if (courier.getCurrentAction() != null && location != null) {
-                // Deposit packets
-                List<String> depositPackets = courier.getCurrentAction().getDeposit();
-                if (depositPackets != null) {
-                    for (String packetName : depositPackets) {
-                        courier.depositPackage(packetName);
-                    }
-                }
-
-                // Take packets
-                List<String> takePackets = courier.getCurrentAction().getTake();
-                if (takePackets != null) {
-                    for (String packetName : takePackets) {
-                        boolean packetFound = location.getPackets().stream()
-                                .filter(packet -> packet != null)  // Filter out null packets
-                                .peek(packet -> System.out.println("Checking packet: " + packet.getName()))  // Debugging output
-                                .anyMatch(packet -> packet.getName().equals(packetName));  // Match packet name
-
-                        if (packetFound) {
-                            courier.takePackage(packetName);
-                            System.out.println("Packet " + packetName + " taken.");
-                        } else {
-                            System.out.println("Packets in location " + location.getPackets() + ". Packet " + packetName + " not found at the location.");
-                        }
-                    }
-                }
-            }
-
-            // Move the courier
-            courier.move();
+            courier.tick();
         }
     }
 }

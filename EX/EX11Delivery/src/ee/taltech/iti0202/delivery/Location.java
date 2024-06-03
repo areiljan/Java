@@ -31,8 +31,9 @@ public class Location {
      */
     public Optional<Packet> getPacket(String name) {
         if (this.packets.containsKey(name)) {
+            Packet packet = this.packets.get(name);
             packets.remove(name);
-            return Optional.ofNullable(this.packets.get(name));
+            return Optional.ofNullable(packet);
         }
         return Optional.empty();
     }
@@ -42,7 +43,7 @@ public class Location {
      * @return - packets in the location.
      */
     public List<Packet> getPackets() {
-        return packets.;
+        return packets.values().stream().toList();
     }
 
 

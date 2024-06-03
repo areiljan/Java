@@ -1,6 +1,7 @@
 package ee.taltech.iti0202.delivery;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 public class Courier {
@@ -114,5 +115,35 @@ public class Courier {
         if (distanceToTarget <= 0) {
             location = target;
         }
+    }
+
+    public void tick() {
+        // If the courier has no current action or is at the target location, get a new action
+        if (getCurrentAction() == null || getLocation().equals(getTarget())) {
+            Action action = getStrategy().getAction();
+            if (action != null) {
+                setCurrentAction(action);
+            }
+        }
+
+        // If courier has a location and a current action
+        if (getCurrentAction() != null && getLocation().isPresent()) {
+            Location location = getLocation().get();
+
+            // Deposit packets
+            List<String> depositPackets = getCurrentAction().getDeposit();
+            for (String packetName : depositPackets) {
+                depositPackage(packetName);
+            }
+
+            // Take packets
+            List<String> takePackets = getCurrentAction().getTake();
+            for (String packetName : takePackets) {
+                takePackage(packetName);
+            }
+        }
+
+        // Move the courier
+        move();
     }
 }
