@@ -116,6 +116,7 @@ public class SchoolDatabase {
 
     /**
      * Get student's average grade by id
+     *
      * @param id student's id
      * @return student's name with key "name", and average grade with key "averageGrade" in json,
      * if student is not found, return empty json {}
@@ -144,8 +145,29 @@ public class SchoolDatabase {
      * if no schools are in the db, return empty json {}
      */
     public String getAverageGradeInEachSchool() {
-        //TODO
-        return "";
+        Map<String, Object> averageGradesPerSchool = new HashMap<>();
+        for (School school : schools) {
+            averageGradesPerSchool.put("school", school.getName());
+            averageGradesPerSchool.put("averageGrade", averageGrade(school));
+        }
+        return gson.toJson(averageGradesPerSchool);
+    }
+
+    /**
+     * Helper method to get the average grade of a school.
+     * @param school - school to get the average grade of.
+     * @return - average grade of the school.
+     */
+    private Double averageGrade(School school) {
+        List<Student> students = getAllStudentsAsList();
+        List<Double> studentAverageGrades = new ArrayList<>();
+        for (Student student : students) {
+            studentAverageGrades.add(getStudentAverageGrade(student.getId()));
+        }
+        return studentAverageGrades.stream()
+                .mapToDouble()
+                .average()
+                .getAsDouble();
     }
 
     /**
@@ -154,8 +176,32 @@ public class SchoolDatabase {
      * if no schools are in the db, return empty json {}
      */
     public String getAllStudentsInEachSchoolAndTheirAverageGrades() {
-        //TODO
-        return "";
+        Map<String, Object> schoolsAndStudentGrades = new HashMap<>();
+        for (School school : schools) {
+            schoolsAndStudentGrades.put("school", school.getName());
+            schoolsAndStudentGrades.put("grades", getStudentsWithAverageGradesList(school));
+        }
+        if (schoolsAndStudentGrades.isEmpty()) {
+            return "{}";
+        }
+        return gson.toJson(schoolsAndStudentGrades);
+    }
+
+    /**
+     * Helper method to get the list of students with average grades.
+     * @param school - which schools students.
+     * @return - list of students and their average grades.
+     */
+    private List getStudentsWithAverageGradesList(School school) {
+        List<Map<String, Object>> studentsWithAverageGrade = new ArrayList<>();
+        for (Student student : school.getStudents()) {
+            Map<String, Object> studentData = new HashMap<>();
+            studentData.put("student", student.getName());
+            studentData.put("averageGrade",
+                    getStudentAverageGrade(student.getId()));
+            studentsWithAverageGrade.add(studentData);
+        }
+        return studentsWithAverageGrade;
     }
 
     /**
@@ -164,8 +210,15 @@ public class SchoolDatabase {
      * if no schools are in the db, return empty json {}
      */
     public String getAllStudentsNamesInEachSchool() {
-        //TODO
-        return "";
+        Map<String, Object> schoolAndStudents = new HashMap<>();
+        for (School school : schools) {
+            schoolAndStudents.put("school", school.getName());
+            schoolAndStudents.put("students", school.getStudents());
+        }
+        if (schoolAndStudents.isEmpty()) {
+            return "{}";
+        }
+        return gson.toJson(schoolAndStudents);
     }
 
     /**
