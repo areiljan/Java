@@ -4,9 +4,7 @@ import java.util.*;
 
 public class Location {
     private final Map<String, Integer> distanceMap = new HashMap<>();
-
-
-    private final List<Packet> packets = new ArrayList<>();
+    private final Map<String, Packet> packets = new HashMap<>();
     private final String name;
     public Location(String name) {
         this.name = name;
@@ -22,9 +20,7 @@ public class Location {
      * @param packet - packet to add.
      */
     public void addPacket(Packet packet) {
-        if (!packets.contains(packet)) {
-            packets.add(packet);
-        }
+        packets.put(packet.getName(), packet);
     }
 
     /**
@@ -34,12 +30,11 @@ public class Location {
      * @return - optional of the packet.
      */
     public Optional<Packet> getPacket(String name) {
-        // a stream returns an Optional by default.
-        Optional<Packet> gottenPacket = packets.stream()
-                .filter(packet -> packet.getName().equals(name))
-                .findFirst();
-        gottenPacket.ifPresent(packets::remove);
-        return gottenPacket;
+        if (this.packets.containsKey(name)) {
+            packets.remove(name);
+            return Optional.ofNullable(this.packets.get(name));
+        }
+        return Optional.empty();
     }
 
     /**
@@ -47,7 +42,7 @@ public class Location {
      * @return - packets in the location.
      */
     public List<Packet> getPackets() {
-        return packets;
+        return packets.;
     }
 
 
@@ -73,6 +68,11 @@ public class Location {
         }
     }
 
+    /**
+     * Helper method to get the farthest or closest distance.
+     * @param closest - is the distance closest.
+     * @return - location.
+     */
     public String getFarthestOrClosestDistance(Boolean closest) {
         Integer distance = 0;
         if (closest) {
@@ -91,6 +91,11 @@ public class Location {
         }
         return foundLocation;
     }
+
+    /**
+     * Get the distancemap.
+     * @return
+     */
     public Map<String, Integer> getDistances() {
         return distanceMap;
     }

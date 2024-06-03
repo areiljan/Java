@@ -71,6 +71,10 @@ public class Courier {
         return Optional.ofNullable(location);
     }
 
+    /**
+     * Get packages on hand.
+     * @return - hashmap of packages.
+     */
     public HashMap<String, Packet> getCurrentPackages() {
         return currentPackages;
     }
@@ -103,14 +107,12 @@ public class Courier {
      */
     public void move() {
         if (distanceToTarget > 0) {
-            distanceToTarget -= 20;
+            distanceToTarget --;
             location = null;
         }
 
         if (distanceToTarget <= 0) {
             location = target;
         }
-
-        System.out.println("distance left: " + distanceToTarget);
     }
 }
