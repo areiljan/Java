@@ -52,9 +52,12 @@ public class World {
             String otherLocationName = otherLocations.get(i);
 
             if (i <= distances.size()) {
-                locationToAdd.addDistance(otherLocationName, distances.get(i));
-                // add these distances to all locations
-                locationMap.get(otherLocationName).addDistance(name, distances.get(i));
+                // if the locationMap has the specific location to add.
+                if (locationMap.containsKey(otherLocationName)) {
+                    locationToAdd.addDistance(otherLocationName, distances.get(i));
+                    // add these distances to all locations
+                    locationMap.get(otherLocationName).addDistance(name, distances.get(i));
+                }
             }
         }
 
