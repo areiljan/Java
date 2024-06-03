@@ -176,6 +176,9 @@ public class SchoolDatabase {
             averageGradesPerSchool.put("school", school.getName());
             averageGradesPerSchool.put("averageGrade", averageGrade(school));
         }
+        if (averageGradesPerSchool.isEmpty()) {
+            return "{}";
+        }
         return gson.toJson(averageGradesPerSchool);
     }
 
