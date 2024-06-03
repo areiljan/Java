@@ -250,15 +250,17 @@ public class SchoolDatabase {
      * if no schools are in the db, return empty json {}
      */
     public String getAllStudentsNamesInEachSchool() {
-        Map<String, Object> schoolAndStudents = new HashMap<>();
+        List<Map<String, Object>> schoolsAndStudents = new ArrayList<>();
         for (School school : schools) {
+            Map<String, Object> schoolAndStudents = new HashMap<>();
             schoolAndStudents.put("school", school.getName());
             schoolAndStudents.put("students", getAllStudentNames(school));
+            schoolsAndStudents.add(schoolAndStudents);
         }
-        if (schoolAndStudents.isEmpty()) {
+        if (schoolsAndStudents.isEmpty()) {
             return "{}";
         }
-        return gson.toJson(schoolAndStudents);
+        return gson.toJson(schoolsAndStudents);
     }
 
     /**
