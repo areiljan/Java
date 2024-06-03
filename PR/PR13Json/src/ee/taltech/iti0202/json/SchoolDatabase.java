@@ -1,6 +1,9 @@
 package ee.taltech.iti0202.json;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import ee.taltech.iti0202.json.school.School;
 import ee.taltech.iti0202.json.student.Grade;
 import ee.taltech.iti0202.json.student.Student;
@@ -162,7 +165,9 @@ public class SchoolDatabase {
         List<Student> students = getAllStudentsAsList();
         List<Double> studentAverageGrades = new ArrayList<>();
         for (Student student : students) {
-            studentAverageGrades.add(getStudentAverageGrade(student.getId()));
+            JsonElement jsonElement = JsonParser.parseString(getStudentAverageGrade(student.getId()));
+            JsonObject jsonObject = jsonElement.getAsJsonObject();
+            studentAverageGrades.add(jsonObject.get("averageGrade");
         }
         return studentAverageGrades.stream()
                 .mapToDouble()
