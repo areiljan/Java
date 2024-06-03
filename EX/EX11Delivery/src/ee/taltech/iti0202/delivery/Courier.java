@@ -112,14 +112,14 @@ public class Courier {
             location = null;
         }
 
-        if (distanceToTarget <= 0) {
+        if (distanceToTarget <= 1) {
             location = target;
         }
     }
 
     public void tick() {
         // If the courier has no current action or is at the target location, get a new action
-        if (getCurrentAction() == null || getLocation().equals(getTarget())) {
+        if (currentAction == null || getLocation().equals(getTarget())) {
             Action action = getStrategy().getAction();
             if (action != null) {
                 setCurrentAction(action);
@@ -127,7 +127,7 @@ public class Courier {
         }
 
         // If courier has a location and a current action
-        if (getCurrentAction() != null && getLocation().isPresent()) {
+        if (currentAction != null && getLocation().isPresent()) {
             Location location = getLocation().get();
 
             // Deposit packets
