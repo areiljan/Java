@@ -107,7 +107,7 @@ public class Courier {
      * Move to the target.
      */
     public void move() {
-        if (distanceToTarget > 0) {
+        if (distanceToTarget > 1) {
             distanceToTarget --;
             location = null;
         }
