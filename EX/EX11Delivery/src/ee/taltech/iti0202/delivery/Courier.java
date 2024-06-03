@@ -113,18 +113,19 @@ public class Courier {
 
         if (distanceToTarget <= 0) {
             location = target;
+            currentAction = null;
         }
     }
 
     public void tick() {
-        // If the courier has no current action or is at the target location, get a new action
-        if (currentAction == null || getLocation().equals(getTarget())) {
-            setCurrentAction(getStrategy().getAction());
-            distanceToTarget = location.getDistanceTo(target.getName());
-        }
-
         // If courier has a location and a current action
         if (getLocation().isPresent()) {
+            // If the courier has no current action or is at the target location, get a new action
+            if (currentAction == null) {
+                setCurrentAction(getStrategy().getAction());
+                distanceToTarget = location.getDistanceTo(target.getName());
+            }
+
             // Deposit packets
             List<String> depositPackets = currentAction.getDeposit();
             for (String packetName : depositPackets) {
