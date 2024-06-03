@@ -210,15 +210,17 @@ public class SchoolDatabase {
      * if no schools are in the db, return empty json {}
      */
     public String getAllStudentsInEachSchoolAndTheirAverageGrades() {
-        Map<String, Object> schoolsAndStudentGrades = new HashMap<>();
+        List<Map<String, Object>> schoolsAndStudents = new ArrayList<>();
         for (School school : schools) {
+            Map<String, Object> schoolsAndStudentGrades = new HashMap<>();
             schoolsAndStudentGrades.put("school", school.getName());
             schoolsAndStudentGrades.put("grades", getStudentsWithAverageGradesList(school));
+            schoolsAndStudents.add(schoolsAndStudentGrades);
         }
-        if (schoolsAndStudentGrades.isEmpty()) {
+        if (schoolsAndStudents.isEmpty()) {
             return "{}";
         }
-        return gson.toJson(schoolsAndStudentGrades);
+        return gson.toJson(schoolsAndStudents);
     }
 
     /**
