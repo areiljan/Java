@@ -31,18 +31,13 @@ public class World {
     public Optional<Location> addLocation(String name, List<String> otherLocations, List<Integer> distances) {
         // making sure that the location is eligible to add.
         // The location already exists.
-        if (locationMap.containsKey(name)) {
+        if (locationMap.containsKey(name) || otherLocations.size() < locationMap.size() || distances.size() < locationMap.size()) {
             return Optional.empty();
-        } else {
-            // if the otherLocations does not contain all locations in the locationMap.
-            if (otherLocations.size() < locationMap.size() || distances.size() < locationMap.size()) {
-                return Optional.empty();
-            }
         }
 
         // otherwise add a location.
         Location locationToAdd = new Location(name);
-        for (int i = 0; i < otherLocations.size(); i++) {
+        for (int i = 0; i < locationMap.size(); i++) {
             String otherLocationName = otherLocations.get(i);
 
             if (!locationMap.containsKey(otherLocationName)) {
