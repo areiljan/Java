@@ -149,7 +149,7 @@ public class SchoolDatabase {
         Student student = gson.fromJson(studentJson, Student.class);
 
         double average = 0;
-        if (!student.getGrades().isEmpty() || student.getGrades() != null) {
+        if (student.getGrades() != null || !student.getGrades().isEmpty()) {
             List<Integer> grades = student.getGrades().stream()
                     .map(Grade::getGrade)
                     .toList();
