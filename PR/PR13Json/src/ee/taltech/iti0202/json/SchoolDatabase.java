@@ -266,7 +266,21 @@ public class SchoolDatabase {
      * @return json of {"averageGrade": averageGradeDouble, "gradesTotal": gradesTotalInt}
      */
     public String getAverageGradeAndGradesCountGlobally() {
-        //TODO
-        return "";
+        List<Student> students = getAllStudentsAsList();
+        int gradeCount = 0;
+        for (Student student : students) {
+            List<Grade> grades = student.getGrades();
+            gradeCount += grades.size();
+        }
+
+        double averageGrade = students.stream()
+                .flatMap(student -> student.getGrades().stream())
+                .mapToDouble(Grade::getGrade)
+                .average()
+                .orElse(0.0);
+        Map<String, Object> averageGradeWithCount = new HashMap<>();
+        averageGradeWithCount.put("averageGrade", averageGrade);
+        averageGradeWithCount.put("gradesTotal", gradeCount);
+        return gson.toJson(averageGradeWithCount);
     }
 }
