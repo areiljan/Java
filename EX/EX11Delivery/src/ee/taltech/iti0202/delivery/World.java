@@ -51,10 +51,11 @@ public class World {
         for (int i = 0; i < otherLocations.size(); i++) {
             String otherLocationName = otherLocations.get(i);
 
-            
+            if (distances.get(i) != null) {
                 locationToAdd.addDistance(otherLocationName, distances.get(i));
                 // add these distances to all locations
                 locationMap.get(otherLocationName).addDistance(name, distances.get(i));
+            }
         }
 
         locationMap.put(locationToAdd.getName(), locationToAdd);
@@ -68,7 +69,7 @@ public class World {
      * @return - optional of courier.
      */
     public Optional<Courier> addCourier(String name, String to) {
-        if (courierMap.containsValue(name) || !locationMap.containsKey(to)) {
+        if (courierMap.containsKey(name) || !locationMap.containsKey(to)) {
             return Optional.empty();
         } else {
             Courier newCourier = new Courier(name, locationMap.get(to));
