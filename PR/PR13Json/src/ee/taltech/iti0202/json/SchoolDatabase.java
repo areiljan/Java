@@ -57,7 +57,24 @@ public class SchoolDatabase {
      */
     public String getAllStudents(School school) {
         List<Student> students = school.getStudents();
+        if (students.isEmpty()) {
+            return "{}";
+        }
         return gson.toJson(students);
+    }
+
+    /**
+     * Helper method to get a list of student names in a specific school.
+     * @param school - where to get the names.
+     * @return - List of names as strings.
+     */
+    private List getAllStudentNames(School school) {
+        List<Student> students = school.getStudents();
+        List<String> names = new ArrayList<>();
+        for (String name : names) {
+             names.add(name);
+        }
+        return names;
     }
 
     /**
@@ -128,13 +145,16 @@ public class SchoolDatabase {
         String studentJson = getStudent(id);
         Student student = gson.fromJson(studentJson, Student.class);
 
-        List<Integer> grades = student.getGrades().stream()
-                .map(Grade::getGrade)
-                .toList();
-        double average = grades.stream()
-                .mapToDouble(Integer::doubleValue)
-                .average()
-                .orElse(0); // Return 0 if the list is empty
+        double average = 0;
+        if (!student.getGrades().isEmpty()) {
+            List<Integer> grades = student.getGrades().stream()
+                    .map(Grade::getGrade)
+                    .toList();
+            average = grades.stream()
+                    .mapToDouble(Integer::doubleValue)
+                    .average()
+                    .orElse(0); // Return 0 if the list is empty
+        }
 
         Map<String, Object> averageGrades = new HashMap<>();
         averageGrades.put("name", student.getName());
@@ -219,7 +239,7 @@ public class SchoolDatabase {
         Map<String, Object> schoolAndStudents = new HashMap<>();
         for (School school : schools) {
             schoolAndStudents.put("school", school.getName());
-            schoolAndStudents.put("students", school.getStudents());
+            schoolAndStudents.put("students", getAllStudentNames(school));
         }
         if (schoolAndStudents.isEmpty()) {
             return "{}";
