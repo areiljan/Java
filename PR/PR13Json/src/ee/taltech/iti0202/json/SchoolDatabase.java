@@ -46,6 +46,9 @@ public class SchoolDatabase {
         List<Student> students = schools.stream()
                 .flatMap(school -> school.getStudents().stream())
                 .collect(Collectors.toList());
+        if (students.isEmpty()) {
+            return "{}";
+        }
 
         return gson.toJson(students);
     }
