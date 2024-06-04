@@ -15,6 +15,11 @@ public class Food {
         this.price = price;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
+
     /**
      * Gets the name of the food.
      */
