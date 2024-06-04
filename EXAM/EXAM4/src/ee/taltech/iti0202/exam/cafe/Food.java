@@ -5,7 +5,7 @@ public class Food {
     private final double price;
 
     /**
-     * Constructor for Food class.
+     * Constructor for Foo class.
      * Creates a new food item with a name and price.
      * @param name the name of the food.
      * @param price the price of the food.

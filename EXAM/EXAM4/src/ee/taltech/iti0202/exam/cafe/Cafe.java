@@ -71,7 +71,7 @@ public class Cafe {
 
     /**
     * Calculates the average price of the orders.
-    * @return the average order price.
+    * @return the average orde price.
     */
     public double getAverageOrderPrice() {
         return getAverageOrderPrice() / calculateTotalIncome();

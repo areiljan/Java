@@ -46,7 +46,7 @@ public class Order {
     }
 
     /**
-     * Calculates the total price of the order by summing all food items in the order.
+     * Calculates the tota price of the order by summing all food items in the order.
      * @return the total price of the order 
      */
     public double getTotalPrice() {
