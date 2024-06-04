@@ -59,6 +59,7 @@ public class Customer {
         if (cost <= money) {
             Order order = new Order(product, amount);
             history.add(order);
+            dotKomm.addOrder(order, this);
             money -= cost;
         } else {
             throw new NotEnoughMoneyException();
