@@ -5,10 +5,10 @@ import ee.taltech.iti0202.exam.bill.Bill;
 import ee.taltech.iti0202.exam.customer.Customer;
 import ee.taltech.iti0202.exam.product.Product;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static java.util.Collections.sort;
 
 public class DotKomm {
 
@@ -75,13 +75,24 @@ public class DotKomm {
 
     /**
      * Search for items based on popularity.
-     * @return - list of the three most popular items.
+     *
+     * @return - descending List of items.
      */
-    public List<Product> itemSearchByPopularity() {
+    public List<Map.Entry<Product, Integer>> itemSearchByPopularity() {
+        Map<Product, Integer> allFoodsMap = new HashMap<>();
         for (Bill bill : customerMap.values()) {
-            bill.getInVoice();
+            Map<Product, Integer> invoice = bill.getInVoice();
+            for (Product product : invoice.keySet()) {
+                if (allFoodsMap.containsKey(product)) {
+                    allFoodsMap.put(product, invoice.get(product) + allFoodsMap.get(product));
+                } else {
+                    allFoodsMap.put(product, invoice.get(product));
+                }
+            }
         }
-        return new ArrayList<>();
+        return allFoodsMap.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .collect(Collectors.toList());
     }
 
     /**

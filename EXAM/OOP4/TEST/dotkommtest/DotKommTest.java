@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class DotKommTest {
     @Test
@@ -132,26 +133,25 @@ public class DotKommTest {
         Assertions.assertEquals(dotKomm.itemSearchByName("priiti"), List.of(product1));
     }
 
-//    @Test
-//    void findMostPopularProduct() throws NotEnoughMoneyException {
-//        DotKomm dotKomm = new DotKomm();
-//        Product product1 = new Product("Priiti", 1);
-//        Product product2 = new Product("Priit", 1);
-//        dotKomm.addProduct(product1);
-//        dotKomm.addProduct(product2);
-//        // each time a customer is added a bill is opened in the store.
-//        Customer customer1 = new Customer("Priit", 10000);
-//        Customer customer2 = new Customer("Priit", 10000);
-//        dotKomm.addCustomer(customer1);
-//        dotKomm.addCustomer(customer2);
-//
-//        customer1.buy(dotKomm, product1, 100);
-//        customer1.buy(dotKomm, product1, 100);
-//
-//        ArrayList<Customer> excpectedCustomers = new ArrayList<Customer>();
-//        excpectedCustomers.add(customer1);
-//        excpectedCustomers.add(customer2);
-//
-//        Assertions.assertEquals(dotKomm., List.of(product1));
-//    }
+    @Test
+    void findMostPopularProducts() throws NotEnoughMoneyException {
+        DotKomm dotKomm = new DotKomm();
+        Product product1 = new Product("Priiti", 1);
+        Product product2 = new Product("Priit", 1);
+        dotKomm.addProduct(product1);
+        dotKomm.addProduct(product2);
+        // each time a customer is added a bill is opened in the store.
+        Customer customer1 = new Customer("Priit", 10000);
+        Customer customer2 = new Customer("Priit", 10000);
+        dotKomm.addCustomer(customer1);
+        dotKomm.addCustomer(customer2);
+
+        customer1.buy(dotKomm, product1, 101);
+        customer1.buy(dotKomm, product2, 100);
+
+        ArrayList<Map.Entry<Product, Integer>> excpectedList = new ArrayList<Map.Entry<Product, Integer>>();
+
+        System.out.println(dotKomm.itemSearchByPopularity());
+        Assertions.assertEquals(dotKomm.itemSearchByPopularity().size(), List.of(product1, product2).size());
+    }
 }
