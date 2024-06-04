@@ -24,7 +24,7 @@ public class Exam {
         int longestDistance = -1;
         for (int i = 0; i < s.length(); i++) {
             char a = s.charAt(i);
-            int distance = s.lastIndexOf(a) - i;
+            int distance = s.lastIndexOf(a) - i - 1;
             if (distance > longestDistance) {
                 longestDistance = distance;
             }
