@@ -1,11 +1,10 @@
 package ee.taltech.iti0202.exam;
 
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 public class Exam {
+
+    public static final int HOURS = 24;
+    public static final int MINUTES = 60;
 
     /**
      * Find the longest distance between two equal symbols.
@@ -58,12 +57,13 @@ public class Exam {
         Integer minutes = Integer.parseInt(time2List[1]) - Integer.parseInt(time1List[1]);
         if (hours == 0 && minutes < 0) {
             hours -= 1;
-        } if (hours < 0) {
-            hours += 24;
+        }
+        if (hours < 0) {
+            hours += HOURS;
         }
 
         if (minutes < 0) {
-            minutes += 60;
+            minutes += MINUTES;
         }
         String hoursAsString = "";
         String minutesAsString = "";

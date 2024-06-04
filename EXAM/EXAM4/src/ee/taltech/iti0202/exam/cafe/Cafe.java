@@ -1,11 +1,11 @@
 package ee.taltech.iti0202.exam.cafe;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
-import static java.time.chrono.JapaneseEra.values;
 
 public class Cafe {
     private final String name;
