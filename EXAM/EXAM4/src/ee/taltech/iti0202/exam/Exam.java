@@ -58,8 +58,6 @@ public class Exam {
         Integer minutes = Integer.parseInt(time2List[1]) - Integer.parseInt(time1List[1]);
         if (hours < 0) {
             hours += 24;
-        } else if (hours != 0) {
-            hours -= 1;
         }
 
         if (minutes < 0) {
