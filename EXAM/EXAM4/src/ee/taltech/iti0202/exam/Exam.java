@@ -59,6 +59,8 @@ public class Exam {
             hours += HOURS;
         }
 
+        hours += 1;
+
         if (minutes < 0) {
             minutes += MINUTES;
         }
