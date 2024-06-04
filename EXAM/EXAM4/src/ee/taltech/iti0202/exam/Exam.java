@@ -1,5 +1,10 @@
 package ee.taltech.iti0202.exam;
 
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+
 public class Exam {
 
     /**
@@ -47,7 +52,32 @@ public class Exam {
      * @return time difference as HH:MM
      */
     public static String timeDiff(String time1, String time2) {
-        return null;
-    }
+        String[] time1List = time1.split(":");
+        String[] time2List = time2.split(":");
+        Integer hours = Integer.parseInt(time2List[0]) - Integer.parseInt(time1List[0]);
+        Integer minutes = Integer.parseInt(time2List[1]) - Integer.parseInt(time1List[1]);
+        if (hours < 0) {
+            hours += 24;
+        }
+        if (minutes < 0) {
+            minutes += 60;
+        }
+        String hoursAsString = "";
+        String minutesAsString = "";
 
+        // DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH.MM");
+        if (hours > 9) {
+            hoursAsString = hours.toString();
+        } else {
+            hoursAsString = "0" + hours.toString();
+        }
+
+        if (minutes > 9) {
+            minutesAsString = minutes.toString();
+        } else {
+            minutesAsString = "0" + minutes.toString();
+        }
+
+        return (hoursAsString + ":" + minutesAsString);
+    }
 }
