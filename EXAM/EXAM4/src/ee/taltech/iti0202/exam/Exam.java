@@ -59,14 +59,14 @@ public class Exam {
         if (minutes < 0) {
             minutes += 60;
             if (hours == 0) {
-                hours = 22;
+                hours = 24;
             }
         }
 
         if (hours < 0) {
             hours += 24;
         } else {
-            hours += 1;
+            hours -= 1;
         }
         String hoursAsString = "";
         String minutesAsString = "";
