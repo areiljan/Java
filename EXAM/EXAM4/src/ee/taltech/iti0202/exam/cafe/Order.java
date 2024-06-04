@@ -3,6 +3,8 @@ package ee.taltech.iti0202.exam.cafe;
 import java.util.List;
 
 public class Order {
+    private List<Food> foods;
+    private String name;
 
     /**
      * Constructor for Order class.
@@ -11,32 +13,36 @@ public class Order {
      * @param customerName the name of the customer.
      */
     public Order(List<Food> foods, String customerName) {
+        this.foods = foods;
+        this.name = customerName;
     }
 
     /**
      * Gets the list of foods in the order.
      */
     public List<Food> getFoods() {
-        return null;
+        return foods;
     }
 
     /**
      * Gets the name of the customer who placed the order.
      */
     public String getCustomerName() {
-        return null;
+        return name;
     }
 
     /**
      * Adds a food item to the order.
      */
     public void addFood(Food food) {
+        foods.add(food);
     }
 
     /**
      * Removes a food item from the order if it exists.
      */
     public void removeFood(Food food) {
+        foods.remove(food);
     }
 
     /**
@@ -44,7 +50,11 @@ public class Order {
      * @return the total price of the order 
      */
     public double getTotalPrice() {
-        return 0;
+        double sum = 0;
+        for (Food food : foods) {
+            sum += food.getPrice();
+        }
+        return sum;
     }
 
     /**
@@ -55,6 +65,9 @@ public class Order {
      */
     @Override
     public String toString() {
-        return null;
+        if (foods.isEmpty()) {
+            return "This order is empty.";
+        }
+        return "This order contains: " + foods + ".";
     }
 }

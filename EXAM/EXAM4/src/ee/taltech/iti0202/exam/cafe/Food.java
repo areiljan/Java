@@ -1,6 +1,8 @@
 package ee.taltech.iti0202.exam.cafe;
 
 public class Food {
+    private final String name;
+    private final double price;
 
     /**
      * Constructor for Food class.
@@ -9,20 +11,22 @@ public class Food {
      * @param price the price of the food.
      */
     public Food(String name, double price) {
+        this.name = name;
+        this.price = price;
     }
 
     /**
      * Gets the name of the food.
      */
     public String getName() {
-        return null;
+        return name;
     }
 
     /**
      * Gets the price of the food.
      */
     public double getPrice() {
-        return 0;
+        return price;
     }
 
     /**
@@ -31,6 +35,6 @@ public class Food {
      * @return true if the food's price is greater than the threshold price.
      */
     public boolean isExpensive(double thresholdPrice) {
-        return false;
+        return price > thresholdPrice;
     }
 }
