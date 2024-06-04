@@ -18,7 +18,7 @@ public class Product {
      * @param name - name of the product.
      * @param price - price of the product.
      */
-    public Product (String name, float price) {
+    public Product(String name, float price) {
         this.name = name;
         this.price = price;
     }

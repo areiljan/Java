@@ -1,7 +1,6 @@
-package dotkommTest;
+package dotkommtest;
 
 import ee.taltech.iti0202.exam.NotEnoughMoneyException;
-import ee.taltech.iti0202.exam.Order;
 import ee.taltech.iti0202.exam.bill.Bill;
 import ee.taltech.iti0202.exam.customer.Customer;
 import ee.taltech.iti0202.exam.dotkomm.DotKomm;

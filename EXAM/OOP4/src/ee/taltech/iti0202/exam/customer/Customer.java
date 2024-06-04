@@ -7,9 +7,7 @@ import ee.taltech.iti0202.exam.dotkomm.DotKomm;
 import ee.taltech.iti0202.exam.product.Product;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Customer {
     private String name;
@@ -18,7 +16,12 @@ public class Customer {
     private ArrayList<Order> history;
 
 
-    public Customer (String name, Integer budget) {
+    /**
+     * Customer is always king.
+     * @param name - name.
+     * @param budget - budget.
+     */
+    public Customer(String name, Integer budget) {
         this.name = name;
         this.money = budget;
         this.bills = new ArrayList<>(); // all my bills paid

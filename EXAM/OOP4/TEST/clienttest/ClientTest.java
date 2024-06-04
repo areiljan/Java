@@ -1,6 +1,5 @@
 package clienttest;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import ee.taltech.iti0202.exam.NotEnoughMoneyException;
@@ -54,7 +53,8 @@ public class ClientTest {
         dotKomm.addCustomer(customer);
 
         Assertions.assertThrows(NotEnoughMoneyException.class,
-                () -> customer.buy(dotKomm, product, 100));}
+                () -> customer.buy(dotKomm, product, 100));
+    }
 
     @Test
     void clientCanOnlyBuyWithEnoughMoneyDoesHaveEnough() throws NotEnoughMoneyException {
@@ -67,5 +67,6 @@ public class ClientTest {
 
         float excpectedMoney = 0;
 
-        Assertions.assertEquals(excpectedMoney, customer.getBudget());}
+        Assertions.assertEquals(excpectedMoney, customer.getBudget());
+    }
 }
