@@ -60,7 +60,7 @@ public class Exam {
         } else if (hours < 0) {
             hours += HOURS;
         } else {
-            hours += 1;
+            hours -= 1;
         }
 
         if (minutes < 0) {
