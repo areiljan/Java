@@ -68,6 +68,6 @@ public class Order {
         if (foods.isEmpty()) {
             return "This order is empty.";
         }
-        return "This order contains: " + foods + ".";
+        return "This order contains: " + foods.get(0) + ", " + foods.get(1) + ".";
     }
 }
