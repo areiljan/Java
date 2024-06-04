@@ -56,17 +56,17 @@ public class Exam {
         String[] time2List = time2.split(":");
         Integer hours = Integer.parseInt(time2List[0]) - Integer.parseInt(time1List[0]);
         Integer minutes = Integer.parseInt(time2List[1]) - Integer.parseInt(time1List[1]);
+        if (hours < 0) {
+            hours += 24;
+        } else if (hours != 0) {
+            hours -= 1;
+        }
+
         if (minutes < 0) {
             minutes += 60;
             if (hours == 0) {
                 hours = 24;
             }
-        }
-
-        if (hours < 0) {
-            hours += 24;
-        } else {
-            hours -= 1;
         }
         String hoursAsString = "";
         String minutesAsString = "";
