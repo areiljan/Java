@@ -8,6 +8,7 @@ import ee.taltech.iti0202.exam.product.Product;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -149,9 +150,13 @@ public class DotKommTest {
         customer1.buy(dotKomm, product1, 101);
         customer1.buy(dotKomm, product2, 100);
 
-        ArrayList<Map.Entry<Product, Integer>> excpectedList = new ArrayList<Map.Entry<Product, Integer>>();
+        Map.Entry<Product, Integer> entry1 = new AbstractMap.SimpleEntry<>(product1, 101);
+        Map.Entry<Product, Integer> entry2 = new AbstractMap.SimpleEntry<>(product2, 100);
+        List<Map.Entry<Product, Integer>> expectedList = new ArrayList<>();
+        expectedList.add(entry1);
+        expectedList.add(entry2);
 
-        System.out.println(dotKomm.itemSearchByPopularity());
-        Assertions.assertEquals(dotKomm.itemSearchByPopularity().size(), List.of(product1, product2).size());
+        // returns two different products, the more popular one in front.
+        Assertions.assertEquals(dotKomm.itemSearchByPopularity(), expectedList);
     }
 }

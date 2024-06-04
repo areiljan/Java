@@ -5,7 +5,11 @@ import ee.taltech.iti0202.exam.bill.Bill;
 import ee.taltech.iti0202.exam.customer.Customer;
 import ee.taltech.iti0202.exam.product.Product;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static java.util.Collections.sort;
