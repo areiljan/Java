@@ -171,8 +171,8 @@ public class SchoolDatabase {
 
         Map<String, Object> averageGrades = new HashMap<>();
         if (average != 0) {
+            averageGrades.put("averageGrade", average);
             averageGrades.put("name", student.getName());
-            averageGrades.put("averageGrades", average);
         }
         return gson.toJson(averageGrades);
     }
