@@ -153,7 +153,8 @@ public class SchoolDatabase {
         }
 
         double average = 0;
-        if (student.getGrades() != null || !student.getGrades().isEmpty()) {
+        List<Grade> gradesList = student.getGrades();
+        if (gradesList != null && gradesList.isEmpty()) {
             List<Integer> grades = student.getGrades().stream()
                     .map(Grade::getGrade)
                     .toList();
