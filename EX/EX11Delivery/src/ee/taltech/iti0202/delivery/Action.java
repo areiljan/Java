@@ -28,7 +28,6 @@ public class Action {
 
     /**
      * packagesToTake getter.
-     * @param - list of packages to take.
      */
     public List<String> getTake() {
         return packagesToTake;
