@@ -61,6 +61,7 @@ public class Store {
 
         balance = balance.add(finalPrice);
         customer.decreaseBalance(finalPrice);
+        customer.addComponent(component);
         database.decreaseComponentStock(id, 1);
         return component;
     }
