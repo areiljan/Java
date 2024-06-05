@@ -159,7 +159,7 @@ public class SchoolDatabase {
 
         double average = 0;
         List<Grade> gradesList = student.getGrades();
-        if (gradesList != null && gradesList.isEmpty()) {
+        if (gradesList != null && !gradesList.isEmpty()) {
             List<Integer> grades = student.getGrades().stream()
                     .map(Grade::getGrade)
                     .toList();
@@ -241,7 +241,7 @@ public class SchoolDatabase {
      * @param school - the school whose students' average grades are needed.
      * @return - list of students and their average grades.
      */
-    private List<Map<String, Object>> getStudentsWithAverageGradesList(School school) {
+    public List<Map<String, Object>> getStudentsWithAverageGradesList(School school) {
         List<Map<String, Object>> studentsWithAverageGrade = new ArrayList<>();
         for (Student student : school.getStudents()) {
             Map<String, Object> studentData = new HashMap<>();
@@ -250,8 +250,8 @@ public class SchoolDatabase {
             JsonElement jsonElement = JsonParser.parseString(studentAverageGradeJson);
             JsonObject jsonObject = jsonElement.getAsJsonObject();
 
-            if (jsonObject.has("averageGrade")) {
-                double averageGrade = jsonObject.get("averageGrade").getAsDouble();
+            if (jsonObject.has("averageGrades")) {
+                double averageGrade = jsonObject.get("averageGrades").getAsDouble();
                 studentData.put("student", student.getName());
                 studentData.put("averageGrade", averageGrade);
                 studentsWithAverageGrade.add(studentData);
