@@ -11,8 +11,29 @@ public class Customer {
     private BigDecimal balance;
     private final List<Component> components = new ArrayList<>();
 
+    /**
+     * Customer constructor.
+     * @param name - name of the customer.
+     * @param balance - customers balance.
+     */
     public Customer(String name, BigDecimal balance) {
         this.name = name;
         this.balance = balance;
+    }
+
+    /**
+     * Customers balance.
+     * @return - balance as BigDecimal.
+     */
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    /**
+     * Decrease balance
+     * @param balance - BigDecimal.
+     */
+    public void decreaseBalance(BigDecimal balance) {
+        balance.subtract(balance);
     }
 }
