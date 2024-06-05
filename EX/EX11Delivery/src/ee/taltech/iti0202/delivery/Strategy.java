@@ -1,5 +1,9 @@
 package ee.taltech.iti0202.delivery;
 
 public interface Strategy {
-    public Action getAction();
+    /**
+     * Get the next action to do.
+     * @return - action.
+     */
+    Action getAction();
 }

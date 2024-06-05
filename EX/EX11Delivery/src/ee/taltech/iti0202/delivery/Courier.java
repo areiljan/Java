@@ -10,29 +10,49 @@ public class Courier {
     private String name; // courier name
     private Location location; // current location
 
-    public Location getTarget() {
-        return target;
-    }
-
     private Location target; // target location
     private int distanceToTarget; // distance left to move
     private Action currentAction; // current Action
 
-
-    public String getName() {
-        return name;
-    }
-
+    /**
+     * Courier constructor.
+     * @param name - name of the courier.
+     * @param startingLocation - where does the courier spawn.
+     */
     public Courier(String name, Location startingLocation) {
         this.name = name;
         location = startingLocation;
         currentPackages = new HashMap<>();
     }
 
+    /**
+     * Target getter.
+     * @return - target.
+     */
+    public Location getTarget() {
+        return target;
+    }
+
+    /**
+     * Name getter.
+     * @return - name.
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Current action getter.
+     * @return - current action.
+     */
     public Action getCurrentAction() {
         return currentAction;
     }
 
+    /**
+     * Current action setter.
+     * @param currentAction - the action to set as current action.
+     */
     public void setCurrentAction(Action currentAction) {
         this.currentAction = currentAction;
         if (currentAction != null) {
@@ -43,6 +63,10 @@ public class Courier {
         }
     }
 
+    /**
+     * How will the object look like souted.
+     * @return - string.
+     */
     @Override
     public String toString() {
         return this.name + " PACKETS " + currentPackages.size();
@@ -85,7 +109,7 @@ public class Courier {
      * Drop a packet at the location.
      * @param packetName - packet with this name to drop.
      */
-    public void depositPackage (String packetName) {
+    public void depositPackage(String packetName) {
         Packet depositPackage = currentPackages.get(packetName);
         location.addPacket(depositPackage);
         currentPackages.remove(depositPackage);
@@ -95,7 +119,7 @@ public class Courier {
      * Take a packet from the location.
      * @param packetName - packet to take.
      */
-    public void takePackage (String packetName) {
+    public void takePackage(String packetName) {
         Optional<Packet> optionalPacket = location.getPacket(packetName);
         if (optionalPacket.isPresent()) {
             Packet packet = optionalPacket.get();
@@ -108,7 +132,7 @@ public class Courier {
      */
     public void move() {
         if (distanceToTarget > 0) {
-            distanceToTarget --;
+            distanceToTarget--;
         }
 
         if (distanceToTarget <= 0) {
@@ -117,6 +141,9 @@ public class Courier {
         }
     }
 
+    /**
+     * Make the world do stuff for one amount of time.
+     */
     public void tick() {
         // If courier has a location and a current action
         if (getLocation().isPresent()) {

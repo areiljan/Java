@@ -7,11 +7,21 @@ public class FarthestLocationStrategy implements Strategy {
     private final Courier courier;
     private final World world;
     private List<Action> actions;
+
+    /**
+     * Get the farthest location.
+     * @param courier - courier.
+     * @param world - world.
+     */
     public FarthestLocationStrategy(Courier courier, World world) {
         this.courier = courier;
         this.world = world;
     }
 
+    /**
+     * Get action to go to the farthest location available.
+     * @return - action.
+     */
     @Override
     public Action getAction() {
         Location currentLocation = courier.getLocation().get();

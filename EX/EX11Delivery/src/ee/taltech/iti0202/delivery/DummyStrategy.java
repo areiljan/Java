@@ -5,6 +5,11 @@ import java.util.List;
 
 public class DummyStrategy implements Strategy {
     private List<Action> actions;
+
+    /**
+     * DummyStrategy constructor.
+     * @param actions - list of actions.
+     */
     public DummyStrategy(List<Action> actions) {
         this.actions = new ArrayList<>(actions);
     }

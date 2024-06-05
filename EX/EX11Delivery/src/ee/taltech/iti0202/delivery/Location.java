@@ -1,15 +1,28 @@
 package ee.taltech.iti0202.delivery;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 public class Location {
     private final Map<String, Integer> distanceMap = new HashMap<>();
     private final Map<String, Packet> packets = new HashMap<>();
     private final String name;
+
+    /**
+     * Location constructor.
+     * @param name - name of the location.
+     */
     public Location(String name) {
         this.name = name;
     }
 
+    /**
+     * How will the class look like souted.
+     * @return - string.
+     */
     @Override
     public String toString() {
         return this.name + " PACKETS: " + this.packets.size();

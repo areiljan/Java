@@ -1,12 +1,16 @@
 package ee.taltech.iti0202.delivery;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Action {
     private Location targetLocation;
     private List<String> packagesToTake;
     private List<String> packagesToDeposit;
+
+    /**
+     * Action constructor.
+     * @param targetLocation -
+     */
     public Action(Location targetLocation) {
         this.targetLocation = targetLocation;
         packagesToTake = new ArrayList<>();

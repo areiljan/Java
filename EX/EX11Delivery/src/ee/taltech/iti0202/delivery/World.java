@@ -8,8 +8,12 @@ import java.util.Optional;
 public class World {
     private Map<String, Location> locationMap = new HashMap<>();
     private Map<String, Courier> courierMap = new HashMap<>();
-    public World() {
 
+    /**
+     * World constructor.
+     */
+    public World() {
+        // nil.
     }
 
     /**
@@ -31,7 +35,9 @@ public class World {
     public Optional<Location> addLocation(String name, List<String> otherLocations, List<Integer> distances) {
         // making sure that the location is eligible to add.
         // The location already exists.
-        if (locationMap.containsKey(name) || otherLocations.size() < locationMap.size() || distances.size() < locationMap.size()) {
+        if (locationMap.containsKey(name)
+                || otherLocations.size() < locationMap.size()
+                || distances.size() < locationMap.size()) {
             return Optional.empty();
         }
 
