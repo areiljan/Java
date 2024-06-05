@@ -182,8 +182,8 @@ public class Store {
      * @param profitMargin - BigDecimal of ProfitMargin.
      */
     public void setProfitMargin(BigDecimal profitMargin) {
-        if (BigDecimal.ONE.compareTo(profitMargin) < 1) {
-            throw new IllegalArgumentException("Profit Margin must be greater than 0");
+        if (BigDecimal.ONE.compareTo(profitMargin) > 0) {
+            throw new IllegalArgumentException("Profit Margin must be greater than 1");
         }
         this.profitMargin = profitMargin;
     }
