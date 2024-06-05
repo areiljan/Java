@@ -130,7 +130,7 @@ public class Store {
         BigDecimal inventoryValue = BigDecimal.ZERO;
         MathContext mc = new MathContext(2);
         for (Component component : getAvailableComponents()) {
-            inventoryValue  = inventoryValue.add(component.getPrice().multiply(BigDecimal.valueOf(component.getAmount())));
+            inventoryValue  = inventoryValue.add(component.getPrice().multiply(BigDecimal.valueOf(component.getAmount()).multiply(profitMargin)));
         }
         return inventoryValue.round(mc);
     }
