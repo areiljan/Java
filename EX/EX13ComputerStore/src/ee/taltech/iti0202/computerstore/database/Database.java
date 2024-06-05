@@ -135,7 +135,7 @@ public final class Database {
      */
     public void loadFromFile(String location) {
         try (FileReader reader = new FileReader(location)) {
-            Type type = new TypeToken<Map<String, Map<Integer, Component>>>() {}.getType();
+            Type type = new TypeToken<Map<String, Map<Integer, Component>>>() { }.getType();
             Map<String, Map<Integer, Component>> bigData = gson.fromJson(reader, type);
 
             if (bigData != null && bigData.containsKey("components")) {

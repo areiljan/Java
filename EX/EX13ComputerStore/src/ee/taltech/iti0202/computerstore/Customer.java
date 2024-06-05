@@ -25,7 +25,9 @@ public class Customer {
      * Add a component to the customer.
      * @param component - component to add.
      */
-    public void addComponent(Component component) { components.add(component); }
+    public void addComponent(Component component) {
+        components.add(component);
+    }
 
     /**
      * Customers balance.
