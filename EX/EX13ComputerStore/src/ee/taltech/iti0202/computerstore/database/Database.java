@@ -14,7 +14,7 @@ import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Database {
+public final class Database {
     private final Map<Integer, Component> components = new HashMap<>();
     private final Gson gson = new Gson();
     private static Database instance;
@@ -86,8 +86,12 @@ public class Database {
      * @throws ProductNotFoundException - if the product was not found.
      */
     public void decreaseComponentStock(int id, int amount) throws OutOfStockException, ProductNotFoundException {
-        if (amount <= 0) {throw new IllegalArgumentException();}
-        if (!components.containsKey(id)) {throw new ProductNotFoundException();}
+        if (amount <= 0) {
+            throw new IllegalArgumentException();
+        }
+        if (!components.containsKey(id)) {
+            throw new ProductNotFoundException();
+        }
         if (components.get(id).getAmount() < amount) {
             throw new OutOfStockException();
         } else {
@@ -121,13 +125,13 @@ public class Database {
         try (FileWriter writer = new FileWriter(location)) {
             gson.toJson(bigData, writer);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
     /**
      * Load a json file from that location.
-     * @param location
+     * @param location - location to download from.
      */
     public void loadFromFile(String location) {
         try (FileReader reader = new FileReader(location)) {
@@ -140,7 +144,7 @@ public class Database {
                 instance = newInstance;
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 }

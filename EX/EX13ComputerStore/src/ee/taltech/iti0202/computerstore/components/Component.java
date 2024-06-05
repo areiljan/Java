@@ -34,7 +34,8 @@ public class Component {
      * @param performancePoints - performancePoints.
      * @param powerConsumption - powerConsumption.
      */
-    public Component(String name, Type type, BigDecimal price, String manufacturer, int performancePoints, int powerConsumption) {
+    public Component(String name, Type type, BigDecimal price, String manufacturer,
+                     int performancePoints, int powerConsumption) {
         this.id = nextId++;
         this.name = name;
         this.type = type;
