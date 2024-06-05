@@ -148,6 +148,10 @@ public class SchoolDatabase {
         String studentJson = getStudent(id);
         Student student = gson.fromJson(studentJson, Student.class);
 
+        if (student == null) {
+            return gson.toJson(new HashMap<>());
+        }
+
         double average = 0;
         if (student.getGrades() != null || !student.getGrades().isEmpty()) {
             List<Integer> grades = student.getGrades().stream()
