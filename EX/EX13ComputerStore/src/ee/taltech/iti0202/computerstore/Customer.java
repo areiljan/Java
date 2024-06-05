@@ -30,6 +30,38 @@ public class Customer {
     }
 
     /**
+     * Name getter.
+     * @return - get name as string.
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Components getter.
+     * @return - components as list.
+     */
+    public List<Component> getComponents() {
+        return components;
+    }
+
+    /**
+     * Name setter.
+     * @param name - to set as name.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Balance setter.
+     * @param balance - to set as balance.
+     */
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
+    }
+
+    /**
      * Decrease balance
      * @param balance - BigDecimal.
      */
