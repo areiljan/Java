@@ -8,7 +8,6 @@ import ee.taltech.iti0202.computerstore.exceptions.OutOfStockException;
 import ee.taltech.iti0202.computerstore.exceptions.ProductNotFoundException;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -128,11 +127,11 @@ public class Store {
      */
     public BigDecimal getInventoryValue() {
         BigDecimal inventoryValue = BigDecimal.ZERO;
-        MathContext mc = new MathContext(2);
         for (Component component : getAvailableComponents()) {
             inventoryValue  = inventoryValue.add(component.getPrice().multiply(BigDecimal.valueOf(component.getAmount()).multiply(profitMargin)));
         }
-        return inventoryValue.round(mc);
+        inventoryValue = inventoryValue.setScale(2, BigDecimal.ROUND_HALF_UP);
+        return inventoryValue;
     }
 
     /**
