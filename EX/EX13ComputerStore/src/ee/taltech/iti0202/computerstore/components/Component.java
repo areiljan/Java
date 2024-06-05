@@ -23,8 +23,6 @@ public class Component {
         CPU, GPU, RAM, MOTHERBOARD, HDD, SSD, PSU, KEYBOARD, TOUCHPAD, SCREEN, BATTERY, FAN
     }
 
-
-
     /**
      * Component constructor.
      * @param name - name of the component.
@@ -60,6 +58,94 @@ public class Component {
         attributes.put("performancePoints", performancePoints);
         attributes.put("powerConsumption", powerConsumption);
         return attributes.toString();
+    }
+
+    /**
+     * Manufacturer getter.
+     * @return - manufacturer.
+     */
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    /**
+     * PerformancePoints getter.
+     * @return - int of performancePoints.
+     */
+    public int getPerformancePoints() {
+        return performancePoints;
+    }
+
+    /**
+     * PowerConsumption getter.
+     * @return - int.
+     */
+    public int getPowerConsumption() {
+        return powerConsumption;
+    }
+
+    /**
+     * Id setter.
+     * @param id - id to set as.
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * Name setter.
+     * @param name - name to set as.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Type setter.
+     * @param type - type to set as.
+     */
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    /**
+     * Price setter.
+     * @param price - price to set as.
+     */
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    /**
+     * Amount setter.
+     * @param amount - amount to set as.
+     */
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    /**
+     * Manufacturer setter.
+     * @param manufacturer - manufacturer to set as.
+     */
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    /**
+     * PerformancePoint setter.
+     * @param performancePoints - performancePoints to set as.
+     */
+    public void setPerformancePoints(int performancePoints) {
+        this.performancePoints = performancePoints;
+    }
+
+    /**
+     * PowerConsumption setter.
+     * @param powerConsumption - powerConsumption setter.
+     */
+    public void setPowerConsumption(int powerConsumption) {
+        this.powerConsumption = powerConsumption;
     }
 
     /**
