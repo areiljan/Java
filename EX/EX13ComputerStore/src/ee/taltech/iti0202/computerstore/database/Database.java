@@ -87,6 +87,9 @@ public class Database {
      */
     public void decreaseComponentStock(int id, int amount) throws OutOfStockException, ProductNotFoundException {
         if (amount <= 0) {throw new IllegalArgumentException();}
+        if (id.) {
+            throw new ProductNotFoundException();
+        }
         if (components.containsKey(id)) {throw new ProductNotFoundException();}
         if (components.get(id).getAmount() < amount) {
             throw new OutOfStockException();

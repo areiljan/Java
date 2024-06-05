@@ -130,7 +130,7 @@ public class Store {
         BigDecimal inventoryValue = BigDecimal.ZERO;
         MathContext mc = new MathContext(2);
         for (Component component : getAvailableComponents()) {
-            inventoryValue.add(component.getPrice().multiply(BigDecimal.valueOf(component.getAmount())));
+            inventoryValue  = inventoryValue.add(component.getPrice().multiply(BigDecimal.valueOf(component.getAmount())));
         }
         return inventoryValue.round(mc);
     }
@@ -164,6 +164,9 @@ public class Store {
      * @param balance - balance as BigDecimal.
      */
     public void setBalance(BigDecimal balance) {
+        if (balance.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("Balance must be greater than 0");
+        }
         this.balance = balance;
     }
 
@@ -180,6 +183,9 @@ public class Store {
      * @param profitMargin - BigDecimal of ProfitMargin.
      */
     public void setProfitMargin(BigDecimal profitMargin) {
+        if (profitMargin.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("Profit Margin must be greater than 0");
+        }
         this.profitMargin = profitMargin;
     }
 }
