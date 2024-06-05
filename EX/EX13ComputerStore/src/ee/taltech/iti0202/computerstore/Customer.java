@@ -72,6 +72,6 @@ public class Customer {
      * @param balance - BigDecimal.
      */
     public void decreaseBalance(BigDecimal balance) {
-        balance.subtract(balance);
+        balance = balance.subtract(balance);
     }
 }
