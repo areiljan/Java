@@ -35,6 +35,9 @@ public class SchoolDatabase {
         return this.schools;
     }
 
+    /**
+     * SchoolDataBase constructor.
+     */
     public SchoolDatabase() {
         this.gson = new Gson();
     }
@@ -96,6 +99,8 @@ public class SchoolDatabase {
 
     /**
      * Convert student object to JSON string using Gson.
+     * @param student the student to convert to json.
+     * @return String.
      */
     public String convertToJson(Student student) {
         return gson.toJson(student);
@@ -211,7 +216,8 @@ public class SchoolDatabase {
 
     /**
      * Get average grade for each student in each school in the database
-     * @return json array of [{"school": "school's name", "grades": [{"student": "student's name","averageGrade": averageGrade double}]}, ...],
+     * @return json array of [{"school": "school's name", "grades":
+     * [{"student": "student's name","averageGrade": averageGrade double}]}, ...],
      * if no schools are in the db, return empty json {}
      */
     public String getAllStudentsInEachSchoolAndTheirAverageGrades() {
