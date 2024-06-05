@@ -8,10 +8,7 @@ import ee.taltech.iti0202.json.school.School;
 import ee.taltech.iti0202.json.student.Grade;
 import ee.taltech.iti0202.json.student.Student;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class SchoolDatabase {
@@ -169,10 +166,10 @@ public class SchoolDatabase {
                     .orElse(0); // Return 0 if the list is empty
         }
 
-        Map<String, Object> averageGrades = new HashMap<>();
+        Map<String, Object> averageGrades = new LinkedHashMap<>();
         if (average != 0) {
-            averageGrades.put("averageGrade", average);
             averageGrades.put("name", student.getName());
+            averageGrades.put("averageGrade", average);
         }
         return gson.toJson(averageGrades);
     }
