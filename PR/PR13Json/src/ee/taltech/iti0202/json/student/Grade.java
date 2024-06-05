@@ -29,5 +29,4 @@ public class Grade {
     public String getAssignment() {
         return assignment;
     }
-
 }
