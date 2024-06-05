@@ -107,6 +107,7 @@ public class Database {
      * Reset the database.
      */
     public void resetEntireDatabase() {
+        Component.setNextId(-1);
         components.clear();
     }
 

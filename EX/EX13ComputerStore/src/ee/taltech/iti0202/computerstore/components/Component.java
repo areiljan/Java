@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Component {
+
+    private static int nextId = -1;
     private int id;
     private String name;
     private Type type;
@@ -33,7 +35,7 @@ public class Component {
      * @param powerConsumption - powerConsumption.
      */
     public Component(String name, Type type, BigDecimal price, String manufacturer, int performancePoints, int powerConsumption) {
-        this.id = -1;
+        this.id = nextId++;
         this.name = name;
         this.type = type;
         this.price = price;
@@ -82,6 +84,14 @@ public class Component {
      */
     public int getPowerConsumption() {
         return powerConsumption;
+    }
+
+    /**
+     * Reset the component counter.
+     * @param nextId - set to -1;
+     */
+    public static void setNextId(int nextId) {
+        Component.nextId = nextId;
     }
 
     /**
