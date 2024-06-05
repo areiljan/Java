@@ -238,18 +238,19 @@ public class SchoolDatabase {
 
     /**
      * Helper method to get the list of students with average grades.
-     * @param school - which schools students.
+     * @param school - the school whose students' average grades are needed.
      * @return - list of students and their average grades.
      */
-    private List getStudentsWithAverageGradesList(School school) {
+    private List<Map<String, Object>> getStudentsWithAverageGradesList(School school) {
         List<Map<String, Object>> studentsWithAverageGrade = new ArrayList<>();
         for (Student student : school.getStudents()) {
             Map<String, Object> studentData = new HashMap<>();
 
-            JsonElement jsonElement = JsonParser.parseString(getStudentAverageGrade(student.getId()));
+            String studentAverageGradeJson = getStudentAverageGrade(student.getId());
+            JsonElement jsonElement = JsonParser.parseString(studentAverageGradeJson);
             JsonObject jsonObject = jsonElement.getAsJsonObject();
 
-            if (jsonObject.get("averageGrade") != null) {
+            if (jsonObject.has("averageGrade")) {
                 double averageGrade = jsonObject.get("averageGrade").getAsDouble();
                 studentData.put("student", student.getName());
                 studentData.put("averageGrade", averageGrade);

@@ -1,10 +1,10 @@
 package ee.taltech.iti0202.testing;
 
+import javax.xml.transform.Result;
+
 class Main {
-    public static void main(String[] args) {
-        Animal dog = new Dog();
-        dog.sound();
-    }
+    Result result = new Result();
+
 }
 
 class Animal {
