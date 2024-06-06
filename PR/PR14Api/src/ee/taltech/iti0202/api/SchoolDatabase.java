@@ -116,6 +116,13 @@ public class SchoolDatabase {
     private boolean addStudentToSchool(String schoolName, String studentName) {
         for (School school : schools) {
             if (school.getName().equals(schoolName)) {
+                boolean studentExists = school.getStudents().stream()
+                        .anyMatch(student -> student.getName().equals(studentName));
+
+                if (studentExists) {
+                    return false;
+                }
+
                 Student newStudent = new Student(studentName);
                 school.addStudent(newStudent);
                 return true;
