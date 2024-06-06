@@ -92,28 +92,32 @@ public class Playlist {
      * @return the duration of playlist
      */
     public String getDurationOfPlaylist() {
-        Integer seconds = 0;
-        Integer hours = 0;
-        Integer minutes = 0;
-        String endString = "";
-        for (Song s : songs) {
-            seconds = seconds + s.duration();
+        int totalSeconds = songs.stream()
+                .mapToInt(Song::duration)
+                .sum();
+
+        if (totalSeconds == 0) {
+            return "0s";
         }
-        if (seconds >= 3600) {
-            hours = seconds / 3600;
-            seconds = seconds - hours * 3600;
-            endString += hours + "h ";
+
+        StringBuilder duration = new StringBuilder();
+
+        int hours = totalSeconds / 3600;
+        int remainingSeconds = totalSeconds % 3600;
+        int minutes = remainingSeconds / 60;
+        int seconds = remainingSeconds % 60;
+
+        if (hours > 0) {
+            duration.append(hours).append("h ");
         }
-        if (seconds >= 60) {
-            minutes = seconds / 60;
-            seconds = seconds - minutes * 60;
-            endString += minutes + "m ";
+        if (minutes > 0) {
+            duration.append(minutes).append("m ");
         }
         if (seconds > 0) {
-            endString += seconds + "s";
+            duration.append(seconds).append("s");
         }
-        return endString;
 
+        return duration.toString();
     }
 
     /**
