@@ -29,7 +29,8 @@ public class Playlist {
     public void addSong(Song song) {
         boolean songFound = false;
         for (Song s : songs) {
-            songFound = song.title().equalsIgnoreCase(song.title()) && song.artist().equalsIgnoreCase(song.artist());
+            songFound = song.title().equalsIgnoreCase(song.title()) &&
+                    song.artist().equalsIgnoreCase(song.artist());
         }
         if (!songFound) {
             songs.add(song);
@@ -96,7 +97,7 @@ public class Playlist {
         Integer minutes = 0;
         String endString = "";
         for (Song s : songs) {
-            seconds += s.duration();
+            seconds = seconds + s.duration();
         }
         if (seconds >= 3600) {
             hours = seconds / 3600;
@@ -109,7 +110,7 @@ public class Playlist {
             endString += minutes + "m ";
         }
         if (seconds > 0) {
-            endString += "s";
+            endString += seconds + "s";
         }
         return endString;
 
