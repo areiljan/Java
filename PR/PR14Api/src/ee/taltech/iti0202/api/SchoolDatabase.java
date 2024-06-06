@@ -116,7 +116,8 @@ public class SchoolDatabase {
     private boolean addStudentToSchool(String schoolName, String studentName) {
         for (School school : schools) {
             if (school.getName().equals(schoolName)) {
-                school.addStudent(new Student(studentName));
+                Student newStudent = new Student(studentName);
+                school.addStudent(newStudent);
                 return true;
             }
         }
