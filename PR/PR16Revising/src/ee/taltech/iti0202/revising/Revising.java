@@ -53,7 +53,22 @@ public class Revising {
      * haveThree([3, 4, 3, 3, 4]) => false
      */
     public static boolean haveThree(List<Integer> numbers) {
-        return true;
+        int count = 0;
+        boolean lastWasThree = false;
+
+        for (int i = 0; i < numbers.size(); i++) {
+            if (numbers.get(i) == 3) {
+                if (lastWasThree) {
+                    return false; // Two 3's are adjacent
+                }
+                count++;
+                lastWasThree = true;
+            } else {
+                lastWasThree = false;
+            }
+        }
+
+        return count == 3;
     }
 
     /**
@@ -67,7 +82,8 @@ public class Revising {
      * prefixExistsAgain("ababa", 3) => true
      */
     public static boolean prefixExistsAgain(String text, int n) {
-        return true;
+        String prefix = text.substring(0, n);
+        return text.indexOf(prefix, n) != -1;
     }
 
     /**
