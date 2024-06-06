@@ -29,7 +29,7 @@ public class Playlist {
     public void addSong(Song song) {
         boolean songFound = false;
         for (Song s : songs) {
-            songFound = song.title().equalsIgnoreCase(song.title()) &&
+            songFound = song.title().equalsIgnoreCase(song.title()) ||
                     song.artist().equalsIgnoreCase(song.artist());
         }
         if (!songFound) {
