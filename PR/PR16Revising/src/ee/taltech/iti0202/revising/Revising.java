@@ -1,8 +1,7 @@
 package ee.taltech.iti0202.revising;
 
+import java.util.Arrays;
 import java.util.List;
-
-import static java.lang.Math.abs;
 
 public class Revising {
 
@@ -18,7 +17,7 @@ public class Revising {
      * @return Whether the list contains adjacent numbers.
      */
     public static boolean tripleUp(List<Integer> numbers) {
-        for (int i = 0; i < numbers.size() - 3; i++) {
+        for (int i = 0; i < numbers.size() - 2; i++) {
             if (numbers.get(i) + 1 == numbers.get(i + 1) && numbers.get(i + 1) + 1 == numbers.get(i + 2)) {
                 return true;
             }
@@ -37,11 +36,11 @@ public class Revising {
      * evenlySpaced(4, 6, 3) => false
      */
     public static boolean evenlySpaced(int a, int b, int c) {
-        int differenceOne = abs(a - b);
-        int differenceTwo = abs(a - c);
-        int differenceThree = abs(b - c);
-        return (differenceOne + differenceTwo == differenceThree) || (differenceOne + differenceThree == differenceTwo) ||
-                (differenceTwo + differenceThree == differenceOne);
+        int[] arr = {a, b, c};
+        Arrays.sort(arr);
+        int differenceOne = arr[1] - arr[0];
+        int differenceTwo = arr[2] - arr[1];
+        return differenceOne == differenceTwo;
     }
 
     /**
