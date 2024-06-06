@@ -6,7 +6,7 @@ import java.util.List;
 public class Revising {
 
     /**
-     * Return true if the list contains, somewhere, three increasing adjacent numbers 
+     * Return true if the list contains, somewhere, three increasing adjacent numbers
      * like .... 4, 5, 6, ... or 23, 24, 25.
      *
      * tripleUp(List.of(1, 4, 5, 6, 2)) => true
