@@ -98,6 +98,15 @@ public class Revising {
      * matchUp([1, 2, 3], [2, 3, 3]) => 2
      */
     public static int matchUp(List<Integer> a, List<Integer> b) {
-        return -1;
+        int count = 0;
+
+        for (int i = 0; i < a.size(); i++) {
+            int diff = Math.abs(a.get(i) - b.get(i));
+            if (diff <= 2 && diff != 0) {
+                count++;
+            }
+        }
+
+        return count;
     }
 }
