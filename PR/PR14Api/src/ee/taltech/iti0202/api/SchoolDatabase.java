@@ -229,7 +229,7 @@ public class SchoolDatabase {
         String endpoint = path;
 
         switch (endpoint) {
-            case "/student/{studentId}":
+            case "/student/":
                 String[] parts = path.split("/");
                 Integer.parseInt(parts[parts.length - 1]);
                 int studentId = Integer.parseInt(parts[parts.length - 1]);
