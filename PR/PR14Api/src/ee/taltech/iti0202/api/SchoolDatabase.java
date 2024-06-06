@@ -1,6 +1,7 @@
 package ee.taltech.iti0202.api;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import ee.taltech.iti0202.api.school.School;
 import ee.taltech.iti0202.api.student.Grade;
 import ee.taltech.iti0202.api.student.Student;
@@ -55,17 +56,25 @@ public class SchoolDatabase {
 
     /**
      * Get all students in this school.
+     *
      * @param schoolName - name to get students with.
      * @return - list of students.
      */
-    private List<Student> getSchoolStudents(String schoolName) {
+    private String getSchoolStudents(String schoolName) {
         List<Student> students = new ArrayList<>();
         for (School school : schools) {
             if (school.getName().equals(schoolName)) {
                 students.addAll(school.getStudents());
             }
         }
-        return students;
+        if (students.isEmpty()) {
+            return "404";
+        }
+        Gson gson = new GsonBuilder()
+                .excludeFieldsWithoutExposeAnnotation()
+                .create();
+
+        return gson.toJson(students);
     }
 
 
@@ -88,11 +97,7 @@ public class SchoolDatabase {
                 return gson.toJson(grades);
             case "/school/students":
                 String schoolName = parts[1].split("=")[1];
-                List<Student> students = getSchoolStudents(schoolName);
-                if (students.isEmpty()) {
-                    return "404";
-                }
-                return gson.toJson(students);
+                return getSchoolStudents(schoolName);
             case "/schools":
                 List<String> schoolNames = schools.stream()
                         .map(School::getName)

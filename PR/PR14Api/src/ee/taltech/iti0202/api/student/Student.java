@@ -1,5 +1,7 @@
 package ee.taltech.iti0202.api.student;
 
+import com.google.gson.annotations.Expose;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +12,9 @@ public class Student {
         return ++nextId;
     }
 
+    @Expose
     private final int id;
+    @Expose
     private String name;
     private final List<Grade> grades = new ArrayList<>();
 
