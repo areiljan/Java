@@ -19,6 +19,10 @@ public class Student {
         this.name = name;
     }
 
+    public String toString() {
+        return "[id=" + id + ", name=" + name + "]";
+    }
+
     public void addGrade(Grade grade) {
         this.grades.add(grade);
     }

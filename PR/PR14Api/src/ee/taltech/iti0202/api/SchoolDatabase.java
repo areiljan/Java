@@ -89,6 +89,9 @@ public class SchoolDatabase {
             case "/school/students":
                 String schoolName = parts[1].split("=")[1];
                 List<Student> students = getSchoolStudents(schoolName);
+                if (students.isEmpty()) {
+                    return "404";
+                }
                 return gson.toJson(students);
             case "/schools":
                 List<String> schoolNames = schools.stream()
