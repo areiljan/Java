@@ -16,8 +16,8 @@ public class Revising {
      * @return Whether the list contains adjacent numbers.
      */
     public static boolean tripleUp(List<Integer> numbers) {
-        for (int i = 0; i < numbers.size() - 2; i++) {
-            if (numbers.get(i) + 1 == numbers.get(i + 1) && numbers.get(i + 1) + 1 == numbers.get(i) + 2) {
+        for (int i = 0; i < numbers.size() - 3; i++) {
+            if (numbers.get(i) + 1 == numbers.get(i + 1) && numbers.get(i + 1) + 1 == numbers.get(i + 2)) {
                 return true;
             }
         }
