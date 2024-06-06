@@ -2,6 +2,8 @@ package ee.taltech.iti0202.revising;
 
 import java.util.List;
 
+import static java.lang.Math.abs;
+
 public class Revising {
 
     /**
@@ -35,7 +37,11 @@ public class Revising {
      * evenlySpaced(4, 6, 3) => false
      */
     public static boolean evenlySpaced(int a, int b, int c) {
-        return true;
+        int differenceOne = abs(a - b);
+        int differenceTwo = abs(a - c);
+        int differenceThree = abs(b - c);
+        return (differenceOne + differenceTwo == differenceThree) || (differenceOne + differenceThree == differenceTwo) ||
+                (differenceTwo + differenceThree == differenceOne);
     }
 
     /**
