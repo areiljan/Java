@@ -108,10 +108,16 @@ public class Playlist {
         int seconds = remainingSeconds % 60;
 
         if (hours > 0) {
-            duration.append(hours).append("h ");
+            duration.append(hours).append("h");
+            if (minutes > 0) {
+                duration.append(" ");
+            }
         }
         if (minutes > 0) {
-            duration.append(minutes).append("m ");
+            duration.append(minutes).append("m");
+            if (seconds > 0) {
+                duration.append(" ");
+            }
         }
         if (seconds > 0) {
             duration.append(seconds).append("s");
