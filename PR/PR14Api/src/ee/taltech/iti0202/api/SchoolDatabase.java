@@ -9,12 +9,23 @@ import ee.taltech.iti0202.api.student.Student;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type School database.
+ */
 public class SchoolDatabase {
     private Gson gson = new Gson();
 
-    //DO NOT CHANGE
+    /**
+     * The Schools.
+     */
+//DO NOT CHANGE
     public List<School> schools = new ArrayList<>();
 
+    /**
+     * Instantiates a new School database.
+     *
+     * @param jsonContent the json content
+     */
     public SchoolDatabase(String jsonContent) {
         //DO NOT CHANGE
         loadDatabase(jsonContent);
@@ -82,8 +93,9 @@ public class SchoolDatabase {
      * Endpoints (note, all results should be in json except the 404)
      * - /student/grades?studentId=studentId - get student's grades by id (return json array of grade classes)
      * - /school/students?schoolName=schoolName - get all students in school by schoolNam (return all fields except grades in Student class)
-     *  - /schools - return all school names (return json array of just school's names)
-     *  If school name or student's id doesn't exist, return string 404
+     * - /schools - return all school names (return json array of just school's names)
+     * If school name or student's id doesn't exist, return string 404
+     *
      * @param path - endpoint path
      * @return - result, if there is no result, return 404 in string
      */
@@ -152,6 +164,7 @@ public class SchoolDatabase {
      * Endpoints
      * - /school/student?schoolName=schoolName&studentName=studentName - add new student to school
      * - /student/grade?studentId=studentId&grade=grade&gradeAssignment=assignment - add new grade to student
+     *
      * @param path - endpoint path
      * @return result, if post was successful or not, for example if school or student doesn't exist, should return false
      */
@@ -197,6 +210,7 @@ public class SchoolDatabase {
     /**
      * Endpoints
      * - /student/name?studentId=studentId&name=newName - change student's name
+     *
      * @param path - endpoint path
      * @return result, if put was successful or not, for example if student doesn't exist, should return false
      */
@@ -235,6 +249,7 @@ public class SchoolDatabase {
     /**
      * Endpoints
      * - /student/{studentId} (for example /student/10 ) - delete student from the database
+     *
      * @param path - endpoint path
      * @return result, if delete was successful or not, for example if student doesn't exist, should return false
      */
