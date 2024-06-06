@@ -226,11 +226,11 @@ public class SchoolDatabase {
      * @return result, if delete was successful or not, for example if student doesn't exist, should return false
      */
     public boolean delete(String path) {
-        String endpoint = path;
+        String[] parts = path.split("/");
+        String endpoint = parts[parts.length - 2];
 
         switch (endpoint) {
-            case "/student/":
-                String[] parts = path.split("/");
+            case "student":
                 Integer.parseInt(parts[parts.length - 1]);
                 int studentId = Integer.parseInt(parts[parts.length - 1]);
                 return deleteStudent(studentId);
