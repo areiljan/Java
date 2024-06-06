@@ -17,7 +17,7 @@ public class Revising {
      */
     public static boolean tripleUp(List<Integer> numbers) {
         for (int i = 0; i < numbers.size() - 3; i++) {
-            if (numbers.get(i) == numbers.get(i + 1) && numbers.get(i + 2) == numbers.get(i)) {
+            if (numbers.get(i) + 1 == numbers.get(i + 1) && numbers.get(i + 2) == numbers.get(i) + 2) {
                 return true;
             }
         }
