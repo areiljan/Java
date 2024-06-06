@@ -112,7 +112,7 @@ public class Playlist {
 
         if (hours > 0) {
             duration.append(hours).append("h");
-            if (minutes > 0) {
+            if (minutes > 0 || seconds > 0) {
                 duration.append(" ");
             }
         }
