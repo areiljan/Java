@@ -1,6 +1,7 @@
 package ee.taltech.iti0202.spotify;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -29,8 +30,8 @@ public class Playlist {
     public void addSong(Song song) {
         boolean songFound = false;
         for (Song s : songs) {
-            songFound = song.title().equalsIgnoreCase(song.title()) ||
-                    song.artist().equalsIgnoreCase(song.artist());
+            songFound = s.title().equalsIgnoreCase(song.title()) &&
+                    s.artist().equalsIgnoreCase(song.artist());
         }
         if (!songFound) {
             songs.add(song);
@@ -81,6 +82,8 @@ public class Playlist {
      * @return the longest song
      */
     public Song getLongestSong() {
+        List<Song> shuffledSongs = new ArrayList<>(songs);
+        Collections.shuffle(shuffledSongs);
         return songs.stream()
                 .sorted(Comparator.comparingDouble(Song::duration))
                 .toList().getFirst();
