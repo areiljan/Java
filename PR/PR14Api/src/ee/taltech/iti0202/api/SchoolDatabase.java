@@ -92,7 +92,8 @@ public class SchoolDatabase {
     /**
      * Endpoints (note, all results should be in json except the 404)
      * - /student/grades?studentId=studentId - get student's grades by id (return json array of grade classes)
-     * - /school/students?schoolName=schoolName - get all students in school by schoolNam (return all fields except grades in Student class)
+     * - /school/students?schoolName=schoolName - get all students
+     * in school by schoolName (return all fields except grades in Student class)
      * - /schools - return all school names (return json array of just school's names)
      * If school name or student's id doesn't exist, return string 404
      *
@@ -124,6 +125,8 @@ public class SchoolDatabase {
      * Add the student to the school.
      *
      * @return true if successful.
+     * @param schoolName - name of the school.
+     * @param studentName - name of the student.
      */
     private boolean addStudentToSchool(String schoolName, String studentName) {
         for (School school : schools) {
@@ -147,6 +150,9 @@ public class SchoolDatabase {
      * Add the grade to the student.
      *
      * @return true if successful.
+     * @param studentId - id of the student.
+     * @param grade - grade.
+     * @param assignment - assignment.
      */
     private boolean addGradeToStudent(Integer studentId, Integer grade, String assignment) {
         for (School school : schools) {
@@ -166,7 +172,8 @@ public class SchoolDatabase {
      * - /student/grade?studentId=studentId&grade=grade&gradeAssignment=assignment - add new grade to student
      *
      * @param path - endpoint path
-     * @return result, if post was successful or not, for example if school or student doesn't exist, should return false
+     * @return result, if post was successful or not,
+     * for example if school or student doesn't exist, should return false
      */
     public boolean post(String path) {
         String[] parts = path.split("\\?");

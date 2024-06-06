@@ -8,11 +8,11 @@ public class Grade {
     private String assignment;
 
     /**
-     * Instantiates a new Grade.
-     *
-     * @param grade      the grade
-     * @param assignment the assignment
-     */
+    * Instantiates a new Grade.
+    *
+    * @param grade      the grade
+    * @param assignment the assignment
+    */
     public Grade(int grade, String assignment) {
         this.grade = grade;
         this.assignment = assignment;
