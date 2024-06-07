@@ -137,8 +137,10 @@ public final class Database {
 
             if (databaseJson != null && databaseJson.jsonComponents != null) {
                 Database newInstance = new Database();
-                for (Component component : newInstance.components.values()) {
-                    newInstance.components.put(component.getId(), component);
+                for (Map<Integer, Component> componentMap : databaseJson.jsonComponents.values()) {
+                    for (Component component : componentMap.values()) {
+                        newInstance.components.put(component.getId(), component);
+                    }
                 }
                 instance = newInstance;
             }
@@ -148,9 +150,9 @@ public final class Database {
     }
 
     /**
-     * Helper method.
+     * Helper class.
      */
-    private final static class DatabaseJson {
+    private final class DatabaseJson {
         Map<String, Map<Integer, Component>> jsonComponents;
     }
 }
