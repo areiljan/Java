@@ -72,7 +72,7 @@ public class Store {
      */
     public List<Component> getAvailableComponents() {
         Database database = Database.getInstance();
-        List<Component> components = new ArrayList<Component>();
+        List<Component> components = new ArrayList<>();
         for (Component component : database.getComponents().values()) {
             if (component.getAmount() > 0) {
                 components.add(component);

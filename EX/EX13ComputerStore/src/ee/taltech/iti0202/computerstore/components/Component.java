@@ -1,8 +1,6 @@
 package ee.taltech.iti0202.computerstore.components;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Component {
 
@@ -51,16 +49,16 @@ public class Component {
      */
     @Override
     public String toString() {
-        Map<String, Object> attributes = new HashMap<>();
-        attributes.put("id", id);
-        attributes.put("name", name);
-        attributes.put("type", type);
-        attributes.put("price", price);
-        attributes.put("amount", amount);
-        attributes.put("manufacturer", manufacturer);
-        attributes.put("performancePoints", performancePoints);
-        attributes.put("powerConsumption", powerConsumption);
-        return attributes.toString();
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", price=" + price +
+                ", amount=" + amount +
+                ", manufacturer='" + manufacturer + '\'' +
+                ", performancePoints=" + performancePoints +
+                ", powerConsumption=" + powerConsumption +
+                '}';
     }
 
     /**
@@ -206,5 +204,4 @@ public class Component {
     public int getId() {
         return id;
     }
-
 }

@@ -1,7 +1,6 @@
 package ee.taltech.iti0202.computerstore.database;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import ee.taltech.iti0202.computerstore.components.Component;
 import ee.taltech.iti0202.computerstore.exceptions.OutOfStockException;
 import ee.taltech.iti0202.computerstore.exceptions.ProductAlreadyExistsException;
@@ -10,7 +9,6 @@ import ee.taltech.iti0202.computerstore.exceptions.ProductNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -135,16 +133,24 @@ public final class Database {
      */
     public void loadFromFile(String location) {
         try (FileReader reader = new FileReader(location)) {
-            Type type = new TypeToken<Map<String, Map<Integer, Component>>>() { }.getType();
-            Map<String, Map<Integer, Component>> bigData = gson.fromJson(reader, type);
+            DatabaseJson databaseJson = gson.fromJson(reader, DatabaseJson.class);
 
-            if (bigData != null && bigData.containsKey("components")) {
+            if (databaseJson != null && databaseJson.jsonComponents != null) {
                 Database newInstance = new Database();
-                newInstance.components.putAll(bigData.get("components"));
+                for (Component component : newInstance.components.values()) {
+                    newInstance.components.put(component.getId(), component);
+                };
                 instance = newInstance;
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * Helper method.
+     */
+    private static class DatabaseJson {
+        Map<String, Map<Integer, Component>> jsonComponents;
     }
 }
