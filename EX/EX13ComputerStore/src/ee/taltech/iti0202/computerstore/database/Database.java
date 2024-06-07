@@ -139,7 +139,9 @@ public final class Database {
                 Database newInstance = new Database();
                 for (Map<Integer, Component> componentMap : databaseJson.jsonComponents.values()) {
                     for (Component component : componentMap.values()) {
-                        newInstance.components.put(component.getId(), component);
+                        if (component != null) {
+                            newInstance.components.put(component.getId(), component);
+                        }
                     }
                 }
                 instance = newInstance;
