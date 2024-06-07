@@ -51,7 +51,7 @@ public class Store {
         Component component = database.getComponents().get(id);
         if (component == null) {
             throw new ProductNotFoundException();
-        } else if (component.getAmount() < 0) {
+        } else if (component.getAmount() <= 0) {
             throw new OutOfStockException();
         }
         BigDecimal finalPrice = component.getPrice().multiply(profitMargin);
