@@ -15,10 +15,10 @@ import java.util.Optional;
 public class EmployeeController {
     private final EmployeeService employeeService;
 
-    @GetMapping("/employees")
-    public List<Employee> getAllEmployees() {
-        return employeeService.findAllEmployees();
-    }
+    // @GetMapping("/employees")
+    // public List<Employee> getAllEmployees() {
+    //     return employeeService.findAllEmployees();
+    // }
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Employee>> getEmployeeById(@PathVariable Long id) {
@@ -65,7 +65,10 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees")
-    public List<Employee> getEmployeesByCompany(@RequestParam("company") String company) {
+    public List<Employee> getEmployeesByCompany(@RequestParam(name = "company", required = false) String company) {
+        if (company == null || company.isEmpty() || company.isBlank()) {
+            return employeeService.findAllEmployees();
+        }
         return employeeService.getEmployeesByCompany(company);
     }
 }
