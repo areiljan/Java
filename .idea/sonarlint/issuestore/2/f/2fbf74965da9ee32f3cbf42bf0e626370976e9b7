@@ -1,0 +1,11 @@
+
+
+java:S1319"mThe return type of this method should be an interface such as "Map" rather than the implementation "HashMap".(š–²Ãÿÿÿÿÿ8üÿ’÷ê1
+
+java:S1319&"mThe return type of this method should be an interface such as "Map" rather than the implementation "HashMap".(Ï¦¯şÿÿÿÿ8üÿ’÷ê1
+M
+java:S1172"+Remove this unused method parameter "name".(üâïùÿÿÿÿ8‹€“÷ê1
+o
+java:S6204Q"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹8“€“÷ê1
+o
+java:S6204["RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹8ÈäÃøê1

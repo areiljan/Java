@@ -1,0 +1,5 @@
+
+p
+java:S6204Ã"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹8¤„ˆ—õ1
+k
+java:S1612À"NReplace this lambda with method reference 'this::calculateAverageServiceCost'.(°’ˆ!8§„ˆ—õ1

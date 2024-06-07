@@ -1,0 +1,10 @@
+
+L	java:S106"+Replace this use of System.out by a logger.(š—°øÿÿÿÿ8ÍûŞÄÚ1
+V
+java:S1854"9Remove this useless assignment to local variable "hello".(¬»ï¹8ÎûŞÄÚ1
+G
+java:S1481"*Remove this unused "hello" local variable.(¬»ï¹8ÏûŞÄÚ1
+M
+java:S1128"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ8ÑûŞÄÚ1
+O
+java:S1128"-Remove this unused import 'java.util.Arrays'.(î–˜Éüÿÿÿÿ8ÑûŞÄÚ1

@@ -1,0 +1,8 @@
+
+0
+java:S1700"Rename field "worker"(û¸”¹úÿÿÿÿ
+_
+java:S2259"DA "NullPointerException" could be thrown; "worker" is nullable here.( ¿­Šúÿÿÿÿ
+L	java:S106"+Replace this use of System.out by a logger.(æ¨¤šøÿÿÿÿ8ëèôõá1
+E
+java:S1068"*Remove this unused "worker" private field.(û¸”¹úÿÿÿÿ

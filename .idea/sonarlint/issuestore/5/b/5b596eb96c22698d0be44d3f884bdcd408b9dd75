@@ -1,0 +1,10 @@
+
+y	java:S127/"XRefactor the code in order to not assign to this loop counter from within the loop body.(Îª±üüÿÿÿÿ8¸ëõää1
+y	java:S1275"XRefactor the code in order to not assign to this loop counter from within the loop body.(Îª±üüÿÿÿÿ8¸ëõää1
+s	java:S127g"XRefactor the code in order to not assign to this loop counter from within the loop body.(¨…ÄK8¸ëõää1
+^
+java:S4973z"<Strings and Boxed types should be compared using "equals()".(Û€èµüÿÿÿÿ8ğä÷ää1
+W
+java:S1118":Add a private constructor to hide the implicit public one.(èşÜÉ8Èëõää1
+^
+java:S1126Q"AReplace this if-then-else statement by a single return statement.(÷Šæ8Ëëõää1

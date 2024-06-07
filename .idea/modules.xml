@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/EX/EX02WebBrowser/EX02WebBrowser.iml" filepath="$PROJECT_DIR$/EX/EX02WebBrowser/EX02WebBrowser.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EX/EX02WebBrowser/EX02WebBrowser1.iml" filepath="$PROJECT_DIR$/EX/EX02WebBrowser/EX02WebBrowser1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EX/EX04SocialNetwork/EX04SocialNetwork.iml" filepath="$PROJECT_DIR$/EX/EX04SocialNetwork/EX04SocialNetwork.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EX/EX05MysticOrbs/EX05MysticOrbs.iml" filepath="$PROJECT_DIR$/EX/EX05MysticOrbs/EX05MysticOrbs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EX/EX06Files/EX06Files.iml" filepath="$PROJECT_DIR$/EX/EX06Files/EX06Files.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EX/EX07Zoo/EX07Zoo.iml" filepath="$PROJECT_DIR$/EX/EX07Zoo/EX07Zoo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EX/EX08TravelAgency/EX08TravelAgency.iml" filepath="$PROJECT_DIR$/EX/EX08TravelAgency/EX08TravelAgency.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Grading/EX08TravelAgency_ElenTamm/EX08TravelAgency_ElenTamm.iml" filepath="$PROJECT_DIR$/Grading/EX08TravelAgency_ElenTamm/EX08TravelAgency_ElenTamm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Grading/EX08TravelAgency_Ervin/EX08TravelAgency_Ervin.iml" filepath="$PROJECT_DIR$/Grading/EX08TravelAgency_Ervin/EX08TravelAgency_Ervin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Grading/EX08TravelAgency_KristelLuik/EX08TravelAgency_KristelLuik.iml" filepath="$PROJECT_DIR$/Grading/EX08TravelAgency_KristelLuik/EX08TravelAgency_KristelLuik.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EX/EX11Delivery/EX11Delivery.iml" filepath="$PROJECT_DIR$/EX/EX11Delivery/EX11Delivery.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EX/EX13ComputerStore/EX13ComputerStore.iml" filepath="$PROJECT_DIR$/EX/EX13ComputerStore/EX13ComputerStore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PROJECT/Hotel/Hotel.iml" filepath="$PROJECT_DIR$/PROJECT/Hotel/Hotel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PR/PR01Introduction/PR01Introduction.iml" filepath="$PROJECT_DIR$/PR/PR01Introduction/PR01Introduction.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PR/PR02DataStructures/PR02DataStructures.iml" filepath="$PROJECT_DIR$/PR/PR02DataStructures/PR02DataStructures.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PR/PR03Ring/PR03Ring.iml" filepath="$PROJECT_DIR$/PR/PR03Ring/PR03Ring.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PR/PR04Stock/PR04Stock.iml" filepath="$PROJECT_DIR$/PR/PR04Stock/PR04Stock.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PR/PR06Shelter/PR06Shelter.iml" filepath="$PROJECT_DIR$/PR/PR06Shelter/PR06Shelter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PR/PR07Kittens/PR07Kittens.iml" filepath="$PROJECT_DIR$/PR/PR07Kittens/PR07Kittens.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PR/PR08FactoryAndBuilder/PR08FactoryAndBuilder.iml" filepath="$PROJECT_DIR$/PR/PR08FactoryAndBuilder/PR08FactoryAndBuilder.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PR/PR09Transportation/PR09Transportation.iml" filepath="$PROJECT_DIR$/PR/PR09Transportation/PR09Transportation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PR/PR10TextEditor/PR10TextEditor.iml" filepath="$PROJECT_DIR$/PR/PR10TextEditor/PR10TextEditor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PR/PR11Comparable/PR11Comparable.iml" filepath="$PROJECT_DIR$/PR/PR11Comparable/PR11Comparable.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PR/PR12Generics/PR12Generics.iml" filepath="$PROJECT_DIR$/PR/PR12Generics/PR12Generics.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PR/PR13Json/PR13Json.iml" filepath="$PROJECT_DIR$/PR/PR13Json/PR13Json.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PR/PR14Api/PR14Api.iml" filepath="$PROJECT_DIR$/PR/PR14Api/PR14Api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PR/PR15Spotify/PR15Spotify.iml" filepath="$PROJECT_DIR$/PR/PR15Spotify/PR15Spotify.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PR/PR16Revising/PR16Revising.iml" filepath="$PROJECT_DIR$/PR/PR16Revising/PR16Revising.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TK/TK3/TK3.iml" filepath="$PROJECT_DIR$/TK/TK3/TK3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/iti0202-2024.iml" filepath="$PROJECT_DIR$/.idea/iti0202-2024.iml" />
+      <module fileurl="file://$PROJECT_DIR$/testing_grounds/testing_grounds.iml" filepath="$PROJECT_DIR$/testing_grounds/testing_grounds.iml" />
+    </modules>
+  </component>
+</project>

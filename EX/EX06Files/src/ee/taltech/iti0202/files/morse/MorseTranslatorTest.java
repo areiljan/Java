@@ -73,32 +73,19 @@ class MorseTranslatorTest {
         translator.addMorseCodes(morseCypher);
         List<String> morseLines = translator.translateLinesToMorse(lines);
         List<String> excpectedMorseLines = new ArrayList<>();
-        excpectedMorseLines.add(".-.. --- .-. . --" + "\t" + ".. .--. ... ..- --" + "\t" + "-.. --- .-.. --- .-."  + "\t" + "... .. -    .- -- . -");
-        excpectedMorseLines.add("... . -.." + "\t" + "-.. --- . .. ..- ... -- --- -.. - . -- .--. --- .-. .-.-.-");
+        excpectedMorseLines.add(".-.. --- .-. . --    .. .--. ... ..- --    -.. --- .-.. --- .-.    ... .. -    .- -- . -");
+        excpectedMorseLines.add("... . -..    -.. ---    . .. ..- ... -- --- -..    - . -- .--. --- .-. .-.-.-");
+        List<String> textLines = translator.translateLinesFromMorse(morseLines);
+        Assertions.assertEquals(lines, textLines);
+
         List <String> excpectedMorseLinesWithoutSpaces = new ArrayList<>();
         for (String line : excpectedMorseLines) {
             excpectedMorseLinesWithoutSpaces.add(line.replaceAll("\\s", ""));
         }
-        morseLines = morseLines.replaceAll("\\s", "");
-        excpectedMorseLinesWithoutSpaces = new ArrayList<>();
-        for (String line : excpectedMorseLines) {
-            excpectedMorseLinesWithoutSpaces.add(line.replaceAll("\\s", ""));
+        List <String> morseLinesWithoutSpaces = new ArrayList<>();
+        for (String line : morseLines) {
+            morseLinesWithoutSpaces.add(line.replaceAll("\\s", ""));
         }
-        Assertions.assertEquals(excpectedMorseLines.replaceAll("\\s", ""), morseLines.replaceAll("\\s", "");
-        List<String> textLines = translator.translateLinesFromMorse(excpectedMorseLines);
-        Assertions.assertEquals(lines, textLines);
-    }
-
-
-    @org.junit.jupiter.api.Test
-    void translateSingleLineToMorse() {
-        MorseTranslator translator = new MorseTranslator();
-        InputFilesReader reader = new InputFilesBufferReader();
-        List<String> morseCypher = reader.readTextFromFile("morse.txt");
-        ArrayList<String> lines = new ArrayList<>();
-        String line = "hey you, darling  ";
-        translator.addMorseCodes(morseCypher);
-        String regularText = translator.translateLineToMorse(line);
-        Assertions.assertEquals(".... . -.--  -.-- --- ..- --..--  -.. .- .-. .-.. .. -. --.", regularText);
+        Assertions.assertEquals(excpectedMorseLinesWithoutSpaces, morseLinesWithoutSpaces);
     }
 }

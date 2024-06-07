@@ -1,0 +1,18 @@
+
+u
+java:S1488¡"YImmediately return this expression instead of assigning it to the temporary variable "b".(â·İÔıÿÿÿÿ
+p
+java:S1488­"YImmediately return this expression instead of assigning it to the temporary variable "b".(—­—Ş
+m
+java:S3776Z"RRefactor this method to reduce its Cognitive Complexity from 27 to the 15 allowed.(ÈûÁ÷úÿÿÿÿ
+A	java:S106‹"+Replace this use of System.out by a logger.(¾–ºó
+A	java:S106Œ"+Replace this use of System.out by a logger.(²Æç
+A	java:S106"+Replace this use of System.out by a logger.(æÃù
+F	java:S106"+Replace this use of System.out by a logger.(ĞÇõ¬ûÿÿÿÿ
+A	java:S106"+Replace this use of System.out by a logger.(ôÈ¸’
+A	java:S106"+Replace this use of System.out by a logger.(ü ÁÛ
+F	java:S106‘"+Replace this use of System.out by a logger.(¹Í§´úÿÿÿÿ
+A	java:S106’"+Replace this use of System.out by a logger.(ƒÖ®
+A	java:S106“"+Replace this use of System.out by a logger.(Ÿ“µã
+F	java:S106”"+Replace this use of System.out by a logger.(²„¯Ìşÿÿÿÿ
+F	java:S106•"+Replace this use of System.out by a logger.(ô¢•úüÿÿÿÿ

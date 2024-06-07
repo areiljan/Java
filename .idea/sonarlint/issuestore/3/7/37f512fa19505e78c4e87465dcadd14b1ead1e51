@@ -1,0 +1,18 @@
+
+b
+java:S1192"FDefine a constant instead of duplicating this literal "apple" 6 times.(°±;8üŠğ²Ş1
+m
+java:S36555"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(ˆì¶Á8’‹ğ²Ş1
+G	java:S106"+Replace this use of System.out by a logger.(’‡ñ¹8œ‹ğ²Ş1
+L	java:S106"+Replace this use of System.out by a logger.(õ›¨Ìùÿÿÿÿ8‹ğ²Ş1
+L	java:S106"+Replace this use of System.out by a logger.(¸ÄıŒşÿÿÿÿ8 ‹ğ²Ş1
+L	java:S106""+Replace this use of System.out by a logger.(®‰úıÿÿÿÿ8¢‹ğ²Ş1
+L	java:S106#"+Replace this use of System.out by a logger.(¤üÑ…şÿÿÿÿ8£‹ğ²Ş1
+L	java:S106("+Replace this use of System.out by a logger.(”¹…«ûÿÿÿÿ8¦‹ğ²Ş1
+G	java:S106."+Replace this use of System.out by a logger.(ñ¹ˆ8§‹ğ²Ş1
+G	java:S1062"+Replace this use of System.out by a logger.(Ü¤²ñ8©‹ğ²Ş1
+L	java:S1064"+Replace this use of System.out by a logger.(¸¯Ü½üÿÿÿÿ8©‹ğ²Ş1
+G	java:S1065"+Replace this use of System.out by a logger.(ˆì¶Á8ª‹ğ²Ş1
+L	java:S1066"+Replace this use of System.out by a logger.(Äàíßøÿÿÿÿ8«‹ğ²Ş1
+v
+java:S1128"TRemove this unnecessary import: same package classes are always implicitly imported.(‰İÎÈûÿÿÿÿ8«‹ğ²Ş1

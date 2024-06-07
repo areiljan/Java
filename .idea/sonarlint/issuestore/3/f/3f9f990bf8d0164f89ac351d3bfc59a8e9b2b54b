@@ -1,0 +1,5 @@
+
+t
+java:S1450"YRemove the "activities" field and declare it as a local variable in the relevant methods.(†ã»¹øÿÿÿÿ
+I
+java:S1068".Remove this unused "activities" private field.(†ã»¹øÿÿÿÿ

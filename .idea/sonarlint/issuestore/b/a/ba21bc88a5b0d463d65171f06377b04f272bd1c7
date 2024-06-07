@@ -1,0 +1,9 @@
+
+j
+java:S1192‹"GDefine a constant instead of duplicating this literal "silver" 3 times.(³Ï£úÿÿÿÿ8ÑĞÚéâ1
+i
+java:S1192Š"FDefine a constant instead of duplicating this literal "pearl" 3 times.(Áİşÿÿÿÿ8ÒĞÚéâ1
+{
+java:S12101"YOverride "equals(Object obj)" to comply with the contract of the "compareTo(T o)" method.(¬­¥ úÿÿÿÿ8âĞÚéâ1
+t
+java:S37761"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(¬­¥ úÿÿÿÿ8æĞÚéâ1

@@ -1,0 +1,18 @@
+
+;
+java:S1700	"Rename field "morseTranslator"(β’Δ8Ηλκε1
+_
+java:S2259+"BA "NullPointerException" could be thrown; "line" is nullable here.(—ι¶8•λκε1
+_
+java:S1117"BRename "morseTranslator" which hides the field declared at line 9.(ƒΑ€Τ8›λκε1
+G	java:S106("+Replace this use of System.out by a logger.(ΆΚΟ8΅λκε1
+E
+java:S1940<")Use the opposite operator ("!=") instead.(•υF8§λκε1
+t
+java:S3776J"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(ψΚήχωÿÿÿÿ8¨λκε1
+Q
+java:S2864U"4Iterate over the "entrySet" instead of the "keySet".(ΰκ¬8­λκε1
+_
+java:S1854u"BRemove this useless assignment to local variable "translatedLine".(Πόν8³λκε1
+P
+java:S1481u"3Remove this unused "translatedLine" local variable.(Πόν8·λκε1

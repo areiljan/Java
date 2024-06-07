@@ -1,0 +1,11 @@
+
+}
+java:S1488Š"fImmediately return this expression instead of assigning it to the temporary variable "sortedPackages".(ñÚË
+Y
+java:S2629P"7Use the built-in formatting to construct this argument.(åé„¢ÿÿÿÿÿ8¸ƒ‹Øğ1
+x
+java:S6201\"VReplace this instanceof check and cast with 'instanceof StandardClient standardclient'(ÄšŠğùÿÿÿÿ8Š†‹Øğ1
+t
+java:S6201c"RReplace this instanceof check and cast with 'instanceof SilverClient silverclient'(èÉ´×úÿÿÿÿ8 †‹Øğ1
+p
+java:S6204"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹8Ò†‹Øğ1
