@@ -139,7 +139,7 @@ public final class Database {
                 Database newInstance = new Database();
                 for (Component component : newInstance.components.values()) {
                     newInstance.components.put(component.getId(), component);
-                };
+                }
                 instance = newInstance;
             }
         } catch (IOException e) {
@@ -150,7 +150,7 @@ public final class Database {
     /**
      * Helper method.
      */
-    private static class DatabaseJson {
+    private final static class DatabaseJson {
         Map<String, Map<Integer, Component>> jsonComponents;
     }
 }

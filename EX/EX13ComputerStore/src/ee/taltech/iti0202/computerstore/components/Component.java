@@ -49,16 +49,16 @@ public class Component {
      */
     @Override
     public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                ", price=" + price +
-                ", amount=" + amount +
-                ", manufacturer='" + manufacturer + '\'' +
-                ", performancePoints=" + performancePoints +
-                ", powerConsumption=" + powerConsumption +
-                '}';
+        return "Product{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", type='" + type + '\''
+                + ", price=" + price
+                + ", amount=" + amount
+                + ", manufacturer='" + manufacturer + '\''
+                + ", performancePoints=" + performancePoints
+                + ", powerConsumption=" + powerConsumption
+                + '}';
     }
 
     /**
